@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Obstacle
   - 
   - 
   - 
@@ -40,6 +40,15 @@ TagManager:
   m_SortingLayers:
   - name: BG
     uniqueID: 3321419759
+    locked: 0
+  - name: Collider
+    uniqueID: 1165959625
+    locked: 0
+  - name: Task
+    uniqueID: 2492450301
+    locked: 0
+  - name: Player
+    uniqueID: 2513446045
     locked: 0
   - name: Default
     uniqueID: 0
