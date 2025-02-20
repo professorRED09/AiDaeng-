@@ -5,11 +5,14 @@ using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Setting")]
     public float speed = 5f;                                // Movement speed
-    public List<Transform> waypoints;                       // List of all waypoints in order
     [SerializeField] int currentWaypointIndex = 0;          // Current waypoint index
-    private bool isMoving = false;                          // Is the player currently moving?
+    public bool reachWayPoint;
+    [SerializeField] bool isMoving = false;                 // Is the player currently moving?
+    public List<Transform> waypoints;                       // List of all waypoints in order
     private Queue<int> waypointQueue = new Queue<int>();    // Queue to store the waypoints to visit
+    
 
     void Update()
     {
@@ -72,6 +75,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = targetWaypoint.position; // Snap to the waypoint
             currentWaypointIndex = waypointQueue.Dequeue(); // Update current index
+            reachWayPoint = true;
         }
     }
 
