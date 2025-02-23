@@ -12,8 +12,7 @@ public class Task : MonoBehaviour
 
     [Header("If the task requires an item...")]
     [SerializeField] bool isRequiredItem;
-    [SerializeField] Items requiredItem;
-    
+    [SerializeField] Items requiredItem;    
 
     private void Start()
     {        

@@ -16,11 +16,11 @@ public abstract class Subject : MonoBehaviour
         ObserverList.Remove(observer);
     }
 
-    public void NotifyObserver(PlayerAction action)
+    public void NotifyObserver(WeatherType weather)
     {
         ObserverList.ForEach((ObserverList) =>
         {
-            ObserverList.OnNotify(action);
+            ObserverList.OnNotify(weather);
         });
 
 

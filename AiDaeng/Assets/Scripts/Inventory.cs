@@ -106,6 +106,11 @@ public class Inventory : MonoBehaviour
         DisplayItems();
     }
 
+    //public bool HasItem(Items _item)
+    //{
+    //    return items.Any(item => item == _item);
+    //}
+
     public void UpdateItem(Items requiredItem, Items goalItem)
     {
         for (int i = 0; i < items.Count; i++)
