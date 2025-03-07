@@ -6,28 +6,34 @@ public class NPC_Manager : MonoBehaviour
 {
     public GameObject npcPrefab;
     public Transform spawnPoint;
-    public GameObject[] npcs;
-    public List<Transform> waypoints; // Assign in the Inspector
-    public int npcCount = 3; // Number of NPCs to spawn
+    //public List<Transform> waypoints;
+    public int npcCount = 3;
 
-    private List<GameObject> activeNPCs = new List<GameObject>();
+    public Queue<GameObject> npcQueue = new Queue<GameObject>();
 
     void Start()
     {
+        print("asd");
         SpawnNPCs();
     }
 
     private void SpawnNPCs()
     {
+        print("SPAWN");
         for (int i = 0; i < npcCount; i++)
         {
-            GameObject npc = Instantiate(npcPrefab, spawnPoint.position, Quaternion.identity);
-            //NPC npcMovement = npc.GetComponent<NPC>();
-            //if (npcMovement != null)
-            //{
-            //    //npcMovement.SetWaypoints(new List<Transform>(waypoints)); // Assign waypoints
-            //}
-            activeNPCs.Add(npc);
+            GameObject npc = Instantiate(npcPrefab, spawnPoint.position, Quaternion.identity);            
+        }
+
+        StartCoroutine(ProcessQueue());
+    }
+
+    private IEnumerator ProcessQueue()
+    {
+        while (npcQueue.Count > 0)
+        {
+            GameObject npc = npcQueue.Dequeue();
+            yield return new WaitForSeconds(2f); // Small delay for spacing
         }
     }
 }

@@ -41,11 +41,7 @@ public class Task : MonoBehaviour
                 print("GET " + goalItem.name);
                 Inventory.instance.AddItem(goalItem);
             }
-        }
-        else
-        {
-            print("SDFF");
-        }
+        }     
     }
 
     private void OnMouseDown()
@@ -55,31 +51,8 @@ public class Task : MonoBehaviour
         {
             player.MoveToWaypoint(waypoint);
             player.targetWP = gameObject;
-            Debug.Log("MOVING TO TASK: " + gameObject.name);
-            
-            //if (isRequiredItem)
-            //{
-            //    if (Inventory.instance.HasItem(requiredItem))
-            //    {
-            //        print("Get " + goalItem.name);
-            //        Inventory.instance.AddItem(goalItem);
-            //    }
-            //    else
-            //    {
-            //        print("Go get " + requiredItem.name + " first!");
-            //    }
-            //}
-            //else
-            //{
-            //    print("Do task");
-            //    Inventory.instance.AddItem(goalItem);
-            //}
+            Debug.Log("MOVING TO TASK: " + gameObject.name);  
         }
-
-        //void DoTask()
-        //{
-
-        //}
     }
 
     

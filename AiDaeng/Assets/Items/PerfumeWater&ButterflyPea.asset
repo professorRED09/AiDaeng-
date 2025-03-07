@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PerfumeWater&ButterflyPea
   m_EditorClassIdentifier: 
   itemName: PerfumeWater&ButterflyPea
-  itemSprite: {fileID: 21300000, guid: f75e9ecb78f8f7c498a5408c40c73439, type: 2}
+  itemSprite: {fileID: 21300000, guid: 6408123e9db107447b8239106d453cbf, type: 3}

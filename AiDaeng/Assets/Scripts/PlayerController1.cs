@@ -14,6 +14,17 @@ public class PlayerController1 : MonoBehaviour
     [SerializeField] private bool isMoving = false;
 
     public GameObject targetWP;
+    Animator anim;
+
+    public Transform counterWP;
+    public bool isAtCounter;
+
+    Vector3 direction;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>(); 
+    }
 
     void Update()
     {        
@@ -24,20 +35,18 @@ public class PlayerController1 : MonoBehaviour
         
         if (isMoving && pathQueue.Count > 0)
         {
-            MoveToNextWaypoint();       
-            //if(transform.position == targetWP.transform.position) {
-            //    print("arrived at " + targetWP.name);
-            //}
-        }
+            MoveToNextWaypoint();
+        }    
         
-        //if (targetWP == null)
-        //{
-        //    return;
-        //}
-        //if (this.transform.position == targetWP.transform.position)
-        //{
-        //    print("arrived at " + targetWP.name);
-        //}
+        if(transform.position == counterWP.position)
+        {
+            isAtCounter = true;
+        }
+        else
+        {
+            isAtCounter = false;
+        }
+
     }
 
     // Start moving toward the nearest waypoint first, then to the target waypoint
@@ -61,14 +70,16 @@ public class PlayerController1 : MonoBehaviour
     // Move to the next waypoint in the queue
     private void MoveToNextWaypoint()
     {
-        //if (pathQueue.Count <= 0)
-        //{
-        //    isMoving = false;
-        //    return;
-        //}        
-
         Transform nextWaypoint = pathQueue.Peek();
-        Vector3 direction = (nextWaypoint.position - transform.position).normalized;
+        direction = (nextWaypoint.position - transform.position).normalized;
+        //if(direction.x > 0)
+        //{
+        //    anim.S
+        //}
+        //else
+        //{
+
+        //}
         transform.position += direction * speed * Time.deltaTime;
 
         // Check if player reached the waypoint
@@ -120,11 +131,4 @@ public class PlayerController1 : MonoBehaviour
 
         return path;
     }
-
-    //check if player have arrived at the task
-    /*
-    if(transform.position == wayPoint.transform.position){
-        start doing task
-
-    */
 }

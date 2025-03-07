@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class NPC_LeaveState : NPC_BaseState
 {
-    public override void EnterState(NPC npc)
+    public override void EnterState(NPC2 npc)
     {
-        Debug.Log("Fuck this shit, I'm out!");
+        npc.currentWaypointIndex = 0;
+        npc.SetWaypoints(npc.wayToLeave);           
     }
 
-    public override void UpdateState(NPC npc)
+    public override void UpdateState(NPC2 npc)
     {
-        
+        if (Vector3.Distance(npc.transform.position, npc.wayToLeave[npc.wayToLeave.Length - 1].transform) <= 0.1f)
+        {
+            npc.LeaveScene();
+        }
     }
 
-    public override void ExitState(NPC npc)
+    public override void ExitState(NPC2 npc)
     {
         
     }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PerfumeWater&Calendula
   m_EditorClassIdentifier: 
   itemName: PerfumeWater&Calendula
-  itemSprite: {fileID: 21300000, guid: 2de8b68837d6b634c9dabc5bdfa5ee6e, type: 2}
+  itemSprite: {fileID: 21300000, guid: 4c0538ef435c28f4c8dc146cf3356bf4, type: 3}

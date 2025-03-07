@@ -9,12 +9,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NPC
   - Water
   - UI
   - Obstacle
   - Player
-  - 
+  - TestRaycast
   - 
   - 
   - 
@@ -59,4 +59,10 @@ TagManager:
     locked: 0
   - name: Task (Back Row)
     uniqueID: 4168532757
+    locked: 0
+  - name: Effect
+    uniqueID: 2808222545
+    locked: 0
+  - name: UI
+    uniqueID: 93704681
     locked: 0

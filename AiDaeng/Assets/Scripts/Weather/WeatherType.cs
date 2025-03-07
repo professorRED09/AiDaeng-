@@ -1,4 +1,8 @@
-public enum WeatherType 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public enum WeatherType
 {
     Normal,
     Sunny,

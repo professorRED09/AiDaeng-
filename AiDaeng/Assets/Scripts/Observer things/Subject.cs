@@ -22,7 +22,5 @@ public abstract class Subject : MonoBehaviour
         {
             ObserverList.OnNotify(weather);
         });
-
-
     }
 }
