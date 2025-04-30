@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeatherManager : Subject
+public class WeatherManager : Subject, IObserver
 {
     public GameObject weatherFilter;
     public Animator anim;
@@ -52,6 +52,22 @@ public class WeatherManager : Subject
         }
 
         state.EnterState(this);
+    }
+
+    public void OnNotify(WeatherType weather)
+    {
+
+    }
+    public void OnNotify(Action action)
+    {
+        switch (action)
+        {
+            case (Action.StartTimerStop):
+
+                return;
+            default:
+                return;
+        }
     }
 
     //public void OnNotify(WeatherType weather)

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bowl
   m_EditorClassIdentifier: 
   itemName: Bowl
-  itemSprite: {fileID: -267587109, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
+  itemSprite: {fileID: 21300000, guid: 8af239e56cc19ca45a49094e4bfce57f, type: 3}

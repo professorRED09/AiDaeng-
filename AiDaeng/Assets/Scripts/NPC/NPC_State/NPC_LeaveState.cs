@@ -4,6 +4,7 @@ public class NPC_LeaveState : NPC_BaseState
 {
     public override void EnterState(NPC2 npc)
     {
+        npc.isMoving = true;
         npc.currentWaypointIndex = 0;
         npc.SetWaypoints(npc.wayToLeave);           
     }

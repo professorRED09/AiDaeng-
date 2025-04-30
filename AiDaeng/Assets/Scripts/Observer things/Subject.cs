@@ -23,4 +23,12 @@ public abstract class Subject : MonoBehaviour
             ObserverList.OnNotify(weather);
         });
     }
+
+    public void NotifyObserver(Action action)
+    {
+        ObserverList.ForEach((ObserverList) =>
+        {
+            ObserverList.OnNotify(action);
+        });
+    }
 }
