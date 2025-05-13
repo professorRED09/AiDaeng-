@@ -44,13 +44,11 @@ public class NPC2 : MonoBehaviour, IObserver
     public bool isUpset = false;
     public bool getProduct = false;
     public bool isClickable;
-    private bool canMove;
-    public bool isWaiting;
-    
+    public bool isWaiting;    
 
     [SerializeField] Items orderItem;
-
     PlayerController1 player;
+    Namwan namwan;
 
     //FSM Stuff
     NPC_BaseState currentState;
@@ -72,6 +70,7 @@ public class NPC2 : MonoBehaviour, IObserver
         inventory = Inventory.instance;
         weatherManager = FindObjectOfType<WeatherManager>();
         player = FindObjectOfType<PlayerController1>();
+        namwan = FindObjectOfType<Namwan>();
         npcManager = FindObjectOfType<NPC_Manager2>();
     }
 
@@ -85,6 +84,8 @@ public class NPC2 : MonoBehaviour, IObserver
         currentState = arriveState;
         currentState.EnterState(this);
     }
+
+    
 
     public void SetWaypoints(Waypoints[] assignedWaypoints)
     {
@@ -209,6 +210,16 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            // called Namwan to give some water cups for this npc
+            print("CALLED NAMWAN");
+        }
+    }
+
+    
     public void SwitchState(NPC_BaseState state)
     {
         currentState = state;

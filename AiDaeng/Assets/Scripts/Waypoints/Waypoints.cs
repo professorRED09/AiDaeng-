@@ -10,6 +10,7 @@ public class Waypoints : ScriptableObject
     public string waypointName;
     public Vector3 transform;
 
+
     //private void Awake()
     //{
     //    transform = waypoint.transform.position;
