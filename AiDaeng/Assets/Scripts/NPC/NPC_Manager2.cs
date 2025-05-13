@@ -4,33 +4,71 @@ using UnityEngine;
 
 public class NPC_Manager2 : MonoBehaviour
 {
-    public float timer;
-    public float currentTimer;
-    public GameObject npcPrefab;
-    public Transform spawnPoint;
-    public Waypoints[] waypoints; // Waypoints to assign
-    //public int npcCount = 3;
+    private float spawnTimer; // a spawn timer
+    [SerializeField] float maxTime; // a longest period to spawn the next npc 
+    [SerializeField] float minTime; // a shortest period to spawn the next npc
+    [SerializeField] float currentSpawnTimer;
+    private bool isTimeout = false;
 
+    public GameObject npcPrefab;
+    public Transform spawnPoint; // a position to spawn npc
+    public Waypoints[] waypoints; // Waypoints to assign    
+
+    private int spawnedNpcCount; // store total of npc that have spawned
+    public int leftNpcCount; // store total of npc that have left 
+
+    private GameManager gameManager;
+
+    private void OnEnable()
+    {        
+        EventManager.TimerStop += OnTimeout;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.TimerStop -= OnTimeout;
+    }
+    
+    private void OnTimeout() => isTimeout = true;
+
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();        
+    }
 
     void Start()
     {
         SpawnNPCs();
-        currentTimer = timer;
+        RandomSpawnTime();
     }
 
     private void Update()
     {
-        currentTimer -= Time.deltaTime;
-        if(currentTimer <= 0)
-        {
+        currentSpawnTimer -= Time.deltaTime;
+        if(currentSpawnTimer <= 0 && !isTimeout)
+        {            
             SpawnNPCs();
-            currentTimer = timer;
-        }        
+            RandomSpawnTime();
+        }
+
+        if(leftNpcCount == spawnedNpcCount) 
+        {
+            if (!isTimeout)
+            {
+                return;
+            }
+            else
+            {
+                gameManager.ShowResult();// show game result
+            }
+        }
+        
+        
     }
 
-    public void CountdownTimer()
+    public void RandomSpawnTime()
     {
-
+        currentSpawnTimer = Random.Range(minTime, maxTime);        
     }
 
     private void SpawnNPCs()
@@ -41,6 +79,8 @@ public class NPC_Manager2 : MonoBehaviour
         {
             npcMovement.SetWaypoints(waypoints); // Assign waypoints to NPC            
         }
+        spawnedNpcCount++;
+        
     }
 
     //private IEnumerator ProcessQueue()

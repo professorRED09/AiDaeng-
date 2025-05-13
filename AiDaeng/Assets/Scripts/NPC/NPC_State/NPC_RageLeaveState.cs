@@ -4,6 +4,7 @@ public class NPC_RageLeaveState : NPC_BaseState
 {
     public override void EnterState(NPC2 npc)
     {
+        npc.isMoving = true;
         npc.isClickable = false;
         npc.HideOrder();
         npc.currentWaypointIndex = 0;

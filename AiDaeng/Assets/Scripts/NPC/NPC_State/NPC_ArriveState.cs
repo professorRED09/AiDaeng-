@@ -17,6 +17,7 @@ public class NPC_ArriveState : NPC_BaseState
         if (Vector3.Distance(npc.transform.position, npc.wayToCounter[npc.wayToCounter.Length - 1].transform) <= 0.1f)
         {
             npc.transform.position = npc.wayToCounter[npc.wayToCounter.Length - 1].transform;
+            // timer for thinking process
             npc.SwitchState(npc.orderState);
         }       
     }

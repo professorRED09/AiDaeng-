@@ -68,7 +68,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            Debug.Log("You already have this one");
+            //Debug.Log("You already have this one");
             for (int i = 0; i < items.Count; i++)
             {
                 if (items[i] == _item)
@@ -99,9 +99,8 @@ public class Inventory : MonoBehaviour
             }
         }
         else
-        {
-            //selectedItem = null;
-            //print("You got nothing in this slot");
+        {            
+            print("You got nothing in this slot");
         }
         DisplayItems();
     }
@@ -119,7 +118,7 @@ public class Inventory : MonoBehaviour
             {
                 items[i] = goalItem;
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemSprite;
-                print("UPDATE ITEM FROM " + requiredItem.name + " TO " + goalItem.name);
+                //print("UPDATE ITEM FROM " + requiredItem.name + " TO " + goalItem.name);
             }
         }
     }

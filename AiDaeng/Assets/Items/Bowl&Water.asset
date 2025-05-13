@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Bowl&Water
   m_EditorClassIdentifier: 
   itemName: Bowl with Water
-  itemSprite: {fileID: 131449278, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
+  itemSprite: {fileID: 21300000, guid: b1c599caa958431469b6476634199569, type: 3}
