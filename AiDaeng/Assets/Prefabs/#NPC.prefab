@@ -223,7 +223,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   orderBubble: {fileID: 7287168114240358586}
-  emoBar: {fileID: 5424894808772938700}
+  moodBar: {fileID: 5424894808772938700}
   thinkingText: {fileID: 3994496829248459128}
   itemImage: {fileID: 2419903319436110288}
   itemLists:
@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 9091144532289902528}
   - component: {fileID: 8464728783208879089}
   m_Layer: 3
-  m_Name: EmoBar
+  m_Name: MoodBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

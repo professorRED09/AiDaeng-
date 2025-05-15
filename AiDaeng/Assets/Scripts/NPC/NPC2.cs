@@ -20,7 +20,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
     [Header("UI")]
     [SerializeField] GameObject orderBubble;
-    [SerializeField] Slider emoBar;
+    [SerializeField] Slider moodBar;
     [SerializeField] GameObject thinkingText;
     [SerializeField] GameObject itemImage;
     [SerializeField] Items[] itemLists;
@@ -78,7 +78,7 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         // set initial value       
         currentEB = maxEB;
-        UpdateEmoBar(currentEB, maxEB);
+        UpdateMoodBar(currentEB, maxEB);
 
         // set initial state to begin with
         currentState = arriveState;
@@ -145,29 +145,6 @@ public class NPC2 : MonoBehaviour, IObserver
             isMoving = false;
         }
     }
-    //bool IsSomeoneAhead()
-    //{
-    //    // check what dir npc is moving
-    //    // if it's up&down, use another raycast
-    //    // if it's left&right, use another as well
-    //    RaycastHit2D hit;
-    //    if (direction.x != 0)
-    //    {
-    //        hit = Physics2D.Raycast(transform.position + transOffset, direction, detectLength, npcMask);
-    //    }else if (direction.y != 0)
-    //    {
-    //        hit = Physics2D.Raycast(transform.position + transOffset, direction, detectLength, npcMask);
-    //    }        
-        
-    //    //if(hit.collider == null)
-    //    //{
-    //    //    return false;
-    //    //}
-    //    //else
-    //    //{
-    //    //    return true;
-    //    //}
-    //}
 
     private void MoveToWaypoint()
     {        
@@ -214,8 +191,8 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         if (Input.GetMouseButton(1))
         {
-            // called Namwan to give some water cups for this npc
-            print("CALLED NAMWAN");
+            namwan.MoveToWaypoint(transform);// called Namwan to give some water cups for this npc
+            namwan.targetNPC = this;
         }
     }
 
@@ -226,10 +203,10 @@ public class NPC2 : MonoBehaviour, IObserver
         state.EnterState(this);
     }
 
-    public void ResetEmoBar()
+    public void ResetMoodBar()
     {
         currentEB = maxEB;
-        UpdateEmoBar(currentEB, maxEB);
+        UpdateMoodBar(currentEB, maxEB);
     }
     public void CountdownPatience()
     {
@@ -237,7 +214,7 @@ public class NPC2 : MonoBehaviour, IObserver
             return;
         // decreasing emotion value as the time goes by
         currentEB -= decSpeed * Time.deltaTime;
-        UpdateEmoBar(currentEB, maxEB);
+        UpdateMoodBar(currentEB, maxEB);
 
         // check if current emotion value reaches 0 or not, if yes, then isUpset = true
         isUpset = currentEB <= 0 ? true : false;
@@ -255,9 +232,9 @@ public class NPC2 : MonoBehaviour, IObserver
         prayingTime -= Time.deltaTime;
     }
 
-    public void UpdateEmoBar(float currentValue, float maxValue)
+    public void UpdateMoodBar(float currentValue, float maxValue)
     {
-        emoBar.value = currentValue / maxValue;
+        moodBar.value = currentValue / maxValue;
     }
 
     // use in LeaveState when the npc leaves the area
@@ -273,7 +250,7 @@ public class NPC2 : MonoBehaviour, IObserver
         orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = true; // enable panel image
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = true; // enable "..." text;
         StartCoroutine(OrderProduct());// set text active
-        ResetEmoBar();
+        ResetMoodBar();
         // play animation
     }
 
