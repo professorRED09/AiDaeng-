@@ -68,10 +68,13 @@ public class Namwan : MonoBehaviour
 
     IEnumerator FillDrinkWater()
     {
-        //audioSource.Play(); // play soundFX
-        yield return new WaitForSeconds(fillSpeed);
-        serveAmount += 1;
-        serveAmountText.text = serveAmount.ToString();
+        if(serveAmount < maxServeAmount)
+        {
+            //audioSource.Play(); // play soundFX
+            yield return new WaitForSeconds(fillSpeed);
+            serveAmount += 1;
+            serveAmountText.text = serveAmount.ToString();
+        }        
     }
 
     private void OnMouseEnter()

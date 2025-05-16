@@ -6,9 +6,9 @@ public class DrinkWaterTask : MonoBehaviour
 {
     [Header("Ref")]
     public Transform waypoint;              // The waypoint for this task
-    public int index;                       // Index of this waypoint    
+    /*public int index;  */                     // Index of this waypoint    
     private Namwan namwan;       // Reference for player script
-    public Items goalItem;
+    //public Items goalItem;
     private AudioSource audioSource;
     //[SerializeField] AudioClip soundFX;
 
@@ -24,7 +24,7 @@ public class DrinkWaterTask : MonoBehaviour
         if (waypoint != null && namwan != null)
         {
             namwan.MoveToWaypoint(waypoint);
-            //Debug.Log("MOVING TO TASK: " + gameObject.name);  
+            Debug.Log("MOVING TO DRINKING WATER FILLER");
         }
     }
 }
