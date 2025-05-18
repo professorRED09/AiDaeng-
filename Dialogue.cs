@@ -43,6 +43,7 @@ public class SimpleDialogue : MonoBehaviour
     void StartDialogue()
     {
         index = 0;
+
         UpdateUI();
         StartCoroutine(TypeLine());
     }
@@ -63,6 +64,7 @@ public class SimpleDialogue : MonoBehaviour
             if (i < lines[index].Length)
                 dialogueText.text += lines[index][i];
 
+
             yield return new WaitForSeconds(textSpeed);
         }
 
@@ -81,6 +83,7 @@ public class SimpleDialogue : MonoBehaviour
         }
         else
         {
+
             gameObject.SetActive(false);
         }
     }
