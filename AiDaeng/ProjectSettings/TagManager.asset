@@ -3,17 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Task
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NPC
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Obstacle
+  - Player
+  - TestRaycast
   - 
   - 
   - 
@@ -41,6 +42,30 @@ TagManager:
   - name: BG
     uniqueID: 3321419759
     locked: 0
+  - name: NPC
+    uniqueID: 3852951397
+    locked: 0
+  - name: Collider
+    uniqueID: 1165959625
+    locked: 0
+  - name: ' Task (Front Row)'
+    uniqueID: 2492450301
+    locked: 0
+  - name: Player
+    uniqueID: 2513446045
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Task (Back Row)
+    uniqueID: 4168532757
+    locked: 0
+  - name: Effect
+    uniqueID: 2808222545
+    locked: 0
+  - name: FG
+    uniqueID: 1627308575
+    locked: 0
+  - name: UI
+    uniqueID: 93704681
     locked: 0
