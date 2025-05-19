@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Subject, IObserver
 {
-    [Header("Scene & UI")]
+    //[Header("Scene & UI")]
     [SerializeField] GameObject resultPanel;
-    [SerializeField] GameObject pausePanel;
-    [SerializeField] GameObject settingPanel;
-    [SerializeField] GameObject tutorialPanel;
     [SerializeField] TMP_Text resultText;
-    //[SerializeField] GameObject
+    //[SerializeField] GameObject pausePanel;
+    //[SerializeField] GameObject settingPanel;
+    //[SerializeField] GameObject tutorialPanel;
+
+    ////[SerializeField] GameObject
 
     [Header("All Manager")]
     public NPC_Manager2 npcManager;
@@ -75,30 +76,30 @@ public class GameManager : Subject, IObserver
 
     }
 
-    public void StartGame()
-    {
-        SceneManager.LoadScene("Cutscene1");
-    }
+    //public void StartGame()
+    //{
+    //    SceneManager.LoadScene("Cutscene1");
+    //}
 
-    public void ShowSetting()
-    {
-        settingPanel.SetActive(true);
-    }
+    //public void ShowSetting()
+    //{
+    //    settingPanel.SetActive(true);
+    //}
 
-    public void ShowTutorial()
-    {
-        tutorialPanel.SetActive(true);
-    }
+    //public void ShowTutorial()
+    //{
+    //    tutorialPanel.SetActive(true);
+    //}
 
-    public void BackFromSetting()
-    {
-        settingPanel.SetActive(false);
-    }
+    //public void BackFromSetting()
+    //{
+    //    settingPanel.SetActive(false);
+    //}
 
-    public void BackFromTutorial()
-    {
-        tutorialPanel.SetActive(false);
-    }
+    //public void BackFromTutorial()
+    //{
+    //    tutorialPanel.SetActive(false);
+    //}
 
     
 
@@ -119,32 +120,32 @@ public class GameManager : Subject, IObserver
         isGameover = true;
     }
 
-    public void PauseGame()
-    {
-        pausePanel.SetActive(true);
-        Time.timeScale = 0;
-    }
+    //public void PauseGame()
+    //{
+    //    pausePanel.SetActive(true);
+    //    Time.timeScale = 0;
+    //}
 
-    public void ResumeGame()
-    {
-        pausePanel.SetActive(false);
-        Time.timeScale = 1;
-    }
+    //public void ResumeGame()
+    //{
+    //    pausePanel.SetActive(false);
+    //    Time.timeScale = 1;
+    //}
 
-    public void ShowLevelSelect()
-    {
-        SceneManager.LoadScene("LevelSelect");
-    }
+    //public void ShowLevelSelect()
+    //{
+    //    SceneManager.LoadScene("LevelSelect");
+    //}
 
-    public void PlayGame()
-    {
-        SceneManager.LoadScene("Gameplay1");
-    }
+    //public void PlayGame()
+    //{
+    //    SceneManager.LoadScene("Gameplay1");
+    //}
 
-    public void BackFromLevelSelect()
-    {
-        SceneManager.LoadScene("Title");
-    }
+    //public void BackFromLevelSelect()
+    //{
+    //    SceneManager.LoadScene("Title");
+    //}
 
     public void OnNotify(WeatherType weather)
     {
