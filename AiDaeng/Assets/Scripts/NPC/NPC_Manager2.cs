@@ -12,7 +12,13 @@ public class NPC_Manager2 : MonoBehaviour
 
     public GameObject npcPrefab;
     public Transform spawnPoint; // a position to spawn npc
-    public Waypoints[] waypoints; // Waypoints to assign    
+
+    [Header("Waypoints")]
+    public Transform[] wpToQueue;       // Waypoints to queue 
+    public Transform[] wpToOrder;       // Waypoints to order 
+    public Transform[] wpToPrey;        // Waypoints to prey 
+    public Transform[] wpToLeave;       // Waypoints to leave
+    public Transform[] wpToRageLeave;   // Waypoints to rage leave
 
     private int spawnedNpcCount; // store total of npc that have spawned
     public int leftNpcCount; // store total of npc that have left 
@@ -77,7 +83,7 @@ public class NPC_Manager2 : MonoBehaviour
         NPC2 npcMovement = npc.GetComponent<NPC2>();
         if (npcMovement != null)
         {
-            npcMovement.SetWaypoints(waypoints); // Assign waypoints to NPC            
+            npcMovement.SetWaypoints(wpToQueue); // Assign waypoints to NPC            
         }
         spawnedNpcCount++;
         

@@ -7,8 +7,8 @@ using TMPro;
 public class NPC2 : MonoBehaviour, IObserver
 {
     [Header("Setting")]
-    [SerializeField] float maxEB; // max value of emotion value
-    public float decSpeed; // decreasing speed of emotion value, assign as public for adjusting in other script
+    [SerializeField] float maxEB;   // max value of emotion value
+    public float decSpeed;          // decreasing speed of emotion value, assign as public for adjusting in other script
     float currentDecSpeed;
     public float prayingTime = 2;
 
@@ -26,11 +26,11 @@ public class NPC2 : MonoBehaviour, IObserver
     [SerializeField] Items[] itemLists;
 
     [Header("Waypoints")]
-    public Waypoints[] waypoints; // Store assigned waypoints
-    public Waypoints[] wayToCounter;
-    public Waypoints[] wayToPrey;
-    public Waypoints[] wayToLeave;
-    public Waypoints[] wayToRageLeave;
+    public Transform[] waypoints; // Store assigned waypoints
+    public Transform[] wayToCounter;    
+    public Transform[] wayToPrey;
+    public Transform[] wayToLeave;
+    public Transform[] wayToRageLeave;
 
     public int currentWaypointIndex = 0;
     public bool isMoving;
@@ -44,7 +44,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public bool isUpset = false;
     public bool getProduct = false;
     public bool isClickable;
-    public bool isWaiting;    
+    public bool isWaiting;
 
     [SerializeField] Items orderItem;
     PlayerController1 player;
@@ -53,6 +53,7 @@ public class NPC2 : MonoBehaviour, IObserver
     //FSM Stuff
     NPC_BaseState currentState;
     public NPC_ArriveState arriveState = new NPC_ArriveState();
+    public NPC_WaitToOrderState waitToOrderState = new NPC_WaitToOrderState();
     public NPC_OrderState orderState = new NPC_OrderState();
     public NPC_PreyState preyState = new NPC_PreyState();
     public NPC_LeaveState leaveState = new NPC_LeaveState();
@@ -62,6 +63,9 @@ public class NPC2 : MonoBehaviour, IObserver
     private NPC_Manager2 npcManager;
     bool isFacingRight = true;
     public Vector3 direction;
+
+    public Transform[] orderSpots;
+    public Transform takenOrderSpot;
 
     private void Awake()
     {
@@ -83,16 +87,22 @@ public class NPC2 : MonoBehaviour, IObserver
         // set initial state to begin with
         currentState = arriveState;
         currentState.EnterState(this);
-    }
 
-    
+        // set up waypoint array
+        wayToCounter = npcManager.wpToQueue;
+        orderSpots = npcManager.wpToOrder;
+        wayToPrey = npcManager.wpToPrey; 
+        wayToLeave = npcManager.wpToLeave;
+        wayToRageLeave = npcManager.wpToRageLeave;
 
-    public void SetWaypoints(Waypoints[] assignedWaypoints)
+    }   
+
+    public void SetWaypoints(Transform[] assignedWaypoints)
     {
         waypoints = assignedWaypoints;
         if (waypoints.Length > 0)
         {
-            transform.position = waypoints[0].transform; // Start at the first waypoint
+            //transform.position = waypoints[0].position; // Start at the first waypoint
             isMoving = true;
         }
     }
@@ -100,24 +110,14 @@ public class NPC2 : MonoBehaviour, IObserver
     void Update()
     {
         Animate(); // animate the character sprite
-        CountdownPatience();
+        DecreaseMoodBar();
 
         if (direction.x > 0 && !isFacingRight || direction.x < 0 && isFacingRight) // check condition to flip the character sprite
         {
             Flip();
         }
 
-        WaitForQueue();
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectLength, npcMask);
-
-        //if (hit.collider == null)
-        //{
-        //    isMoving = true;
-        //}
-        //else
-        //{
-        //    isMoving = false;
-        //}
+        WaitForQueue();  
 
         currentState.UpdateState(this);
 
@@ -132,6 +132,8 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    // Check if there's npc ahead, if yes then stop moving
+    //public bool isGonnaOrder;
     void WaitForQueue()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectLength, npcMask);
@@ -147,14 +149,14 @@ public class NPC2 : MonoBehaviour, IObserver
     }
 
     private void MoveToWaypoint()
-    {        
-        Waypoints targetWaypoint = waypoints[currentWaypointIndex];
-        direction = (targetWaypoint.transform - transform.position).normalized;
+    {
+        Transform targetWaypoint = waypoints[currentWaypointIndex];
+        direction = (targetWaypoint.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, targetWaypoint.transform) < 0.1f)
+        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
-            transform.position = targetWaypoint.transform; // Snap to exact position
+            transform.position = targetWaypoint.position; // Snap to exact position
             currentWaypointIndex++;
 
             if (currentWaypointIndex >= waypoints.Length)
@@ -164,6 +166,7 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    // To give npc a product
     private void OnMouseDown()
     {
         if (!isClickable)
@@ -177,8 +180,6 @@ public class NPC2 : MonoBehaviour, IObserver
                 getProduct = true;                  // npc gets product
                 orderBubble.SetActive(false);       // hide UI
                 ScoreManager.instance.AddScore();   // add score for player
-                                                    //print("THERE YOU GO! HERE'S YOUR HOLY WATER");
-                                                    //Destroy(gameObject);
             }
             else
             {
@@ -187,6 +188,7 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    // To call Namwan to give drink water to npc
     void OnMouseOver()
     {
         if (Input.GetMouseButton(1))
@@ -208,10 +210,11 @@ public class NPC2 : MonoBehaviour, IObserver
         currentEB = maxEB;
         UpdateMoodBar(currentEB, maxEB);
     }
-    public void CountdownPatience()
+    public void DecreaseMoodBar()
     {
-        if (!isWaiting)
+        if (isWaiting == false)
             return;
+
         // decreasing emotion value as the time goes by
         currentEB -= decSpeed * Time.deltaTime;
         UpdateMoodBar(currentEB, maxEB);
@@ -237,12 +240,22 @@ public class NPC2 : MonoBehaviour, IObserver
         moodBar.value = currentValue / maxValue;
     }
 
-    // use in LeaveState when the npc leaves the area
-    //public void Leave()
-    //{
-    //    orderBubble.SetActive(false);
-    //    Destroy(gameObject);
-    //}
+    
+    public IEnumerator CheckOrderSpot()
+    {
+        for(int i = orderSpots.Length-1; i >= 0; i--)
+        {
+            Transform _freeSpot = orderSpots[i];
+            OrderSpot freeSpot = orderSpots[i].GetComponent<OrderSpot>();
+            if (freeSpot.isFree && takenOrderSpot == null)
+            {
+                takenOrderSpot = _freeSpot;//move to that spot
+                freeSpot.isFree = false;
+                break;                
+            }
+        }
+        yield return null;
+    }
 
     public void ThinkOfOrder()
     {
