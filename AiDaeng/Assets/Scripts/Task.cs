@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -46,7 +46,8 @@ public class Task : MonoBehaviour
             }
             else
             {
-                print("GO GET " + requiredItem.name + " FIRST!");
+                NotificationManager.instance.AddNoti($"ผู้เล่นต้องมี{requiredItem.name}ก่อนจึงสามารถทำได้!");
+                //print("GO GET " + requiredItem.name + " FIRST!");
             }
         }
         else

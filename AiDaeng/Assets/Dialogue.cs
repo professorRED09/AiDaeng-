@@ -120,7 +120,7 @@ public class SimpleDialogue : MonoBehaviour
         nameText.text = names[index];   
         isTyping = false;
         continueButton.gameObject.SetActive(true);
-        SceneManager.LoadScene("Gameplay1");
+        SceneManager.LoadScene("Gameplay [Beta]");
     }
 }
 

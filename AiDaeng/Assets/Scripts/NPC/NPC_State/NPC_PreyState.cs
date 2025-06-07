@@ -26,7 +26,7 @@ public class NPC_PreyState : NPC_BaseState
         npc.Praying(); // countdown praying time
         if (npc.prayingTime <= 0)
         {
-            BuddhaBasin.instance.IncreaseWater(2);  // increase water in basin
+            BuddhaBasin.instance.IncreaseWater(11);  // increase water in basin
             npc.SwitchState(npc.leaveState);        // switch to leave state
         }
             

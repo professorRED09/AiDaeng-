@@ -19,8 +19,9 @@ public class PlayerController1 : MonoBehaviour
 
     public Transform counterWP;
     public bool isAtCounter;
-    public bool isFacingRight; // our based sprite for walking is facing in the right direction
+    public bool isFacingRight;      // our based sprite for walking is facing in the right direction
     public bool isAtPosition;
+    public bool canControl = false; // player won't be able to control until the game start
 
     public Vector3 direction;  // set as public for debugging
 
@@ -66,7 +67,7 @@ public class PlayerController1 : MonoBehaviour
     // Start moving toward the nearest waypoint first, then to the target waypoint
     public void MoveToWaypoint(Transform targetWaypoint)
     {
-        if (isMoving || targetWaypoint == null)
+        if (isMoving || targetWaypoint == null || !canControl)
             return;
 
         // Find the nearest waypoint

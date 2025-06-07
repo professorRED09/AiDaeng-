@@ -36,7 +36,7 @@ public class Namwan : MonoBehaviour
         {
             MoveToNextWaypoint();            
         }
-        else if (pathQueue.Count <= 0)
+        else if (pathQueue.Count <= 0 && targetNPC != null)
         {
             isMoving = false;
             StartCoroutine(GiveDrinkWater());
@@ -53,17 +53,25 @@ public class Namwan : MonoBehaviour
         
     }
 
+    //void GGiveDrinkWater()
+    //{
+    //    if (targetNPC == null) return;
+    //    if()
+    //}
     IEnumerator GiveDrinkWater()
     {
-        if (targetNPC != null && serveAmount > 0)
+        if (serveAmount > 0)
         {
             targetNPC.GetComponent<NPC2>().ResetMoodBar();      // reset npc mood
             serveAmount -= 1;                                   // deduct drink water from Namwan
             serveAmountText.text = serveAmount.ToString();      // update on UI
-            targetNPC = null;                                   // set target to null
-            
+            targetNPC = null;                                   // set target to null            
+        }
+        else
+        {
+            //print("YOU DON'T HAVE ANY DRINKS LEFT!");
         }        
-        yield return null;
+        yield return new WaitForSeconds(1f);
     }
 
     IEnumerator FillDrinkWater()
@@ -88,8 +96,7 @@ public class Namwan : MonoBehaviour
             return;
 
         // Find the nearest waypoint
-        Transform nearestWaypoint = GetNearestWaypoint(targetWaypoint);
-        print(nearestWaypoint.gameObject.name);
+        Transform nearestWaypoint = GetNearestWaypoint(targetWaypoint); 
 
         if (nearestWaypoint != null)
         {

@@ -6,42 +6,36 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Subject, IObserver
 {
-    //[Header("Scene & UI")]
+    [Header("UI")]
     [SerializeField] GameObject resultPanel;
     [SerializeField] TMP_Text resultText;
-    //[SerializeField] GameObject pausePanel;
-    //[SerializeField] GameObject settingPanel;
-    //[SerializeField] GameObject tutorialPanel;
-
-    ////[SerializeField] GameObject
-
-    [Header("All Manager")]
-    public NPC_Manager2 npcManager;
-    public ScoreManager scoreManager;
-    public WeatherManager weatherManager;
-
-    [Header("Level timer")]
-    [SerializeField] Timer timer;
-    //[SerializeField] private TMP_Text levelTimerText;
-    //[SerializeField] private float timeToDisplay = 60.0f;
-    //private bool _isRunning;
-
     [SerializeField] GameObject StartNotif;
     [SerializeField] GameObject ClosedNotif;
 
+    // Managers
+    private NPC_Manager2 npcManager;
+    private ScoreManager scoreManager;
+    private WeatherManager weatherManager;
 
+    [Header("Level timer")]
+    [SerializeField] Timer timer;
     [SerializeField] float startTimer;    
 
-    public bool isGameover = false;    
+    public bool isGameover = false;
+
+    private PlayerController1 player;
+
+    void Awake()
+    {
+        player = FindObjectOfType<PlayerController1>();
+        npcManager = FindObjectOfType<NPC_Manager2>();
+        scoreManager = FindObjectOfType<ScoreManager>();
+        weatherManager = FindObjectOfType<WeatherManager>();
+    }
 
     private void Start()
-    {
-        isGameover = false;
-
-        npcManager.enabled = false;
-        scoreManager.enabled = false;
-        weatherManager.enabled = false;
-        StartCoroutine(countdownToStart()); // start coroutine
+    {        
+        StartCoroutine(countdownToStart());     // start coroutine
     }
 
     private void OnEnable()
@@ -67,41 +61,20 @@ public class GameManager : Subject, IObserver
     IEnumerator countdownToStart()
     {
         StartNotif.GetComponent<Animator>().SetTrigger("Enter");    // play animation start pop up
-        yield return new WaitForSeconds(3); // this make the game kinda jiggle, 
+        yield return new WaitForSeconds(3);                         // this make the game kinda jiggle, find a way to fix it later 
         StartNotif.GetComponent<Animator>().SetTrigger("Leave");
         timer.StartLevelTimer();
+
+        EnableManagers();
+        player.canControl = true;
+    }    
+
+    private void EnableManagers()
+    {
         npcManager.enabled = true;
         scoreManager.enabled = true;
-        weatherManager.enabled = true;      
-
+        weatherManager.enabled = true;
     }
-
-    //public void StartGame()
-    //{
-    //    SceneManager.LoadScene("Cutscene1");
-    //}
-
-    //public void ShowSetting()
-    //{
-    //    settingPanel.SetActive(true);
-    //}
-
-    //public void ShowTutorial()
-    //{
-    //    tutorialPanel.SetActive(true);
-    //}
-
-    //public void BackFromSetting()
-    //{
-    //    settingPanel.SetActive(false);
-    //}
-
-    //public void BackFromTutorial()
-    //{
-    //    tutorialPanel.SetActive(false);
-    //}
-
-    
 
     public void ShowResult()
     {
@@ -118,34 +91,7 @@ public class GameManager : Subject, IObserver
         }
         print("VICTOR");
         isGameover = true;
-    }
-
-    //public void PauseGame()
-    //{
-    //    pausePanel.SetActive(true);
-    //    Time.timeScale = 0;
-    //}
-
-    //public void ResumeGame()
-    //{
-    //    pausePanel.SetActive(false);
-    //    Time.timeScale = 1;
-    //}
-
-    //public void ShowLevelSelect()
-    //{
-    //    SceneManager.LoadScene("LevelSelect");
-    //}
-
-    //public void PlayGame()
-    //{
-    //    SceneManager.LoadScene("Gameplay1");
-    //}
-
-    //public void BackFromLevelSelect()
-    //{
-    //    SceneManager.LoadScene("Title");
-    //}
+    }    
 
     public void OnNotify(WeatherType weather)
     {

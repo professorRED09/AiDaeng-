@@ -242,6 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc4268f610ce6948b76d9f08ead0aad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cutscene1Name: Cutscene1
+  level1Name: Gameplay [Beta]
   pausePanel: {fileID: 0}
   settingPanel: {fileID: 0}
   tutorialPanel: {fileID: 0}

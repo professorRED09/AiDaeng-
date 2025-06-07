@@ -72,6 +72,7 @@ public class NPC2 : MonoBehaviour, IObserver
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         inventory = Inventory.instance;
+
         weatherManager = FindObjectOfType<WeatherManager>();
         player = FindObjectOfType<PlayerController1>();
         namwan = FindObjectOfType<Namwan>();
@@ -126,6 +127,10 @@ public class NPC2 : MonoBehaviour, IObserver
         {
             MoveToWaypoint();
         }
+        else if (isUpset)
+        {
+            isMoving = true;
+        }
         else
         {
             isMoving = false;
@@ -136,6 +141,7 @@ public class NPC2 : MonoBehaviour, IObserver
     //public bool isGonnaOrder;
     void WaitForQueue()
     {
+        if (isUpset) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectLength, npcMask);
 
         if (hit.collider == null)
@@ -191,7 +197,7 @@ public class NPC2 : MonoBehaviour, IObserver
     // To call Namwan to give drink water to npc
     void OnMouseOver()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && namwan != null)
         {
             namwan.MoveToWaypoint(transform);// called Namwan to give some water cups for this npc
             namwan.targetNPC = this;
@@ -303,6 +309,16 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         sprite.color = Color.red;
         //print("ITS SO DAMN HOT MANN");
+    }
+
+    public void RageMood()
+    {
+        direction = Vector3.left;
+        transform.position += direction * speed * Time.deltaTime;
+        if(transform.position.x <= -10)
+        {
+            LeaveScene();
+        }
     }
 
     public void LeaveScene()

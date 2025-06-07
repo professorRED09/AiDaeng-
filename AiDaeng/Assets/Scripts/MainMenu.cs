@@ -5,14 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Scene & UI")]
+    [Header("Scene")]
+    [SerializeField] string cutscene1Name;
+    [SerializeField] string level1Name;
+
+    [Header("UI")]
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject settingPanel;
     [SerializeField] GameObject tutorialPanel;
 
     public void OnPressStartGame()
     {
-        SceneManager.LoadScene("Cutscene1");
+        SceneManager.LoadScene(cutscene1Name);
     }
 
     public void OnPressSetting()
@@ -54,7 +58,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnPressSkipScene1()
     {
-        SceneManager.LoadScene("Gameplay1");
+        SceneManager.LoadScene(level1Name);
     }
 
     public void OnPressMainMenu()

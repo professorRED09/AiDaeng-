@@ -10,6 +10,9 @@ public class WeatherManager : Subject, IObserver
     public float timer;
     public float currentTimer;
 
+    public bool Rainy;
+    public bool Sunny;
+
     //FSM Stuff
     Weather_BaseState currentState;
     public Weather_Normal normalState = new Weather_Normal();
@@ -18,7 +21,7 @@ public class WeatherManager : Subject, IObserver
 
     void Awake()
     {
-        //weatherController = FindObjectOfType<WeatherController>();
+        
     }
 
     void Start()

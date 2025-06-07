@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44d975fba686cdc45a13b108d9226e43, type: 3}
-  m_Name: Bowl
+  m_Name: "\u0E19\u0E49\u0E33\u0E2D\u0E1A\u0E14\u0E2D\u0E01\u0E01\u0E38\u0E2B\u0E25\u0E32\u0E1A"
   m_EditorClassIdentifier: 
-  itemName: Bowl
-  itemSprite: {fileID: 21300000, guid: 8af239e56cc19ca45a49094e4bfce57f, type: 3}
+  itemName: PerfumeWater&Rose
+  itemSprite: {fileID: 21300000, guid: fec706135e75a744d987bd6fddeff5a2, type: 3}

@@ -15,7 +15,7 @@ public class BuddhaBasin : MonoBehaviour
 
     [Header("UI")]
     public Slider waterBar;
-    [SerializeField] GameObject fullBasin_Notif;
+    //[SerializeField] GameObject fullBasin_Notif;
 
     [Header("Settings")]
     public bool isFull;    // check if the basin is full
@@ -60,8 +60,7 @@ public class BuddhaBasin : MonoBehaviour
             OnFullBasin();// pop up notif window
         }
         UpdateWaterBar(currentWB, maxWB);
-
-        print("WATER INCREASES");
+        //print("WATER INCREASES");
     }
 
     public void UpdateWaterBar(float currentValue, float maxValue)
@@ -72,8 +71,7 @@ public class BuddhaBasin : MonoBehaviour
     void OnFullBasin()
     {
         isFull = true;
-        fullBasin_Notif.GetComponentInChildren<TMP_Text>().text = "น้ำเต็มแล้ว";
-        fullBasin_Notif.GetComponent<Animator>().SetTrigger("isFull");
+        NotificationManager.instance.AddNoti("น้ำเต็มแล้วน้อง!");        
     }
 
     private void OnMouseDown()
@@ -82,8 +80,7 @@ public class BuddhaBasin : MonoBehaviour
         if (waypoint != null && player != null)
         {
             player.MoveToWaypoint(waypoint);
-            player.targetWP = gameObject;
-            Debug.Log("MOVING TO TASK: " + gameObject.name);
+            player.targetWP = gameObject;            
         }
     }
 

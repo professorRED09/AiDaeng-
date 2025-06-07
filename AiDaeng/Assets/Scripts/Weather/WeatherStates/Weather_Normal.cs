@@ -11,7 +11,7 @@ public class Weather_Normal : Weather_BaseState
     }
 
     public override void UpdateState(WeatherManager weather)
-    {
+    {        
         weather.currentTimer -= Time.deltaTime; // countdown timer
         if (weather.currentTimer <= 0)
         {

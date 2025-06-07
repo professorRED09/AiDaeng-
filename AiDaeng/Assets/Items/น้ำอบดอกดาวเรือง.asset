@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44d975fba686cdc45a13b108d9226e43, type: 3}
-  m_Name: PerfumeWater
+  m_Name: "\u0E19\u0E49\u0E33\u0E2D\u0E1A\u0E14\u0E2D\u0E01\u0E14\u0E32\u0E27\u0E40\u0E23\u0E37\u0E2D\u0E07"
   m_EditorClassIdentifier: 
-  itemName: PerfumeWater
-  itemSprite: {fileID: 23267520, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
+  itemName: PerfumeWater&Calendula
+  itemSprite: {fileID: 21300000, guid: 4c0538ef435c28f4c8dc146cf3356bf4, type: 3}
