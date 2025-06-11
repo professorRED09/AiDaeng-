@@ -36,31 +36,18 @@ public class Task : MonoBehaviour
         {
             if (Inventory.instance.HasItem(requiredItem))
             {
-                //StartCoroutine(DoTask());
-                //print("GET " + goalItem.name);
-                Inventory.instance.UpdateItem(requiredItem, goalItem);
-                //if (audioSource.clip != null)
-                //{
-                //    audioSource.Play();
-                //}                 
+                Inventory.instance.UpdateItem(requiredItem, goalItem);  
             }
             else
             {
-                NotificationManager.instance.AddNoti($"ผู้เล่นต้องมี{requiredItem.name}ก่อนจึงสามารถทำได้!");
-                //print("GO GET " + requiredItem.name + " FIRST!");
+                NotificationManager.instance.AddNoti($"ผู้เล่นต้องมี{requiredItem.name}ก่อนจึงสามารถทำได้!"); 
             }
         }
         else
-        {
-            //print("GET " + goalItem.name);
-            //StartCoroutine(DoTask());
+        {  
             Inventory.instance.AddItem(goalItem);
-
-            //if (audioSource.clip != null)
-            //{
-            //    audioSource.Play();
-            //}
         }
+        // remove task from queue
     }
     
     private void OnTriggerEnter2D(Collider2D col)

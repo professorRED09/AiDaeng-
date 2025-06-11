@@ -14,11 +14,12 @@ public class NPC_WaitToOrderState : NPC_BaseState
         npc.StartCoroutine(npc.CheckOrderSpot());
 
         // if order spot is taken by them, then go to that spot
-        if (npc.takenOrderSpot != null)        {
-            
+        if (npc.takenOrderSpot != null)
+        {
+
             Transform[] orderSpot = { npc.takenOrderSpot };
             npc.SetWaypoints(orderSpot);
-
+            //npc.MoveToWaypoint();
             if (Vector3.Distance(npc.transform.position, orderSpot[^1].position) <= 0.1f)
             {
                 //Debug.Log("SNAP");
@@ -27,8 +28,11 @@ public class NPC_WaitToOrderState : NPC_BaseState
 
             }
         }
-        
-
+        if (npc.isUpset)
+        {
+            npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
+            npc.SwitchState(npc.rageLeaveState);
+        }
     }
 
     public override void ExitState(NPC2 npc)

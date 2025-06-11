@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEB: 10
-  decSpeed: 0.7
+  decSpeed: 2
   prayingTime: 2
   speed: 5
   transOffset: {x: 0, y: 0, z: 0}
@@ -233,22 +233,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7bbfd8c47e016e449c890b743d0e2e3, type: 2}
   waypoints: []
   wayToCounter:
-  - {fileID: 11400000, guid: c0c5000e91935b440b402bab0eba4c08, type: 2}
-  - {fileID: 11400000, guid: e1f81e16abcef0f4ab02b53232e7f571, type: 2}
-  - {fileID: 11400000, guid: e2fc910a296ce6544bf5b1e49ac1d056, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   wayToPrey:
-  - {fileID: 11400000, guid: e2fc910a296ce6544bf5b1e49ac1d056, type: 2}
-  - {fileID: 11400000, guid: 444c85b1aeef1cb4aa30c990f82dffc7, type: 2}
-  - {fileID: 11400000, guid: 8944153a6f51a234b91f07d774f6108c, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   wayToLeave:
-  - {fileID: 11400000, guid: 8944153a6f51a234b91f07d774f6108c, type: 2}
-  - {fileID: 11400000, guid: 2a2a6d65096d23e4eaed3d95ebca99be, type: 2}
-  - {fileID: 11400000, guid: 7383e915380785445a729e289de188f5, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   wayToRageLeave:
-  - {fileID: 11400000, guid: e2fc910a296ce6544bf5b1e49ac1d056, type: 2}
-  - {fileID: 11400000, guid: f7a2a759754b1d74aab3300cd7377530, type: 2}
-  - {fileID: 11400000, guid: 2a2a6d65096d23e4eaed3d95ebca99be, type: 2}
-  - {fileID: 11400000, guid: 7383e915380785445a729e289de188f5, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentWaypointIndex: 0
   isMoving: 0
   isUpset: 0
@@ -257,6 +257,8 @@ MonoBehaviour:
   isWaiting: 1
   orderItem: {fileID: 0}
   direction: {x: 0, y: 0, z: 0}
+  orderSpots: []
+  takenOrderSpot: {fileID: 0}
 --- !u!70 &7674193820973781169
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

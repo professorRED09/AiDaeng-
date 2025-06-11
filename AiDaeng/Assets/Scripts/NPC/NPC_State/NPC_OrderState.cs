@@ -15,13 +15,15 @@ public class NPC_OrderState : NPC_BaseState
     {        
         if (npc.isUpset)
         {
-            npc.SwitchState(npc.rageLeaveState);
             npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
+            npc.SwitchState(npc.rageLeaveState);
+            
         }
         else if (npc.getProduct)
         {
-            npc.SwitchState(npc.preyState);
             npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
+            npc.SwitchState(npc.preyState);
+            
         }
             
         

@@ -11,7 +11,11 @@ public class NPC_ArriveState : NPC_BaseState
 
     public override void UpdateState(NPC2 npc)
     {
-        //walk to counter
+        if (npc.isUpset)
+        {
+            npc.SwitchState(npc.rageLeaveState);
+        }
+        //npc.MoveToWaypoint(); // walk to counter
         if (Vector3.Distance(npc.transform.position, npc.wayToCounter[npc.wayToCounter.Length - 1].position) <= 0.1f)
         {
             npc.transform.position = npc.wayToCounter[npc.wayToCounter.Length - 1].position;

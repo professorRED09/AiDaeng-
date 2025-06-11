@@ -8,15 +8,14 @@ public class NPC2 : MonoBehaviour, IObserver
 {
     [Header("Setting")]
     [SerializeField] float maxEB;   // max value of emotion value
-    public float decSpeed;          // decreasing speed of emotion value, assign as public for adjusting in other script
-    float currentDecSpeed;
+    public float decSpeed;         // decreasing speed of mood value, assign as public for adjusting in other script
     public float prayingTime = 2;
 
     public float speed = 2f;
     private float currentEB; // max value of emotion value
     [SerializeField] Vector3 transOffset;
     [SerializeField] float detectLength;
-    [SerializeField] LayerMask npcMask;
+    public LayerMask npcMask;
 
     [Header("UI")]
     [SerializeField] GameObject orderBubble;
@@ -37,9 +36,6 @@ public class NPC2 : MonoBehaviour, IObserver
 
     SpriteRenderer sprite;
 
-    Inventory inventory;
-    Subject weatherManager;
-
     [Header("Boolean")]
     public bool isUpset = false;
     public bool getProduct = false;
@@ -51,7 +47,7 @@ public class NPC2 : MonoBehaviour, IObserver
     Namwan namwan;
 
     //FSM Stuff
-    NPC_BaseState currentState;
+    public NPC_BaseState currentState;
     public NPC_ArriveState arriveState = new NPC_ArriveState();
     public NPC_WaitToOrderState waitToOrderState = new NPC_WaitToOrderState();
     public NPC_OrderState orderState = new NPC_OrderState();
@@ -67,11 +63,12 @@ public class NPC2 : MonoBehaviour, IObserver
     public Transform[] orderSpots;
     public Transform takenOrderSpot;
 
+    private WeatherManager weatherManager;
+
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        inventory = Inventory.instance;
+        animator = GetComponent<Animator>(); 
 
         weatherManager = FindObjectOfType<WeatherManager>();
         player = FindObjectOfType<PlayerController1>();
@@ -96,6 +93,8 @@ public class NPC2 : MonoBehaviour, IObserver
         wayToLeave = npcManager.wpToLeave;
         wayToRageLeave = npcManager.wpToRageLeave;
 
+        OnWeatherChange();
+
     }   
 
     public void SetWaypoints(Transform[] assignedWaypoints)
@@ -113,7 +112,8 @@ public class NPC2 : MonoBehaviour, IObserver
         Animate(); // animate the character sprite
         DecreaseMoodBar();
 
-        if (direction.x > 0 && !isFacingRight || direction.x < 0 && isFacingRight) // check condition to flip the character sprite
+        // check condition to flip the character sprite
+        if (direction.x > 0 && !isFacingRight || direction.x < 0 && isFacingRight) 
         {
             Flip();
         }
@@ -122,8 +122,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
         currentState.UpdateState(this);
 
-        //IsSomeoneAhead();
-        if (isMoving && currentWaypointIndex < waypoints.Length)
+        if (isMoving && currentWaypointIndex < waypoints.Length && !isUpset)
         {
             MoveToWaypoint();
         }
@@ -138,12 +137,12 @@ public class NPC2 : MonoBehaviour, IObserver
     }
 
     // Check if there's npc ahead, if yes then stop moving
-    //public bool isGonnaOrder;
     void WaitForQueue()
     {
         if (isUpset) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectLength, npcMask);
-
+        //if (hit.collider.gameObject == null) return;
+        //bool _isUpset = hit.collider.gameObject.GetComponent<NPC2>().isUpset;
         if (hit.collider == null)
         {
             isMoving = true;
@@ -154,8 +153,9 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
-    private void MoveToWaypoint()
+    public void MoveToWaypoint()
     {
+        //if (!isMoving) return;
         Transform targetWaypoint = waypoints[currentWaypointIndex];
         direction = (targetWaypoint.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
@@ -189,7 +189,7 @@ public class NPC2 : MonoBehaviour, IObserver
             }
             else
             {
-                print("SORRY, I HAVEN'T MADE IT YET");
+                //print("SORRY, I HAVEN'T MADE IT YET");
             }
         }
     }
@@ -207,6 +207,7 @@ public class NPC2 : MonoBehaviour, IObserver
     
     public void SwitchState(NPC_BaseState state)
     {
+        print(state);
         currentState = state;
         state.EnterState(this);
     }
@@ -225,8 +226,10 @@ public class NPC2 : MonoBehaviour, IObserver
         currentEB -= decSpeed * Time.deltaTime;
         UpdateMoodBar(currentEB, maxEB);
 
-        // check if current emotion value reaches 0 or not, if yes, then isUpset = true
-        isUpset = currentEB <= 0 ? true : false;
+        if (currentEB <= 0)
+        {
+            isUpset = true;
+        }
     }
 
     // hide order bubble ui
@@ -286,12 +289,6 @@ public class NPC2 : MonoBehaviour, IObserver
         //thinkingText.SetActive(false);
         isWaiting = true;
     }
-    //public void OrderProduct()
-    //{
-    //    orderItem = itemLists[Random.Range(0, itemLists.Length)];   // Random order items for npc to order player
-    //    orderBubble.transform.GetChild(1).GetComponent<Image>().sprite = orderItem.itemSprite;
-    //    orderBubble.SetActive(true);
-    //}
 
     public void NormalEffect()
     {
@@ -313,12 +310,15 @@ public class NPC2 : MonoBehaviour, IObserver
 
     public void RageMood()
     {
+        //LeaveScene();
+
         direction = Vector3.left;
-        transform.position += direction * speed * Time.deltaTime;
-        if(transform.position.x <= -10)
+        transform.position += speed * Time.deltaTime * direction;
+        if (transform.position.x <= -10)
         {
             LeaveScene();
         }
+
     }
 
     public void LeaveScene()
@@ -333,6 +333,21 @@ public class NPC2 : MonoBehaviour, IObserver
         Vector3 position = transform.position + transOffset;
         Gizmos.DrawLine(position, position + Vector3.right * detectLength);
         Gizmos.DrawLine(position, position + Vector3.up * detectLength);
+    }
+
+    void OnWeatherChange()
+    {
+        if(weatherManager.currentState == weatherManager.sunnyState)
+        {
+            SunnyEffect();
+        }else if (weatherManager.currentState == weatherManager.rainyState)
+        {
+            RainyEffect();
+        }
+        else
+        {
+            NormalEffect();
+        }
     }
 
     public void OnNotify(Action action)

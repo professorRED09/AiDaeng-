@@ -64,6 +64,11 @@ public class PlayerController1 : MonoBehaviour
 
     }
 
+    public void AddTask(Transform task)
+    {
+        taskQueue.Add(task);
+    }
+
     // Start moving toward the nearest waypoint first, then to the target waypoint
     public void MoveToWaypoint(Transform targetWaypoint)
     {
@@ -88,7 +93,7 @@ public class PlayerController1 : MonoBehaviour
         Transform nextWaypoint = pathQueue.Peek();
         direction = (nextWaypoint.position - transform.position).normalized;
      
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += speed * Time.deltaTime * direction;
 
         // Check if player reached the waypoint
         if (Vector3.Distance(transform.position, nextWaypoint.position) < 0.1f)

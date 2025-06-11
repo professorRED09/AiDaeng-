@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NPC_PreyState : NPC_BaseState
 {
@@ -13,23 +13,25 @@ public class NPC_PreyState : NPC_BaseState
     public override void UpdateState(NPC2 npc)
     {
         // check if water is overflowing, if yes, disable movement until it's not
-
+        //npc.MoveToWaypoint();
         if (Vector3.Distance(npc.transform.position, npc.wayToPrey[npc.wayToPrey.Length - 1].position) <= 0.1f) // set position 
         {
             npc.transform.position = npc.wayToPrey[npc.wayToPrey.Length - 1].position;
             npc.isMoving = false;
         }
 
+        //ถ้าอ่างน้ำเต็ม ให้ return
         if (BuddhaBasin.instance.isFull)
+        {           
             return;
+        }           
 
         npc.Praying(); // countdown praying time
         if (npc.prayingTime <= 0)
         {
-            BuddhaBasin.instance.IncreaseWater(11);  // increase water in basin
+            BuddhaBasin.instance.IncreaseWater(1);  // increase water in basin
             npc.SwitchState(npc.leaveState);        // switch to leave state
-        }
-            
+        }  
 
         
     }

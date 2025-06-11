@@ -2,27 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeatherManager : Subject, IObserver
+public class WeatherManager : Subject
 {
     public GameObject weatherFilter;
     public Animator anim;
+    [Header("Sunny")]
+
+    [Header("Rainy")]
     public ParticleSystem rainFX;
+
     public float timer;
     public float currentTimer;
 
-    public bool Rainy;
-    public bool Sunny;
+    //public bool Rainy;
+    //public bool Sunny;
 
     //FSM Stuff
-    Weather_BaseState currentState;
+    public Weather_BaseState currentState;
     public Weather_Normal normalState = new Weather_Normal();
     public Weather_Rainy rainyState = new Weather_Rainy();
-
-
-    void Awake()
-    {
-        
-    }
+    public Weather_Sunny sunnyState = new Weather_Sunny();
 
     void Start()
     {
@@ -57,21 +56,21 @@ public class WeatherManager : Subject, IObserver
         state.EnterState(this);
     }
 
-    public void OnNotify(WeatherType weather)
-    {
+    //public void OnNotify(WeatherType weather)
+    //{
 
-    }
-    public void OnNotify(Action action)
-    {
-        switch (action)
-        {
-            case (Action.StartTimerStop):
+    //}
+    //public void OnNotify(Action action)
+    //{
+    //    switch (action)
+    //    {
+    //        case (Action.StartTimerStop):
 
-                return;
-            default:
-                return;
-        }
-    }
+    //            return;
+    //        default:
+    //            return;
+    //    }
+    //}
 
     //public void OnNotify(WeatherType weather)
     //{
