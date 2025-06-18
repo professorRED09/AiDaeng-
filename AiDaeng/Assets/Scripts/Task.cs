@@ -17,12 +17,15 @@ public class Task : MonoBehaviour
 
     [Header("If the task requires an item...")]
     [SerializeField] bool isRequiredItem;
-    [SerializeField] Items requiredItem;    
+    [SerializeField] Items requiredItem;
+
+    Animator animator;
 
     private void Start()
     {        
         player = FindObjectOfType<PlayerController1>(); // get reference from player script
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
 
         //if (soundFX == null) return;
         //audioSource.clip = soundFX;
@@ -47,7 +50,13 @@ public class Task : MonoBehaviour
         {  
             Inventory.instance.AddItem(goalItem);
         }
-        // remove task from queue
+        //player.taskQueue.Dequeue();
+        //print(m);// remove task from queue
+        //if(player.taskQueue.Count > 0)
+        //{
+        //    player.MoveToWaypoint(player.taskQueue.Peek());
+        //}
+        // if player has task in queue, go do that task
     }
     
     private void OnTriggerEnter2D(Collider2D col)
@@ -73,7 +82,17 @@ public class Task : MonoBehaviour
         }
     }
 
-    
+    void OnMouseOver()
+    {
+        animator.SetBool("isHovered", true);
+    }
+
+    void OnMouseExit()
+    {
+        animator.SetBool("isHovered", false);
+    }
+
+
 
 
 }

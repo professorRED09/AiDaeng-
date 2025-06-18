@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d4c932d37e08b34d973147707a02c4c, type: 3}
-  m_Name: PreyWP 1
+  m_Name: PrayWP 1
   m_EditorClassIdentifier: 
   waypointName: 
   transform: {x: -0.3, y: 1, z: 0}

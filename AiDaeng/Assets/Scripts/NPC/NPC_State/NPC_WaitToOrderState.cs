@@ -30,7 +30,10 @@ public class NPC_WaitToOrderState : NPC_BaseState
         }
         if (npc.isUpset)
         {
-            npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
+            if(npc.takenOrderSpot != null)
+            {
+                npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
+            }            
             npc.SwitchState(npc.rageLeaveState);
         }
     }

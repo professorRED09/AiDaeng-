@@ -11,12 +11,12 @@ public class NPC_Manager2 : MonoBehaviour
     private bool isTimeout = false;
 
     public GameObject npcPrefab;
-    public Transform spawnPoint; // a position to spawn npc
+    public GameObject spawnPoint; // a position to spawn npc
 
     [Header("Waypoints")]
     public Transform[] wpToQueue;       // Waypoints to queue 
     public Transform[] wpToOrder;       // Waypoints to order 
-    public Transform[] wpToPrey;        // Waypoints to prey 
+    public Transform[] wpToPray;        // Waypoints to prey 
     public Transform[] wpToLeave;       // Waypoints to leave
     public Transform[] wpToRageLeave;   // Waypoints to rage leave
 
@@ -24,18 +24,6 @@ public class NPC_Manager2 : MonoBehaviour
     public int leftNpcCount; // store total of npc that have left 
 
     private GameManager gameManager;
-
-    private void OnEnable()
-    {        
-        EventManager.TimerStop += OnTimeout;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.TimerStop -= OnTimeout;
-    }
-    
-    private void OnTimeout() => isTimeout = true;
 
     private void Awake()
     {
@@ -79,7 +67,8 @@ public class NPC_Manager2 : MonoBehaviour
 
     private void SpawnNPCs()
     {
-        GameObject npc = Instantiate(npcPrefab, spawnPoint.position, Quaternion.identity);
+        // if npc is standing on the spawn waypoint, don't spawn 
+        GameObject npc = Instantiate(npcPrefab, spawnPoint.transform.position, Quaternion.identity);
         NPC2 npcMovement = npc.GetComponent<NPC2>();
         if (npcMovement != null)
         {
@@ -88,6 +77,18 @@ public class NPC_Manager2 : MonoBehaviour
         spawnedNpcCount++;
         
     }
+
+    private void OnEnable()
+    {
+        EventManager.TimerStop += OnTimeout;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.TimerStop -= OnTimeout;
+    }
+
+    private void OnTimeout() => isTimeout = true;
 
     //private IEnumerator ProcessQueue()
     //{

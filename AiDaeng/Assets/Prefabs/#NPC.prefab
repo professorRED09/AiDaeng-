@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEB: 10
-  decSpeed: 2
+  moodDecSpeed: 0.4
   prayingTime: 2
   speed: 5
   transOffset: {x: 0, y: 0, z: 0}
@@ -236,10 +236,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  wayToPrey:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  wayToPray: []
   wayToLeave:
   - {fileID: 0}
   - {fileID: 0}
@@ -256,7 +253,6 @@ MonoBehaviour:
   isClickable: 0
   isWaiting: 1
   orderItem: {fileID: 0}
-  direction: {x: 0, y: 0, z: 0}
   orderSpots: []
   takenOrderSpot: {fileID: 0}
 --- !u!70 &7674193820973781169

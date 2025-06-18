@@ -11,16 +11,16 @@ public class PlayerController1 : MonoBehaviour
     [Header("Setting")]
     public float speed = 5f;                                        // Movement speed
 
-    public List<Transform> taskQueue;
+    public Queue<Transform> taskQueue = new Queue<Transform>();
     [SerializeField] private bool isMoving = false;
 
     public GameObject targetWP;
     Animator animator;
 
     public Transform counterWP;
-    public bool isAtCounter;
+    public bool isAtCounter;           // check if player is gonna give product to npc
     public bool isFacingRight;      // our based sprite for walking is facing in the right direction
-    public bool isAtPosition;
+    //public bool isAtPosition;
     public bool canControl = false; // player won't be able to control until the game start
 
     public Vector3 direction;  // set as public for debugging
@@ -40,18 +40,27 @@ public class PlayerController1 : MonoBehaviour
             Flip();
         }
 
-        if (pathQueue.Count <= 0)
-        {
-            isMoving = false;
-            isAtPosition = true;
+        //if (pathQueue.Count <= 0)
+        //{
+            
+        //    //isAtPosition = true;
 
-        }
+        //}
 
         if (isMoving && pathQueue.Count > 0)
         {
             MoveToNextWaypoint();
-            isAtPosition = false;
         }
+        else
+        {
+            isMoving = false;
+        }
+
+        //if (pathQueue.Count == 0 && taskQueue.Count > 0)
+        //{
+        //    MoveToWaypoint(taskQueue.Peek());
+        //    print(taskQueue.Peek());
+        //}
 
         if (transform.position == counterWP.position)
         {
@@ -66,7 +75,11 @@ public class PlayerController1 : MonoBehaviour
 
     public void AddTask(Transform task)
     {
-        taskQueue.Add(task);
+        //add task to the list and start move to that waypoint        
+        taskQueue.Enqueue(task);
+        //check if player is free
+        
+        
     }
 
     // Start moving toward the nearest waypoint first, then to the target waypoint
@@ -74,7 +87,7 @@ public class PlayerController1 : MonoBehaviour
     {
         if (isMoving || targetWaypoint == null || !canControl)
             return;
-
+        
         // Find the nearest waypoint
         Transform nearestWaypoint = GetNearestWaypoint();
 
@@ -84,15 +97,16 @@ public class PlayerController1 : MonoBehaviour
             List<Transform> path = GetPath(nearestWaypoint, targetWaypoint);
             pathQueue = new Queue<Transform>(path);
             isMoving = true;
+            MoveToNextWaypoint();
         }
     }
 
     // Move to the next waypoint in the queue
     private void MoveToNextWaypoint()
-    {
+    {       
         Transform nextWaypoint = pathQueue.Peek();
         direction = (nextWaypoint.position - transform.position).normalized;
-     
+
         transform.position += speed * Time.deltaTime * direction;
 
         // Check if player reached the waypoint
@@ -101,6 +115,7 @@ public class PlayerController1 : MonoBehaviour
             transform.position = nextWaypoint.position; // Snap to waypoint
             pathQueue.Dequeue(); // Remove the visited waypoint            
         }
+               
     }
 
     // Find the nearest waypoint to the player's current position

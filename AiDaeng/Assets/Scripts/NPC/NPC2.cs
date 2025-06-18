@@ -8,10 +8,11 @@ public class NPC2 : MonoBehaviour, IObserver
 {
     [Header("Setting")]
     [SerializeField] float maxEB;   // max value of emotion value
-    public float decSpeed;         // decreasing speed of mood value, assign as public for adjusting in other script
+    public float moodDecSpeed;      // decreasing speed of mood value, assign as public for adjusting in other script
+    float tempMoodDecSp;
     public float prayingTime = 2;
-
     public float speed = 2f;
+
     private float currentEB; // max value of emotion value
     [SerializeField] Vector3 transOffset;
     [SerializeField] float detectLength;
@@ -27,7 +28,7 @@ public class NPC2 : MonoBehaviour, IObserver
     [Header("Waypoints")]
     public Transform[] waypoints; // Store assigned waypoints
     public Transform[] wayToCounter;    
-    public Transform[] wayToPrey;
+    public Transform[] wayToPray;
     public Transform[] wayToLeave;
     public Transform[] wayToRageLeave;
 
@@ -51,14 +52,14 @@ public class NPC2 : MonoBehaviour, IObserver
     public NPC_ArriveState arriveState = new NPC_ArriveState();
     public NPC_WaitToOrderState waitToOrderState = new NPC_WaitToOrderState();
     public NPC_OrderState orderState = new NPC_OrderState();
-    public NPC_PreyState preyState = new NPC_PreyState();
+    public NPC_PrayState preyState = new NPC_PrayState();
     public NPC_LeaveState leaveState = new NPC_LeaveState();
     public NPC_RageLeaveState rageLeaveState = new NPC_RageLeaveState();
 
     private Animator animator;
     private NPC_Manager2 npcManager;
     bool isFacingRight = true;
-    public Vector3 direction;
+    private Vector3 direction;
 
     public Transform[] orderSpots;
     public Transform takenOrderSpot;
@@ -89,12 +90,13 @@ public class NPC2 : MonoBehaviour, IObserver
         // set up waypoint array
         wayToCounter = npcManager.wpToQueue;
         orderSpots = npcManager.wpToOrder;
-        wayToPrey = npcManager.wpToPrey; 
+        wayToPray = npcManager.wpToPray; 
         wayToLeave = npcManager.wpToLeave;
         wayToRageLeave = npcManager.wpToRageLeave;
 
-        OnWeatherChange();
+        tempMoodDecSp = moodDecSpeed;
 
+        OnWeatherChange();
     }   
 
     public void SetWaypoints(Transform[] assignedWaypoints)
@@ -110,7 +112,11 @@ public class NPC2 : MonoBehaviour, IObserver
     void Update()
     {
         Animate(); // animate the character sprite
-        DecreaseMoodBar();
+        if (!isMoving)
+        {
+            DecreaseMoodBar();
+        }
+        
 
         // check condition to flip the character sprite
         if (direction.x > 0 && !isFacingRight || direction.x < 0 && isFacingRight) 
@@ -124,7 +130,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
         if (isMoving && currentWaypointIndex < waypoints.Length && !isUpset)
         {
-            MoveToWaypoint();
+            MoveToWaypoint();            
         }
         else if (isUpset)
         {
@@ -223,7 +229,7 @@ public class NPC2 : MonoBehaviour, IObserver
             return;
 
         // decreasing emotion value as the time goes by
-        currentEB -= decSpeed * Time.deltaTime;
+        currentEB -= moodDecSpeed * Time.deltaTime;
         UpdateMoodBar(currentEB, maxEB);
 
         if (currentEB <= 0)
@@ -293,18 +299,21 @@ public class NPC2 : MonoBehaviour, IObserver
     public void NormalEffect()
     {
         sprite.color = Color.white;
+        moodDecSpeed = tempMoodDecSp;
+        print(moodDecSpeed);
         //print("TODAY IS A GOOD DAY, EH?");
     }
 
     public void RainyEffect()
     {
-        sprite.color = Color.blue;
+        sprite.color = Color.blue;        
         //print("OH! RAIN! RUN!");
     }
 
     public void SunnyEffect()
     {
         sprite.color = Color.red;
+        moodDecSpeed = 1;
         //print("ITS SO DAMN HOT MANN");
     }
 
@@ -340,7 +349,8 @@ public class NPC2 : MonoBehaviour, IObserver
         if(weatherManager.currentState == weatherManager.sunnyState)
         {
             SunnyEffect();
-        }else if (weatherManager.currentState == weatherManager.rainyState)
+        }
+        else if (weatherManager.currentState == weatherManager.rainyState)
         {
             RainyEffect();
         }
