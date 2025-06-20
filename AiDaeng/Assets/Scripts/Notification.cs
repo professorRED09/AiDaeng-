@@ -15,15 +15,17 @@ public class Notification : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Leave());
+        animator.SetTrigger("noti");  //animation in
+        Destroy(gameObject, 2.5f);
+        //StartCoroutine(Leave());
     }
 
-    public IEnumerator Leave()
-    {
-        yield return new WaitForSeconds(2f);
-        animator.SetTrigger("noti");  //animation out        
-        Destroy(this.gameObject, 2f);        //destroy from the scene
-    }
+    //public IEnumerator Leave()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    //animator.SetTrigger("noti");  //animation out        
+    //    Destroy(this.gameObject, 2f);        //destroy from the scene
+    //}
 
     //public void Leave()
     //{

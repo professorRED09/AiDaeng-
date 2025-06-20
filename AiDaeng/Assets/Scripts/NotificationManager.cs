@@ -6,7 +6,7 @@ using TMPro;
 public class NotificationManager : MonoBehaviour
 {
     //public List<GameObject> notif = new List<GameObject>();
-    public GameObject currentNoti;
+    //public GameObject currentNoti;
     public GameObject noti;
     public static NotificationManager instance;
 
@@ -23,12 +23,8 @@ public class NotificationManager : MonoBehaviour
     }
 
     public void AddNoti(string message)
-    {
-        if (currentNoti != null) {
-            StartCoroutine(currentNoti.GetComponent<Notification>().Leave());
-        }
-        GameObject newNoti = Instantiate(noti, gameObject.transform);
-        currentNoti = newNoti;
-        currentNoti.GetComponentInChildren<TMP_Text>().text = message;
+    {        
+        GameObject newNoti = Instantiate(noti, gameObject.transform);        
+        newNoti.GetComponentInChildren<TMP_Text>().text = message;
     }
 }

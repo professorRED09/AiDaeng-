@@ -24,6 +24,10 @@ public class NPC2 : MonoBehaviour, IObserver
     [SerializeField] GameObject thinkingText;
     [SerializeField] GameObject itemImage;
     [SerializeField] Items[] itemLists;
+    //public List<Items> orderList;
+    public List<GameObject> orderSlotLists;
+    public GameObject orderSlot;
+    public GameObject orderPanel;
 
     [Header("Waypoints")]
     public Transform[] waypoints; // Store assigned waypoints
@@ -94,8 +98,10 @@ public class NPC2 : MonoBehaviour, IObserver
         wayToLeave = npcManager.wpToLeave;
         wayToRageLeave = npcManager.wpToRageLeave;
 
+        // store default value in temp value
         tempMoodDecSp = moodDecSpeed;
 
+        // make npc recognize the weather when get spawned
         OnWeatherChange();
     }   
 
@@ -112,6 +118,8 @@ public class NPC2 : MonoBehaviour, IObserver
     void Update()
     {
         Animate(); // animate the character sprite
+
+        // if npc isn't move, means that they are waiting 
         if (!isMoving)
         {
             DecreaseMoodBar();
@@ -124,6 +132,7 @@ public class NPC2 : MonoBehaviour, IObserver
             Flip();
         }
 
+        // check if there's other npc ahead of them
         WaitForQueue();  
 
         currentState.UpdateState(this);
@@ -186,18 +195,86 @@ public class NPC2 : MonoBehaviour, IObserver
         player.MoveToWaypoint(player.counterWP);
         if (player.isAtCounter)
         {
-            if (Inventory.instance.HasItem(orderItem))      //  check if the player has the product that npc wants or not          
+            for (int i = 0; i < orderSlotLists.Count; i++)
             {
-                Inventory.instance.RemoveItem(orderItem);   // remove the given item from player's inventory
-                getProduct = true;                  // npc gets product
-                orderBubble.SetActive(false);       // hide UI
-                ScoreManager.instance.AddScore();   // add score for player
+                Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
+                // check if there's the exact order in the list, remove it 
+                if (Inventory.instance.HasItem(m_OrderItem))
+                {
+                    // remove the given item from player's inventory
+                    Inventory.instance.RemoveItem(m_OrderItem);
+
+                    // remove the given item from npc's order panel and destroy its gameobject;
+                    orderSlotLists[i].SetActive(false);
+                    orderSlotLists.Remove(orderSlotLists[i]);
+                    
+                }                
             }
-            else
+
+            if (orderSlotLists.Count == 0)
             {
-                //print("SORRY, I HAVEN'T MADE IT YET");
+                getProduct = true;                
+                ScoreManager.instance.AddScore();
             }
+            //if (Inventory.instance.HasItem(orderItem))      //  check if the player has the product that npc wants or not          
+            //{
+            //    Inventory.instance.RemoveItem(orderItem);   // remove the given item from player's inventory
+            //    getProduct = true;                  // npc gets product
+            //    orderBubble.SetActive(false);       // hide UI
+            //    ScoreManager.instance.AddScore();   // add score for player
+
+
+            //}
+            //else
+            //{
+            //    //print("SORRY, I HAVEN'T MADE IT YET");
+            //}
         }
+    }
+
+
+
+    public void ThinkOfOrder()
+    {
+        orderPanel.SetActive(true);
+        
+        orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = true; // enable panel image
+        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = true; // enable "..." text;
+        StartCoroutine(OrderProduct()); // set text active
+        //ResetMoodBar();
+        //// play animation
+    }
+
+    IEnumerator OrderProduct()
+    {
+        yield return new WaitForSeconds(3);
+        // random total of things to order (for now let's just random between 1 and 2)
+        int orderNumbers = 2/*Random.Range(1, 2)*/;  
+        
+        for (int i = 0; i < orderNumbers; i++)
+        {
+            //random order
+            Items order = itemLists[Random.Range(0, itemLists.Length)];
+            //instantiate slot
+            GameObject m_OrderSlot = Instantiate(orderSlot, orderPanel.transform);
+            //set order item in order slot
+            m_OrderSlot.GetComponent<OrderSlot>().SetOrderItem(order);
+            orderSlotLists.Add(m_OrderSlot);
+        }
+        // disable "..." text;
+        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; 
+        isWaiting = true;
+
+        //yield return new WaitForSeconds(3);
+        //orderItem = itemLists[Random.Range(0, itemLists.Length)];   // Random order items for npc to order player
+        //orderBubble.transform.GetChild(1).GetComponent<Image>().sprite = orderItem.itemSprite;  // set order image
+        //orderBubble.transform.GetChild(1).GetComponent<Image>().enabled = true;     // enable order image 
+
+        //orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; // disable "..." text;
+
+        ////itemImage.SetActive(true);   // enable item image on npc's order
+        ////thinkingText.SetActive(false);
+        //isWaiting = true;
     }
 
     // To call Namwan to give drink water to npc
@@ -223,6 +300,7 @@ public class NPC2 : MonoBehaviour, IObserver
         currentEB = maxEB;
         UpdateMoodBar(currentEB, maxEB);
     }
+
     public void DecreaseMoodBar()
     {
         if (isWaiting == false)
@@ -272,35 +350,12 @@ public class NPC2 : MonoBehaviour, IObserver
         yield return null;
     }
 
-    public void ThinkOfOrder()
-    {
-        //orderBubble.SetActive(true);
-        orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = true; // enable panel image
-        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = true; // enable "..." text;
-        StartCoroutine(OrderProduct());// set text active
-        ResetMoodBar();
-        // play animation
-    }
-
-    IEnumerator OrderProduct()
-    {
-        yield return new WaitForSeconds(3);
-        orderItem = itemLists[Random.Range(0, itemLists.Length)];   // Random order items for npc to order player
-        orderBubble.transform.GetChild(1).GetComponent<Image>().sprite = orderItem.itemSprite;  // set order image
-        orderBubble.transform.GetChild(1).GetComponent<Image>().enabled = true;     // enable order image 
-
-        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; // disable "..." text;
-
-        //itemImage.SetActive(true);   // enable item image on npc's order
-        //thinkingText.SetActive(false);
-        isWaiting = true;
-    }
+    
 
     public void NormalEffect()
     {
         sprite.color = Color.white;
-        moodDecSpeed = tempMoodDecSp;
-        print(moodDecSpeed);
+        moodDecSpeed = tempMoodDecSp; 
         //print("TODAY IS A GOOD DAY, EH?");
     }
 

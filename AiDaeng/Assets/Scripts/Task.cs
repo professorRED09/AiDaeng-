@@ -33,7 +33,7 @@ public class Task : MonoBehaviour
 
     IEnumerator DoTask()
     {
-        audioSource.Play(); // play soundFX
+        //audioSource.Play(); // play soundFX
         yield return new WaitForSeconds(0.7f);
         if (isRequiredItem)
         {
@@ -73,6 +73,7 @@ public class Task : MonoBehaviour
 
     private void OnMouseDown()
     {
+        audioSource.Play(); // play soundFX
         // when players click on this task, the character will move to this task  
         if (waypoint != null && player != null)
         {
