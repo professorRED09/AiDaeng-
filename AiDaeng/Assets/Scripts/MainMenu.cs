@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject settingPanel;
     [SerializeField] GameObject tutorialPanel;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     public void OnPressStartGame()
     {
         SceneManager.LoadScene(cutscene1Name);
@@ -41,14 +46,15 @@ public class MainMenu : MonoBehaviour
 
     public void OnPressPauseGame()
     {
+        Debug.Log("Pause");
         pausePanel.SetActive(true);
-        Time.timeScale = 0;
+        pausePanel.GetComponent<Animator>().SetBool("isOpened", true);
+        Time.timeScale = 0f;
     }
 
     public void OnPressResumeGame()
     {
-        pausePanel.SetActive(false);
-        Time.timeScale = 1;
+        StartCoroutine(OnResume());
     }
 
     public void OnPressLevelSelect()
@@ -63,6 +69,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnPressMainMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Title");
     }
 
@@ -70,4 +77,22 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
     }
+
+    IEnumerator DelayTime(float timeScale)
+    {
+        yield return new WaitForSeconds(1f);
+        Time.timeScale = timeScale;
+    }
+
+    public IEnumerator OnResume()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("Resume");
+        pausePanel.GetComponent<Animator>().SetBool("isOpened", false);
+        yield return new WaitForSeconds(1f);
+        pausePanel.SetActive(false);
+    }
+
+
+
 }

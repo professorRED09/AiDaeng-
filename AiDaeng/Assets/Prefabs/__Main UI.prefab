@@ -690,7 +690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2672700064752044868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2913,7 +2913,6 @@ RectTransform:
   m_Children:
   - {fileID: 1677317517901166357}
   - {fileID: 8321897530311975123}
-  - {fileID: 2672700064752044868}
   - {fileID: 6268014330534814488}
   - {fileID: 9144376205623783982}
   - {fileID: 8692239911512037929}
@@ -2923,6 +2922,7 @@ RectTransform:
   - {fileID: 9009245261347647529}
   - {fileID: 4949118936677608854}
   - {fileID: 9201549533446562873}
+  - {fileID: 2672700064752044868}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3037,7 +3037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ec93fe17b0f46409dfaca77b8e8c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentNoti: {fileID: 0}
+  noti: {fileID: 0}
 --- !u!1 &5210963026843781501
 GameObject:
   m_ObjectHideFlags: 0

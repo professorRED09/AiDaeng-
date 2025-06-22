@@ -12,20 +12,24 @@ public class Task : MonoBehaviour
     private PlayerController1 player;       // Reference for player script
     public Items goalItem;
 
+    public bool isFirstTaskOfTheProduct;
     private AudioSource audioSource;
     //[SerializeField] AudioClip soundFX;
 
     [Header("If the task requires an item...")]
     [SerializeField] bool isRequiredItem;
     [SerializeField] Items requiredItem;
+    
 
     Animator animator;
+    private MixturePanel mixturePanel;
 
     private void Start()
     {        
         player = FindObjectOfType<PlayerController1>(); // get reference from player script
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        mixturePanel = FindObjectOfType<MixturePanel>();
 
         //if (soundFX == null) return;
         //audioSource.clip = soundFX;
@@ -33,8 +37,15 @@ public class Task : MonoBehaviour
 
     IEnumerator DoTask()
     {
+        //if (isFirstTaskOfTheProduct)
+        //{
+        //    mixturePanel.OpenPanel();
+        //}
         //audioSource.Play(); // play soundFX
         yield return new WaitForSeconds(0.7f);
+        // Add code to pop up a mixture window, maybe check if the mixture is showing already or not
+        // if mixture window haven't been poped up yet; show it
+        
         if (isRequiredItem)
         {
             if (Inventory.instance.HasItem(requiredItem))
@@ -43,22 +54,21 @@ public class Task : MonoBehaviour
             }
             else
             {
-                NotificationManager.instance.AddNoti($"ผู้เล่นต้องมี{requiredItem.name}ก่อนจึงสามารถทำได้!"); 
+                NotificationManager.instance.AddNoti($"ต้องมี{requiredItem.name}ก่อนจึงสามารถทำได้!");
+                //if (mixturePanel.isOpened)
+                //{
+                //    mixturePanel.ClosePanel();
+                //}
             }
         }
         else
         {  
             Inventory.instance.AddItem(goalItem);
         }
-        //player.taskQueue.Dequeue();
-        //print(m);// remove task from queue
-        //if(player.taskQueue.Count > 0)
-        //{
-        //    player.MoveToWaypoint(player.taskQueue.Peek());
-        //}
-        // if player has task in queue, go do that task
+       
     }
     
+    // To check if player have arrived at the task
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player") && player.targetWP == gameObject)
