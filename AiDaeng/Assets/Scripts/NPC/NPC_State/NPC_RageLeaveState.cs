@@ -4,19 +4,18 @@ public class NPC_RageLeaveState : NPC_BaseState
 {
     public override void EnterState(NPC2 npc)
     {
-        npc.isMoving = true;
-        npc.isClickable = false;
-        npc.HideOrder();
-        npc.currentWaypointIndex = 0;
-        npc.SetWaypoints(npc.wayToRageLeave);        
+        npc.isMoving = true; 
+        npc.isClickable = false;    // player unable to click on the npc
+        npc.HideOrder();            // hide bubble ui of npc
+        npc.isUpset = true;
+        npc.npcMask = LayerMask.GetMask("Default");
+        //npc.currentWaypointIndex = 0;   // reset index
+        //npc.SetWaypoints(npc.wayToRageLeave);   //make their way to leave with rage        
     }
 
     public override void UpdateState(NPC2 npc)
     {
-        if (Vector3.Distance(npc.transform.position, npc.wayToLeave[npc.wayToCounter.Length - 1].transform) <= 0.1f)
-        {
-            npc.LeaveScene();
-        }
+        npc.RageMood();        
     }
 
     public override void ExitState(NPC2 npc)

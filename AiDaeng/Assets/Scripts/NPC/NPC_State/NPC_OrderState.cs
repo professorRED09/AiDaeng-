@@ -6,24 +6,33 @@ public class NPC_OrderState : NPC_BaseState
     {
         npc.isMoving = false;
         npc.isClickable = true;
-        npc.isWaiting = false;
-        npc.ThinkOfOrder();     //Show order bubble
-
-
-        //Debug.Log("Hey you, you there, I order something please");
+        npc.isWaiting = false;  
+        npc.ThinkOfOrder();     //Show bubble ui
+        //Debug.Log("ENTER ORDER STATE");
     }
 
     public override void UpdateState(NPC2 npc)
     {        
         if (npc.isUpset)
+        {
+            npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
             npc.SwitchState(npc.rageLeaveState);
-        if (npc.getProduct)
+            
+        }
+        else if (npc.getProduct)
+        {
+            npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
             npc.SwitchState(npc.preyState);
+            
+        }
+            
+        
+            
         // npc get product 
     }
 
     public override void ExitState(NPC2 npc)
     {
-        
+        // free spot = true
     }
 }

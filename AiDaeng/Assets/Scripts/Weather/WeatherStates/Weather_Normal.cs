@@ -11,12 +11,12 @@ public class Weather_Normal : Weather_BaseState
     }
 
     public override void UpdateState(WeatherManager weather)
-    {
+    {        
         weather.currentTimer -= Time.deltaTime; // countdown timer
         if (weather.currentTimer <= 0)
         {
             weather.anim.ResetTrigger("isNormal");
-            weather.SwitchState(weather.rainyState);
+            weather.SwitchState(weather.sunnyState);
         }
             
         // if hit jackpot, change weather again

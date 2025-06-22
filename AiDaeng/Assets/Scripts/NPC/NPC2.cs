@@ -7,16 +7,16 @@ using TMPro;
 public class NPC2 : MonoBehaviour, IObserver
 {
     [Header("Setting")]
-    [SerializeField] float maxEB; // max value of emotion value
-    public float decSpeed; // decreasing speed of emotion value, assign as public for adjusting in other script
-    float currentDecSpeed;
+    [SerializeField] float maxEB;   // max value of emotion value
+    public float moodDecSpeed;      // decreasing speed of mood value, assign as public for adjusting in other script
+    float tempMoodDecSp;
     public float prayingTime = 2;
-
     public float speed = 2f;
+
     private float currentEB; // max value of emotion value
     [SerializeField] Vector3 transOffset;
     [SerializeField] float detectLength;
-    [SerializeField] LayerMask npcMask;
+    public LayerMask npcMask;
 
     [Header("UI")]
     [SerializeField] GameObject orderBubble;
@@ -24,50 +24,57 @@ public class NPC2 : MonoBehaviour, IObserver
     [SerializeField] GameObject thinkingText;
     [SerializeField] GameObject itemImage;
     [SerializeField] Items[] itemLists;
+    //public List<Items> orderList;
+    public List<GameObject> orderSlotLists;
+    public GameObject orderSlot;
+    public GameObject orderPanel;
 
     [Header("Waypoints")]
-    public Waypoints[] waypoints; // Store assigned waypoints
-    public Waypoints[] wayToCounter;
-    public Waypoints[] wayToPrey;
-    public Waypoints[] wayToLeave;
-    public Waypoints[] wayToRageLeave;
+    public Transform[] waypoints; // Store assigned waypoints
+    public Transform[] wayToCounter;    
+    public Transform[] wayToPray;
+    public Transform[] wayToLeave;
+    public Transform[] wayToRageLeave;
 
     public int currentWaypointIndex = 0;
     public bool isMoving;
 
     SpriteRenderer sprite;
 
-    Inventory inventory;
-    Subject weatherManager;
-
     [Header("Boolean")]
     public bool isUpset = false;
     public bool getProduct = false;
     public bool isClickable;
-    public bool isWaiting;    
+    public bool isWaiting;
 
     [SerializeField] Items orderItem;
     PlayerController1 player;
     Namwan namwan;
 
     //FSM Stuff
-    NPC_BaseState currentState;
+    public NPC_BaseState currentState;
     public NPC_ArriveState arriveState = new NPC_ArriveState();
+    public NPC_WaitToOrderState waitToOrderState = new NPC_WaitToOrderState();
     public NPC_OrderState orderState = new NPC_OrderState();
-    public NPC_PreyState preyState = new NPC_PreyState();
+    public NPC_PrayState preyState = new NPC_PrayState();
     public NPC_LeaveState leaveState = new NPC_LeaveState();
     public NPC_RageLeaveState rageLeaveState = new NPC_RageLeaveState();
 
     private Animator animator;
     private NPC_Manager2 npcManager;
     bool isFacingRight = true;
-    public Vector3 direction;
+    private Vector3 direction;
+
+    public Transform[] orderSpots;
+    public Transform takenOrderSpot;
+
+    private WeatherManager weatherManager;
 
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
-        inventory = Inventory.instance;
+        animator = GetComponent<Animator>(); 
+
         weatherManager = FindObjectOfType<WeatherManager>();
         player = FindObjectOfType<PlayerController1>();
         namwan = FindObjectOfType<Namwan>();
@@ -83,16 +90,27 @@ public class NPC2 : MonoBehaviour, IObserver
         // set initial state to begin with
         currentState = arriveState;
         currentState.EnterState(this);
-    }
 
-    
+        // set up waypoint array
+        wayToCounter = npcManager.wpToQueue;
+        orderSpots = npcManager.wpToOrder;
+        wayToPray = npcManager.wpToPray; 
+        wayToLeave = npcManager.wpToLeave;
+        wayToRageLeave = npcManager.wpToRageLeave;
 
-    public void SetWaypoints(Waypoints[] assignedWaypoints)
+        // store default value in temp value
+        tempMoodDecSp = moodDecSpeed;
+
+        // make npc recognize the weather when get spawned
+        OnWeatherChange();
+    }   
+
+    public void SetWaypoints(Transform[] assignedWaypoints)
     {
         waypoints = assignedWaypoints;
         if (waypoints.Length > 0)
         {
-            transform.position = waypoints[0].transform; // Start at the first waypoint
+            //transform.position = waypoints[0].position; // Start at the first waypoint
             isMoving = true;
         }
     }
@@ -100,31 +118,32 @@ public class NPC2 : MonoBehaviour, IObserver
     void Update()
     {
         Animate(); // animate the character sprite
-        CountdownPatience();
 
-        if (direction.x > 0 && !isFacingRight || direction.x < 0 && isFacingRight) // check condition to flip the character sprite
+        // if npc isn't move, means that they are waiting 
+        if (!isMoving)
+        {
+            DecreaseMoodBar();
+        }
+        
+
+        // check condition to flip the character sprite
+        if (direction.x > 0 && !isFacingRight || direction.x < 0 && isFacingRight) 
         {
             Flip();
         }
 
-        WaitForQueue();
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectLength, npcMask);
-
-        //if (hit.collider == null)
-        //{
-        //    isMoving = true;
-        //}
-        //else
-        //{
-        //    isMoving = false;
-        //}
+        // check if there's other npc ahead of them
+        WaitForQueue();  
 
         currentState.UpdateState(this);
 
-        //IsSomeoneAhead();
-        if (isMoving && currentWaypointIndex < waypoints.Length)
+        if (isMoving && currentWaypointIndex < waypoints.Length && !isUpset)
         {
-            MoveToWaypoint();
+            MoveToWaypoint();            
+        }
+        else if (isUpset)
+        {
+            isMoving = true;
         }
         else
         {
@@ -132,10 +151,13 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    // Check if there's npc ahead, if yes then stop moving
     void WaitForQueue()
     {
+        if (isUpset) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectLength, npcMask);
-
+        //if (hit.collider.gameObject == null) return;
+        //bool _isUpset = hit.collider.gameObject.GetComponent<NPC2>().isUpset;
         if (hit.collider == null)
         {
             isMoving = true;
@@ -146,15 +168,16 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
-    private void MoveToWaypoint()
-    {        
-        Waypoints targetWaypoint = waypoints[currentWaypointIndex];
-        direction = (targetWaypoint.transform - transform.position).normalized;
+    public void MoveToWaypoint()
+    {
+        //if (!isMoving) return;
+        Transform targetWaypoint = waypoints[currentWaypointIndex];
+        direction = (targetWaypoint.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
 
-        if (Vector3.Distance(transform.position, targetWaypoint.transform) < 0.1f)
+        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
-            transform.position = targetWaypoint.transform; // Snap to exact position
+            transform.position = targetWaypoint.position; // Snap to exact position
             currentWaypointIndex++;
 
             if (currentWaypointIndex >= waypoints.Length)
@@ -164,6 +187,7 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    // To give npc a product
     private void OnMouseDown()
     {
         if (!isClickable)
@@ -171,25 +195,92 @@ public class NPC2 : MonoBehaviour, IObserver
         player.MoveToWaypoint(player.counterWP);
         if (player.isAtCounter)
         {
-            if (Inventory.instance.HasItem(orderItem))      //  check if the player has the product that npc wants or not          
+            for (int i = 0; i < orderSlotLists.Count; i++)
             {
-                Inventory.instance.RemoveItem(orderItem);   // remove the given item from player's inventory
-                getProduct = true;                  // npc gets product
-                orderBubble.SetActive(false);       // hide UI
-                ScoreManager.instance.AddScore();   // add score for player
-                                                    //print("THERE YOU GO! HERE'S YOUR HOLY WATER");
-                                                    //Destroy(gameObject);
+                Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
+                // check if there's the exact order in the list, remove it 
+                if (Inventory.instance.HasItem(m_OrderItem))
+                {
+                    // remove the given item from player's inventory
+                    Inventory.instance.RemoveItem(m_OrderItem);
+
+                    // remove the given item from npc's order panel and destroy its gameobject;
+                    orderSlotLists[i].SetActive(false);
+                    orderSlotLists.Remove(orderSlotLists[i]);
+                    
+                }                
             }
-            else
+
+            if (orderSlotLists.Count == 0)
             {
-                print("SORRY, I HAVEN'T MADE IT YET");
+                getProduct = true;                
+                ScoreManager.instance.AddScore();
             }
+            //if (Inventory.instance.HasItem(orderItem))      //  check if the player has the product that npc wants or not          
+            //{
+            //    Inventory.instance.RemoveItem(orderItem);   // remove the given item from player's inventory
+            //    getProduct = true;                  // npc gets product
+            //    orderBubble.SetActive(false);       // hide UI
+            //    ScoreManager.instance.AddScore();   // add score for player
+
+
+            //}
+            //else
+            //{
+            //    //print("SORRY, I HAVEN'T MADE IT YET");
+            //}
         }
     }
 
+
+
+    public void ThinkOfOrder()
+    {
+        orderPanel.SetActive(true);
+        
+        orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = true; // enable panel image
+        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = true; // enable "..." text;
+        StartCoroutine(OrderProduct()); // set text active
+        //ResetMoodBar();
+        //// play animation
+    }
+
+    IEnumerator OrderProduct()
+    {
+        yield return new WaitForSeconds(3);
+        // random total of things to order (for now let's just random between 1 and 2)
+        int orderNumbers = 2/*Random.Range(1, 2)*/;  
+        
+        for (int i = 0; i < orderNumbers; i++)
+        {
+            //random order
+            Items order = itemLists[Random.Range(0, itemLists.Length)];
+            //instantiate slot
+            GameObject m_OrderSlot = Instantiate(orderSlot, orderPanel.transform);
+            //set order item in order slot
+            m_OrderSlot.GetComponent<OrderSlot>().SetOrderItem(order);
+            orderSlotLists.Add(m_OrderSlot);
+        }
+        // disable "..." text;
+        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; 
+        isWaiting = true;
+
+        //yield return new WaitForSeconds(3);
+        //orderItem = itemLists[Random.Range(0, itemLists.Length)];   // Random order items for npc to order player
+        //orderBubble.transform.GetChild(1).GetComponent<Image>().sprite = orderItem.itemSprite;  // set order image
+        //orderBubble.transform.GetChild(1).GetComponent<Image>().enabled = true;     // enable order image 
+
+        //orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; // disable "..." text;
+
+        ////itemImage.SetActive(true);   // enable item image on npc's order
+        ////thinkingText.SetActive(false);
+        //isWaiting = true;
+    }
+
+    // To call Namwan to give drink water to npc
     void OnMouseOver()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButton(1) && namwan != null)
         {
             namwan.MoveToWaypoint(transform);// called Namwan to give some water cups for this npc
             namwan.targetNPC = this;
@@ -199,6 +290,7 @@ public class NPC2 : MonoBehaviour, IObserver
     
     public void SwitchState(NPC_BaseState state)
     {
+        print(state);
         currentState = state;
         state.EnterState(this);
     }
@@ -208,16 +300,20 @@ public class NPC2 : MonoBehaviour, IObserver
         currentEB = maxEB;
         UpdateMoodBar(currentEB, maxEB);
     }
-    public void CountdownPatience()
+
+    public void DecreaseMoodBar()
     {
-        if (!isWaiting)
+        if (isWaiting == false)
             return;
+
         // decreasing emotion value as the time goes by
-        currentEB -= decSpeed * Time.deltaTime;
+        currentEB -= moodDecSpeed * Time.deltaTime;
         UpdateMoodBar(currentEB, maxEB);
 
-        // check if current emotion value reaches 0 or not, if yes, then isUpset = true
-        isUpset = currentEB <= 0 ? true : false;
+        if (currentEB <= 0)
+        {
+            isUpset = true;
+        }
     }
 
     // hide order bubble ui
@@ -237,59 +333,56 @@ public class NPC2 : MonoBehaviour, IObserver
         moodBar.value = currentValue / maxValue;
     }
 
-    // use in LeaveState when the npc leaves the area
-    //public void Leave()
-    //{
-    //    orderBubble.SetActive(false);
-    //    Destroy(gameObject);
-    //}
-
-    public void ThinkOfOrder()
+    
+    public IEnumerator CheckOrderSpot()
     {
-        //orderBubble.SetActive(true);
-        orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = true; // enable panel image
-        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = true; // enable "..." text;
-        StartCoroutine(OrderProduct());// set text active
-        ResetMoodBar();
-        // play animation
+        for(int i = orderSpots.Length-1; i >= 0; i--)
+        {
+            Transform _freeSpot = orderSpots[i];
+            OrderSpot freeSpot = orderSpots[i].GetComponent<OrderSpot>();
+            if (freeSpot.isFree && takenOrderSpot == null)
+            {
+                takenOrderSpot = _freeSpot;//move to that spot
+                freeSpot.isFree = false;
+                break;                
+            }
+        }
+        yield return null;
     }
 
-    IEnumerator OrderProduct()
-    {
-        yield return new WaitForSeconds(3);
-        orderItem = itemLists[Random.Range(0, itemLists.Length)];   // Random order items for npc to order player
-        orderBubble.transform.GetChild(1).GetComponent<Image>().sprite = orderItem.itemSprite;  // set order image
-        orderBubble.transform.GetChild(1).GetComponent<Image>().enabled = true;     // enable order image 
-
-        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; // disable "..." text;
-
-        //itemImage.SetActive(true);   // enable item image on npc's order
-        //thinkingText.SetActive(false);
-        isWaiting = true;
-    }
-    //public void OrderProduct()
-    //{
-    //    orderItem = itemLists[Random.Range(0, itemLists.Length)];   // Random order items for npc to order player
-    //    orderBubble.transform.GetChild(1).GetComponent<Image>().sprite = orderItem.itemSprite;
-    //    orderBubble.SetActive(true);
-    //}
+    
 
     public void NormalEffect()
     {
         sprite.color = Color.white;
+        moodDecSpeed = tempMoodDecSp; 
         //print("TODAY IS A GOOD DAY, EH?");
     }
 
     public void RainyEffect()
     {
-        sprite.color = Color.blue;
+        sprite.color = Color.blue;        
         //print("OH! RAIN! RUN!");
     }
 
     public void SunnyEffect()
     {
         sprite.color = Color.red;
+        moodDecSpeed = 1;
         //print("ITS SO DAMN HOT MANN");
+    }
+
+    public void RageMood()
+    {
+        //LeaveScene();
+
+        direction = Vector3.left;
+        transform.position += speed * Time.deltaTime * direction;
+        if (transform.position.x <= -10)
+        {
+            LeaveScene();
+        }
+
     }
 
     public void LeaveScene()
@@ -304,6 +397,22 @@ public class NPC2 : MonoBehaviour, IObserver
         Vector3 position = transform.position + transOffset;
         Gizmos.DrawLine(position, position + Vector3.right * detectLength);
         Gizmos.DrawLine(position, position + Vector3.up * detectLength);
+    }
+
+    void OnWeatherChange()
+    {
+        if(weatherManager.currentState == weatherManager.sunnyState)
+        {
+            SunnyEffect();
+        }
+        else if (weatherManager.currentState == weatherManager.rainyState)
+        {
+            RainyEffect();
+        }
+        else
+        {
+            NormalEffect();
+        }
     }
 
     public void OnNotify(Action action)
