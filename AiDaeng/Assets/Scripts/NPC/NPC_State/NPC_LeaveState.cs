@@ -10,8 +10,9 @@ public class NPC_LeaveState : NPC_BaseState
     }
 
     public override void UpdateState(NPC2 npc)
-    {
-        if (Vector3.Distance(npc.transform.position, npc.wayToLeave[npc.wayToLeave.Length - 1].transform) <= 0.1f)
+    {       
+        //npc.MoveToWaypoint();
+        if (Vector3.Distance(npc.transform.position, npc.wayToLeave[^1].position) <= 0.1f)
         {
             npc.LeaveScene();
         }

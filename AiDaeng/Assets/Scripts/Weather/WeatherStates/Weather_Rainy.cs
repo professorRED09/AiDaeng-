@@ -7,7 +7,7 @@ public class Weather_Rainy : Weather_BaseState
         weather.anim.SetTrigger("isRainy");
         weather.rainFX.Play();
         weather.currentTimer = weather.timer;
-        Debug.Log("RAINY STATE ENTRY");
+        //Debug.Log("RAINY STATE ENTRY");
     }
 
     public override void UpdateState(WeatherManager weather)
