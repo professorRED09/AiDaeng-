@@ -69,6 +69,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public Transform takenOrderSpot;
 
     private WeatherManager weatherManager;
+    private ScoreManager scoreManager;
 
     private void Awake()
     {
@@ -79,6 +80,8 @@ public class NPC2 : MonoBehaviour, IObserver
         player = FindObjectOfType<PlayerController1>();
         namwan = FindObjectOfType<Namwan>();
         npcManager = FindObjectOfType<NPC_Manager2>();
+
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     void Start()
@@ -214,7 +217,7 @@ public class NPC2 : MonoBehaviour, IObserver
             if (orderSlotLists.Count == 0)
             {
                 getProduct = true;                
-                ScoreManager.instance.AddScore();
+                scoreManager.AddScore();
             }
             //if (Inventory.instance.HasItem(orderItem))      //  check if the player has the product that npc wants or not          
             //{

@@ -9,6 +9,7 @@ public class GameManager : Subject, IObserver
     [Header("UI")]
     [SerializeField] GameObject resultPanel;
     [SerializeField] TMP_Text resultText;
+    [SerializeField] TMP_Text bowlText;
     [SerializeField] GameObject StartNotif;
     [SerializeField] GameObject ClosedNotif;
 
@@ -24,6 +25,7 @@ public class GameManager : Subject, IObserver
     public bool isGameover = false;
 
     private PlayerController1 player;
+    private MusicManager musicManager;
 
     void Awake()
     {
@@ -31,6 +33,7 @@ public class GameManager : Subject, IObserver
         npcManager = FindObjectOfType<NPC_Manager2>();
         scoreManager = FindObjectOfType<ScoreManager>();
         weatherManager = FindObjectOfType<WeatherManager>();
+        musicManager = FindObjectOfType<MusicManager>();
     }
 
     private void Start()
@@ -80,16 +83,34 @@ public class GameManager : Subject, IObserver
     {
         if (isGameover == true)
             return;
+
         resultPanel.SetActive(true);
-        if (ScoreManager.instance.DoesPlayerWin() == true)
+        musicManager.PlayResultMusic(scoreManager.StarCount());
+        // if player's score is at least pass 1-star goal, inform them that they pass the level
+        if (scoreManager.StarCount() >= 1)
         {
-            resultText.text = "ผ่านด่าน!";
+            resultText.text = "ผ่านด่านจ้า!";
+            bowlText.text = $"คุณได้ {scoreManager.StarCount()} ถ้วย!";
+
+            ////check player's score to give them bowl up to their score
+            //if (scoreManager.StarCount() >= 3)
+            //{
+            //    bowlText.text = "คุณได้"
+            //}
+            //else if (scoreManager.StarCount() >= 2)
+            //{
+
+            //}
+            //else
+            //{
+
+            //}
         }
         else
         {
-            resultText.text = "ลองเล่นใหม่!";
-        }
-        print("VICTOR");
+            resultText.text = "ลองใหม่นะ";
+            bowlText.text = "ว้าย ม่ายถ้วย";
+        }        
         isGameover = true;
     }    
 
