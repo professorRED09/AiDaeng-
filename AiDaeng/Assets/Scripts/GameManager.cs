@@ -37,8 +37,11 @@ public class GameManager : Subject, IObserver
     }
 
     private void Start()
-    {        
-        StartCoroutine(countdownToStart());     // start coroutine
+    {
+        // start coroutine
+        StartCoroutine(countdownToStart());
+        // tell musicManager to play begin sound
+        musicManager.StartCoroutine(musicManager.PlayBeginSound());
     }
 
     private void OnEnable()

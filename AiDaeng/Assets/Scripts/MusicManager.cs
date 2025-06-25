@@ -7,7 +7,9 @@ public class MusicManager : MonoBehaviour
     GameObject sound;
     AudioSource audioSource;
 
-    [Header("Music")]
+    public AudioClip sceneMusic;
+    
+    [Header("Music Ref")]
     public AudioClip levelBeginMusic;
     public AudioClip gameplayMusic;
     public AudioClip winMusic;
@@ -19,11 +21,15 @@ public class MusicManager : MonoBehaviour
         if(sound != null)
         {
             audioSource = sound.GetComponent<AudioSource>();
-            StartCoroutine(BeginGame());
+            if(sceneMusic != null)
+            {
+                audioSource.clip = sceneMusic;
+                audioSource.Play();
+            }            
         }        
     }
 
-    private IEnumerator BeginGame()
+    public IEnumerator PlayBeginSound()
     {
         audioSource.clip = levelBeginMusic;
         audioSource.Play();

@@ -82,7 +82,7 @@ public class SimpleDialogue : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Gameplay");
+            SceneManager.LoadScene("Gameplay [Beta]");
             //gameObject.SetActive(false);
         }
     }
