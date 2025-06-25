@@ -118,7 +118,7 @@ public class Inventory : MonoBehaviour
             {
                 items[i] = goalItem;
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemSprite;
-                //print("UPDATE ITEM FROM " + requiredItem.name + " TO " + goalItem.name);
+                return;
             }
         }
     }

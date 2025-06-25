@@ -11,9 +11,11 @@ public class ScoreManager : MonoBehaviour
     public TMP_Text scoreText;
 
     [Header("Setting")]
+    public AudioClip addScoreSFX;
     [SerializeField] float oneStarScore;
     [SerializeField] float twoStarsScore;    
     [SerializeField] float threeStarsScore;    
+    private AudioSource audioSource;
     
     [SerializeField] float maxScore;
     public float currentScore;
@@ -21,6 +23,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         currentScore = 0;   //initially set score to 0 when the game start        
     }
 
@@ -32,6 +35,8 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore()
     {
+        audioSource.clip = addScoreSFX;
+        audioSource.Play();
         currentScore += 1;
     }
 

@@ -19,8 +19,7 @@ public class GameManager : Subject, IObserver
     private WeatherManager weatherManager;
 
     [Header("Level timer")]
-    [SerializeField] Timer timer;
-    [SerializeField] float startTimer;    
+    [SerializeField] Timer timer; 
 
     public bool isGameover = false;
 

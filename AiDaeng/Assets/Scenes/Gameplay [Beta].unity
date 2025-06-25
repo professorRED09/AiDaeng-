@@ -538,8 +538,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 0}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 1071476202}
-  index: 1
   goalItem: {fileID: 11400000, guid: 3344601e3a2b9e648949bb22a957d51e, type: 2}
   isFirstTaskOfTheProduct: 0
   isRequiredItem: 1
@@ -1149,8 +1150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 0}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 498962622}
-  index: 0
   goalItem: {fileID: 11400000, guid: 89f49ec4b74a4c141b0060586f201e81, type: 2}
   isFirstTaskOfTheProduct: 0
   isRequiredItem: 1
@@ -1490,6 +1492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 650653515}
   - component: {fileID: 650653516}
+  - component: {fileID: 650653517}
   m_Layer: 0
   m_Name: '#Score Manager'
   m_TagString: Untagged
@@ -1526,11 +1529,108 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreBar: {fileID: 164298779}
   scoreText: {fileID: 1722778752}
+  addScoreSFX: {fileID: 8300000, guid: 3c85cd8227e807e47ae9a0dc94fd978a, type: 3}
   oneStarScore: 1
   twoStarsScore: 10
   threeStarsScore: 15
   maxScore: 20
   currentScore: 0
+--- !u!82 &650653517
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650653514}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &666427836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,8 +1794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 8300000, guid: dcc0c8b040054764caadc90bc4eb7276, type: 3}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 1058001153}
-  index: 6
   goalItem: {fileID: 11400000, guid: 1baa172a33f74e4448f9acbd544f0ef9, type: 2}
   isFirstTaskOfTheProduct: 0
   isRequiredItem: 1
@@ -1810,7 +1911,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: dcc0c8b040054764caadc90bc4eb7276, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2380,7 +2481,6 @@ MonoBehaviour:
   StartNotif: {fileID: 2025171410}
   ClosedNotif: {fileID: 572904167}
   timer: {fileID: 770082254}
-  startTimer: 0
   isGameover: 0
 --- !u!1 &927350689 stripped
 GameObject:
@@ -2488,8 +2588,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 0}
+  clickSFX: {fileID: 0}
   waypoint: {fileID: 382107800}
-  index: 4
   goalItem: {fileID: 11400000, guid: 2a340d89eafa9674fa4e9a5eb10e787d, type: 2}
   isFirstTaskOfTheProduct: 0
   isRequiredItem: 1
@@ -3492,8 +3593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 8300000, guid: 35c5e84706c6423469d02389e3f01c3f, type: 3}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 1788392673}
-  index: 5
   goalItem: {fileID: 11400000, guid: a037d85c315fce24fa7c48a96e4081b9, type: 2}
   isFirstTaskOfTheProduct: 1
   isRequiredItem: 0
@@ -3656,7 +3758,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8984,12 +9086,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c027a4a58a763614f8af04edc0eddb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoint: {fileID: 1292781620}
-  index: 11
-  waterBar: {fileID: 1386343312}
+  taskSFX: {fileID: 0}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   isFull: 0
   maxWB: 8
   currentWB: 0
+  waypoint: {fileID: 1292781620}
+  waterBar: {fileID: 1386343312}
 --- !u!82 &1273976326
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9196,8 +9299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 0}
+  clickSFX: {fileID: 0}
   waypoint: {fileID: 2032695720}
-  index: 0
   goalItem: {fileID: 11400000, guid: 28a65c88a0950dd43824c90d5c13d96c, type: 2}
   isFirstTaskOfTheProduct: 0
   isRequiredItem: 0
@@ -9769,8 +9873,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 0}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 1359722581}
-  index: 3
   goalItem: {fileID: 11400000, guid: b7bbfd8c47e016e449c890b743d0e2e3, type: 2}
   isFirstTaskOfTheProduct: 0
   isRequiredItem: 1
@@ -10420,8 +10525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 0}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 281928869}
-  index: 2
   goalItem: {fileID: 11400000, guid: 333977778b5d6944b8dc7d9dbec56691, type: 2}
   isFirstTaskOfTheProduct: 0
   isRequiredItem: 1
@@ -16383,8 +16489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskSFX: {fileID: 0}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 324800402}
-  index: 0
   goalItem: {fileID: 0}
   isFirstTaskOfTheProduct: 0
   isRequiredItem: 0

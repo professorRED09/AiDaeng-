@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Task : MonoBehaviour
 {
-    //[SerializeField] float timeUsed;
-
-    [Header("Ref")]
-    public Transform waypoint;              // The waypoint for this task
-    public int index;                       // Index of this waypoint    
+    [Header("Setting")]
+    public AudioClip taskSFX;
+    public AudioClip clickSFX;
+   
+    public Transform waypoint;              // The waypoint for this task     
     private PlayerController1 player;       // Reference for player script
     public Items goalItem;
 
     public bool isFirstTaskOfTheProduct;
+    public bool playerIsAtTask;
     private AudioSource audioSource;
     //[SerializeField] AudioClip soundFX;
 
@@ -41,11 +42,13 @@ public class Task : MonoBehaviour
         //{
         //    mixturePanel.OpenPanel();
         //}
-        //audioSource.Play(); // play soundFX
+        audioSource.clip = taskSFX;
+        audioSource.Play(); // play soundFX
         yield return new WaitForSeconds(0.7f);
-        // Add code to pop up a mixture window, maybe check if the mixture is showing already or not
-        // if mixture window haven't been poped up yet; show it
         
+                            // Add code to pop up a mixture window, maybe check if the mixture is showing already or not
+                            // if mixture window haven't been poped up yet; show it
+
         if (isRequiredItem)
         {
             if (Inventory.instance.HasItem(requiredItem))
@@ -79,17 +82,35 @@ public class Task : MonoBehaviour
         {
             //print("ASDAEWAEWEQW");
         }
-    }    
+    }
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        playerIsAtTask = true;
+    }
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        playerIsAtTask = false;
+    }
 
     private void OnMouseDown()
     {
+        audioSource.clip = clickSFX;
         audioSource.Play(); // play soundFX
         // when players click on this task, the character will move to this task  
         if (waypoint != null && player != null)
         {
-            player.MoveToWaypoint(waypoint);
-            player.targetWP = gameObject;
-            //Debug.Log("MOVING TO TASK: " + gameObject.name);  
+            if (player.targetWP == gameObject && playerIsAtTask)
+            {
+                StartCoroutine(DoTask());
+            }
+            else {
+                player.MoveToWaypoint(waypoint);
+                player.targetWP = gameObject;
+                //Debug.Log("MOVING TO TASK: " + gameObject.name);  
+            }
+
+
+
         }
     }
 

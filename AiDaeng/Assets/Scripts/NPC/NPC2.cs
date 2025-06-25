@@ -293,7 +293,7 @@ public class NPC2 : MonoBehaviour, IObserver
     
     public void SwitchState(NPC_BaseState state)
     {
-        print(state);
+        //print(state);
         currentState = state;
         state.EnterState(this);
     }
