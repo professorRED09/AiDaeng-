@@ -38,7 +38,7 @@ public class GameManager : Subject, IObserver
     private void Start()
     {
         // start coroutine
-        StartCoroutine(countdownToStart());
+        StartCoroutine(CountdownToStart());
         // tell musicManager to play begin sound
         musicManager.StartCoroutine(musicManager.PlayBeginSound());
     }
@@ -63,8 +63,9 @@ public class GameManager : Subject, IObserver
         ClosedNotif.GetComponent<Animator>().SetTrigger("isTimeout");
     }
 
-    IEnumerator countdownToStart()
+    IEnumerator CountdownToStart()
     {
+        StartNotif.SetActive(true);
         StartNotif.GetComponent<Animator>().SetTrigger("Enter");    // play animation start pop up
         yield return new WaitForSeconds(3);                         // this make the game kinda jiggle, find a way to fix it later 
         StartNotif.GetComponent<Animator>().SetTrigger("Leave");

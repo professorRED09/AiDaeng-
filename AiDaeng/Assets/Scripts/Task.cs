@@ -38,10 +38,14 @@ public class Task : MonoBehaviour
 
     IEnumerator DoTask()
     {
-        //if (isFirstTaskOfTheProduct)
-        //{
-        //    mixturePanel.OpenPanel();
-        //}
+        if (isFirstTaskOfTheProduct)
+        {
+            mixturePanel.OpenPanel();
+            // update on UI to show which process player is currently at
+            mixturePanel.UpdateTempItem(goalItem);
+
+        }
+
         audioSource.clip = taskSFX;
         audioSource.Play(); // play soundFX
         yield return new WaitForSeconds(0.7f);
@@ -51,22 +55,45 @@ public class Task : MonoBehaviour
 
         if (isRequiredItem)
         {
-            if (Inventory.instance.HasItem(requiredItem))
+            // if tempItem is correct, update it. if not, delete tempItem
+            if(mixturePanel.tempItem == requiredItem)
             {
-                Inventory.instance.UpdateItem(requiredItem, goalItem);  
+                mixturePanel.UpdateTempItem(goalItem);
+                if (goalItem.isCompleted)
+                {
+                    //add it to inventory
+                    Inventory.instance.AddItem(goalItem);
+                    //delete tempItem
+                    mixturePanel.tempItem = null;
+                    //hide mixture panel
+                    mixturePanel.ClosePanel();
+                }
             }
             else
             {
-                NotificationManager.instance.AddNoti($"ต้องมี{requiredItem.name}ก่อนจึงสามารถทำได้!");
-                //if (mixturePanel.isOpened)
-                //{
-                //    mixturePanel.ClosePanel();
-                //}
+                //delete tempItem
+                mixturePanel.tempItem = null;
+                //hide mixture panel
+                mixturePanel.ClosePanel();
+                print("GO GET THE ITEM FIRST");
             }
+            
+            //if (Inventory.instance.HasItem(requiredItem))
+            //{
+            //    Inventory.instance.UpdateItem(requiredItem, goalItem);  
+            //}
+            //else
+            //{
+            //    NotificationManager.instance.AddNoti($"ต้องมี{requiredItem.name}ก่อนจึงสามารถทำได้!");
+            //    //if (mixturePanel.isOpened)
+            //    //{
+            //    //    mixturePanel.ClosePanel();
+            //    //}
+            //}
         }
         else
-        {  
-            Inventory.instance.AddItem(goalItem);
+        {            
+            //Inventory.instance.AddItem(goalItem);
         }
        
     }

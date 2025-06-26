@@ -543,6 +543,7 @@ MonoBehaviour:
   waypoint: {fileID: 1071476202}
   goalItem: {fileID: 11400000, guid: 3344601e3a2b9e648949bb22a957d51e, type: 2}
   isFirstTaskOfTheProduct: 0
+  playerIsAtTask: 0
   isRequiredItem: 1
   requiredItem: {fileID: 11400000, guid: 2a340d89eafa9674fa4e9a5eb10e787d, type: 2}
 --- !u!50 &366367680
@@ -1155,6 +1156,7 @@ MonoBehaviour:
   waypoint: {fileID: 498962622}
   goalItem: {fileID: 11400000, guid: 89f49ec4b74a4c141b0060586f201e81, type: 2}
   isFirstTaskOfTheProduct: 0
+  playerIsAtTask: 0
   isRequiredItem: 1
   requiredItem: {fileID: 11400000, guid: 2a340d89eafa9674fa4e9a5eb10e787d, type: 2}
 --- !u!212 &584209681
@@ -1799,6 +1801,7 @@ MonoBehaviour:
   waypoint: {fileID: 1058001153}
   goalItem: {fileID: 11400000, guid: 1baa172a33f74e4448f9acbd544f0ef9, type: 2}
   isFirstTaskOfTheProduct: 0
+  playerIsAtTask: 0
   isRequiredItem: 1
   requiredItem: {fileID: 11400000, guid: a037d85c315fce24fa7c48a96e4081b9, type: 2}
 --- !u!50 &670768119
@@ -2593,6 +2596,7 @@ MonoBehaviour:
   waypoint: {fileID: 382107800}
   goalItem: {fileID: 11400000, guid: 2a340d89eafa9674fa4e9a5eb10e787d, type: 2}
   isFirstTaskOfTheProduct: 0
+  playerIsAtTask: 0
   isRequiredItem: 1
   requiredItem: {fileID: 11400000, guid: 1baa172a33f74e4448f9acbd544f0ef9, type: 2}
 --- !u!50 &950658683
@@ -3598,6 +3602,7 @@ MonoBehaviour:
   waypoint: {fileID: 1788392673}
   goalItem: {fileID: 11400000, guid: a037d85c315fce24fa7c48a96e4081b9, type: 2}
   isFirstTaskOfTheProduct: 1
+  playerIsAtTask: 0
   isRequiredItem: 0
   requiredItem: {fileID: 0}
 --- !u!50 &1096668459
@@ -9304,6 +9309,7 @@ MonoBehaviour:
   waypoint: {fileID: 2032695720}
   goalItem: {fileID: 11400000, guid: 28a65c88a0950dd43824c90d5c13d96c, type: 2}
   isFirstTaskOfTheProduct: 0
+  playerIsAtTask: 0
   isRequiredItem: 0
   requiredItem: {fileID: 0}
 --- !u!60 &1311343261
@@ -9878,6 +9884,7 @@ MonoBehaviour:
   waypoint: {fileID: 1359722581}
   goalItem: {fileID: 11400000, guid: b7bbfd8c47e016e449c890b743d0e2e3, type: 2}
   isFirstTaskOfTheProduct: 0
+  playerIsAtTask: 0
   isRequiredItem: 1
   requiredItem: {fileID: 11400000, guid: 2a340d89eafa9674fa4e9a5eb10e787d, type: 2}
 --- !u!50 &1376778803
@@ -10530,6 +10537,7 @@ MonoBehaviour:
   waypoint: {fileID: 281928869}
   goalItem: {fileID: 11400000, guid: 333977778b5d6944b8dc7d9dbec56691, type: 2}
   isFirstTaskOfTheProduct: 0
+  playerIsAtTask: 0
   isRequiredItem: 1
   requiredItem: {fileID: 11400000, guid: 2a340d89eafa9674fa4e9a5eb10e787d, type: 2}
 --- !u!50 &1577534232
@@ -16494,6 +16502,7 @@ MonoBehaviour:
   waypoint: {fileID: 324800402}
   goalItem: {fileID: 0}
   isFirstTaskOfTheProduct: 0
+  playerIsAtTask: 0
   isRequiredItem: 0
   requiredItem: {fileID: 0}
 --- !u!212 &1819488770
@@ -17006,6 +17015,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2178451201945076951, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2190374528402528377, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -17069,6 +17082,10 @@ PrefabInstance:
     - target: {fileID: 6296042020480868644, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512612469827593863, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7606105702295055872, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.x

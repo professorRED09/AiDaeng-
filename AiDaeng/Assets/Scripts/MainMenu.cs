@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] string level1Name;
 
     [Header("UI")]
+    //[SerializeField] GameObject startBanner;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject settingPanel;
     [SerializeField] GameObject tutorialPanel;
@@ -17,6 +18,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
+        //startBanner.SetActive(true);
     }
 
     public void OnPressStartGame()

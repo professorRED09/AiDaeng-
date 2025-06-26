@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: PerfumeWater&Calendula
   itemSprite: {fileID: 21300000, guid: 4c0538ef435c28f4c8dc146cf3356bf4, type: 3}
+  isCompleted: 1

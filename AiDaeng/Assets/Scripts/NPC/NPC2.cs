@@ -219,19 +219,7 @@ public class NPC2 : MonoBehaviour, IObserver
                 getProduct = true;                
                 scoreManager.AddScore();
             }
-            //if (Inventory.instance.HasItem(orderItem))      //  check if the player has the product that npc wants or not          
-            //{
-            //    Inventory.instance.RemoveItem(orderItem);   // remove the given item from player's inventory
-            //    getProduct = true;                  // npc gets product
-            //    orderBubble.SetActive(false);       // hide UI
-            //    ScoreManager.instance.AddScore();   // add score for player
 
-
-            //}
-            //else
-            //{
-            //    //print("SORRY, I HAVEN'T MADE IT YET");
-            //}
         }
     }
 
