@@ -6,10 +6,17 @@ using TMPro;
 
 public class BuddhaBasin : MonoBehaviour
 {
-    [Header("Ref")]
+    [Header("Settings")]
+    public AudioClip taskSFX;
+    public AudioClip clickSFX;
+
+    public bool isFull;    // check if the basin is full
+    public float maxWB; // max quantity of water in the basin
+    [SerializeField] float currentWB; // current quantity of water in the basin
     public Transform waypoint;  // The waypoint for this task
-    public int index;           // Index of this waypoint    
+
     private PlayerController1 player;    // Reference for player script 
+    private AudioSource audioSource;
 
     public static BuddhaBasin instance;
 
@@ -17,21 +24,18 @@ public class BuddhaBasin : MonoBehaviour
     public Slider waterBar;
     //[SerializeField] GameObject fullBasin_Notif;
 
-    [Header("Settings")]
-    public bool isFull;    // check if the basin is full
-    public float maxWB; // max quantity of water in the basin
-    [SerializeField] float currentWB; // current quantity of water in the basin
 
     private void Awake()
     {
         instance = this;
         player = FindObjectOfType<PlayerController1>(); // get reference from player script
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        ResetBasin(); // start the game with empty basin
+        StartCoroutine(ResetBasin());
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -44,6 +48,8 @@ public class BuddhaBasin : MonoBehaviour
 
     IEnumerator ResetBasin()
     {
+        audioSource.clip = taskSFX;
+        audioSource.Play(); // play soundFX
         yield return new WaitForSeconds(0.7f);
         currentWB = 0;
         isFull = false;
@@ -76,6 +82,8 @@ public class BuddhaBasin : MonoBehaviour
 
     private void OnMouseDown()
     {
+        audioSource.clip = clickSFX;
+        audioSource.Play(); // play soundFX
         // when players click on this task, the character will move to this task  
         if (waypoint != null && player != null)
         {

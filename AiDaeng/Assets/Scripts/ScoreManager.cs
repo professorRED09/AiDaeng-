@@ -11,20 +11,19 @@ public class ScoreManager : MonoBehaviour
     public TMP_Text scoreText;
 
     [Header("Setting")]
-    [SerializeField] float goalScore;
+    public AudioClip addScoreSFX;
+    [SerializeField] float oneStarScore;
+    [SerializeField] float twoStarsScore;    
+    [SerializeField] float threeStarsScore;    
+    private AudioSource audioSource;
+    
     [SerializeField] float maxScore;
     public float currentScore;
-
-    public static ScoreManager instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         currentScore = 0;   //initially set score to 0 when the game start        
     }
 
@@ -36,6 +35,8 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore()
     {
+        audioSource.clip = addScoreSFX;
+        audioSource.Play();
         currentScore += 1;
     }
 
@@ -45,15 +46,24 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = currentScore.ToString();
     }
 
-    public bool DoesPlayerWin()
+    // convert current score to number of star
+    public float StarCount()
     {
-        if(currentScore >= goalScore)
+        if(currentScore >= threeStarsScore)
         {
-            return true;
+            return 3;
+        }
+        else if (currentScore >= twoStarsScore)
+        {
+            return 2;
+        }
+        else if (currentScore >= oneStarScore)
+        {
+            return 1;
         }
         else
         {
-            return false;
+            return 0;
         }
     }
 }
