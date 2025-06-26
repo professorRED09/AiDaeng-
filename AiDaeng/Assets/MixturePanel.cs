@@ -39,5 +39,11 @@ public class MixturePanel : MonoBehaviour
         tempItemImage.sprite = item.itemSprite;
     }
 
+    // gradually disappear when item is complete
+    public void OnItemComplete()
+    {
+
+    }
+
 
 }

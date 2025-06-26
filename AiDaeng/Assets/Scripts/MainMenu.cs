@@ -54,10 +54,10 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void OnPressResumeGame()
-    {
-        StartCoroutine(OnResume());
-    }
+    //public void OnPressResumeGame()
+    //{
+    //    StartCoroutine(OnResume());
+    //}
 
     public void OnPressLevelSelect()
     {
@@ -68,6 +68,11 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(level1Name);
     }
+
+    //public void OnRestart()
+    //{
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    //}
 
     public void OnPressMainMenu()
     {
@@ -80,20 +85,20 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Title");
     }
 
-    IEnumerator DelayTime(float timeScale)
-    {
-        yield return new WaitForSeconds(1f);
-        Time.timeScale = timeScale;
-    }
+    //IEnumerator DelayTime(float timeScale)
+    //{
+    //    yield return new WaitForSeconds(1f);
+    //    Time.timeScale = timeScale;
+    //}
 
-    public IEnumerator OnResume()
-    {
-        Time.timeScale = 1f;
-        Debug.Log("Resume");
-        pausePanel.GetComponent<Animator>().SetBool("isOpened", false);
-        yield return new WaitForSeconds(1f);
-        pausePanel.SetActive(false);
-    }
+    //public IEnumerator OnResume()
+    //{
+    //    Time.timeScale = 1f;
+    //    Debug.Log("Resume");
+    //    pausePanel.GetComponent<Animator>().SetBool("isOpened", false);
+    //    yield return new WaitForSeconds(1f);
+    //    pausePanel.SetActive(false);
+    //}
 
 
 
