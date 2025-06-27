@@ -23,6 +23,10 @@ public class SimpleDialogue : MonoBehaviour
     private bool isTyping = false;
     private float textSpeed = 0.05f;
 
+    public AudioSource audioSource;
+    public AudioClip typingSound;
+    public AudioClip clickSound;
+    public AudioClip skipSound;
     void Start()
     {
         dialogueText.text = "";
@@ -35,9 +39,20 @@ public class SimpleDialogue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isTyping) // กดคลิกเพื่อไปบรรทัดถัดไป
+        if (Input.GetMouseButtonDown(0))
         {
-            NextLine();
+            if (isTyping)
+            {
+                StopAllCoroutines();
+                dialogueText.text = lines[index];
+                nameText.text = names[index];
+                isTyping = false;
+                continueButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                NextLine();
+            }
         }
     }
 
@@ -122,5 +137,6 @@ public class SimpleDialogue : MonoBehaviour
         continueButton.gameObject.SetActive(true);
         SceneManager.LoadScene("Gameplay [Beta]");
     }
+    
 }
 
