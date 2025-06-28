@@ -40,6 +40,7 @@ public class Task : MonoBehaviour
     {
         if (isFirstTaskOfTheProduct)
         {
+            Debug.Log("OPEN MIXTURE PANEL");
             mixturePanel.OpenPanel();
             // update on UI to show which process player is currently at
             mixturePanel.UpdateTempItem(goalItem);
@@ -64,9 +65,9 @@ public class Task : MonoBehaviour
                     //add it to inventory
                     Inventory.instance.AddItem(goalItem);
                     //delete tempItem
-                    mixturePanel.tempItem = null;
+                    //mixturePanel.tempItem = null;
                     //hide mixture panel
-                    mixturePanel.ClosePanel();
+                    //Invoke("mixturePanel.ClosePanel()", 1f);
                 }
             }
             else

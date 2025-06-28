@@ -69,10 +69,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(level1Name);
     }
 
-    //public void OnRestart()
-    //{
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    //}
+    public void OnPressRestart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     public void OnPressMainMenu()
     {

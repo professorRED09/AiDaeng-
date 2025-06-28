@@ -213,11 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea515ff7e9ffd141be59b3012070781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEB: 10
-  moodDecSpeed: 0
-  prayingTime: 2
-  speed: 5
-  transOffset: {x: 0, y: 0, z: 0}
+  happyVFX: {fileID: 9014111512956324487, guid: f239bbefc1998194fbf6c6500d4328ed, type: 3}
+  scorePopup: {fileID: 1017039640014431114, guid: 1170d6712164010449f96499b8839c8e, type: 3}
   detectLength: 1.2
   npcMask:
     serializedVersion: 2
@@ -225,7 +222,6 @@ MonoBehaviour:
   orderBubble: {fileID: 7287168114240358586}
   moodBar: {fileID: 5424894808772938700}
   thinkingText: {fileID: 3994496829248459128}
-  itemImage: {fileID: 2419903319436110288}
   itemLists:
   - {fileID: 11400000, guid: 333977778b5d6944b8dc7d9dbec56691, type: 2}
   - {fileID: 11400000, guid: 3344601e3a2b9e648949bb22a957d51e, type: 2}

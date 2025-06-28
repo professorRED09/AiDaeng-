@@ -21,18 +21,23 @@ public class NPC_OrderState : NPC_BaseState
         }
         else if (npc.getProduct)
         {
-            npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
-            npc.SwitchState(npc.preyState);
+            //delay time before swtiching to prayState
+            npc.OnGettingProduct();
             
+            //npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
+            //npc.SwitchState(npc.prayState);
+
+            //npc.StartCoroutine(npc.OnGettingProduct(1f));
+
         }
             
         
             
         // npc get product 
     }
-
     public override void ExitState(NPC2 npc)
     {
-        // free spot = true
+        
+        //npc.SwitchState(npc.prayState);
     }
 }
