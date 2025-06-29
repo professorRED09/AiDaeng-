@@ -43,7 +43,7 @@ public class NPC_PrayState : NPC_BaseState
             }
             else
             {
-                BuddhaBasin.instance.IncreaseWater(1);  // increase water in basin
+                BuddhaBasin.instance.IncreaseWater();  // increase water in basin
                 npc.SwitchState(npc.leaveState);        // switch to leave state
             }
 

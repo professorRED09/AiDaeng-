@@ -39,8 +39,7 @@ public class Task : MonoBehaviour
     IEnumerator DoTask()
     {
         if (isFirstTaskOfTheProduct)
-        {
-            Debug.Log("OPEN MIXTURE PANEL");
+        {            
             mixturePanel.OpenPanel();
             // update on UI to show which process player is currently at
             mixturePanel.UpdateTempItem(goalItem);
@@ -60,15 +59,15 @@ public class Task : MonoBehaviour
             if(mixturePanel.tempItem == requiredItem)
             {
                 mixturePanel.UpdateTempItem(goalItem);
-                if (goalItem.isCompleted)
-                {
-                    //add it to inventory
-                    Inventory.instance.AddItem(goalItem);
-                    //delete tempItem
-                    //mixturePanel.tempItem = null;
-                    //hide mixture panel
-                    //Invoke("mixturePanel.ClosePanel()", 1f);
-                }
+                //if (goalItem.isCompleted)
+                //{
+                //    //add it to inventory
+                //    //Inventory.instance.AddItem(goalItem);
+                //    //delete tempItem
+                //    //mixturePanel.tempItem = null;
+                //    //hide mixture panel
+                //    //Invoke("mixturePanel.ClosePanel()", 1f);
+                //}
             }
             else
             {

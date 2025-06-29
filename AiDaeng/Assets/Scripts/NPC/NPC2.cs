@@ -246,7 +246,7 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         yield return new WaitForSeconds(3);
         // random total of things to order (for now let's just random between 1 and 2)
-        int orderNumbers = Random.Range(1, 2);  
+        int orderNumbers = Random.Range(1, 3);  // npc will order 1 or 2 things (3 is the exclusive)
         
         for (int i = 0; i < orderNumbers; i++)
         {
