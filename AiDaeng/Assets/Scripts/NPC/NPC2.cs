@@ -10,7 +10,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private float maxMV = 10f;   // MV => mood value
     private float currentMV;
 
-    private float moodDecSp = 0.4f;      // decreasing speed of mood value, assign as public for adjusting in other script
+    private float moodDecSp = 1f;      // decreasing speed of mood value, assign as public for adjusting in other script
     private float tempMoodDecSp;
     //public float prayingTime = 2;
     private float speed = 5f;
@@ -443,6 +443,7 @@ public class NPC2 : MonoBehaviour, IObserver
     // animate character based on each conditions
     void Animate()
     {
+        animator.SetFloat("currentMood", currentMV);
         animator.SetBool("isMoving", isMoving);
         animator.SetFloat("moveX", direction.x);
         animator.SetFloat("moveY", direction.y);
