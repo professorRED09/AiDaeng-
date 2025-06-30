@@ -10027,6 +10027,9 @@ MonoBehaviour:
   currentSpawnTimer: 0
   npcPrefabs:
   - {fileID: 2014829141127630396, guid: 9a5ae8331b117674da6a999c72535d1f, type: 3}
+  - {fileID: 2014829141127630396, guid: 2bb5f4a29e4ac574fa55b835bddb25d3, type: 3}
+  - {fileID: 2014829141127630396, guid: 6c5d0828f5a80d848a03e5feb7e29b59, type: 3}
+  - {fileID: 2014829141127630396, guid: 208bf92ab79e9d1449cddfa6988871ed, type: 3}
   spawnPoint: {fileID: 557693610}
   wpToQueue:
   - {fileID: 557693611}
