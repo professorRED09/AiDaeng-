@@ -8,7 +8,7 @@ public class NPC_PrayState : NPC_BaseState
         npc.isClickable = false;
         npc.currentWaypointIndex = 0; // reset index to go to next waypoints
         npc.HideOrder();
-        Debug.Log("THANKS, I'M MA GO prayING");
+        //Debug.Log("THANKS, I'M MA GO prayING");
         npc.SetWaypoints(npc.wayToPray);
     }
 

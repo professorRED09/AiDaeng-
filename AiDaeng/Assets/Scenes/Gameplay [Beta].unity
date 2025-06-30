@@ -1537,7 +1537,7 @@ MonoBehaviour:
   twoStarsScore: 10
   threeStarsScore: 15
   maxScore: 20
-  currentScore: 0
+  currentScore: 10
 --- !u!82 &650653517
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2486,7 +2486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resultPanel: {fileID: 927350689}
   resultText: {fileID: 479597940}
-  bowlText: {fileID: 1345793173021261955}
+  resultStar: {fileID: 1308932090}
   StartNotif: {fileID: 2025171410}
   ClosedNotif: {fileID: 572904167}
   timer: {fileID: 770082254}
@@ -9113,6 +9113,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1308932090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3718774733950192201, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+  m_PrefabInstance: {fileID: 1345793173021261954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1311343258
 GameObject:
   m_ObjectHideFlags: 0
@@ -17081,6 +17086,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 6239143374079321834, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: timeToDisplay
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6296042020480868644, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -17205,14 +17214,3 @@ PrefabInstance:
       addedObject: {fileID: 2130844205}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
---- !u!114 &1345793173021261955 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6865923813743558446, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
-  m_PrefabInstance: {fileID: 1345793173021261954}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
