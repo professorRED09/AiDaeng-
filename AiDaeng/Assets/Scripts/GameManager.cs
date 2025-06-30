@@ -121,10 +121,7 @@ public class GameManager : Subject, IObserver
     {
 
     }
-    public void OnNotify(Action action)
-    {
-
-    }
+    
 
 
 }
