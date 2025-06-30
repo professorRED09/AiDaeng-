@@ -6,33 +6,38 @@ using UnityEngine.SceneManagement;
 
 public class SimpleDialogue : MonoBehaviour
 {
-    public TextMeshProUGUI dialogueText;  // ข้อความสนทนา
-    public TextMeshProUGUI nameText;      // ชื่อผู้พูด
-    public Image characterLeft;           // ตัวละครฝั่งซ้าย (ผู้เล่น)
-    public Image characterRight;          // ตัวละครฝั่งขวา (NPC)
-    public Button continueButton;         // ปุ่มกดเพื่อไปต่อ
-    public Button skipButton;             // ปุ่มกดเพื่อข้ามข้อความทั้งหมด
+    public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI nameText;
+    public Image characterLeft;
+    public Image characterRight;
+    public Button continueButton;
+    public Button skipButton;
 
-    public string[] lines;                // บทสนทนา
-    public string[] names;                // ชื่อของตัวละครแต่ละบรรทัด
-    public Sprite[] leftSprites;          // รูปตัวละครผู้เล่น
-    public Sprite[] rightSprites;         // รูปตัวละคร NPC
-    public bool[] isLeftSpeaker;          // true = ผู้เล่นพูด, false = NPC พูด
+    public string[] lines;
+    public string[] names;
+    public bool[] isLeftSpeaker;
+
+    [Header("Sprites")]
+    public Sprite leftIdleSprite;
+    public Sprite rightIdleSprite;
+    public Sprite[] leftTalkingSprites;
+    public Sprite[] rightTalkingSprites;
+
+    [Header("Settings")]
+    public float textSpeed = 0.05f;
+    public float talkFrameDelay = 0.1f;
 
     private int index = 0;
     private bool isTyping = false;
-    private float textSpeed = 0.05f;
 
-    public AudioSource audioSource;
-    public AudioClip typingSound;
-    public AudioClip clickSound;
-    public AudioClip skipSound;
+    private Coroutine leftTalkRoutine;
+    private Coroutine rightTalkRoutine;
+
     void Start()
     {
         dialogueText.text = "";
         nameText.text = "";
-        continueButton.gameObject.SetActive(false); // ซ่อนปุ่มตอนเริ่มต้น
-        //continueButton.onClick.AddListener(OnContinueClicked);
+        continueButton.gameObject.SetActive(false);
         skipButton.onClick.AddListener(OnSkipClicked);
         StartDialogue();
     }
@@ -44,6 +49,7 @@ public class SimpleDialogue : MonoBehaviour
             if (isTyping)
             {
                 StopAllCoroutines();
+                StopTalkingAnimations();
                 dialogueText.text = lines[index];
                 nameText.text = names[index];
                 isTyping = false;
@@ -59,6 +65,11 @@ public class SimpleDialogue : MonoBehaviour
     void StartDialogue()
     {
         index = 0;
+        if (lines.Length == 0 || names.Length == 0 || isLeftSpeaker.Length == 0)
+        {
+            Debug.LogError("Missing dialogue data.");
+            return;
+        }
         UpdateUI();
         StartCoroutine(TypeLine());
     }
@@ -69,26 +80,25 @@ public class SimpleDialogue : MonoBehaviour
         dialogueText.text = "";
         nameText.text = "";
 
+        StartTalkingAnimation();
+
         int maxLength = Mathf.Max(names[index].Length, lines[index].Length);
 
         for (int i = 0; i < maxLength; i++)
         {
-            if (i < names[index].Length)
-                nameText.text += names[index][i];
-
-            if (i < lines[index].Length)
-                dialogueText.text += lines[index][i];
-
+            if (i < names[index].Length) nameText.text += names[index][i];
+            if (i < lines[index].Length) dialogueText.text += lines[index][i];
             yield return new WaitForSeconds(textSpeed);
         }
 
+        StopTalkingAnimations();
         isTyping = false;
-        continueButton.gameObject.SetActive(true); // แสดงปุ่มเมื่อพิมพ์เสร็จ
+        continueButton.gameObject.SetActive(true);
     }
 
     void NextLine()
     {
-        continueButton.gameObject.SetActive(false); // ซ่อนปุ่มตอนเปลี่ยนไดอะล็อก
+        continueButton.gameObject.SetActive(false);
         if (index < lines.Length - 1)
         {
             index++;
@@ -98,7 +108,6 @@ public class SimpleDialogue : MonoBehaviour
         else
         {
             SceneManager.LoadScene("Gameplay [Beta]");
-            //gameObject.SetActive(false);
         }
     }
 
@@ -106,37 +115,63 @@ public class SimpleDialogue : MonoBehaviour
     {
         if (isLeftSpeaker[index])
         {
-            characterLeft.sprite = leftSprites[index];    
-            characterRight.color = new Color(1, 1, 1, 0.5f); 
-            characterLeft.color = new Color(1, 1, 1, 1);  
+            characterLeft.sprite = leftIdleSprite;
+            characterRight.sprite = rightIdleSprite;
+            characterLeft.color = new Color(1, 1, 1, 1);
+            characterRight.color = new Color(1, 1, 1, 0.5f);
         }
         else
         {
-            characterRight.sprite = rightSprites[index];  
-            characterLeft.color = new Color(1, 1, 1, 0.5f); 
-            characterRight.color = new Color(1, 1, 1, 1); 
+            characterLeft.sprite = leftIdleSprite;
+            characterRight.sprite = rightIdleSprite;
+            characterLeft.color = new Color(1, 1, 1, 0.5f);
+            characterRight.color = new Color(1, 1, 1, 1);
         }
     }
 
-    void OnContinueClicked()
+    void StartTalkingAnimation()
     {
-        if (!isTyping)
+        StopTalkingAnimations(); // เผื่ออันเก่ายังเล่นอยู่
+
+        if (isLeftSpeaker[index] && leftTalkingSprites.Length > 0)
         {
-            NextLine();
+            leftTalkRoutine = StartCoroutine(AnimateSprite(characterLeft, leftTalkingSprites));
+        }
+        else if (!isLeftSpeaker[index] && rightTalkingSprites.Length > 0)
+        {
+            rightTalkRoutine = StartCoroutine(AnimateSprite(characterRight, rightTalkingSprites));
         }
     }
 
-    public void OnSkipClicked()
+    void StopTalkingAnimations()
     {
-        StopAllCoroutines();  
-        index = lines.Length - 1;  
+        if (leftTalkRoutine != null) StopCoroutine(leftTalkRoutine);
+        if (rightTalkRoutine != null) StopCoroutine(rightTalkRoutine);
+
+        characterLeft.sprite = leftIdleSprite;
+        characterRight.sprite = rightIdleSprite;
+    }
+
+    IEnumerator AnimateSprite(Image target, Sprite[] sprites)
+    {
+        int i = 0;
+        while (true)
+        {
+            target.sprite = sprites[i];
+            i = (i + 1) % sprites.Length;
+            yield return new WaitForSeconds(talkFrameDelay);
+        }
+    }
+
+    void OnSkipClicked()
+    {
+        StopAllCoroutines();
+        index = lines.Length - 1;
         UpdateUI();
-        dialogueText.text = lines[index];  
-        nameText.text = names[index];   
+        dialogueText.text = lines[index];
+        nameText.text = names[index];
         isTyping = false;
         continueButton.gameObject.SetActive(true);
         SceneManager.LoadScene("Gameplay [Beta]");
     }
-    
 }
-
