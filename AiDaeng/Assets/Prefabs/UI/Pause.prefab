@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 8926865521285313607}
+        m_TargetAssemblyTypeName: PauseManu, Assembly-CSharp
         m_MethodName: OnPressSetting
         m_Mode: 1
         m_Arguments:
@@ -371,8 +371,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 8926865521285313607}
+        m_TargetAssemblyTypeName: PauseManu, Assembly-CSharp
         m_MethodName: OnPressResumeGame
         m_Mode: 1
         m_Arguments:
@@ -639,8 +639,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 8926865521285313607}
+        m_TargetAssemblyTypeName: PauseManu, Assembly-CSharp
         m_MethodName: OnPressMainMenu
         m_Mode: 1
         m_Arguments:
@@ -662,6 +662,7 @@ GameObject:
   - component: {fileID: 4653872115978707839}
   - component: {fileID: 3614802794382703436}
   - component: {fileID: -6212397154015716300}
+  - component: {fileID: 8926865521285313607}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -726,6 +727,20 @@ SortingGroup:
   m_SortingLayer: 4
   m_SortingOrder: 5
   m_SortAtRoot: 0
+--- !u!114 &8926865521285313607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561589271921736009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100f0d4a275b9114ab309ab5db7b66b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 7561589271921736009}
+  settingPanel: {fileID: 0}
 --- !u!1 &7788191580743055182
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,9 +997,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: OnPressSkipScene1
+      - m_Target: {fileID: 8926865521285313607}
+        m_TargetAssemblyTypeName: PauseManu, Assembly-CSharp
+        m_MethodName: OnPressRestart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

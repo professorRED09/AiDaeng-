@@ -56,9 +56,9 @@ public class BuddhaBasin : MonoBehaviour
         UpdateWaterBar(currentWB, maxWB);
     }
 
-    public void IncreaseWater(int quant)
+    public void IncreaseWater()
     {
-        currentWB += quant;
+        currentWB += 2.5f;
         if(currentWB >= maxWB)
         {
             currentWB = maxWB;

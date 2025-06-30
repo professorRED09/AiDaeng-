@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     [Header("Ref")]
     public Slider scoreBar;
     public TMP_Text scoreText;
+    public GameObject scorePopupPrefab;
 
     [Header("Setting")]
     public AudioClip addScoreSFX;
@@ -33,8 +34,10 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreBar(currentScore, maxScore);
     }
 
-    public void AddScore()
+    public void AddScore(Vector3 transform)
     {
+        GameObject m_scorePopup = Instantiate(scorePopupPrefab, new Vector2(transform.x + 1.2f, transform.y + 1.9f), Quaternion.identity);
+        m_scorePopup.GetComponent<ScorePopup>().DisplayScoreText(1);
         audioSource.clip = addScoreSFX;
         audioSource.Play();
         currentScore += 1;

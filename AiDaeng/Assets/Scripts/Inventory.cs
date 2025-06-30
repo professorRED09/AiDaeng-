@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,13 +20,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         DisplayItems();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    }    
 
     void DisplayItems()
     {
@@ -61,22 +55,31 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Items _item)
     {
-        if (!items.Contains(_item))
+        if(itemNumbers.Count >= slots.Length)
         {
-            items.Add(_item);
-            itemNumbers.Add(1);
+            NotificationManager.instance.AddNoti("ของเต็มแล้ว!");
+            return;
         }
-        else
-        {
-            //Debug.Log("You already have this one");
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i] == _item)
-                {
-                    itemNumbers[i]++;
-                }
-            }
-        }
+
+        items.Add(_item);
+        itemNumbers.Add(1);
+
+        //if (!items.Contains(_item))
+        //{
+        //    items.Add(_item);
+        //    itemNumbers.Add(1);
+        //}
+        //else
+        //{
+        //    //Debug.Log("You already have this one");
+        //    for (int i = 0; i < items.Count; i++)
+        //    {
+        //        if (items[i] == _item)
+        //        {
+        //            itemNumbers[i]++;
+        //        }
+        //    }
+        //}
         DisplayItems();        
     }
 

@@ -24,11 +24,11 @@ public abstract class Subject : MonoBehaviour
         });
     }
 
-    public void NotifyObserver(Action action)
-    {
-        ObserverList.ForEach((ObserverList) =>
-        {
-            ObserverList.OnNotify(action);
-        });
-    }
+    //public void NotifyObserver(Action action)
+    //{
+    //    ObserverList.ForEach((ObserverList) =>
+    //    {
+    //        ObserverList.OnNotify(action);
+    //    });
+    //}
 }

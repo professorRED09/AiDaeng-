@@ -7,14 +7,17 @@ using TMPro;
 public class NPC2 : MonoBehaviour, IObserver
 {
     [Header("Setting")]
-    [SerializeField] float maxEB;   // max value of emotion value
-    public float moodDecSpeed;      // decreasing speed of mood value, assign as public for adjusting in other script
-    float tempMoodDecSp;
-    public float prayingTime = 2;
-    public float speed = 2f;
+    private float maxMV = 10f;   // MV => mood value
+    private float currentMV;
 
-    private float currentEB; // max value of emotion value
-    [SerializeField] Vector3 transOffset;
+    private float moodDecSp = 1f;      // decreasing speed of mood value, assign as public for adjusting in other script
+    private float tempMoodDecSp;
+    //public float prayingTime = 2;
+    private float speed = 5f;
+    public GameObject happyVFX;
+    //public GameObject scorePopup;
+ 
+    //[SerializeField] Vector3 transOffset;
     [SerializeField] float detectLength;
     public LayerMask npcMask;
 
@@ -22,7 +25,7 @@ public class NPC2 : MonoBehaviour, IObserver
     [SerializeField] GameObject orderBubble;
     [SerializeField] Slider moodBar;
     [SerializeField] GameObject thinkingText;
-    [SerializeField] GameObject itemImage;
+    //[SerializeField] GameObject itemImage;
     [SerializeField] Items[] itemLists;
     //public List<Items> orderList;
     public List<GameObject> orderSlotLists;
@@ -37,26 +40,27 @@ public class NPC2 : MonoBehaviour, IObserver
     public Transform[] wayToRageLeave;
 
     public int currentWaypointIndex = 0;
-    public bool isMoving;
+    
 
     SpriteRenderer sprite;
 
     [Header("Boolean")]
+    public bool isMoving;
     public bool isUpset = false;
     public bool getProduct = false;
     public bool isClickable;
     public bool isWaiting;
 
     [SerializeField] Items orderItem;
-    PlayerController1 player;
-    Namwan namwan;
+    private PlayerController1 player;
+    private Namwan namwan;
 
     //FSM Stuff
     public NPC_BaseState currentState;
     public NPC_ArriveState arriveState = new NPC_ArriveState();
     public NPC_WaitToOrderState waitToOrderState = new NPC_WaitToOrderState();
     public NPC_OrderState orderState = new NPC_OrderState();
-    public NPC_PrayState preyState = new NPC_PrayState();
+    public NPC_PrayState prayState = new NPC_PrayState();
     public NPC_LeaveState leaveState = new NPC_LeaveState();
     public NPC_RageLeaveState rageLeaveState = new NPC_RageLeaveState();
 
@@ -87,8 +91,8 @@ public class NPC2 : MonoBehaviour, IObserver
     void Start()
     {
         // set initial value       
-        currentEB = maxEB;
-        UpdateMoodBar(currentEB, maxEB);
+        currentMV = maxMV;
+        UpdateMoodBar(currentMV, maxMV);
 
         // set initial state to begin with
         currentState = arriveState;
@@ -102,10 +106,11 @@ public class NPC2 : MonoBehaviour, IObserver
         wayToRageLeave = npcManager.wpToRageLeave;
 
         // store default value in temp value
-        tempMoodDecSp = moodDecSpeed;
+        tempMoodDecSp = moodDecSp;
 
         // make npc recognize the weather when get spawned
         OnWeatherChange();
+
     }   
 
     public void SetWaypoints(Transform[] assignedWaypoints)
@@ -159,8 +164,7 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         if (isUpset) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectLength, npcMask);
-        //if (hit.collider.gameObject == null) return;
-        //bool _isUpset = hit.collider.gameObject.GetComponent<NPC2>().isUpset;
+
         if (hit.collider == null)
         {
             isMoving = true;
@@ -217,21 +221,11 @@ public class NPC2 : MonoBehaviour, IObserver
             if (orderSlotLists.Count == 0)
             {
                 getProduct = true;                
-                scoreManager.AddScore();
+                scoreManager.AddScore(transform.position); // FIX:implement on getting score base on current Mood Value
+                GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
+                m_HappyVFX.transform.parent = transform;
             }
-            //if (Inventory.instance.HasItem(orderItem))      //  check if the player has the product that npc wants or not          
-            //{
-            //    Inventory.instance.RemoveItem(orderItem);   // remove the given item from player's inventory
-            //    getProduct = true;                  // npc gets product
-            //    orderBubble.SetActive(false);       // hide UI
-            //    ScoreManager.instance.AddScore();   // add score for player
 
-
-            //}
-            //else
-            //{
-            //    //print("SORRY, I HAVEN'T MADE IT YET");
-            //}
         }
     }
 
@@ -252,7 +246,7 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         yield return new WaitForSeconds(3);
         // random total of things to order (for now let's just random between 1 and 2)
-        int orderNumbers = 2/*Random.Range(1, 2)*/;  
+        int orderNumbers = Random.Range(1, 3);  // npc will order 1 or 2 things (3 is the exclusive)
         
         for (int i = 0; i < orderNumbers; i++)
         {
@@ -266,18 +260,7 @@ public class NPC2 : MonoBehaviour, IObserver
         }
         // disable "..." text;
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; 
-        isWaiting = true;
-
-        //yield return new WaitForSeconds(3);
-        //orderItem = itemLists[Random.Range(0, itemLists.Length)];   // Random order items for npc to order player
-        //orderBubble.transform.GetChild(1).GetComponent<Image>().sprite = orderItem.itemSprite;  // set order image
-        //orderBubble.transform.GetChild(1).GetComponent<Image>().enabled = true;     // enable order image 
-
-        //orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; // disable "..." text;
-
-        ////itemImage.SetActive(true);   // enable item image on npc's order
-        ////thinkingText.SetActive(false);
-        //isWaiting = true;
+        isWaiting = true;        
     }
 
     // To call Namwan to give drink water to npc
@@ -300,8 +283,8 @@ public class NPC2 : MonoBehaviour, IObserver
 
     public void ResetMoodBar()
     {
-        currentEB = maxEB;
-        UpdateMoodBar(currentEB, maxEB);
+        currentMV = maxMV;
+        UpdateMoodBar(currentMV, maxMV);
     }
 
     public void DecreaseMoodBar()
@@ -310,10 +293,10 @@ public class NPC2 : MonoBehaviour, IObserver
             return;
 
         // decreasing emotion value as the time goes by
-        currentEB -= moodDecSpeed * Time.deltaTime;
-        UpdateMoodBar(currentEB, maxEB);
+        currentMV -= moodDecSp * Time.deltaTime;
+        UpdateMoodBar(currentMV, maxMV);
 
-        if (currentEB <= 0)
+        if (currentMV <= 0)
         {
             isUpset = true;
         }
@@ -326,10 +309,10 @@ public class NPC2 : MonoBehaviour, IObserver
     }
 
     // countdown when the character start praying
-    public void Praying()
-    {        
-        prayingTime -= Time.deltaTime;
-    }
+    //public void Praying()
+    //{        
+    //    prayingTime -= Time.deltaTime;
+    //}
 
     public void UpdateMoodBar(float currentValue, float maxValue)
     {
@@ -358,7 +341,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public void NormalEffect()
     {
         sprite.color = Color.white;
-        moodDecSpeed = tempMoodDecSp; 
+        moodDecSp = tempMoodDecSp; 
         //print("TODAY IS A GOOD DAY, EH?");
     }
 
@@ -371,7 +354,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public void SunnyEffect()
     {
         sprite.color = Color.red;
-        moodDecSpeed = 1;
+        moodDecSp = 1;
         //print("ITS SO DAMN HOT MANN");
     }
 
@@ -394,12 +377,11 @@ public class NPC2 : MonoBehaviour, IObserver
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Vector3 position = transform.position + transOffset;
-        Gizmos.DrawLine(position, position + Vector3.right * detectLength);
-        Gizmos.DrawLine(position, position + Vector3.up * detectLength);
+        Gizmos.color = Color.red;        
+        Gizmos.DrawLine(transform.position, direction * detectLength);
+        Gizmos.DrawLine(transform.position, transform.up);
     }
 
     void OnWeatherChange()
@@ -418,10 +400,24 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
-    public void OnNotify(Action action)
-    {
-
+    public void OnGettingProduct()
+    {        
+        isWaiting = false;
+        takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
+        SwitchState(prayState);
     }
+
+    //public IEnumerator OnGettingProduct(float waitTime)
+    //{        
+    //    GameObject m_ScorePopup = Instantiate(scorePopup, transform);
+    //    m_ScorePopup.transform.parent = transform;
+    //    yield return new WaitForSeconds(waitTime);
+    //    print("STROP");
+    //    StopAllCoroutines();
+    //    isWaiting = false;
+    //    takenOrderSpot.GetComponent<OrderSpot>().isFree = true;        
+    //    SwitchState(prayState); 
+    //}    
 
     public void OnNotify(WeatherType weather)
     {
@@ -447,6 +443,7 @@ public class NPC2 : MonoBehaviour, IObserver
     // animate character based on each conditions
     void Animate()
     {
+        animator.SetFloat("currentMood", currentMV);
         animator.SetBool("isMoving", isMoving);
         animator.SetFloat("moveX", direction.x);
         animator.SetFloat("moveY", direction.y);
@@ -455,7 +452,10 @@ public class NPC2 : MonoBehaviour, IObserver
     void Flip()
     {
         if (!isMoving)
+        {
             return;
+        }
+            
 
         Vector3 scale = transform.localScale;
         scale.x *= -1;

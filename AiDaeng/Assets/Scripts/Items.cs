@@ -7,4 +7,5 @@ public class Items : ScriptableObject
 {
     public string itemName;    
     public Sprite itemSprite;
+    public bool isCompleted;
 }

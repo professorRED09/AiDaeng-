@@ -10,7 +10,7 @@ public class NPC_Manager2 : MonoBehaviour
     [SerializeField] float currentSpawnTimer;
     private bool isTimeout = false;
 
-    public GameObject npcPrefab;
+    public List<GameObject> npcPrefabs;
     public GameObject spawnPoint; // a position to spawn npc
 
     [Header("Waypoints")]
@@ -67,8 +67,9 @@ public class NPC_Manager2 : MonoBehaviour
 
     private void SpawnNPCs()
     {
-        // if npc is standing on the spawn waypoint, don't spawn 
-        GameObject npc = Instantiate(npcPrefab, spawnPoint.transform.position, Quaternion.identity);
+        // FIX:if npc is standing on the spawn waypoint, don't spawn 
+        GameObject npc = Instantiate(npcPrefabs[Random.Range(0,npcPrefabs.Count)], spawnPoint.transform.position, Quaternion.identity);
+        //GameObject npc = Instantiate(npcPrefab, spawnPoint.transform.position, Quaternion.identity);
         NPC2 npcMovement = npc.GetComponent<NPC2>();
         if (npcMovement != null)
         {
