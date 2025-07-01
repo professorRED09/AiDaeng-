@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: "\u0E19\u0E49\u0E33\u0E2D\u0E1A"
   m_EditorClassIdentifier: 
   itemName: PerfumeWater
-  itemSprite: {fileID: 23267520, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
+  itemSprite: {fileID: 21300000, guid: f99a8fd99d6a5ff47aca88c6f4a0bf9d, type: 3}
+  isCompleted: 0

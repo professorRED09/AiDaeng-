@@ -38,4 +38,9 @@ public class Tutorial : MonoBehaviour
         currentIndex -= 1;
         StartCoroutine(ChangePage(currentIndex));
     }
+
+    public void OnBackButton()
+    {
+        gameObject.SetActive(false);
+    }
 }
