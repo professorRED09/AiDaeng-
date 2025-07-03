@@ -85,7 +85,7 @@ public class GameManager : Subject/*, IObserver*/
     public void ShowResult()
     {        
         if (isGameover == true)
-            return;        
+            return;
         resultPanel.SetActive(true);
         musicManager.PlayResultMusic(scoreManager.StarCount());
         // if player's score is at least pass 1-star goal, inform them that they pass the level

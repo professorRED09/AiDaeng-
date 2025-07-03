@@ -832,6 +832,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoodBar
       objectReference: {fileID: 0}
+    - target: {fileID: 5232628990870942591, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5232628990870942591, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5232628990870942591, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

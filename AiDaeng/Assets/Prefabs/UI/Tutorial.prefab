@@ -190,7 +190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4864432370613054644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1327,13 +1327,17 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 47.16
       objectReference: {fileID: 0}
+    - target: {fileID: 1782940122584840499, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
+      propertyPath: videoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 3cda9eb8e7f337e438e95c7219f38c01, type: 3}
     - target: {fileID: 2097057047150402986, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_Name
       value: NPC Mood
       objectReference: {fileID: 0}
     - target: {fileID: 2097057047150402986, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2242102003689336380, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1459,17 +1463,21 @@ PrefabInstance:
       propertyPath: sentences.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1782940122584840499, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
+      propertyPath: videoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 012e4e76fb4ae8e4083b245e18bf2d0f, type: 3}
     - target: {fileID: 2097057047150402986, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_Name
       value: BasicControls
       objectReference: {fileID: 0}
     - target: {fileID: 2097057047150402986, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4222699929957512673, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_text
-      value: WASD
+      value: "\u0E04\u0E25\u0E34\u0E01\u0E17\u0E35\u0E48\u0E07\u0E32\u0E19\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E43\u0E2B\u0E49\u0E15\u0E31\u0E27\u0E25\u0E30\u0E04\u0E23\u0E02\u0E2D\u0E07\u0E04\u0E38\u0E13\u0E40\u0E14\u0E34\u0E19\u0E44\u0E1B\u0E17\u0E33\u0E07\u0E32\u0E19\u0E19\u0E31\u0E49\u0E19\n\u0E07\u0E32\u0E19\u0E17\u0E35\u0E48\u0E2A\u0E32\u0E21\u0E32\u0E23\u0E16\u0E17\u0E33\u0E44\u0E14\u0E49\u0E08\u0E30\u0E21\u0E35\u0E01\u0E32\u0E23\u0E40\u0E19\u0E49\u0E19\u0E41\u0E2A\u0E14\u0E07\u0E43\u0E2B\u0E49\u0E40\u0E2B\u0E47\u0E19"
       objectReference: {fileID: 0}
     - target: {fileID: 4222699929957512673, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -1590,17 +1598,30 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u0E01\u0E32\u0E23\u0E1C\u0E48\u0E32\u0E19\u0E14\u0E48\u0E32\u0E19"
       objectReference: {fileID: 0}
+    - target: {fileID: 1046063258160770673, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1046063258160770673, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 411
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782940122584840499, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
+      propertyPath: videoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 5f4247433dfa4d5429d7bd95fa1efc85, type: 3}
     - target: {fileID: 2097057047150402986, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_Name
       value: GameObjective
       objectReference: {fileID: 0}
     - target: {fileID: 2097057047150402986, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4222699929957512673, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_text
-      value: "\u0E1C\u0E48\u0E32\u0E19\u0E14\u0E48\u0E32\u0E19"
+      value: "\u0E1C\u0E49\u0E39\u0E40\u0E25\u0E48\u0E19\u0E08\u0E33\u0E40\u0E1B\u0E47\u0E19\u0E15\u0E49\u0E2D\u0E07\u0E17\u0E33\u0E41\u0E15\u0E49\u0E21\u0E43\u0E2B\u0E49\u0E44\u0E14\u0E49\u0E2D\u0E22\u0E48\u0E32\u0E07\u0E19\u0E49\u0E2D\u0E22\u0E16\u0E36\u0E07\u0E23\u0E30\u0E14\u0E31\u0E1A
+        1 \u0E02\u0E31\u0E19 \u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E1B\u0E25\u0E14\u0E25\u0E47\u0E2D\u0E01\u0E44\u0E1B\u0E22\u0E31\u0E07\u0E14\u0E48\u0E32\u0E19\u0E16\u0E31\u0E14\u0E44\u0E1B"
       objectReference: {fileID: 0}
     - target: {fileID: 4222699929957512673, guid: 682976554fe4ae8428a544c123eb0c09, type: 3}
       propertyPath: m_HorizontalAlignment
