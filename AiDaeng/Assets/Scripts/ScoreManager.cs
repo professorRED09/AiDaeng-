@@ -10,12 +10,13 @@ public class ScoreManager : MonoBehaviour
     public Slider scoreBar;
     public TMP_Text scoreText;
     public GameObject scorePopupPrefab;
+    public GameObject[] stars;
 
     [Header("Setting")]
     public AudioClip addScoreSFX;
-    [SerializeField] float oneStarScore;
-    [SerializeField] float twoStarsScore;    
-    [SerializeField] float threeStarsScore;    
+    //[SerializeField] float oneStarScore;
+    //[SerializeField] float twoStarsScore;    
+    //[SerializeField] float threeStarsScore;    
     private AudioSource audioSource;
     
     [SerializeField] float maxScore;
@@ -38,30 +39,54 @@ public class ScoreManager : MonoBehaviour
     {
         GameObject m_scorePopup = Instantiate(scorePopupPrefab, new Vector2(transform.x + 1.2f, transform.y + 1.9f), Quaternion.identity);
         m_scorePopup.GetComponent<ScorePopup>().DisplayScoreText(1);
+
         audioSource.clip = addScoreSFX;
         audioSource.Play();
+
         currentScore += 1;
+        UpdateScoreBar(currentScore, maxScore);       
+        
     }
+
+    
+
+    
 
     public void UpdateScoreBar(float currentValue, float maxValue)
     {
         scoreBar.value = currentValue / maxValue;
         scoreText.text = currentScore.ToString();
+
+        if (StarCount() >= 3)
+        {
+            stars[2].GetComponent<Animator>().SetTrigger("GetStar");
+            Debug.Log("3 STARS");
+        }
+        else if (StarCount() >= 2)
+        {
+            stars[1].GetComponent<Animator>().SetTrigger("GetStar");
+            Debug.Log("2 STARS");
+        }
+        else if (StarCount() >= 1)
+        {
+            stars[0].GetComponent<Animator>().SetTrigger("GetStar");
+            Debug.Log("1 STAR");
+        }
     }
 
     // convert current score to number of star
     public float StarCount()
     {
-        if(currentScore >= threeStarsScore)
-        {
+        if(currentScore >= maxScore)
+        {            
             return 3;
         }
-        else if (currentScore >= twoStarsScore)
-        {
-            return 2;
+        else if (currentScore >= (2*maxScore/3))
+        {            
+            return 2;            
         }
-        else if (currentScore >= oneStarScore)
-        {
+        else if (currentScore >= (maxScore/3))
+        {            
             return 1;
         }
         else

@@ -4,12 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class GameManager : Subject, IObserver
+public class GameManager : Subject/*, IObserver*/
 {
     [Header("UI")]
     [SerializeField] GameObject resultPanel;
     [SerializeField] TMP_Text resultText;
-    [SerializeField] TMP_Text bowlText;
+    [SerializeField] GameObject resultStar;
     [SerializeField] GameObject StartNotif;
     [SerializeField] GameObject ClosedNotif;
 
@@ -83,44 +83,49 @@ public class GameManager : Subject, IObserver
     }
 
     public void ShowResult()
-    {
+    {        
         if (isGameover == true)
             return;
-
         resultPanel.SetActive(true);
         musicManager.PlayResultMusic(scoreManager.StarCount());
         // if player's score is at least pass 1-star goal, inform them that they pass the level
         if (scoreManager.StarCount() >= 1)
         {
-            resultText.text = "ผ่านด่านจ้า!";
-            bowlText.text = $"คุณได้ {scoreManager.StarCount()} ถ้วย!";
-
-            ////check player's score to give them bowl up to their score
-            //if (scoreManager.StarCount() >= 3)
-            //{
-            //    bowlText.text = "คุณได้"
-            //}
-            //else if (scoreManager.StarCount() >= 2)
-            //{
-
-            //}
-            //else
-            //{
-
-            //}
+            resultText.text = "ผ่านด่านจ้า!";            
         }
         else
         {
-            resultText.text = "ลองใหม่นะ";
-            bowlText.text = "ว้าย ม่ายถ้วย";
-        }        
+            resultText.text = "ลองใหม่นะ";            
+        }
+        ResultStar();
         isGameover = true;
-    }    
-
-    public void OnNotify(WeatherType weather)
+    } 
+    
+    void ResultStar()
     {
-
+        Animator m_Animator = resultStar.GetComponent<Animator>();
+        if (scoreManager.StarCount() >= 3)
+        {
+            m_Animator.Play("3Stars");
+        }
+        else if (scoreManager.StarCount() >= 2)
+        {
+            m_Animator.Play("2Stars");
+        }
+        else if (scoreManager.StarCount() >= 1)
+        {
+            m_Animator.Play("1Star");
+        }
+        else
+        {
+            m_Animator.Play("Lose");
+        }
     }
+
+    //public void OnNotify(WeatherType weather)
+    //{
+
+    //}
     
 
 

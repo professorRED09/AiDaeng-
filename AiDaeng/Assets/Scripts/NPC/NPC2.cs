@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private float maxMV = 10f;   // MV => mood value
     private float currentMV;
 
-    private float moodDecSp = 1f;      // decreasing speed of mood value, assign as public for adjusting in other script
+    private float moodDecSp = 0.4f;      // decreasing speed of mood value, assign as public for adjusting in other script
     private float tempMoodDecSp;
     //public float prayingTime = 2;
     private float speed = 5f;
@@ -210,12 +210,16 @@ public class NPC2 : MonoBehaviour, IObserver
                 {
                     // remove the given item from player's inventory
                     Inventory.instance.RemoveItem(m_OrderItem);
-
+                    currentMV += maxMV/3.5f;
                     // remove the given item from npc's order panel and destroy its gameobject;
                     orderSlotLists[i].SetActive(false);
                     orderSlotLists.Remove(orderSlotLists[i]);
-                    
-                }                
+
+                }
+                else
+                {
+                    NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+                }    
             }
 
             if (orderSlotLists.Count == 0)
