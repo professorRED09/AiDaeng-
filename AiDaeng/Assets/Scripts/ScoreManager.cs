@@ -27,13 +27,7 @@ public class ScoreManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         currentScore = 0;   //initially set score to 0 when the game start        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateScoreBar(currentScore, maxScore);
-    }
+    }    
 
     public void AddScore(Vector3 transform)
     {
@@ -46,11 +40,7 @@ public class ScoreManager : MonoBehaviour
         currentScore += 1;
         UpdateScoreBar(currentScore, maxScore);       
         
-    }
-
-    
-
-    
+    } 
 
     public void UpdateScoreBar(float currentValue, float maxValue)
     {
