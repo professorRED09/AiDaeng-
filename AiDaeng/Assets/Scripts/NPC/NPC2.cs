@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class NPC2 : MonoBehaviour, IObserver
 {
@@ -10,7 +11,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private float maxMV = 10f;   // MV => mood value
     private float currentMV;
 
-    private float moodDecSp = 0.4f;      // decreasing speed of mood value, assign as public for adjusting in other script
+    private float moodDecSp = 5f;      // decreasing speed of mood value, assign as public for adjusting in other script
     private float tempMoodDecSp;
     //public float prayingTime = 2;
     private float speed = 5f;
@@ -23,7 +24,10 @@ public class NPC2 : MonoBehaviour, IObserver
 
     [Header("UI")]
     [SerializeField] GameObject orderBubble;
-    [SerializeField] Slider moodBar;
+    //[SerializeField] GameObject moodBar;
+    [SerializeField] Image _moodBarFill;
+    [SerializeField] Animator _emoji;
+
     [SerializeField] GameObject thinkingText;
     //[SerializeField] GameObject itemImage;
     [SerializeField] Items[] itemLists;
@@ -92,7 +96,7 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         // set initial value       
         currentMV = maxMV;
-        UpdateMoodBar(currentMV, maxMV);
+        UpdateMoodBar();
 
         // set initial state to begin with
         currentState = arriveState;
@@ -251,7 +255,8 @@ public class NPC2 : MonoBehaviour, IObserver
         yield return new WaitForSeconds(3);
         // random total of things to order (for now let's just random between 1 and 2)
         int orderNumbers = Random.Range(1, 3);  // npc will order 1 or 2 things (3 is the exclusive)
-        
+        isClickable = true;
+
         for (int i = 0; i < orderNumbers; i++)
         {
             //random order
@@ -269,14 +274,13 @@ public class NPC2 : MonoBehaviour, IObserver
 
     // To call Namwan to give drink water to npc
     void OnMouseOver()
-    {
-        if (Input.GetMouseButton(1) && namwan != null)
-        {
+    {        
+        if (Input.GetMouseButtonDown(1) && namwan != null && !isMoving && namwan.canServe)
+        {            
             namwan.MoveToWaypoint(transform);// called Namwan to give some water cups for this npc
             namwan.targetNPC = this;
         }
     }
-
     
     public void SwitchState(NPC_BaseState state)
     {
@@ -288,7 +292,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public void ResetMoodBar()
     {
         currentMV = maxMV;
-        UpdateMoodBar(currentMV, maxMV);
+        UpdateMoodBar();
     }
 
     public void DecreaseMoodBar()
@@ -298,7 +302,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
         // decreasing emotion value as the time goes by
         currentMV -= moodDecSp * Time.deltaTime;
-        UpdateMoodBar(currentMV, maxMV);
+        UpdateMoodBar();
 
         if (currentMV <= 0)
         {
@@ -312,15 +316,25 @@ public class NPC2 : MonoBehaviour, IObserver
         orderBubble.SetActive(false);
     }
 
-    // countdown when the character start praying
-    //public void Praying()
-    //{        
-    //    prayingTime -= Time.deltaTime;
-    //}
-
-    public void UpdateMoodBar(float currentValue, float maxValue)
+    public void UpdateMoodBar()
     {
-        moodBar.value = currentValue / maxValue;
+        float targetFillAmount = currentMV / maxMV;
+        _moodBarFill.fillAmount = targetFillAmount;
+        //_moodBarFill.DOFillAmount(targetFillAmount, 0.5f);
+
+        if(currentMV >= maxMV * 0.67)
+        {
+            _emoji.Play("Happy");
+        }else if (currentMV >= maxMV * 0.33)
+        {
+            _emoji.Play("Edgy");
+        }
+        else
+        {
+            _emoji.Play("Angry");
+        }
+
+        //_moodBarFill.DOColor(_colorGradient.Evaluate(targetFillAmount), 0.5f);        
     }
 
     
@@ -362,12 +376,12 @@ public class NPC2 : MonoBehaviour, IObserver
         //print("ITS SO DAMN HOT MANN");
     }
 
-    public void RageMood()
-    {
-        //LeaveScene();
-
+    public void OnRageMood()
+    {        
+        // make it go above an inch so it won't overlap with the other
         direction = Vector3.left;
         transform.position += speed * Time.deltaTime * direction;
+
         if (transform.position.x <= -10)
         {
             LeaveScene();
@@ -409,19 +423,7 @@ public class NPC2 : MonoBehaviour, IObserver
         isWaiting = false;
         takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
         SwitchState(prayState);
-    }
-
-    //public IEnumerator OnGettingProduct(float waitTime)
-    //{        
-    //    GameObject m_ScorePopup = Instantiate(scorePopup, transform);
-    //    m_ScorePopup.transform.parent = transform;
-    //    yield return new WaitForSeconds(waitTime);
-    //    print("STROP");
-    //    StopAllCoroutines();
-    //    isWaiting = false;
-    //    takenOrderSpot.GetComponent<OrderSpot>().isFree = true;        
-    //    SwitchState(prayState); 
-    //}    
+    } 
 
     public void OnNotify(WeatherType weather)
     {

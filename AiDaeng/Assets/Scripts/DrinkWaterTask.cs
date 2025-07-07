@@ -23,8 +23,7 @@ public class DrinkWaterTask : MonoBehaviour
         // when players click on this task, the character will move to this task  
         if (waypoint != null && namwan != null)
         {
-            namwan.MoveToWaypoint(waypoint);
-            Debug.Log("MOVING TO DRINKING WATER FILLER");
+            namwan.MoveToWaypoint(waypoint);            
         }
     }
 }

@@ -31,13 +31,10 @@ public class Task : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         mixturePanel = FindObjectOfType<MixturePanel>();
-
-        //if (soundFX == null) return;
-        //audioSource.clip = soundFX;
     }
 
     IEnumerator DoTask()
-    {
+    {        
         if (isFirstTaskOfTheProduct)
         {            
             mixturePanel.OpenPanel();
@@ -45,13 +42,14 @@ public class Task : MonoBehaviour
             mixturePanel.UpdateTempItem(goalItem);
 
         }
-
+        player.GetComponent<Animator>().SetBool("isDoingTask", true);
         audioSource.clip = taskSFX;
         audioSource.Play(); // play soundFX
         yield return new WaitForSeconds(0.7f);
-        
-                            // Add code to pop up a mixture window, maybe check if the mixture is showing already or not
-                            // if mixture window haven't been poped up yet; show it
+        player.GetComponent<Animator>().SetBool("isDoingTask", false);
+
+        // Add code to pop up a mixture window, maybe check if the mixture is showing already or not
+        // if mixture window haven't been poped up yet; show it
 
         if (isRequiredItem)
         {
@@ -59,6 +57,7 @@ public class Task : MonoBehaviour
             if(mixturePanel.tempItem == requiredItem)
             {
                 mixturePanel.UpdateTempItem(goalItem);
+                
                 //if (goalItem.isCompleted)
                 //{
                 //    //add it to inventory
@@ -91,9 +90,9 @@ public class Task : MonoBehaviour
             //    //}
             //}
         }
-        else
-        {            
-            //Inventory.instance.AddItem(goalItem);
+        else if (!isFirstTaskOfTheProduct)
+        {
+            Inventory.instance.AddItem(goalItem);
         }
        
     }

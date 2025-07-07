@@ -14,6 +14,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject scorePopupPrefab;
     [SerializeField] private GameObject[] stars;
 
+    private NPC_Manager2 npcManager;
+    private float score = 1f;
+
     [Header("Setting")]
     public AudioClip addScoreSFX;   
     private AudioSource _audioSource;    
@@ -21,13 +24,24 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] float _fillSpeed;
     [SerializeField] private float _currentScore;
 
+    private void Awake()
+    {
+        npcManager = FindObjectOfType<NPC_Manager2>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        _maxScore = npcManager.maxTime * score;
         _audioSource = GetComponent<AudioSource>();
         //initially set score to 0 when the game start
         _currentScore = 0;           
-    }    
+    }
+
+    //private void Update()
+    //{
+    //    UpdateScoreBar(_currentScore, _maxScore);
+    //}
 
     public void AddScore(Vector3 transform)
     {
@@ -37,7 +51,7 @@ public class ScoreManager : MonoBehaviour
         _audioSource.clip = addScoreSFX;
         _audioSource.Play();
 
-        _currentScore += 1;
+        _currentScore += score;
         UpdateScoreBar(_currentScore, _maxScore);       
         
     } 

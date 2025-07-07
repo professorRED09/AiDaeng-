@@ -6,26 +6,28 @@ using TMPro;
 public class Namwan : MonoBehaviour
 {
     [Header("Ref")]
-    public List<Transform> waypoints;
+    public List<Transform> waypoints;   // [0] is the drinking water waypoint
     public Transform currentWaypoint;
     public Queue<Transform> pathQueue = new Queue<Transform>();   // Waypoints to visit
-    public Vector3 direction;
+    private Vector3 direction;
     public TMP_Text serveAmountText;
     public NPC2 targetNPC;
 
+    //[SerializeField] bool isRefilling = false;
     [Header("Setting")]
-    public float moveSpeed = 5f;    // Movement speed
-    public float fillSpeed;    
+    public float moveSpeed = 5f;    // Movement speed      
     
     [SerializeField] private bool isMoving = false;
-
-    public float maxServeAmount; // Max amount of water cups that Namwan can carries
+    public bool canServe = true;
+    [SerializeField] float _maxServeAmount = 4f; // Max amount of water cups that Namwan can carries
     public float serveAmount;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        serveAmount = maxServeAmount;
+        //set initial serve amount
+        serveAmount = _maxServeAmount;
         serveAmountText.text = serveAmount.ToString();
     }
 
@@ -34,67 +36,81 @@ public class Namwan : MonoBehaviour
     {
         if (isMoving && pathQueue.Count > 0)
         {
-            MoveToNextWaypoint();            
+            MoveToNextWaypoint();
         }
-        else if (pathQueue.Count <= 0 && targetNPC != null)
+        else
         {
             isMoving = false;
-            StartCoroutine(GiveDrinkWater());
         }
+        //else if (isMoving && pathQueue.Count <= 0 && targetNPC != null)
+        //{
+        //    isMoving = false;
+        //    StartCoroutine(GiveDrinkWater());
+        //}
 
         // check if Namwan is at a drink water waypoint, if yes, then fill water
-        if (transform.position == waypoints[0].position) {
-            if (serveAmount >= maxServeAmount) return;
-            else
-            {
-                StartCoroutine(FillDrinkWater());
-            }
-        }    
+        if (transform.position == waypoints[0].position)
+        {                      
+            RefillDrinkWater();
+        }
         
+
+        if (serveAmount < 1)
+        {
+            canServe = false;
+        }
+        else
+        {
+            canServe = true;
+        }
+    }
+    void RefillDrinkWater()
+    {        
+        if (serveAmount < _maxServeAmount)
+        {
+            //audioSource.Play(); // play soundFX
+            serveAmount += 1 * Time.deltaTime;
+            serveAmountText.text = ((int)serveAmount).ToString();
+        }        
     }
 
-    //void GGiveDrinkWater()
+    //private void OnCollisionEnter2D(Collision2D collision)
     //{
-    //    if (targetNPC == null) return;
-    //    if()
+    //    if(collision.collider.CompareTag("DrinkWater"))
+    //    {
+    //        StartCoroutine(RefillDrinkWater());
+    //    }
     //}
+
     IEnumerator GiveDrinkWater()
     {
-        if (serveAmount > 0)
+        isMoving = false;
+        if (serveAmount >= 1 /*&& targetNPC != null*/)
         {
             targetNPC.GetComponent<NPC2>().ResetMoodBar();      // reset npc mood
             serveAmount -= 1;                                   // deduct drink water from Namwan
-            serveAmountText.text = serveAmount.ToString();      // update on UI
-            targetNPC = null;                                   // set target to null            
+            serveAmountText.text = ((int)serveAmount).ToString();         // update on UI
+            targetNPC = null;                                   // set target to null
+            Invoke(nameof(BackToRefill), 4f);
         }
         else
         {
             //print("YOU DON'T HAVE ANY DRINKS LEFT!");
-        }        
-        yield return new WaitForSeconds(1f);
+        }
+        //yield return new WaitForSeconds(1f);
+        yield return null;
     }
 
-    IEnumerator FillDrinkWater()
+    void BackToRefill()
     {
-        if(serveAmount < maxServeAmount)
-        {
-            //audioSource.Play(); // play soundFX
-            yield return new WaitForSeconds(fillSpeed);
-            serveAmount += 1;
-            serveAmountText.text = serveAmount.ToString();
-        }        
-    }
-
-    private void OnMouseEnter()
-    {        
-        print("MOUSE OVER NAMWAN");
+        if (isMoving) return;
+        MoveToWaypoint(waypoints[0]);        
     }
 
     public void MoveToWaypoint(Transform targetWaypoint)
     {
         if (isMoving || targetWaypoint == null)
             return;
-
         // Find the nearest waypoint
         Transform nearestWaypoint = GetNearestWaypoint(targetWaypoint); 
 
@@ -103,7 +119,7 @@ public class Namwan : MonoBehaviour
             // Generate the path (nearest waypoint -> intermediate waypoints -> target)
             List<Transform> path = GetPath(currentWaypoint, nearestWaypoint);
             pathQueue = new Queue<Transform>(path);
-            isMoving = true;
+            isMoving = true;            
         }
     }
 
@@ -113,20 +129,21 @@ public class Namwan : MonoBehaviour
         Transform nextWaypoint = pathQueue.Peek();
         direction = (nextWaypoint.position - transform.position).normalized;
 
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        transform.position += moveSpeed * Time.deltaTime * direction;
 
         // Check if player reached the waypoint, then continue to the next one
         if (Vector3.Distance(transform.position, nextWaypoint.position) < 0.1f)
         {
             transform.position = nextWaypoint.position; // Snap to waypoint
             currentWaypoint = nextWaypoint;
-            pathQueue.Dequeue(); // Remove the visited waypoint            
+            pathQueue.Dequeue(); // Remove the visited waypoint
+
+            if (pathQueue.Count <= 0 && targetNPC != null)
+            {
+                StartCoroutine(GiveDrinkWater());
+            }
         }
-        //// check if player reached the final waypoint 
-        //if (Vector3.Distance(transform.position, pathQueue[]) < 0.1f)
-        //{
-        //    transform.position = nextWaypoint.position; // Snap to waypoint
-        //}
+        
     }
 
     // Generate the path from startWaypoint to targetWaypoint 

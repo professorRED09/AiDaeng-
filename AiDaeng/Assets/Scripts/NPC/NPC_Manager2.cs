@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class NPC_Manager2 : MonoBehaviour
 {
-    private float spawnTimer; // a spawn timer
-    [SerializeField] float maxTime; // a longest period to spawn the next npc 
+    //private float spawnTimer; // a spawn timer
+    public float maxTime; // a longest period to spawn the next npc 
     [SerializeField] float minTime; // a shortest period to spawn the next npc
     [SerializeField] float currentSpawnTimer;
+    [SerializeField] Items[] itemLists;
     private bool isTimeout = false;
 
     public List<GameObject> npcPrefabs;

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3094638101755569538}
   - component: {fileID: 1415039440803652099}
-  - component: {fileID: 727528451751542441}
   - component: {fileID: 5957788296577988501}
   - component: {fileID: 1114292123285399056}
   - component: {fileID: 5180678393542439760}
@@ -35,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1415039440803652099
 SpriteRenderer:
@@ -89,35 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &727528451751542441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8504067682954403956}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2f576f40b3a544197a7e5d952dbaaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  currentWaypointIndex: 5
-  reachWayPoint: 0
-  isMoving: 0
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &5957788296577988501
 MonoBehaviour:
   m_ObjectHideFlags: 0

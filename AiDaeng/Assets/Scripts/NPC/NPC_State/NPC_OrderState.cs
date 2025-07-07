@@ -4,8 +4,7 @@ public class NPC_OrderState : NPC_BaseState
 {
     public override void EnterState(NPC2 npc)
     {
-        npc.isMoving = false;
-        npc.isClickable = true;
+        npc.isMoving = false;        
         npc.isWaiting = false;  
         npc.ThinkOfOrder();     //Show bubble ui
         //Debug.Log("ENTER ORDER STATE");
