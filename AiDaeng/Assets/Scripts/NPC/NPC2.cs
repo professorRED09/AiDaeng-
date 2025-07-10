@@ -11,10 +11,10 @@ public class NPC2 : MonoBehaviour, IObserver
     private float maxMV = 10f;   // MV => mood value
     private float currentMV;
 
-    private float moodDecSp = 5f;      // decreasing speed of mood value, assign as public for adjusting in other script
+    private float moodDecSp = 0.4f;      // decreasing speed of mood value, assign as public for adjusting in other script
     private float tempMoodDecSp;
     //public float prayingTime = 2;
-    private float speed = 5f;
+    private readonly float speed = 5f;
     public GameObject happyVFX;
     //public GameObject scorePopup;
  
@@ -70,7 +70,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
     private Animator animator;
     private NPC_Manager2 npcManager;
-    bool isFacingRight = true;
+    private bool isFacingRight = true;
     private Vector3 direction;
 
     public Transform[] orderSpots;
@@ -80,7 +80,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private ScoreManager scoreManager;
 
     private void Awake()
-    {
+    {        
         sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>(); 
 
@@ -135,8 +135,7 @@ public class NPC2 : MonoBehaviour, IObserver
         if (!isMoving)
         {
             DecreaseMoodBar();
-        }
-        
+        }        
 
         // check condition to flip the character sprite
         if (direction.x > 0 && !isFacingRight || direction.x < 0 && isFacingRight) 
@@ -203,6 +202,7 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         if (!isClickable)
             return;
+
         player.MoveToWaypoint(player.counterWP);
         if (player.isAtCounter)
         {
@@ -214,7 +214,13 @@ public class NPC2 : MonoBehaviour, IObserver
                 {
                     // remove the given item from player's inventory
                     Inventory.instance.RemoveItem(m_OrderItem);
+
                     currentMV += maxMV/3.5f;
+                    if(currentMV > maxMV)
+                    {
+                        currentMV = maxMV;
+                    }
+
                     // remove the given item from npc's order panel and destroy its gameobject;
                     orderSlotLists[i].SetActive(false);
                     orderSlotLists.Remove(orderSlotLists[i]);
@@ -229,15 +235,13 @@ public class NPC2 : MonoBehaviour, IObserver
             if (orderSlotLists.Count == 0)
             {
                 getProduct = true;                
-                scoreManager.AddScore(transform.position); // FIX:implement on getting score base on current Mood Value
+                scoreManager.AddScore(transform.position, GetScoreBasedOnMood()); // FIX:implement on getting score base on current Mood Value
                 GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
                 m_HappyVFX.transform.parent = transform;
             }
 
         }
     }
-
-
 
     public void ThinkOfOrder()
     {
@@ -293,6 +297,8 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         currentMV = maxMV;
         UpdateMoodBar();
+        GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
+        m_HappyVFX.transform.parent = transform;
     }
 
     public void DecreaseMoodBar()
@@ -337,7 +343,24 @@ public class NPC2 : MonoBehaviour, IObserver
         //_moodBarFill.DOColor(_colorGradient.Evaluate(targetFillAmount), 0.5f);        
     }
 
-    
+    public float GetScoreBasedOnMood()
+    {        
+        if (currentMV >= maxMV * 0.67)
+        {
+            return scoreManager.baseScore;
+        }
+        else if (currentMV >= maxMV * 0.33)
+        {
+            return scoreManager.baseScore * 0.8f;
+        }
+        else
+        {
+            return scoreManager.baseScore * 0.5f;
+        }
+        
+    }
+
+
     public IEnumerator CheckOrderSpot()
     {
         for(int i = orderSpots.Length-1; i >= 0; i--)

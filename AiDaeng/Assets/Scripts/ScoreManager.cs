@@ -15,7 +15,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject[] stars;
 
     private NPC_Manager2 npcManager;
-    private float score = 1f;
+    public float baseScore = 1f;
 
     [Header("Setting")]
     public AudioClip addScoreSFX;   
@@ -32,7 +32,7 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _maxScore = npcManager.maxTime * score;
+        _maxScore = npcManager.maxTime * baseScore;
         _audioSource = GetComponent<AudioSource>();
         //initially set score to 0 when the game start
         _currentScore = 0;           
@@ -43,10 +43,10 @@ public class ScoreManager : MonoBehaviour
     //    UpdateScoreBar(_currentScore, _maxScore);
     //}
 
-    public void AddScore(Vector3 transform)
+    public void AddScore(Vector3 transform, float score)
     {
         GameObject m_scorePopup = Instantiate(scorePopupPrefab, new Vector2(transform.x + 1.2f, transform.y + 1.9f), Quaternion.identity);
-        m_scorePopup.GetComponent<ScorePopup>().DisplayScoreText(1);
+        m_scorePopup.GetComponent<ScorePopup>().DisplayScoreText(score);
 
         _audioSource.clip = addScoreSFX;
         _audioSource.Play();

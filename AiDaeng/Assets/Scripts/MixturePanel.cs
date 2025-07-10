@@ -8,6 +8,7 @@ public class MixturePanel : MonoBehaviour
     [Header("Setting")]
     public Items tempItem;
     private Image tempItemImage;
+    private AudioSource _audioSource;
 
     private bool isOpened;
     private Animator animator;    
@@ -15,13 +16,9 @@ public class MixturePanel : MonoBehaviour
     private void Awake()
     {        
         animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
         tempItemImage = transform.GetChild(0).GetComponent<Image>();        
-    }
-
-    private void Update()
-    {
-             
-    }
+    }   
 
     public void OpenPanel()
     {
@@ -46,6 +43,7 @@ public class MixturePanel : MonoBehaviour
             //enable "เสร็จแล้วจ้า!" text to inform player            
             transform.GetChild(1).gameObject.SetActive(true);
             tempItem = null;
+            _audioSource.Play();
             //if player don't do any task in time, hide it
             StartCoroutine(OnCompleteTask());
             
