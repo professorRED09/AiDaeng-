@@ -2,22 +2,36 @@ using UnityEngine;
 
 public class Weather_Sunny : Weather_BaseState
 {
+    private float _timer = 10f;
+    private float _currentTimer;
+
     public override void EnterState(WeatherManager weather)
     {
+        //play sunny atmosphere
         weather.anim.SetTrigger("isSunny");
-        weather.currentTimer = weather.timer;
+
+        _currentTimer = _timer;
+        //weather.currentTimer = weather.timer;
         //Debug.Log("Sunny STATE ENTRY");
     }
 
     public override void UpdateState(WeatherManager weather)
     {
-        weather.currentTimer -= Time.deltaTime; // countdown timer
-        if (weather.currentTimer <= 0)
+        _currentTimer -= Time.deltaTime; // countdown timer
+        if (_currentTimer <= 0)
         {
-            weather.anim.ResetTrigger("isSunny");            
+            weather.anim.ResetTrigger("isSunny");
+
             weather.SwitchState(weather.normalState);
         }
-            
+
+        //weather.currentTimer -= Time.deltaTime; // countdown timer
+        //if (weather.currentTimer <= 0)
+        //{
+        //    weather.anim.ResetTrigger("isSunny");            
+        //    weather.SwitchState(weather.normalState);
+        //}
+
 
         // if hit jackpot, change weather again
     }

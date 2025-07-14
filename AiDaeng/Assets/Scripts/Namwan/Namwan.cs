@@ -12,16 +12,23 @@ public class Namwan : MonoBehaviour
     private Vector3 direction;
     public TMP_Text serveAmountText;
     public NPC2 targetNPC;
-
-    //[SerializeField] bool isRefilling = false;
-    [Header("Setting")]
-    public float moveSpeed = 5f;    // Movement speed      
+    [SerializeField] NamwanInventory _inventory;
     
-    [SerializeField] private bool isMoving = false;
+    [Header("Setting")]
+    public float moveSpeed = 5f;    // Movement speed
+    
+    
+    private bool _isMoving = false;
     public bool canServe = true;
     [SerializeField] float _maxServeAmount = 4f; // Max amount of water cups that Namwan can carries
-    public float serveAmount;
-    
+    private float serveAmount;
+
+    public enum CurrentTask
+    {
+        DrinkWater, Umbrella
+    }
+
+    public CurrentTask currentTask;
 
     // Start is called before the first frame update
     void Start()
@@ -29,24 +36,23 @@ public class Namwan : MonoBehaviour
         //set initial serve amount
         serveAmount = _maxServeAmount;
         serveAmountText.text = serveAmount.ToString();
+
+        //set initial task
+        currentTask = CurrentTask.DrinkWater;
+        ChangeTask();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isMoving && pathQueue.Count > 0)
+        if (_isMoving && pathQueue.Count > 0)
         {
             MoveToNextWaypoint();
         }
         else
         {
-            isMoving = false;
+            _isMoving = false;
         }
-        //else if (isMoving && pathQueue.Count <= 0 && targetNPC != null)
-        //{
-        //    isMoving = false;
-        //    StartCoroutine(GiveDrinkWater());
-        //}
 
         // check if Namwan is at a drink water waypoint, if yes, then fill water
         if (transform.position == waypoints[0].position)
@@ -64,6 +70,21 @@ public class Namwan : MonoBehaviour
             canServe = true;
         }
     }
+
+    public void ChangeTask()
+    {
+        switch (currentTask)
+        {
+            case CurrentTask.DrinkWater:
+                _inventory.OnDrinkWaterTask();
+                break;
+            case CurrentTask.Umbrella:
+                _inventory.OnUmbrellaTask();
+                break;
+        }
+    }
+    
+
     void RefillDrinkWater()
     {        
         if (serveAmount < _maxServeAmount)
@@ -84,7 +105,7 @@ public class Namwan : MonoBehaviour
 
     IEnumerator GiveDrinkWater()
     {
-        isMoving = false;
+        _isMoving = false;
         if (serveAmount >= 1 /*&& targetNPC != null*/)
         {
             targetNPC.GetComponent<NPC2>().ResetMoodBar();      // reset npc mood
@@ -103,13 +124,13 @@ public class Namwan : MonoBehaviour
 
     void BackToRefill()
     {
-        if (isMoving) return;
+        if (_isMoving) return;
         MoveToWaypoint(waypoints[0]);        
     }
 
     public void MoveToWaypoint(Transform targetWaypoint)
     {
-        if (isMoving || targetWaypoint == null)
+        if (_isMoving || targetWaypoint == null)
             return;
         // Find the nearest waypoint
         Transform nearestWaypoint = GetNearestWaypoint(targetWaypoint); 
@@ -119,7 +140,7 @@ public class Namwan : MonoBehaviour
             // Generate the path (nearest waypoint -> intermediate waypoints -> target)
             List<Transform> path = GetPath(currentWaypoint, nearestWaypoint);
             pathQueue = new Queue<Transform>(path);
-            isMoving = true;            
+            _isMoving = true;            
         }
     }
 

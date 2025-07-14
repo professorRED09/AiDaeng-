@@ -10,9 +10,9 @@ public class WeatherManager : Subject
 
     [Header("Rainy")]
     public ParticleSystem rainFX;
-
-    public float timer;
-    public float currentTimer;
+    
+    private float weatherTimer;
+    private float currentWeatherTimer;
 
     //public bool Rainy;
     //public bool Sunny;
@@ -55,50 +55,5 @@ public class WeatherManager : Subject
 
         state.EnterState(this);
     }
-
-    //public void OnNotify(WeatherType weather)
-    //{
-
-    //}
-    //public void OnNotify(Action action)
-    //{
-    //    switch (action)
-    //    {
-    //        case (Action.StartTimerStop):
-
-    //            return;
-    //        default:
-    //            return;
-    //    }
-    //}
-
-    //public void OnNotify(WeatherType weather)
-    //{
-    //    switch (weather)
-    //    {
-    //        case (WeatherType.Rainy):
-    //            anim.SetTrigger("isRainy");
-    //            //SwitchState(rainyState);
-    //            return;
-
-    //        case (WeatherType.Normal):
-    //            anim.SetTrigger("isNormal");
-    //            //SwitchState(normalState);
-    //            return;
-
-    //        default:
-    //            return;
-    //    }
-    //}
-
-    //void OnEnable()
-    //{
-    //    weatherController.AddObserver(this);
-    //}
-
-    //void OnDisable()
-    //{
-    //    weatherController.RemoveObserver(this);
-    //}
 
 }

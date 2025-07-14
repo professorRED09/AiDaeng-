@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrinkWaterTask : MonoBehaviour
+public class UmbrellaTask : MonoBehaviour
 {
     [Header("Ref")]
     public Transform waypoint;              // The waypoint for this task
@@ -16,14 +16,16 @@ public class DrinkWaterTask : MonoBehaviour
     {
         namwan = FindObjectOfType<Namwan>(); // get reference from player script
         audioSource = GetComponent<AudioSource>();
-    } 
+    }
 
     private void OnMouseDown()
     {
         // when players click on this task, the character will move to this task  
         if (waypoint != null && namwan != null)
         {
-            namwan.MoveToWaypoint(waypoint);            
+            namwan.MoveToWaypoint(waypoint);
+            namwan.currentTask = Namwan.CurrentTask.Umbrella;
+            namwan.ChangeTask();
         }
     }
 }

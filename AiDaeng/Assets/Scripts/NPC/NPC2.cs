@@ -90,12 +90,14 @@ public class NPC2 : MonoBehaviour, IObserver
         npcManager = FindObjectOfType<NPC_Manager2>();
 
         scoreManager = FindObjectOfType<ScoreManager>();
+
+        // set initial value       
+        currentMV = maxMV;
     }
 
     void Start()
     {
-        // set initial value       
-        currentMV = maxMV;
+        
         UpdateMoodBar();
 
         // set initial state to begin with
