@@ -22,6 +22,7 @@ public class Namwan : MonoBehaviour
     public bool canServe = true;
     [SerializeField] float _maxServeAmount = 4f; // Max amount of water cups that Namwan can carries
     private float serveAmount;
+    private AudioSource _audioSource;
 
     public enum CurrentTask
     {
@@ -31,6 +32,12 @@ public class Namwan : MonoBehaviour
     public CurrentTask currentTask;
 
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
         //set initial serve amount
@@ -108,10 +115,11 @@ public class Namwan : MonoBehaviour
         _isMoving = false;
         if (serveAmount >= 1 /*&& targetNPC != null*/)
         {
-            targetNPC.GetComponent<NPC2>().ResetMoodBar();      // reset npc mood
-            serveAmount -= 1;                                   // deduct drink water from Namwan
+            targetNPC.GetComponent<NPC2>().ResetMoodBar();      
+            serveAmount -= 1;                                   
             serveAmountText.text = ((int)serveAmount).ToString();         // update on UI
             targetNPC = null;                                   // set target to null
+            _audioSource.Play();
             Invoke(nameof(BackToRefill), 4f);
         }
         else

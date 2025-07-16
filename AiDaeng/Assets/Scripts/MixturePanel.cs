@@ -37,6 +37,7 @@ public class MixturePanel : MonoBehaviour
     {        
         tempItem = item;
         tempItemImage.sprite = item.itemSprite;
+
         if (item.isCompleted)
         {
             Inventory.instance.AddItem(item);
@@ -44,6 +45,7 @@ public class MixturePanel : MonoBehaviour
             transform.GetChild(1).gameObject.SetActive(true);
             tempItem = null;
             _audioSource.Play();
+
             //if player don't do any task in time, hide it
             StartCoroutine(OnCompleteTask());
             

@@ -26,6 +26,13 @@ public class GameManager : Subject/*, IObserver*/
     private PlayerController1 player;
     private MusicManager musicManager;
 
+    public enum Level
+    {
+        Level_1, Level_2, Level_3
+    }
+
+    [SerializeField] Level currentLevel;
+
     void Awake()
     {
         player = FindObjectOfType<PlayerController1>();
@@ -79,6 +86,8 @@ public class GameManager : Subject/*, IObserver*/
     {
         npcManager.enabled = true;
         scoreManager.enabled = true;
+
+        if (currentLevel == Level.Level_1) return;
         weatherManager.enabled = true;
     }
 

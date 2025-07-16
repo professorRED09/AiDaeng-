@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
     public List<Items> items = new List<Items>();
-    public List<int> itemNumbers = new List<int>();
+    //public List<int> itemNumbers = new List<int>();
     public GameObject[] slots;
 
     private void Awake()
@@ -22,7 +22,7 @@ public class Inventory : MonoBehaviour
         DisplayItems();
     }    
 
-    void DisplayItems()
+    public void DisplayItems()
     {
         for (int i = 0; i < items.Count; i++)
         {
@@ -55,14 +55,14 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Items _item)
     {
-        if(itemNumbers.Count >= slots.Length)
+        if(items.Count >= slots.Length)
         {
             NotificationManager.instance.AddNoti("ของเต็มแล้ว!");
             return;
         }
 
         items.Add(_item);
-        itemNumbers.Add(1);
+        //itemNumbers.Add(1);
 
         //if (!items.Contains(_item))
         //{
@@ -91,13 +91,14 @@ public class Inventory : MonoBehaviour
             {
                 if (_item == items[i])
                 {
-                    itemNumbers[i]--;
-                    if (itemNumbers[i] == 0)
-                    {
-                        items.Remove(_item);
-                        itemNumbers.Remove(itemNumbers[i]);
-                        //selectedItem = null;
-                    }
+                    items.Remove(_item);
+                    //itemNumbers[i]--;
+                    //if (itemNumbers[i] == 0)
+                    //{
+                    //    items.Remove(_item);
+                    //    itemNumbers.Remove(itemNumbers[i]);
+                    //    //selectedItem = null;
+                    //}
                 }
             }
         }

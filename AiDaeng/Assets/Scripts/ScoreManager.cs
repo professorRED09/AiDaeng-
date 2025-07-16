@@ -56,6 +56,18 @@ public class ScoreManager : MonoBehaviour
         
     } 
 
+    public void AddAllOrdersScore(Vector3 transform, float score)
+    {
+        GameObject m_scorePopup = Instantiate(scorePopupPrefab, new Vector2(transform.x + 1.2f, transform.y + 1.9f), Quaternion.identity);
+        m_scorePopup.GetComponent<ScorePopup>().DisplayAllOrdersText(score);
+
+        _audioSource.clip = addScoreSFX;
+        _audioSource.Play();
+
+        _currentScore += score;
+        UpdateScoreBar(_currentScore, _maxScore);
+    }
+
     public void UpdateScoreBar(float currentValue, float maxValue)
     {
         float targetFillAmount = _currentScore / _maxScore;

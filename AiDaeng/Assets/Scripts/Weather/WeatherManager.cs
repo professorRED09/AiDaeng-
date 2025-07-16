@@ -12,10 +12,7 @@ public class WeatherManager : Subject
     public ParticleSystem rainFX;
     
     private float weatherTimer;
-    private float currentWeatherTimer;
-
-    //public bool Rainy;
-    //public bool Sunny;
+    private float currentWeatherTimer;    
 
     //FSM Stuff
     public Weather_BaseState currentState;

@@ -38,10 +38,15 @@ public class Task : MonoBehaviour
         if (isFirstTaskOfTheProduct)
         {            
             mixturePanel.OpenPanel();
+
             // update on UI to show which process player is currently at
             mixturePanel.UpdateTempItem(goalItem);
-
         }
+        else
+        {
+            //Debug.Log("PLEASE FINISH YOUR CURRENT PRODUCT FIRST");
+        }
+
         player.GetComponent<Animator>().SetBool("isDoingTask", true);
         audioSource.clip = taskSFX;
         audioSource.Play(); // play soundFX
@@ -56,45 +61,17 @@ public class Task : MonoBehaviour
             // if tempItem is correct, update it. if not, delete tempItem
             if(mixturePanel.tempItem == requiredItem)
             {
-                mixturePanel.UpdateTempItem(goalItem);
-                
-                //if (goalItem.isCompleted)
-                //{
-                //    //add it to inventory
-                //    //Inventory.instance.AddItem(goalItem);
-                //    //delete tempItem
-                //    //mixturePanel.tempItem = null;
-                //    //hide mixture panel
-                //    //Invoke("mixturePanel.ClosePanel()", 1f);
-                //}
+                mixturePanel.UpdateTempItem(goalItem);                
             }
-            else
-            {
-                //delete tempItem
-                mixturePanel.tempItem = null;
-                //hide mixture panel
-                mixturePanel.ClosePanel();
-                print("GO GET THE ITEM FIRST");
-            }
-            
-            //if (Inventory.instance.HasItem(requiredItem))
-            //{
-            //    Inventory.instance.UpdateItem(requiredItem, goalItem);  
-            //}
-            //else
-            //{
-            //    NotificationManager.instance.AddNoti($"ต้องมี{requiredItem.name}ก่อนจึงสามารถทำได้!");
-            //    //if (mixturePanel.isOpened)
-            //    //{
-            //    //    mixturePanel.ClosePanel();
-            //    //}
-            //}
+            else if (mixturePanel.tempItem.itemType == requiredItem.itemType)
+            {                
+                print("GO GET THE REQUIRED COMPONENT FIRST!");
+            }            
         }
         else if (!isFirstTaskOfTheProduct)
         {
             Inventory.instance.AddItem(goalItem);
-        }
-       
+        }       
     }
     
     // To check if player have arrived at the task

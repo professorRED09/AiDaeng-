@@ -8950,7 +8950,7 @@ MonoBehaviour:
   clickSFX: {fileID: 0}
   waypoint: {fileID: 2032695720}
   goalItem: {fileID: 11400000, guid: 28a65c88a0950dd43824c90d5c13d96c, type: 2}
-  isFirstTaskOfTheProduct: 0
+  isFirstTaskOfTheProduct: 1
   playerIsAtTask: 0
   isRequiredItem: 0
   requiredItem: {fileID: 0}
@@ -17155,6 +17155,10 @@ PrefabInstance:
     - target: {fileID: 5850169562241019825, guid: 6470abd900d176e4595603e8b3a51640, type: 3}
       propertyPath: m_Name
       value: '@Namwan'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5850169562241019825, guid: 6470abd900d176e4595603e8b3a51640, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6949628872840457355, guid: 6470abd900d176e4595603e8b3a51640, type: 3}
       propertyPath: m_Camera

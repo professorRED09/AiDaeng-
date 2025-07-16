@@ -1911,7 +1911,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  itemNumbers: 
   slots:
   - {fileID: 1827390499661933084}
   - {fileID: 7919212423387203873}

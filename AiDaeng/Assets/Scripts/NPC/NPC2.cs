@@ -30,9 +30,10 @@ public class NPC2 : MonoBehaviour, IObserver
 
     [SerializeField] GameObject thinkingText;
     //[SerializeField] GameObject itemImage;
-    [SerializeField] Items[] itemLists;
+    [SerializeField] List<Items> itemLists;
     //public List<Items> orderList;
     public List<GameObject> orderSlotLists;
+    public List<Items> orderLists;
     public GameObject orderSlot;
     public GameObject orderPanel;
 
@@ -43,8 +44,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public Transform[] wayToLeave;
     public Transform[] wayToRageLeave;
 
-    public int currentWaypointIndex = 0;
-    
+    public int currentWaypointIndex = 0;    
 
     SpriteRenderer sprite;
 
@@ -78,6 +78,8 @@ public class NPC2 : MonoBehaviour, IObserver
 
     private WeatherManager weatherManager;
     private ScoreManager scoreManager;
+
+    private int _serveAttemp = 0;
 
     private void Awake()
     {        
@@ -205,39 +207,111 @@ public class NPC2 : MonoBehaviour, IObserver
         if (!isClickable)
             return;
 
-        player.MoveToWaypoint(player.counterWP);
+        player.MoveToWaypoint(player.counterWP);        
         if (player.isAtCounter)
         {
-            for (int i = 0; i < orderSlotLists.Count; i++)
+            //check if player has all of products
+            bool playerHasAllProducts = true;
+            //bool getBonus = true;
+            foreach (var element in orderSlotLists)
             {
-                Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
-                // check if there's the exact order in the list, remove it 
-                if (Inventory.instance.HasItem(m_OrderItem))
+                if (!Inventory.instance.items.Contains(element.GetComponent<OrderSlot>().orderItem))
                 {
-                    // remove the given item from player's inventory
-                    Inventory.instance.RemoveItem(m_OrderItem);
-
-                    currentMV += maxMV/3.5f;
-                    if(currentMV > maxMV)
-                    {
-                        currentMV = maxMV;
-                    }
-
-                    // remove the given item from npc's order panel and destroy its gameobject;
-                    orderSlotLists[i].SetActive(false);
-                    orderSlotLists.Remove(orderSlotLists[i]);
-
+                    playerHasAllProducts = false;                    
+                    break;
                 }
-                else
-                {
-                    NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
-                }    
             }
+
+            //if player has all products for npc who has more than 1 order, give them all
+            if (playerHasAllProducts && orderLists.Count > 1)
+            {
+                Inventory.instance.items.RemoveAll(x => orderLists.Contains(x));
+                Inventory.instance.DisplayItems();
+
+                //clear slot list
+                orderSlotLists.Clear();
+            }
+
+            //if player has just 1 products OR npc orders only 1 products
+            else if (!playerHasAllProducts || orderLists.Count < 2)
+            {
+                for (int i = 0; i < orderSlotLists.Count; i++)
+                {
+                    Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
+                    if (Inventory.instance.HasItem(m_OrderItem))
+                    {
+                        // remove the given item from player's inventory
+                        Inventory.instance.RemoveItem(m_OrderItem);
+
+                        currentMV += maxMV / 3.5f;
+                        if (currentMV > maxMV)
+                        {
+                            currentMV = maxMV;
+                        }
+
+                        // remove the given item from npc's order panel and destroy its gameobject;
+                        orderSlotLists[i].SetActive(false);
+                        orderSlotLists.Remove(orderSlotLists[i]);
+
+                        _serveAttemp += 1;
+                        //print(_serveAttemp);
+                        //Debug.Log("Serve ONE");
+
+                    }
+                    
+                }
+            }
+
+            else
+            {
+                NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+            }
+
+            //for (int i = 0; i < orderSlotLists.Count; i++)
+            //{
+            //    Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
+            //    // check if there's the exact order in the list, remove it 
+            //    if (Inventory.instance.HasItem(m_OrderItem))
+            //    {
+            //        // remove the given item from player's inventory
+            //        Inventory.instance.RemoveItem(m_OrderItem);
+
+            //        currentMV += maxMV/3.5f;
+            //        if(currentMV > maxMV)
+            //        {
+            //            currentMV = maxMV;
+            //        }
+
+            //        // remove the given item from npc's order panel and destroy its gameobject;
+            //        orderSlotLists[i].SetActive(false);
+            //        orderSlotLists.Remove(orderSlotLists[i]);
+
+            //    }
+            //    else
+            //    {
+            //        NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+            //    }    
+            //}
 
             if (orderSlotLists.Count == 0)
             {
-                getProduct = true;                
-                scoreManager.AddScore(transform.position, GetScoreBasedOnMood()); // FIX:implement on getting score base on current Mood Value
+                getProduct = true;
+
+                if (_serveAttemp < 1)
+                {
+                    print("BONUS");
+                    //player will get score base on npc's current Mood Value
+                    scoreManager.AddAllOrdersScore(transform.position, GetScoreBasedOnMood());
+                }
+                else
+                {
+                    print("NO BONUS");
+                    //player will get score base on npc's current Mood Value
+                    scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
+                }
+
+
+                //scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
                 GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
                 m_HappyVFX.transform.parent = transform;
             }
@@ -259,19 +333,27 @@ public class NPC2 : MonoBehaviour, IObserver
     IEnumerator OrderProduct()
     {
         yield return new WaitForSeconds(3);
+
         // random total of things to order (for now let's just random between 1 and 2)
         int orderNumbers = Random.Range(1, 3);  // npc will order 1 or 2 things (3 is the exclusive)
+
         isClickable = true;
 
         for (int i = 0; i < orderNumbers; i++)
         {
             //random order
-            Items order = itemLists[Random.Range(0, itemLists.Length)];
+            Items order = itemLists[Random.Range(0, itemLists.Count)];
+
+            //add to list
+            orderLists.Add(order);
+
             //instantiate slot
             GameObject m_OrderSlot = Instantiate(orderSlot, orderPanel.transform);
+
             //set order item in order slot
             m_OrderSlot.GetComponent<OrderSlot>().SetOrderItem(order);
             orderSlotLists.Add(m_OrderSlot);
+            itemLists.Remove(order);
         }
         // disable "..." text;
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; 
@@ -333,7 +415,8 @@ public class NPC2 : MonoBehaviour, IObserver
         if(currentMV >= maxMV * 0.67)
         {
             _emoji.Play("Happy");
-        }else if (currentMV >= maxMV * 0.33)
+        }
+        else if (currentMV >= maxMV * 0.33)
         {
             _emoji.Play("Edgy");
         }
@@ -358,8 +441,7 @@ public class NPC2 : MonoBehaviour, IObserver
         else
         {
             return scoreManager.baseScore * 0.5f;
-        }
-        
+        }        
     }
 
 

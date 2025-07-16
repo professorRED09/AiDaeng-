@@ -11,4 +11,9 @@ public class ScorePopup : MonoBehaviour
     {
         scoreText.text = $"+ {score} แต้ม!";
     }
+
+    public void DisplayAllOrdersText(float score)
+    {
+        scoreText.text = $"+ โบนัส {score} แต้ม!";
+    }
 }
