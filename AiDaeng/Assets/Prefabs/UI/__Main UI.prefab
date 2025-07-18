@@ -1686,6 +1686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timerText: {fileID: 3278164041824114481}
+  _timerImageFill: {fileID: 0}
   timeToDisplay: 120
 --- !u!114 &7989246329781369854
 MonoBehaviour:

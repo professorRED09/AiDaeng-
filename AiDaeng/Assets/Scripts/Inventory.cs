@@ -27,17 +27,19 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             slots[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemSprite;
+            slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemSprite;            
             //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().color = new Color(1, 1, 1, 1);
             //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = itemNumbers[i].ToString();
             //slots[i].transform.GetChild(1).gameObject.SetActive(true);
         }
+
         for (int i = 0; i < slots.Length; i++)
         {
             if (i < items.Count)
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemSprite;
+                slots[i].GetComponent<InventorySlot>().OnChanged(items[i].itemSprite);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().color = new Color(1, 1, 1, 1);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = itemNumbers[i].ToString();
                 //slots[i].transform.GetChild(1).gameObject.SetActive(true);
@@ -46,6 +48,7 @@ public class Inventory : MonoBehaviour
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 0);
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
+                slots[i].GetComponent<InventorySlot>().OnChanged(null);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().color = new Color(1, 1, 1, 0);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = null;
                 //slots[i].transform.GetChild(1).gameObject.SetActive(false);
