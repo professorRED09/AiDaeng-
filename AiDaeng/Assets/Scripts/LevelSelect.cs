@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class LevelSelect : MonoBehaviour
 {
     [SerializeField] string selectedSceneName;
+    [SerializeField] GameObject daeng;
 
     [Header("Cutscene Name")]
     [SerializeField] string cutscene1Name;

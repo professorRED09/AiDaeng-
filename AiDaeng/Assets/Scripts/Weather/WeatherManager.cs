@@ -24,7 +24,8 @@ public class WeatherManager : Subject
     {
         weatherFilter.SetActive(true);
 
-        currentState = normalState;
+        //currentState = normalState;
+        currentState = rainyState;
         currentState.EnterState(this);
     }
 

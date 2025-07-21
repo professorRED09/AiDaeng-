@@ -39,6 +39,12 @@ public class Task : MonoBehaviour
         {            
             mixturePanel.OpenPanel();
 
+            player.GetComponent<Animator>().SetBool("isDoingTask", true);
+            audioSource.clip = taskSFX;
+            audioSource.Play(); // play soundFX
+            yield return new WaitForSeconds(0.7f);
+            player.GetComponent<Animator>().SetBool("isDoingTask", false);
+
             // update on UI to show which process player is currently at
             mixturePanel.UpdateTempItem(goalItem);
         }
@@ -47,11 +53,11 @@ public class Task : MonoBehaviour
             //Debug.Log("PLEASE FINISH YOUR CURRENT PRODUCT FIRST");
         }
 
-        player.GetComponent<Animator>().SetBool("isDoingTask", true);
-        audioSource.clip = taskSFX;
-        audioSource.Play(); // play soundFX
-        yield return new WaitForSeconds(0.7f);
-        player.GetComponent<Animator>().SetBool("isDoingTask", false);
+        //player.GetComponent<Animator>().SetBool("isDoingTask", true);
+        //audioSource.clip = taskSFX;
+        //audioSource.Play(); // play soundFX
+        //yield return new WaitForSeconds(0.7f);
+        //player.GetComponent<Animator>().SetBool("isDoingTask", false);
 
         // Add code to pop up a mixture window, maybe check if the mixture is showing already or not
         // if mixture window haven't been poped up yet; show it
@@ -61,15 +67,30 @@ public class Task : MonoBehaviour
             // if tempItem is correct, update it. if not, delete tempItem
             if(mixturePanel.tempItem == requiredItem)
             {
+                player.GetComponent<Animator>().SetBool("isDoingTask", true);
+                audioSource.clip = taskSFX;
+                audioSource.Play(); // play soundFX
+                yield return new WaitForSeconds(0.7f);
+                player.GetComponent<Animator>().SetBool("isDoingTask", false);
+
                 mixturePanel.UpdateTempItem(goalItem);                
             }
-            else if (mixturePanel.tempItem.itemType == requiredItem.itemType)
-            {                
+            //else if (mixturePanel.tempItem.itemType == requiredItem.itemType)
+            //{                
+            //    print("GO GET THE REQUIRED COMPONENT FIRST!");
+            //}
+            else {
                 print("GO GET THE REQUIRED COMPONENT FIRST!");
-            }            
+            }
         }
         else if (!isFirstTaskOfTheProduct)
         {
+            player.GetComponent<Animator>().SetBool("isDoingTask", true);
+            audioSource.clip = taskSFX;
+            audioSource.Play(); // play soundFX
+            yield return new WaitForSeconds(0.7f);
+            player.GetComponent<Animator>().SetBool("isDoingTask", false);
+
             Inventory.instance.AddItem(goalItem);
         }       
     }

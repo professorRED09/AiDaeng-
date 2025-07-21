@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Weather_Rainy : Weather_BaseState
 {
-    private float _timer = 10f;
+    private float _timer = 200f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)

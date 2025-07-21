@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using DG.Tweening;
 
 public class Inventory : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class Inventory : MonoBehaviour
     public List<Items> items = new List<Items>();
     //public List<int> itemNumbers = new List<int>();
     public GameObject[] slots;
+
+    [SerializeField] Image _inventorySprite;
+    [SerializeField] float shakeStrength;
+    Vector3 defaultPos;
 
     private void Awake()
     {
@@ -20,6 +25,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         DisplayItems();
+        defaultPos = transform.TransformPoint(transform.position);
     }    
 
     public void DisplayItems()
@@ -54,12 +60,17 @@ public class Inventory : MonoBehaviour
                 //slots[i].transform.GetChild(1).gameObject.SetActive(false);
             }
         }
-    }
+    }    
 
     public void AddItem(Items _item)
     {
+        //inform player if slots are all full
         if(items.Count >= slots.Length)
-        {
+        {            
+            _inventorySprite.transform.DOShakePosition(1f, shakeStrength).OnComplete(() =>
+            _inventorySprite.transform.DOMove(defaultPos, 0.2f));
+            //_inventorySprite.transform.DOMove( new Vector3 (-0.3f, -4.71f, 0), 0.2f));
+
             NotificationManager.instance.AddNoti("ของเต็มแล้ว!");
             return;
         }
@@ -160,5 +171,13 @@ public class Inventory : MonoBehaviour
     public bool HasItem(Items requiredItem)
     {
         return items.Contains(requiredItem);
-    }      
+    }
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+            
+    //    }
+    //}
 }

@@ -9,7 +9,7 @@ public class LoadingScene : MonoBehaviour
 {
     [SerializeField] GameObject _loadingScreen;
     [SerializeField] Image _loadingBarFill;
-    [SerializeField] Image _transitionScreen;
+    //[SerializeField] Image _transitionScreen;
 
     public void LoadScene(string sceneName)
     {
@@ -23,20 +23,22 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadSceneAsync(string sceneName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        operation.allowSceneActivation = false;
+        //operation.allowSceneActivation = false;
         _loadingScreen.SetActive(true);
 
         while (!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
             _loadingBarFill.fillAmount = progressValue;
-            if(operation.progress >= 0.9f)
-            {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    operation.allowSceneActivation = true;
-                }
-            }
+
+            //if (operation.progress >= 0.9f)
+            //{
+            //    if (Input.GetKey(KeyCode.Space))
+            //    {
+            //        print("ASD");
+            //        operation.allowSceneActivation = true;
+            //    }
+            //}
 
             yield return null;
         }        

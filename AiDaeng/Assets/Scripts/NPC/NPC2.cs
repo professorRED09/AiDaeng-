@@ -11,8 +11,8 @@ public class NPC2 : MonoBehaviour, IObserver
     private float maxMV = 10f;   // MV => mood value
     private float currentMV;
 
-    private float moodDecSp = 0.4f;      // decreasing speed of mood value, assign as public for adjusting in other script
-    private float tempMoodDecSp;
+    [SerializeField] private float moodDecSp = 0.4f;      // decreasing speed of mood value, assign as public for adjusting in other script
+    private float defaultMoodDecSp;
     //public float prayingTime = 2;
     private readonly float speed = 5f;
     public GameObject happyVFX;
@@ -80,6 +80,11 @@ public class NPC2 : MonoBehaviour, IObserver
     private ScoreManager scoreManager;
 
     private int _serveAttemp = 0;
+    [SerializeField] GameObject _umbrellaIcon;
+    public bool hasUmbrella;
+    private UmbrellaTask _umbrellaTask;
+
+    bool isRainLover = true;    
 
     private void Awake()
     {        
@@ -92,9 +97,23 @@ public class NPC2 : MonoBehaviour, IObserver
         npcManager = FindObjectOfType<NPC_Manager2>();
 
         scoreManager = FindObjectOfType<ScoreManager>();
+        _umbrellaTask = FindObjectOfType<UmbrellaTask>();
 
         // set initial value       
         currentMV = maxMV;
+
+        //random to determine if this npc is rain lover or not
+        float randValue = Random.value;
+        if (randValue < .65f) // 65% of the time
+        {
+            isRainLover = true;
+            Debug.Log("LOVE");
+        }
+        else // 35% of the time
+        {
+            isRainLover = false;
+            Debug.Log("HATE");
+        }
     }
 
     void Start()
@@ -114,10 +133,12 @@ public class NPC2 : MonoBehaviour, IObserver
         wayToRageLeave = npcManager.wpToRageLeave;
 
         // store default value in temp value
-        tempMoodDecSp = moodDecSp;
+        defaultMoodDecSp = moodDecSp;
 
         // make npc recognize the weather when get spawned
         OnWeatherChange();
+
+       
 
     }   
 
@@ -164,6 +185,15 @@ public class NPC2 : MonoBehaviour, IObserver
         {
             isMoving = false;
         }
+    }
+
+
+    public void OnGettingUmbrella()
+    {
+        NormalEffect();
+
+        _umbrellaIcon.SetActive(true);
+        hasUmbrella = true;
     }
 
     // Check if there's npc ahead, if yes then stop moving
@@ -363,11 +393,11 @@ public class NPC2 : MonoBehaviour, IObserver
     // To call Namwan to give drink water to npc
     void OnMouseOver()
     {        
-        if (Input.GetMouseButtonDown(1) && namwan != null && !isMoving && namwan.canServe)
+        if (Input.GetMouseButtonDown(1) && namwan != null && !isMoving && namwan.inventory.canServe)
         {            
             namwan.MoveToWaypoint(transform);// called Namwan to give some water cups for this npc
             namwan.targetNPC = this;
-        }
+        }        
     }
     
     public void SwitchState(NPC_BaseState state)
@@ -466,18 +496,34 @@ public class NPC2 : MonoBehaviour, IObserver
     public void NormalEffect()
     {
         sprite.color = Color.white;
-        moodDecSp = tempMoodDecSp; 
+        moodDecSp = defaultMoodDecSp; 
         //print("TODAY IS A GOOD DAY, EH?");
     }
 
     public void RainyEffect()
     {
-        sprite.color = Color.blue;        
+        if (hasUmbrella) return;
+
+        if (isRainLover)
+        {
+            //Debug.Log("OOH RAIN");
+            moodDecSp = 0.2f;
+        }
+        else
+        {
+            //Debug.Log("EEW RAIN");
+            moodDecSp = 0.45f;
+        }
+
+        sprite.color = Color.blue;
+        //moodDecSp = 1;
         //print("OH! RAIN! RUN!");
     }
 
     public void SunnyEffect()
     {
+        if (hasUmbrella) return;
+
         sprite.color = Color.red;
         moodDecSp = 1;
         //print("ITS SO DAMN HOT MANN");
@@ -499,6 +545,9 @@ public class NPC2 : MonoBehaviour, IObserver
     public void LeaveScene()
     {
         npcManager.leftNpcCount++;
+
+        if (hasUmbrella) _umbrellaTask.ReturnUmbrella();
+
         Destroy(gameObject);
     }
 

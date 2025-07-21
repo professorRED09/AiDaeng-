@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Namwan : MonoBehaviour
+public class Namwan : MonoBehaviour, IObserver
 {
     [Header("Ref")]
     public List<Transform> waypoints;   // [0] is the drinking water waypoint
     public Transform currentWaypoint;
     public Queue<Transform> pathQueue = new Queue<Transform>();   // Waypoints to visit
     private Vector3 direction;
-    public TMP_Text serveAmountText;
+
+    //public TMP_Text serveAmountText;
     public NPC2 targetNPC;
-    [SerializeField] NamwanInventory _inventory;
+    public NamwanInventory inventory;
     
     [Header("Setting")]
-    public float moveSpeed = 5f;    // Movement speed
-    
-    
+    public float moveSpeed = 5f;    // Movement speed    
     private bool _isMoving = false;
-    public bool canServe = true;
-    [SerializeField] float _maxServeAmount = 4f; // Max amount of water cups that Namwan can carries
-    private float serveAmount;
+    //public bool canServe = true;
+
+    //[SerializeField] float _maxServeAmount = 4f; // Max amount of water cups that Namwan can carries
+    //private float serveAmount;
+    private WeatherManager _weatherManager;
     private AudioSource _audioSource;
 
     public enum CurrentTask
@@ -35,18 +36,20 @@ public class Namwan : MonoBehaviour
 
     void Awake()
     {
+        _weatherManager = FindObjectOfType<WeatherManager>();
         _audioSource = GetComponent<AudioSource>();
     }
 
     void Start()
     {
         //set initial serve amount
-        serveAmount = _maxServeAmount;
-        serveAmountText.text = serveAmount.ToString();
+        //serveAmount = _maxServeAmount;
+        //serveAmountText.text = serveAmount.ToString();
 
         //set initial task
-        currentTask = CurrentTask.DrinkWater;
-        ChangeTask();
+        ChangeTask(CurrentTask.DrinkWater);
+        //currentTask = CurrentTask.DrinkWater;
+        
     }
 
     // Update is called once per frame
@@ -61,63 +64,59 @@ public class Namwan : MonoBehaviour
             _isMoving = false;
         }
 
-        // check if Namwan is at a drink water waypoint, if yes, then fill water
-        if (transform.position == waypoints[0].position)
+        // check if Namwan is at a drink water waypoint and current task is drinkWater, if yes, then fill water
+        if (transform.position == waypoints[0].position && currentTask == CurrentTask.DrinkWater)
         {                      
-            RefillDrinkWater();
+            inventory.RefillDrinkWater();
         }
         
 
-        if (serveAmount < 1)
-        {
-            canServe = false;
-        }
-        else
-        {
-            canServe = true;
-        }
+        //if (serveAmount < 1)
+        //{
+        //    canServe = false;
+        //}
+        //else
+        //{
+        //    canServe = true;
+        //}
     }
 
-    public void ChangeTask()
+    public void ChangeTask(CurrentTask task)
     {
-        switch (currentTask)
+        switch (task)
         {
             case CurrentTask.DrinkWater:
-                _inventory.OnDrinkWaterTask();
+                currentTask = CurrentTask.DrinkWater;
+                inventory.OnDrinkWaterTask();
                 break;
             case CurrentTask.Umbrella:
-                _inventory.OnUmbrellaTask();
+                currentTask = CurrentTask.Umbrella;
+                inventory.OnUmbrellaTask();
                 break;
         }
     }
     
 
-    void RefillDrinkWater()
-    {        
-        if (serveAmount < _maxServeAmount)
-        {
-            //audioSource.Play(); // play soundFX
-            serveAmount += 1 * Time.deltaTime;
-            serveAmountText.text = ((int)serveAmount).ToString();
-        }        
-    }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if(collision.collider.CompareTag("DrinkWater"))
+    //void RefillDrinkWater()
+    //{        
+    //    if (serveAmount < _maxServeAmount)
     //    {
-    //        StartCoroutine(RefillDrinkWater());
-    //    }
+    //        //audioSource.Play(); // play soundFX
+    //        serveAmount += 1 * Time.deltaTime;
+    //        serveAmountText.text = ((int)serveAmount).ToString();
+    //    }        
     //}
 
     IEnumerator GiveDrinkWater()
     {
         _isMoving = false;
-        if (serveAmount >= 1 /*&& targetNPC != null*/)
+        if (inventory.serveAmount >= 1 /*&& targetNPC != null*/)
         {
-            targetNPC.GetComponent<NPC2>().ResetMoodBar();      
-            serveAmount -= 1;                                   
-            serveAmountText.text = ((int)serveAmount).ToString();         // update on UI
+            targetNPC.GetComponent<NPC2>().ResetMoodBar();
+
+            inventory.DeductDrinkWater();
+            //serveAmount -= 1;                                   
+            //serveAmountText.text = ((int)serveAmount).ToString();         // update on UI
             targetNPC = null;                                   // set target to null
             _audioSource.Play();
             Invoke(nameof(BackToRefill), 4f);
@@ -130,10 +129,62 @@ public class Namwan : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator GiveUmbrella()
+    {        
+        _isMoving = false;
+        if (inventory.serveAmount >= 1)
+        {
+            if (!targetNPC.GetComponent<NPC2>().hasUmbrella) {
+                targetNPC.GetComponent<NPC2>().ResetMoodBar();
+                targetNPC.GetComponent<NPC2>().OnGettingUmbrella();
+
+                inventory.DeductDrinkWater();
+                //serveAmount -= 1;                                   
+                //serveAmountText.text = ((int)serveAmount).ToString();         // update on UI
+                targetNPC = null;                                               // set target to null
+                _audioSource.Play();
+            }
+            else
+            {
+                Debug.Log("This guy has an umbrella already");                
+            }            
+        }
+        else
+        {
+            print("YOU DON'T HAVE ANY UMBRELLA LEFT!");
+        }
+        //yield return new WaitForSeconds(1f);
+        yield return null;
+    }
+
     void BackToRefill()
     {
         if (_isMoving) return;
         MoveToWaypoint(waypoints[0]);        
+    }
+
+    public void OnNotify(WeatherType weather)
+    {
+        switch (weather)
+        {
+            case (WeatherType.Rainy):
+                ChangeTask(CurrentTask.Umbrella);
+                return;
+
+            default:
+                ChangeTask(CurrentTask.DrinkWater);
+                return;
+        }
+    }
+
+    void OnEnable()
+    {
+        _weatherManager.AddObserver(this);
+    }
+
+    void OnDisable()
+    {
+        _weatherManager.RemoveObserver(this);
     }
 
     public void MoveToWaypoint(Transform targetWaypoint)
@@ -169,11 +220,20 @@ public class Namwan : MonoBehaviour
 
             if (pathQueue.Count <= 0 && targetNPC != null)
             {
-                StartCoroutine(GiveDrinkWater());
+                if(currentTask == CurrentTask.DrinkWater)
+                {
+                    StartCoroutine(GiveDrinkWater());
+                }
+                else if (currentTask == CurrentTask.Umbrella)
+                {
+                    StartCoroutine(GiveUmbrella());
+                }
+
             }
         }
         
     }
+
 
     // Generate the path from startWaypoint to targetWaypoint 
     private List<Transform> GetPath(Transform startWaypoint, Transform targetWaypoint)

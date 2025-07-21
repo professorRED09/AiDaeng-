@@ -59,6 +59,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bcd129cea69fa4a41ad19c3e21c60413, type: 3}
   - {fileID: 21300000, guid: 4c496eb9f3a5da8498cbfbda20f6db7e, type: 3}
   _taskIcon: {fileID: 8234397464283136715}
+  _serveAmountText: {fileID: 5223176386756574383}
+  serveAmount: 0
+  _maxDrinkWaterServeAmount: 4
+  _maxUmbrellaServeAmount: 3
+  canServe: 1
 --- !u!223 &6949628872840457355
 Canvas:
   m_ObjectHideFlags: 0
@@ -186,12 +191,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currentWaypoint: {fileID: 0}
-  serveAmountText: {fileID: 5223176386756574383}
   targetNPC: {fileID: 0}
-  _inventory: {fileID: 8022126920014468084}
+  inventory: {fileID: 8022126920014468084}
   moveSpeed: 50
-  canServe: 1
-  _maxServeAmount: 4
   currentTask: 0
 --- !u!212 &5517554680531496031
 SpriteRenderer:

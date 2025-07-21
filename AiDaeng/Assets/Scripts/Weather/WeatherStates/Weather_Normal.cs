@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Weather_Normal : Weather_BaseState
 {
-    private float _timer = 15f;
+    private float _timer = 5f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)
@@ -25,7 +25,7 @@ public class Weather_Normal : Weather_BaseState
         {
             weather.anim.ResetTrigger("isNormal");
 
-            weather.SwitchState(weather.sunnyState);
+            weather.SwitchState(weather.rainyState);
         }
 
         //weather.currentTimer -= Time.deltaTime; // countdown timer

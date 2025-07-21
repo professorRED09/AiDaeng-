@@ -1918,6 +1918,8 @@ MonoBehaviour:
   - {fileID: 1313816011407241042}
   - {fileID: 251083167318123389}
   - {fileID: 6877807027925102101}
+  _inventorySprite: {fileID: 0}
+  shakeStrength: 0
 --- !u!114 &1051218077976354547
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UmbrellaTask : MonoBehaviour
 {
@@ -12,10 +14,15 @@ public class UmbrellaTask : MonoBehaviour
     private AudioSource audioSource;
     //[SerializeField] AudioClip soundFX;
 
+    private float _umbrellaAmount = 0;
+    [SerializeField] TMP_Text _umbrellaAmountText;
+
     private void Start()
     {
         namwan = FindObjectOfType<Namwan>(); // get reference from player script
         audioSource = GetComponent<AudioSource>();
+
+        _umbrellaAmountText.text = _umbrellaAmount.ToString();
     }
 
     private void OnMouseDown()
@@ -25,7 +32,21 @@ public class UmbrellaTask : MonoBehaviour
         {
             namwan.MoveToWaypoint(waypoint);
             namwan.currentTask = Namwan.CurrentTask.Umbrella;
-            namwan.ChangeTask();
+            namwan.ChangeTask(namwan.currentTask);
         }
     }
+
+    public void TakeUmbrella()
+    {
+
+    }
+
+    public void ReturnUmbrella()
+    {
+        ++_umbrellaAmount;
+        _umbrellaAmountText.text = _umbrellaAmount.ToString();
+
+        //inform player that the umbrella amount has increase
+    }
+
 }
