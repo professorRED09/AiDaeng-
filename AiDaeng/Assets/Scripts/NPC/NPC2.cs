@@ -107,18 +107,17 @@ public class NPC2 : MonoBehaviour, IObserver
         if (randValue < .65f) // 65% of the time
         {
             isRainLover = true;
-            Debug.Log("LOVE");
+            //Debug.Log("LOVE");
         }
         else // 35% of the time
         {
             isRainLover = false;
-            Debug.Log("HATE");
+            //Debug.Log("HATE");
         }
     }
 
     void Start()
-    {
-        
+    {        
         UpdateMoodBar();
 
         // set initial state to begin with
@@ -137,9 +136,6 @@ public class NPC2 : MonoBehaviour, IObserver
 
         // make npc recognize the weather when get spawned
         OnWeatherChange();
-
-       
-
     }   
 
     public void SetWaypoints(Transform[] assignedWaypoints)
@@ -286,9 +282,7 @@ public class NPC2 : MonoBehaviour, IObserver
                         _serveAttemp += 1;
                         //print(_serveAttemp);
                         //Debug.Log("Serve ONE");
-
-                    }
-                    
+                    }                    
                 }
             }
 

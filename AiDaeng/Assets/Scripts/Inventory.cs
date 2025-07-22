@@ -5,20 +5,22 @@ using UnityEngine.UI;
 using System.Linq;
 using DG.Tweening;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IObserver
 {
     public static Inventory instance;
     public List<Items> items = new List<Items>();
     //public List<int> itemNumbers = new List<int>();
     public GameObject[] slots;
 
-    [SerializeField] Image _inventorySprite;
-    [SerializeField] float shakeStrength;
+    [SerializeField] private Image _inventorySprite;
+    [SerializeField] private float _shakeStrength;
+    private WeatherManager _weatherManager;
     Vector3 defaultPos;
 
     private void Awake()
     {
         instance = this;
+        _weatherManager = FindObjectOfType<WeatherManager>();
     }
 
     // Start is called before the first frame update
@@ -45,7 +47,9 @@ public class Inventory : MonoBehaviour
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemSprite;
+
                 slots[i].GetComponent<InventorySlot>().OnChanged(items[i].itemSprite);
+                slots[i].GetComponent<InventorySlot>().SetItem(items[i]);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().color = new Color(1, 1, 1, 1);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = itemNumbers[i].ToString();
                 //slots[i].transform.GetChild(1).gameObject.SetActive(true);
@@ -54,7 +58,9 @@ public class Inventory : MonoBehaviour
             {
                 slots[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 0);
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
+
                 slots[i].GetComponent<InventorySlot>().OnChanged(null);
+                slots[i].GetComponent<InventorySlot>().SetItem(null);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().color = new Color(1, 1, 1, 0);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = null;
                 //slots[i].transform.GetChild(1).gameObject.SetActive(false);
@@ -67,10 +73,9 @@ public class Inventory : MonoBehaviour
         //inform player if slots are all full
         if(items.Count >= slots.Length)
         {            
-            _inventorySprite.transform.DOShakePosition(1f, shakeStrength).OnComplete(() =>
+            _inventorySprite.transform.DOShakePosition(1f, _shakeStrength).OnComplete(() =>
             _inventorySprite.transform.DOMove(defaultPos, 0.2f));
-            //_inventorySprite.transform.DOMove( new Vector3 (-0.3f, -4.71f, 0), 0.2f));
-
+            
             NotificationManager.instance.AddNoti("ของเต็มแล้ว!");
             return;
         }
@@ -173,11 +178,32 @@ public class Inventory : MonoBehaviour
         return items.Contains(requiredItem);
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-            
-    //    }
-    //}
+    public void OnNotify(WeatherType weather)
+    {
+        switch (weather)
+        {
+            case (WeatherType.Rainy):
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    if (i < items.Count)
+                    {                        
+                        slots[i].GetComponent<InventorySlot>().CountdownLifeBar();                        
+                    }                    
+                }
+                return;
+
+            default:                
+                return;
+        }
+    }
+
+    void OnEnable()
+    {
+        _weatherManager.AddObserver(this);
+    }
+
+    void OnDisable()
+    {
+        _weatherManager.RemoveObserver(this);
+    }
 }

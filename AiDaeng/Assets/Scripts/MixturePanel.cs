@@ -41,10 +41,15 @@ public class MixturePanel : MonoBehaviour
         if (item.isCompleted)
         {
             Inventory.instance.AddItem(item);
+
             //enable "เสร็จแล้วจ้า!" text to inform player            
             transform.GetChild(1).gameObject.SetActive(true);
+
             tempItem = null;
+            tempItemImage.sprite = item.itemSprite;
+
             _audioSource.Play();
+
 
             //if player don't do any task in time, hide it
             StartCoroutine(OnCompleteTask());
@@ -57,6 +62,7 @@ public class MixturePanel : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if(tempItem == null)
         {
+            tempItemImage.sprite = null;
             ClosePanel();
         }
     }

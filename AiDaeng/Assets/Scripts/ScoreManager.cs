@@ -73,7 +73,7 @@ public class ScoreManager : MonoBehaviour
         float targetFillAmount = _currentScore / _maxScore;
         _scoreBarFill.DOFillAmount(targetFillAmount, _fillSpeed);
         //scoreBar.value = currentValue / maxValue;
-        scoreText.text = _currentScore.ToString();
+        scoreText.text = ((int)_currentScore).ToString();
 
         if (StarCount() >= 3)
         {
