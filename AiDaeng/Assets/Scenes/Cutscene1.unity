@@ -830,6 +830,7 @@ GameObject:
   - component: {fileID: 802281368}
   - component: {fileID: 802281372}
   - component: {fileID: 802281373}
+  - component: {fileID: 802281374}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1169,6 +1170,33 @@ MonoBehaviour:
   pausePanel: {fileID: 0}
   settingPanel: {fileID: 0}
   tutorialPanel: {fileID: 0}
+--- !u!114 &802281374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802281367}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740afd275ec08a343a434f6354210499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
+  textNames: {fileID: 0}
+  textContinue: {fileID: 0}
+  imageContinue: {fileID: 0}
+  _isChoice: 0
+  oldBG: {fileID: 0}
+  newBG: {fileID: 0}
+  daraIMG: {fileID: 0}
+  Choice_1: {fileID: 0}
+  Choice_2: {fileID: 0}
+  Choice_3: {fileID: 0}
+  lines: []
+  names: []
+  textSpeed: 0
+  _isTyping: 0
 --- !u!1 &879813627
 GameObject:
   m_ObjectHideFlags: 0
