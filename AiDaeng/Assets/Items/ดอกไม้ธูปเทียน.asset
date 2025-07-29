@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: "\u0E14\u0E2D\u0E01\u0E44\u0E21\u0E49\u0E18\u0E39\u0E1B\u0E40\u0E17\u0E35\u0E22\u0E19"
   itemType: 1
-  itemSprite: {fileID: 21300000, guid: 9e9960e29ede4894f8c8393db3ef31ab, type: 3}
+  itemSprite: {fileID: 21300000, guid: 0b6f5336eeb2620498776fd51862c0b2, type: 3}
   isCompleted: 1

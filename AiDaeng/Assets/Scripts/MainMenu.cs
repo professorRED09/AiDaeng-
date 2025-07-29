@@ -14,12 +14,19 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject settingPanel;
     [SerializeField] GameObject tutorialPanel;
+    //[SerializeField] GameObject _productTutorialPanel;
 
     private void Start()
     {
         Time.timeScale = 1f;
         //startBanner.SetActive(true);
     }
+
+    //public void OnProductTutorialPress()
+    //{
+    //    Time.timeScale = 0f;
+    //    _productTutorialPanel.SetActive(true);
+    //}
 
     public void OnPressStartGame()
     {

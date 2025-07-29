@@ -19,6 +19,7 @@ public class BuddhaBasin : MonoBehaviour
     private AudioSource audioSource;
 
     public static BuddhaBasin instance;
+    private SpriteRenderer spriteRender;
 
     [Header("UI")]
     public Slider waterBar;
@@ -28,7 +29,9 @@ public class BuddhaBasin : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        player = FindObjectOfType<PlayerController1>(); // get reference from player script
+
+        player = FindObjectOfType<PlayerController1>(); 
+        spriteRender = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -90,6 +93,16 @@ public class BuddhaBasin : MonoBehaviour
             player.MoveToWaypoint(waypoint);
             player.targetWP = gameObject;            
         }
+    }
+
+    private void OnMouseOver()
+    {
+        spriteRender.color = Color.black;
+    }
+
+    private void OnMouseExit()
+    {
+        spriteRender.color = Color.white;
     }
 
 }
