@@ -8,7 +8,7 @@ public class NPC_Manager2 : MonoBehaviour
     public float maxTime; // a longest period to spawn the next npc 
     [SerializeField] float minTime; // a shortest period to spawn the next npc
     [SerializeField] float currentSpawnTimer;
-    [SerializeField] Items[] itemLists;
+    public List<Items> itemLists;
     private bool isTimeout = false;
 
     public List<GameObject> npcPrefabs;

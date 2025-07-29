@@ -24,6 +24,9 @@ public class GameManager : Subject/*, IObserver*/
     public bool isGameover = false;
 
     private PlayerController1 player;
+    [SerializeField] private GameObject _namwan;
+    [SerializeField] private GameObject _drinkWaterTask;
+    [SerializeField] private GameObject _umbrellaTask;
     private MusicManager musicManager;
 
     public enum Level
@@ -89,6 +92,9 @@ public class GameManager : Subject/*, IObserver*/
 
         if (currentLevel == Level.Level_1) return;
         weatherManager.enabled = true;
+        _namwan.SetActive(true);
+        _drinkWaterTask.SetActive(true);
+        _umbrellaTask.SetActive(true);
     }
 
     public void ShowResult()

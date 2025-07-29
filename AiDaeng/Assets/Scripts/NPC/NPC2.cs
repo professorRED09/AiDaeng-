@@ -11,7 +11,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private float maxMV = 10f;   // MV => mood value
     private float currentMV;
 
-    [SerializeField] private float moodDecSp = 0.4f;      // decreasing speed of mood value, assign as public for adjusting in other script
+    [SerializeField] private float moodDecSp = 0.2f;      // decreasing speed of mood value, assign as public for adjusting in other script
     private float defaultMoodDecSp;
     //public float prayingTime = 2;
     private readonly float speed = 5f;
@@ -30,7 +30,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
     [SerializeField] GameObject thinkingText;
     //[SerializeField] GameObject itemImage;
-    [SerializeField] List<Items> itemLists;
+    [SerializeField] List<Items> _itemLists;
     //public List<Items> orderList;
     public List<GameObject> orderSlotLists;
     public List<Items> orderLists;
@@ -136,6 +136,9 @@ public class NPC2 : MonoBehaviour, IObserver
 
         // make npc recognize the weather when get spawned
         OnWeatherChange();
+
+        // store item lists from npc manager
+        _itemLists.AddRange(npcManager.itemLists);
     }   
 
     public void SetWaypoints(Transform[] assignedWaypoints)
@@ -227,120 +230,211 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    //// To give npc a product
+    //private void OnMouseDown()
+    //{
+    //    if (!isClickable)
+    //        return;
+
+    //    player.MoveToWaypoint(player.counterWP);        
+    //    if (player.isAtCounter)
+    //    {
+    //        //check if player has all of products
+    //        bool playerHasAllProducts = true;
+    //        //bool getBonus = true;
+    //        foreach (var element in orderSlotLists)
+    //        {
+    //            if (!Inventory.instance.items.Contains(element.GetComponent<OrderSlot>().orderItem))
+    //            {
+    //                playerHasAllProducts = false;                    
+    //                break;
+    //            }
+    //        }
+
+    //        //if player has all products for npc who has more than 1 order, give them all
+    //        if (playerHasAllProducts && orderLists.Count > 1)
+    //        {
+    //            Inventory.instance.items.RemoveAll(x => orderLists.Contains(x));
+    //            Inventory.instance.DisplayItems();
+
+    //            //clear slot list
+    //            orderSlotLists.Clear();
+    //        }
+
+    //        //if player has just 1 products OR npc orders only 1 products
+    //        else if (!playerHasAllProducts || orderLists.Count < 2)
+    //        {
+    //            for (int i = 0; i < orderSlotLists.Count; i++)
+    //            {
+    //                Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
+    //                if (Inventory.instance.HasItem(m_OrderItem))
+    //                {
+    //                    // remove the given item from player's inventory
+    //                    Inventory.instance.RemoveItem(m_OrderItem);
+
+    //                    currentMV += maxMV / 3.5f;
+    //                    if (currentMV > maxMV)
+    //                    {
+    //                        currentMV = maxMV;
+    //                    }
+
+    //                    // remove the given item from npc's order panel and destroy its gameobject;
+    //                    orderSlotLists[i].SetActive(false);
+    //                    orderSlotLists.Remove(orderSlotLists[i]);
+
+    //                    _serveAttemp += 1;
+    //                    //print(_serveAttemp);
+    //                    //Debug.Log("Serve ONE");
+    //                }                    
+    //            }
+    //        }
+
+    //        else
+    //        {
+    //            NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+    //        }
+
+    //        //for (int i = 0; i < orderSlotLists.Count; i++)
+    //        //{
+    //        //    Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
+    //        //    // check if there's the exact order in the list, remove it 
+    //        //    if (Inventory.instance.HasItem(m_OrderItem))
+    //        //    {
+    //        //        // remove the given item from player's inventory
+    //        //        Inventory.instance.RemoveItem(m_OrderItem);
+
+    //        //        currentMV += maxMV/3.5f;
+    //        //        if(currentMV > maxMV)
+    //        //        {
+    //        //            currentMV = maxMV;
+    //        //        }
+
+    //        //        // remove the given item from npc's order panel and destroy its gameobject;
+    //        //        orderSlotLists[i].SetActive(false);
+    //        //        orderSlotLists.Remove(orderSlotLists[i]);
+
+    //        //    }
+    //        //    else
+    //        //    {
+    //        //        NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+    //        //    }    
+    //        //}
+
+    //        if (orderSlotLists.Count == 0)
+    //        {
+    //            getProduct = true;
+
+    //            if (_serveAttemp < 1)
+    //            {
+    //                print("BONUS");
+    //                //player will get score base on npc's current Mood Value
+    //                scoreManager.AddAllOrdersScore(transform.position, GetScoreBasedOnMood());
+    //            }
+    //            else
+    //            {
+    //                print("NO BONUS");
+    //                //player will get score base on npc's current Mood Value
+    //                scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
+    //            }
+
+
+    //            //scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
+    //            GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
+    //            m_HappyVFX.transform.parent = transform;
+    //        }
+
+    //    }
+    //}
+
     // To give npc a product
     private void OnMouseDown()
     {
         if (!isClickable)
             return;
 
-        player.MoveToWaypoint(player.counterWP);        
-        if (player.isAtCounter)
+        player.MoveToWaypoint(player.counterWP);
+        player.SetTargetNPC(this);        
+    }
+
+    public void CheckProductFromPlayer()
+    {        
+        //check if player has all of products
+        bool playerHasAllProducts = true;
+        //bool getBonus = true;
+        foreach (var element in orderSlotLists)
         {
-            //check if player has all of products
-            bool playerHasAllProducts = true;
-            //bool getBonus = true;
-            foreach (var element in orderSlotLists)
+            if (!Inventory.instance.items.Contains(element.GetComponent<OrderSlot>().orderItem))
             {
-                if (!Inventory.instance.items.Contains(element.GetComponent<OrderSlot>().orderItem))
-                {
-                    playerHasAllProducts = false;                    
-                    break;
-                }
+                playerHasAllProducts = false;
+                break;
             }
+        }
 
-            //if player has all products for npc who has more than 1 order, give them all
-            if (playerHasAllProducts && orderLists.Count > 1)
+        //if player has all products for npc who has more than 1 order, give them all
+        if (playerHasAllProducts && orderLists.Count > 1)
+        {
+            Inventory.instance.items.RemoveAll(x => orderLists.Contains(x));
+            Inventory.instance.DisplayItems();
+
+            //clear slot list
+            orderSlotLists.Clear();
+        }
+
+        //if player has just 1 products OR npc orders only 1 products
+        else if (!playerHasAllProducts || orderLists.Count < 2)
+        {
+            for (int i = 0; i < orderSlotLists.Count; i++)
             {
-                Inventory.instance.items.RemoveAll(x => orderLists.Contains(x));
-                Inventory.instance.DisplayItems();
-
-                //clear slot list
-                orderSlotLists.Clear();
-            }
-
-            //if player has just 1 products OR npc orders only 1 products
-            else if (!playerHasAllProducts || orderLists.Count < 2)
-            {
-                for (int i = 0; i < orderSlotLists.Count; i++)
+                Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
+                if (Inventory.instance.HasItem(m_OrderItem))
                 {
-                    Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
-                    if (Inventory.instance.HasItem(m_OrderItem))
+                    // remove the given item from player's inventory
+                    Inventory.instance.RemoveItem(m_OrderItem);
+
+                    currentMV += maxMV / 3.5f;
+                    if (currentMV > maxMV)
                     {
-                        // remove the given item from player's inventory
-                        Inventory.instance.RemoveItem(m_OrderItem);
+                        currentMV = maxMV;
+                    }
 
-                        currentMV += maxMV / 3.5f;
-                        if (currentMV > maxMV)
-                        {
-                            currentMV = maxMV;
-                        }
+                    // remove the given item from npc's order panel and destroy its gameobject;
+                    orderSlotLists[i].SetActive(false);
+                    orderSlotLists.Remove(orderSlotLists[i]);
 
-                        // remove the given item from npc's order panel and destroy its gameobject;
-                        orderSlotLists[i].SetActive(false);
-                        orderSlotLists.Remove(orderSlotLists[i]);
-
-                        _serveAttemp += 1;
-                        //print(_serveAttemp);
-                        //Debug.Log("Serve ONE");
-                    }                    
+                    _serveAttemp += 1;
                 }
             }
+        }
 
+        else
+        {
+            NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+        }
+
+        
+
+        if (orderSlotLists.Count == 0)
+        {
+            getProduct = true;
+
+            if (_serveAttemp < 1)
+            {
+                print("BONUS");
+                //player will get score base on npc's current Mood Value
+                scoreManager.AddAllOrdersScore(transform.position, GetScoreBasedOnMood());
+            }
             else
             {
-                NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+                print("NO BONUS");
+                //player will get score base on npc's current Mood Value
+                scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
             }
 
-            //for (int i = 0; i < orderSlotLists.Count; i++)
-            //{
-            //    Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
-            //    // check if there's the exact order in the list, remove it 
-            //    if (Inventory.instance.HasItem(m_OrderItem))
-            //    {
-            //        // remove the given item from player's inventory
-            //        Inventory.instance.RemoveItem(m_OrderItem);
 
-            //        currentMV += maxMV/3.5f;
-            //        if(currentMV > maxMV)
-            //        {
-            //            currentMV = maxMV;
-            //        }
-
-            //        // remove the given item from npc's order panel and destroy its gameobject;
-            //        orderSlotLists[i].SetActive(false);
-            //        orderSlotLists.Remove(orderSlotLists[i]);
-
-            //    }
-            //    else
-            //    {
-            //        NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
-            //    }    
-            //}
-
-            if (orderSlotLists.Count == 0)
-            {
-                getProduct = true;
-
-                if (_serveAttemp < 1)
-                {
-                    print("BONUS");
-                    //player will get score base on npc's current Mood Value
-                    scoreManager.AddAllOrdersScore(transform.position, GetScoreBasedOnMood());
-                }
-                else
-                {
-                    print("NO BONUS");
-                    //player will get score base on npc's current Mood Value
-                    scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
-                }
-
-
-                //scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
-                GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
-                m_HappyVFX.transform.parent = transform;
-            }
-
-        }
+            //scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
+            GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
+            m_HappyVFX.transform.parent = transform;
+        }        
     }
 
     public void ThinkOfOrder()
@@ -366,7 +460,7 @@ public class NPC2 : MonoBehaviour, IObserver
         for (int i = 0; i < orderNumbers; i++)
         {
             //random order
-            Items order = itemLists[Random.Range(0, itemLists.Count)];
+            Items order = _itemLists[Random.Range(0, _itemLists.Count)];
 
             //add to list
             orderLists.Add(order);
@@ -377,7 +471,7 @@ public class NPC2 : MonoBehaviour, IObserver
             //set order item in order slot
             m_OrderSlot.GetComponent<OrderSlot>().SetOrderItem(order);
             orderSlotLists.Add(m_OrderSlot);
-            itemLists.Remove(order);
+            _itemLists.Remove(order);
         }
         // disable "..." text;
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; 
@@ -501,7 +595,7 @@ public class NPC2 : MonoBehaviour, IObserver
         if (isRainLover)
         {
             //Debug.Log("OOH RAIN");
-            moodDecSp = 0.2f;
+            moodDecSp = 0.1f;
         }
         else
         {

@@ -2164,7 +2164,6 @@ MonoBehaviour:
   pausePanel: {fileID: 7991621222810393299}
   settingPanel: {fileID: 8085770009641382754}
   tutorialPanel: {fileID: 2191529817229558936}
-  _productTutorialPanel: {fileID: 0}
 --- !u!210 &2742952016486418761
 SortingGroup:
   m_ObjectHideFlags: 0
