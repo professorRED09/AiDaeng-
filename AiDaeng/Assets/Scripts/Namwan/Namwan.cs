@@ -18,6 +18,7 @@ public class Namwan : MonoBehaviour, IObserver
     [Header("Setting")]
     public float moveSpeed = 5f;    // Movement speed    
     private bool _isMoving = false;
+    private Animator _animator;
     //public bool canServe = true;
 
     //[SerializeField] float _maxServeAmount = 4f; // Max amount of water cups that Namwan can carries
@@ -38,6 +39,7 @@ public class Namwan : MonoBehaviour, IObserver
     {
         _weatherManager = FindObjectOfType<WeatherManager>();
         _audioSource = GetComponent<AudioSource>();
+        _animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -55,6 +57,8 @@ public class Namwan : MonoBehaviour, IObserver
     // Update is called once per frame
     void Update()
     {
+        Animate();
+
         if (_isMoving && pathQueue.Count > 0)
         {
             MoveToNextWaypoint();
@@ -79,6 +83,13 @@ public class Namwan : MonoBehaviour, IObserver
         //{
         //    canServe = true;
         //}
+    }
+
+    void Animate()
+    {
+        _animator.SetBool("isMoving", _isMoving);
+        _animator.SetFloat("moveX", direction.x);
+        _animator.SetFloat("moveY", direction.y);
     }
 
     public void ChangeTask(CurrentTask task)
@@ -112,7 +123,8 @@ public class Namwan : MonoBehaviour, IObserver
         _isMoving = false;
         if (inventory.serveAmount >= 1 /*&& targetNPC != null*/)
         {
-            targetNPC.GetComponent<NPC2>().ResetMoodBar();
+            //targetNPC.GetComponent<NPC2>().ResetMoodBar();
+            targetNPC.GetComponent<NPC2>().OnGettingWater();
 
             inventory.DeductDrinkWater();
             //serveAmount -= 1;                                   
@@ -135,7 +147,7 @@ public class Namwan : MonoBehaviour, IObserver
         if (inventory.serveAmount >= 1)
         {
             if (!targetNPC.GetComponent<NPC2>().hasUmbrella) {
-                targetNPC.GetComponent<NPC2>().ResetMoodBar();
+                //targetNPC.GetComponent<NPC2>().ResetMoodBar();
                 targetNPC.GetComponent<NPC2>().OnGettingUmbrella();
 
                 inventory.DeductDrinkWater();

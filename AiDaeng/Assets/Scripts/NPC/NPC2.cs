@@ -19,7 +19,7 @@ public class NPC2 : MonoBehaviour, IObserver
     //public GameObject scorePopup;
  
     //[SerializeField] Vector3 transOffset;
-    [SerializeField] float detectLength;
+    float detectLength = 1.2f;
     public LayerMask npcMask;
 
     [Header("UI")]
@@ -47,7 +47,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public int currentWaypointIndex = 0;    
 
     SpriteRenderer sprite;
-
+    
     [Header("Boolean")]
     public bool isMoving;
     public bool isUpset = false;
@@ -71,7 +71,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private Animator animator;
     private NPC_Manager2 npcManager;
     private bool isFacingRight = true;
-    private Vector3 direction;
+    [SerializeField] private Vector3 direction;
 
     public Transform[] orderSpots;
     public Transform takenOrderSpot;
@@ -84,12 +84,17 @@ public class NPC2 : MonoBehaviour, IObserver
     public bool hasUmbrella;
     private UmbrellaTask _umbrellaTask;
 
-    bool isRainLover = true;    
+    bool isRainLover = true;
+
+    private AudioSource _audioSource;
+    [SerializeField] AudioClip _getWaterSFX;
+    [SerializeField] AudioClip _getUmbrellaSFX;
 
     private void Awake()
     {        
         sprite = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>(); 
+        animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
 
         weatherManager = FindObjectOfType<WeatherManager>();
         player = FindObjectOfType<PlayerController1>();
@@ -98,6 +103,8 @@ public class NPC2 : MonoBehaviour, IObserver
 
         scoreManager = FindObjectOfType<ScoreManager>();
         _umbrellaTask = FindObjectOfType<UmbrellaTask>();
+
+        
 
         // set initial value       
         currentMV = maxMV;
@@ -144,6 +151,9 @@ public class NPC2 : MonoBehaviour, IObserver
     public void SetWaypoints(Transform[] assignedWaypoints)
     {
         waypoints = assignedWaypoints;
+        Transform targetWaypoint = waypoints[0];
+        direction = (targetWaypoint.position - transform.position).normalized;
+
         if (waypoints.Length > 0)
         {
             //transform.position = waypoints[0].position; // Start at the first waypoint
@@ -168,7 +178,7 @@ public class NPC2 : MonoBehaviour, IObserver
         }
 
         // check if there's other npc ahead of them
-        WaitForQueue();  
+        WaitForQueue();
 
         currentState.UpdateState(this);
 
@@ -186,19 +196,29 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    public void OnGettingWater()
+    {
+        ResetMoodBar();
+        _audioSource.clip = _getWaterSFX;
+        _audioSource.Play();
+    }
 
     public void OnGettingUmbrella()
     {
         NormalEffect();
+        ResetMoodBar();
 
         _umbrellaIcon.SetActive(true);
         hasUmbrella = true;
+
+        _audioSource.clip = _getUmbrellaSFX;
+        _audioSource.Play();
     }
 
     // Check if there's npc ahead, if yes then stop moving
     void WaitForQueue()
     {
-        if (isUpset) return;
+        if (isUpset /*|| getProduct*/) return;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detectLength, npcMask);
 
         if (hit.collider == null)
@@ -214,10 +234,11 @@ public class NPC2 : MonoBehaviour, IObserver
     public void MoveToWaypoint()
     {
         //if (!isMoving) return;
+        
         Transform targetWaypoint = waypoints[currentWaypointIndex];
         direction = (targetWaypoint.position - transform.position).normalized;
-        transform.position += direction * speed * Time.deltaTime;
-
+        transform.position += speed * Time.deltaTime * direction;
+        //WaitForQueue();
         if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
         {
             transform.position = targetWaypoint.position; // Snap to exact position
@@ -643,7 +664,7 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         Gizmos.color = Color.red;        
         Gizmos.DrawLine(transform.position, direction * detectLength);
-        Gizmos.DrawLine(transform.position, transform.up);
+        //Gizmos.DrawLine(transform.position, transform.up);
     }
 
     void OnWeatherChange()
@@ -662,12 +683,18 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    public void PlayGetItemAnimation()
+    {
+        animator.Play("GetItem");
+    }
+
     public void OnGettingProduct()
-    {        
+    {
+        Debug.Log("OnGettingProduct");      
         isWaiting = false;
         takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
         SwitchState(prayState);
-    } 
+    }
 
     public void OnNotify(WeatherType weather)
     {
@@ -696,7 +723,7 @@ public class NPC2 : MonoBehaviour, IObserver
         animator.SetFloat("currentMood", currentMV);
         animator.SetBool("isMoving", isMoving);
         animator.SetFloat("moveX", direction.x);
-        animator.SetFloat("moveY", direction.y);
+        animator.SetFloat("moveY", direction.y);        
     }
 
     void Flip()

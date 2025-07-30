@@ -21,8 +21,10 @@ public class NPC_OrderState : NPC_BaseState
         else if (npc.getProduct)
         {
             //delay time before swtiching to prayState
-            npc.OnGettingProduct();
-            
+            npc.PlayGetItemAnimation();
+            //npc.OnGettingProduct();
+
+
             //npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
             //npc.SwitchState(npc.prayState);
 

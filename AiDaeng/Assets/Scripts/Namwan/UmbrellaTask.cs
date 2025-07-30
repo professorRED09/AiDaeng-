@@ -7,15 +7,13 @@ using TMPro;
 public class UmbrellaTask : MonoBehaviour
 {
     [Header("Ref")]
-    public Transform waypoint;              // The waypoint for this task
-    /*public int index;  */                     // Index of this waypoint    
-    private Namwan namwan;       // Reference for player script
-    //public Items goalItem;
-    private AudioSource audioSource;
-    //[SerializeField] AudioClip soundFX;
-
-    private float _umbrellaAmount = 0;
     [SerializeField] TMP_Text _umbrellaAmountText;
+    public Transform waypoint;  
+    private Namwan namwan;       
+    private AudioSource audioSource;
+    private float _umbrellaAmount = 0;
+
+    
 
     private void Start()
     {
