@@ -70,7 +70,7 @@ public class Dialog : MonoBehaviour
             //textContinue.gameObject.SetActive(false);
             imageContinue.gameObject.SetActive(false);
         }
-        if (index == 14 && !_isChoice1Finished)
+        if (index == 2 && !_isChoice1Finished)
         {
             _isChoice = true;
             Choice_1.SetActive(true);
@@ -119,12 +119,12 @@ public class Dialog : MonoBehaviour
             textComponent.text = string.Empty;
             UpdateName();
             StartCoroutine(TypeLine());
-            if (index == 4)
+            if (index == 1)
             {
                 if (oldBG != null) oldBG.SetActive(false);
                 if (newBG != null) newBG.SetActive(true);
             }
-            if (index == 8 && daraIMG != null)
+            if (index == 4 && daraIMG != null)
             {
                 daraIMG.SetActive(true);
             }
