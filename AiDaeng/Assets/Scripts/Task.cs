@@ -37,7 +37,7 @@ public class Task : MonoBehaviour
     {        
         if (isFirstTaskOfTheProduct)
         {            
-            mixturePanel.OpenPanel();
+            mixturePanel.ShowPanel();
 
             player.GetComponent<Animator>().SetBool("isDoingTask", true);
             audioSource.clip = taskSFX;

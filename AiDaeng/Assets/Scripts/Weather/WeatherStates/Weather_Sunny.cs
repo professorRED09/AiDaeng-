@@ -11,6 +11,10 @@ public class Weather_Sunny : Weather_BaseState
         weather.anim.SetTrigger("isSunny");
 
         _currentTimer = _timer;
+
+        weather.audioSource.clip = weather.sunnyWeatherSFX;
+        weather.audioSource.Play();
+
         //weather.currentTimer = weather.timer;
         //Debug.Log("Sunny STATE ENTRY");
     }

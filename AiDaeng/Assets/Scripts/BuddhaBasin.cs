@@ -9,6 +9,7 @@ public class BuddhaBasin : MonoBehaviour
     [Header("Settings")]
     public AudioClip taskSFX;
     public AudioClip clickSFX;
+    public AudioClip fullSFX;
 
     public bool isFull;    // check if the basin is full
     public float maxWB; // max quantity of water in the basin
@@ -80,6 +81,11 @@ public class BuddhaBasin : MonoBehaviour
     void OnFullBasin()
     {
         isFull = true;
+
+        // play soundFX
+        audioSource.clip = fullSFX;
+        audioSource.Play();
+
         NotificationManager.instance.AddNoti("น้ำเต็มแล้วน้อง!");        
     }
 

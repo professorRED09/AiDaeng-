@@ -11,26 +11,63 @@ public class MixturePanel : MonoBehaviour
     private AudioSource _audioSource;
 
     private bool isOpened;
-    private Animator animator;    
+    [SerializeField] private bool _isClicked = false;
+    private Animator animator;
+    private float _defaultTimer = 2f;
+    private float _timer;
+    private bool _isUIVisible = false;
 
     private void Awake()
     {        
         animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-        tempItemImage = transform.GetChild(0).GetComponent<Image>();        
-    }   
+        tempItemImage = transform.GetChild(0).GetComponent<Image>();
 
-    public void OpenPanel()
-    {
-        isOpened = true;
-        animator.SetBool("isOpened", isOpened);
+        _timer = _defaultTimer;
     }
 
-    public void ClosePanel()
+    private void Update()
     {
-        isOpened = false;
-        animator.SetBool("isOpened", isOpened);
-        transform.GetChild(1).gameObject.SetActive(false);
+        // Detect any input
+        if (_isClicked)
+        {
+            // Reset timer and show UI if it's hidden
+            _timer = _defaultTimer;
+            _isClicked = false;
+
+            if (!_isUIVisible)
+            {
+                ShowPanel();
+            }
+        }
+        else
+        {
+            // Count time since last input
+            _timer -= Time.deltaTime;
+
+            if ( _timer <= 0 && _isUIVisible && tempItem == null)
+            {
+                HidePanel();
+            }
+        }
+    }
+
+    public void ShowPanel()
+    {
+        //isOpened = true;
+        _isClicked = true;
+        //animator.SetBool("isOpened", isOpened);
+        _isUIVisible = true;
+        animator.SetTrigger("Open");
+    }
+
+    public void HidePanel()
+    {
+        if (_isClicked) return;
+        //isOpened = false;
+        //animator.SetBool("isOpened", isOpened);
+        _isUIVisible = false;
+        animator.SetTrigger("Close");        
     }
 
     public void UpdateTempItem(Items item)
@@ -63,11 +100,15 @@ public class MixturePanel : MonoBehaviour
         if(tempItem == null)
         {
             tempItemImage.sprite = null;
-            ClosePanel();
+
+            //disable "เสร็จแล้วจ้า!" text   
+            transform.GetChild(1).gameObject.SetActive(false);
+            //_isClicked = false;
+            //HidePanel();
         }
     }
 
-    // gradually disappear when item is complete
+    
     
 
 

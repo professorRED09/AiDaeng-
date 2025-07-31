@@ -657,7 +657,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6386602113128435493, guid: d5ed711f5b7a9f2489598fe6b7163c66, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -776,7 +776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskSFX: {fileID: 0}
-  clickSFX: {fileID: 0}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 244643453}
   goalItem: {fileID: 11400000, guid: 50b4c1fdeb011d742b16f6fe5418f44a, type: 2}
   isFirstTaskOfTheProduct: 1
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSFX: {fileID: 0}
+  taskSFX: {fileID: 8300000, guid: 012ffb08d04005346b218c9b9f34c060, type: 3}
   clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 1071476202}
   goalItem: {fileID: 11400000, guid: 3344601e3a2b9e648949bb22a957d51e, type: 2}
@@ -1762,7 +1762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSFX: {fileID: 0}
+  taskSFX: {fileID: 8300000, guid: 012ffb08d04005346b218c9b9f34c060, type: 3}
   clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 498962622}
   goalItem: {fileID: 11400000, guid: 89f49ec4b74a4c141b0060586f201e81, type: 2}
@@ -3593,7 +3593,7 @@ MonoBehaviour:
   _namwan: {fileID: 91148722}
   _drinkWaterTask: {fileID: 716498550}
   _umbrellaTask: {fileID: 2027653564}
-  currentLevel: 0
+  currentLevel: 1
 --- !u!1 &927350689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3156429153952712613, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
@@ -3700,7 +3700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSFX: {fileID: 0}
+  taskSFX: {fileID: 8300000, guid: ad2a3f5f00692ad48a512dbe414631a9, type: 3}
   clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 382107800}
   goalItem: {fileID: 11400000, guid: 2a340d89eafa9674fa4e9a5eb10e787d, type: 2}
@@ -4113,8 +4113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c027a4a58a763614f8af04edc0eddb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSFX: {fileID: 0}
+  taskSFX: {fileID: 8300000, guid: ad2a3f5f00692ad48a512dbe414631a9, type: 3}
   clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
+  fullSFX: {fileID: 8300000, guid: 71dfb9d35c570cc4b972a75cbee90a0f, type: 3}
   isFull: 0
   maxWB: 8
   currentWB: 0
@@ -10706,6 +10707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskSFX: {fileID: 0}
   clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
+  fullSFX: {fileID: 0}
   isFull: 0
   maxWB: 8
   currentWB: 0
@@ -10967,7 +10969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskSFX: {fileID: 0}
-  clickSFX: {fileID: 0}
+  clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 2032695720}
   goalItem: {fileID: 11400000, guid: 28a65c88a0950dd43824c90d5c13d96c, type: 2}
   isFirstTaskOfTheProduct: 1
@@ -11134,7 +11136,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 6386602113128435493, guid: d5ed711f5b7a9f2489598fe6b7163c66, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -11229,6 +11231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1339018600}
   - component: {fileID: 1339018599}
+  - component: {fileID: 1339018601}
   m_Layer: 0
   m_Name: '#Weather Manager'
   m_TagString: Untagged
@@ -11251,6 +11254,10 @@ MonoBehaviour:
   weatherFilter: {fileID: 168078762}
   anim: {fileID: 1667287569}
   rainFX: {fileID: 1747304876}
+  audioSource: {fileID: 1339018601}
+  normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
+  sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
+  rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
 --- !u!4 &1339018600
 Transform:
   m_ObjectHideFlags: 0
@@ -11266,6 +11273,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1339018601
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339018598}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1339171759
 GameObject:
   m_ObjectHideFlags: 0
@@ -11638,7 +11741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSFX: {fileID: 0}
+  taskSFX: {fileID: 8300000, guid: 012ffb08d04005346b218c9b9f34c060, type: 3}
   clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 1359722581}
   goalItem: {fileID: 11400000, guid: b7bbfd8c47e016e449c890b743d0e2e3, type: 2}
@@ -12273,7 +12376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad0f1713f2df86459d9340e7e0203cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSFX: {fileID: 0}
+  taskSFX: {fileID: 8300000, guid: 012ffb08d04005346b218c9b9f34c060, type: 3}
   clickSFX: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
   waypoint: {fileID: 281928869}
   goalItem: {fileID: 11400000, guid: 333977778b5d6944b8dc7d9dbec56691, type: 2}
@@ -18937,9 +19040,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: //Main UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6239143374079321834, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: timeToDisplay
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6296042020480868644, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629184944882397567, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_text
+      value: '0
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 7989246329781369854, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: _productTutorialPanel

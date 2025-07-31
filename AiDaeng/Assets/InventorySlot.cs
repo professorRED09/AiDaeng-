@@ -73,13 +73,13 @@ public class InventorySlot : MonoBehaviour
             if (_currentSprite == null && newSprite != null)
             {
                 Vector3 thePosition = transform.TransformPoint(transform.position);
-                Instantiate(_addItemPrefab, thePosition, Quaternion.identity);
-            }                
+                //Instantiate(_addItemPrefab, thePosition, Quaternion.identity);
+            }
 
             else if (_currentSprite != null && newSprite == null)
             {
                 Vector3 thePosition = transform.TransformPoint(transform.position);
-                Instantiate(_removeItemPrefab, thePosition, Quaternion.identity);
+                //Instantiate(_removeItemPrefab, thePosition, Quaternion.identity);
             }
 
             else

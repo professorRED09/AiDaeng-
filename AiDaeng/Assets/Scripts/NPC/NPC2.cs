@@ -89,6 +89,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private AudioSource _audioSource;
     [SerializeField] AudioClip _getWaterSFX;
     [SerializeField] AudioClip _getUmbrellaSFX;
+    [SerializeField] AudioClip _thankSFX;
 
     private void Awake()
     {        
@@ -686,11 +687,14 @@ public class NPC2 : MonoBehaviour, IObserver
     public void PlayGetItemAnimation()
     {
         animator.Play("GetItem");
+        _audioSource.clip = _thankSFX;
+        _audioSource.Play();
     }
 
     public void OnGettingProduct()
     {
-        Debug.Log("OnGettingProduct");      
+        //Debug.Log("OnGettingProduct");   
+
         isWaiting = false;
         takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
         SwitchState(prayState);

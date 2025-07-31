@@ -179,7 +179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moodDecSp: 0.2
   happyVFX: {fileID: 9014111512956324487, guid: f239bbefc1998194fbf6c6500d4328ed, type: 3}
-  detectLength: 5
   npcMask:
     serializedVersion: 2
     m_Bits: 8
@@ -221,6 +220,7 @@ MonoBehaviour:
   hasUmbrella: 0
   _getWaterSFX: {fileID: 8300000, guid: dcc0c8b040054764caadc90bc4eb7276, type: 3}
   _getUmbrellaSFX: {fileID: 8300000, guid: 4554051cc250ecc4388c07f5954ba3b9, type: 3}
+  _thankSFX: {fileID: 8300000, guid: fa406cbdda539824696555050e87da98, type: 3}
 --- !u!70 &7674193820973781169
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

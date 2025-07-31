@@ -10,15 +10,25 @@ public class WeatherManager : Subject
 
     [Header("Rainy")]
     public ParticleSystem rainFX;
-    
-    private float weatherTimer;
-    private float currentWeatherTimer;    
+
+    //private float weatherTimer;
+    //private float currentWeatherTimer;    
+    [Header("Sound")]
+    public AudioSource audioSource;
+    public AudioClip normalWeatherSFX;
+    public AudioClip sunnyWeatherSFX;
+    public AudioClip rainyWeatherSFX;
 
     //FSM Stuff
     public Weather_BaseState currentState;
     public Weather_Normal normalState = new Weather_Normal();
     public Weather_Rainy rainyState = new Weather_Rainy();
     public Weather_Sunny sunnyState = new Weather_Sunny();
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Start()
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Weather_Rainy : Weather_BaseState
 {
-    private float _timer = 200f;
+    private float _timer = 10f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)
@@ -12,6 +12,10 @@ public class Weather_Rainy : Weather_BaseState
         weather.rainFX.Play();
 
         _currentTimer = _timer;
+
+        weather.audioSource.clip = weather.rainyWeatherSFX;
+        weather.audioSource.Play();
+
         //weather.currentTimer = weather.timer;
         //Debug.Log("RAINY STATE ENTRY");
     }
