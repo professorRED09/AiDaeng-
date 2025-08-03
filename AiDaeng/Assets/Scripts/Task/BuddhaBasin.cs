@@ -39,7 +39,7 @@ public class BuddhaBasin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ResetBasin());
+        //StartCoroutine(ResetBasin());
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -54,7 +54,9 @@ public class BuddhaBasin : MonoBehaviour
     {
         audioSource.clip = taskSFX;
         audioSource.Play(); // play soundFX
+
         yield return new WaitForSeconds(0.7f);
+
         currentWB = 0;
         isFull = false;
         UpdateWaterBar(currentWB, maxWB);

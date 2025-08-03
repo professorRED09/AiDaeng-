@@ -8,16 +8,27 @@ using UnityEngine.SceneManagement;
 public class LevelSelect : MonoBehaviour
 {
     [SerializeField] string selectedSceneName;
-    [SerializeField] GameObject daeng;
+    [SerializeField] DaengLevelSelect daeng;
 
     [Header("Cutscene Name")]
     [SerializeField] string cutscene1Name;
     [SerializeField] string cutscene2Name;
     [SerializeField] string cutscene3Name;
 
+    [Header("Level position")]
+    [SerializeField] Transform level1Pos; 
+    [SerializeField] Transform level2Pos;
+    [SerializeField] Transform level3Pos;
+
+
     [Header("UI")]
     [SerializeField] TMP_Text levelNameText;
-    
+
+    private void Start()
+    {
+        OnSelectLevel1();
+    }
+
     public void OnPressPlay()
     {
         if(selectedSceneName == null)
@@ -43,7 +54,9 @@ public class LevelSelect : MonoBehaviour
         }
         selectedSceneName = cutscene1Name;
         levelNameText.text = "-ด่านที่ 1-";
+
         //Daeng walk to the selected cutscene
+        daeng.SetWaypoint(level1Pos.TransformPoint(level2Pos.position)); ;
     }
 
     public void OnSelectLevel2()
@@ -56,7 +69,9 @@ public class LevelSelect : MonoBehaviour
         //change selectedSceneName to cutscene name
         selectedSceneName = cutscene2Name;
         levelNameText.text = "-ด่านที่ 2-";
+
         //Daeng walk to the selected cutscene
+        daeng.SetWaypoint(level2Pos.TransformPoint(level2Pos.position));
     }
 
     public void OnSelectLevel3()
@@ -69,6 +84,8 @@ public class LevelSelect : MonoBehaviour
         //change selectedSceneName to cutscene name
         selectedSceneName = cutscene3Name;
         levelNameText.text = "-ด่านที่ 3-";
+
         //Daeng walk to the selected cutscene
+        daeng.SetWaypoint(level3Pos.TransformPoint(level2Pos.position));
     }
 }

@@ -5,19 +5,17 @@ using UnityEngine;
 public class DrinkWaterTask : MonoBehaviour, IObserver
 {
     [Header("Ref")]
-    public Transform waypoint;              // The waypoint for this task
-    /*public int index;  */                     // Index of this waypoint    
-    private Namwan namwan;       // Reference for player script
-    //public Items goalItem;
+    public Transform waypoint;     
+  
+    private Namwan namwan;       
     private AudioSource audioSource;
-    //[SerializeField] AudioClip soundFX;
     [SerializeField] private bool _isAvailable = true;
     private WeatherManager weatherManager;
 
     void Awake()
     {
         weatherManager = FindObjectOfType<WeatherManager>();
-        namwan = FindObjectOfType<Namwan>(); // get reference from player script
+        namwan = FindObjectOfType<Namwan>(); 
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -37,10 +35,10 @@ public class DrinkWaterTask : MonoBehaviour, IObserver
             {
                 Debug.Log("CANT PICK");
                 return;
-            }
+            }           
             
-            namwan.currentTask = Namwan.CurrentTask.DrinkWater;
-            namwan.ChangeTask(namwan.currentTask);
+            //Change current task for namwan
+            namwan.ChangeTask(Namwan.CurrentTask.DrinkWater);
         }
     }
 

@@ -10,7 +10,7 @@ public class NPC_PrayState : NPC_BaseState
         npc.HideOrder();        
         npc.SetWaypoints(npc.wayToPray);
 
-        Debug.Log("THANKS, I'M MA GO prayING");
+        //Debug.Log("THANKS, I'M MA GO prayING");
     }
 
     public override void UpdateState(NPC2 npc)

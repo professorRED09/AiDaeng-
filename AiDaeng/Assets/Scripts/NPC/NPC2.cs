@@ -197,8 +197,24 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
+    IEnumerator GetDrinkWaterBuff()
+    {
+        moodDecSp = 0.1f;
+        yield return new WaitForSeconds(2f);
+
+        moodDecSp = defaultMoodDecSp;
+    }
+
     public void OnGettingWater()
     {
+        // NPC won't recieve drinking water on rainy weather
+        if(weatherManager.currentState == weatherManager.rainyState)
+        {
+            Debug.Log("I'm not thirsty. It's already cold!");
+            return;
+        }
+
+        StartCoroutine(GetDrinkWaterBuff());
         ResetMoodBar();
         _audioSource.clip = _getWaterSFX;
         _audioSource.Play();
@@ -459,6 +475,26 @@ public class NPC2 : MonoBehaviour, IObserver
         }        
     }
 
+    public void PlayGetItemAnimation()
+    {
+        //hide order bubble
+        orderBubble.SetActive(false);
+
+        animator.Play("GetItem");
+        _audioSource.clip = _thankSFX;
+        _audioSource.Play();
+    }
+
+    public void OnGettingProduct()
+    {
+        //Debug.Log("OnGettingProduct");   
+
+        isWaiting = false;
+        takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
+ 
+        SwitchState(prayState);
+    }
+
     public void ThinkOfOrder()
     {
         orderPanel.SetActive(true);
@@ -507,7 +543,11 @@ public class NPC2 : MonoBehaviour, IObserver
         {            
             namwan.MoveToWaypoint(transform);// called Namwan to give some water cups for this npc
             namwan.targetNPC = this;
-        }        
+        }
+        else
+        {
+            print("CAN'T USE NAMWAN");
+        }
     }
     
     public void SwitchState(NPC_BaseState state)
@@ -548,6 +588,8 @@ public class NPC2 : MonoBehaviour, IObserver
 
     public void UpdateMoodBar()
     {
+        if (getProduct) return;
+
         float targetFillAmount = currentMV / maxMV;
         _moodBarFill.fillAmount = targetFillAmount;
         //_moodBarFill.DOFillAmount(targetFillAmount, 0.5f);
@@ -682,22 +724,6 @@ public class NPC2 : MonoBehaviour, IObserver
         {
             NormalEffect();
         }
-    }
-
-    public void PlayGetItemAnimation()
-    {
-        animator.Play("GetItem");
-        _audioSource.clip = _thankSFX;
-        _audioSource.Play();
-    }
-
-    public void OnGettingProduct()
-    {
-        //Debug.Log("OnGettingProduct");   
-
-        isWaiting = false;
-        takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
-        SwitchState(prayState);
     }
 
     public void OnNotify(WeatherType weather)

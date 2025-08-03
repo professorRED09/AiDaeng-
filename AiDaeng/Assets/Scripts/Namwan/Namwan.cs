@@ -44,14 +44,8 @@ public class Namwan : MonoBehaviour, IObserver
 
     void Start()
     {
-        //set initial serve amount
-        //serveAmount = _maxServeAmount;
-        //serveAmountText.text = serveAmount.ToString();
-
         //set initial task
-        ChangeTask(CurrentTask.DrinkWater);
-        //currentTask = CurrentTask.DrinkWater;
-        
+        ChangeTask(CurrentTask.DrinkWater);     
     }
 
     // Update is called once per frame
@@ -70,19 +64,13 @@ public class Namwan : MonoBehaviour, IObserver
 
         // check if Namwan is at a drink water waypoint and current task is drinkWater, if yes, then fill water
         if (transform.position == waypoints[0].position && currentTask == CurrentTask.DrinkWater)
-        {                      
-            inventory.RefillDrinkWater();
+        {
+            inventory.OnDrinkWaterTask();
         }
-        
-
-        //if (serveAmount < 1)
-        //{
-        //    canServe = false;
-        //}
-        //else
-        //{
-        //    canServe = true;
-        //}
+        else if (transform.position == waypoints[1].position && currentTask == CurrentTask.Umbrella)
+        {
+            inventory.OnUmbrellaTask();
+        }
     }
 
     void Animate()
@@ -90,6 +78,8 @@ public class Namwan : MonoBehaviour, IObserver
         _animator.SetBool("isMoving", _isMoving);
         _animator.SetFloat("moveX", direction.x);
         _animator.SetFloat("moveY", direction.y);
+
+        _animator.SetFloat("serveAmount", inventory.serveAmount);
     }
 
     public void ChangeTask(CurrentTask task)
@@ -98,25 +88,14 @@ public class Namwan : MonoBehaviour, IObserver
         {
             case CurrentTask.DrinkWater:
                 currentTask = CurrentTask.DrinkWater;
-                inventory.OnDrinkWaterTask();
+                //inventory.OnDrinkWaterTask();
                 break;
             case CurrentTask.Umbrella:
                 currentTask = CurrentTask.Umbrella;
-                inventory.OnUmbrellaTask();
+                //inventory.OnUmbrellaTask();
                 break;
         }
     }
-    
-
-    //void RefillDrinkWater()
-    //{        
-    //    if (serveAmount < _maxServeAmount)
-    //    {
-    //        //audioSource.Play(); // play soundFX
-    //        serveAmount += 1 * Time.deltaTime;
-    //        serveAmountText.text = ((int)serveAmount).ToString();
-    //    }        
-    //}
 
     IEnumerator GiveDrinkWater()
     {
@@ -125,13 +104,10 @@ public class Namwan : MonoBehaviour, IObserver
         {
             //targetNPC.GetComponent<NPC2>().ResetMoodBar();
             targetNPC.GetComponent<NPC2>().OnGettingWater();
-
             inventory.DeductDrinkWater();
-            //serveAmount -= 1;                                   
-            //serveAmountText.text = ((int)serveAmount).ToString();         // update on UI
             targetNPC = null;                                   // set target to null
             _audioSource.Play();
-            Invoke(nameof(BackToRefill), 4f);
+            Invoke(nameof(BackToTheTask), 4f);
         }
         else
         {
@@ -147,14 +123,14 @@ public class Namwan : MonoBehaviour, IObserver
         if (inventory.serveAmount >= 1)
         {
             if (!targetNPC.GetComponent<NPC2>().hasUmbrella) {
-                //targetNPC.GetComponent<NPC2>().ResetMoodBar();
+
                 targetNPC.GetComponent<NPC2>().OnGettingUmbrella();
 
-                inventory.DeductDrinkWater();
-                //serveAmount -= 1;                                   
-                //serveAmountText.text = ((int)serveAmount).ToString();         // update on UI
-                targetNPC = null;                                               // set target to null
+                inventory.DecreaseUmbrella();
+
+                targetNPC = null;                                               
                 _audioSource.Play();
+                Invoke(nameof(BackToTheTask), 4f);
             }
             else
             {
@@ -169,11 +145,25 @@ public class Namwan : MonoBehaviour, IObserver
         yield return null;
     }
 
-    void BackToRefill()
+    void BackToTheTask()
     {
         if (_isMoving) return;
-        MoveToWaypoint(waypoints[0]);        
+
+        if(currentTask == CurrentTask.DrinkWater)
+        {
+            MoveToWaypoint(waypoints[0]);
+        }
+        else
+        {
+            MoveToWaypoint(waypoints[1]);
+        }
     }
+
+    //void BackToRefill()
+    //{
+    //    if (_isMoving) return;
+    //    MoveToWaypoint(waypoints[0]);        
+    //}
 
     public void OnNotify(WeatherType weather)
     {
