@@ -105,7 +105,7 @@ public class Namwan : MonoBehaviour, IObserver
             //targetNPC.GetComponent<NPC2>().ResetMoodBar();
             targetNPC.GetComponent<NPC2>().OnGettingWater();
             inventory.DeductDrinkWater();
-            targetNPC = null;                                   // set target to null
+            targetNPC = null;                                  
             _audioSource.Play();
             Invoke(nameof(BackToTheTask), 4f);
         }

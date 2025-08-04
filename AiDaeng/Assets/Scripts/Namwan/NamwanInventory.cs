@@ -15,25 +15,17 @@ public class NamwanInventory : MonoBehaviour
     [Header("Settings")]
     [SerializeField] float _maxDrinkWaterServeAmount;
     //[SerializeField] float _maxUmbrellaServeAmount;
-
-    private float _drinkWaterServeAmount;
-            
-    private float _umbrellaServeAmount;
+    [SerializeField] private float _drinkWaterServeAmount;
+    [SerializeField] private float _umbrellaServeAmount;
 
     public bool canServe = true;
     [SerializeField] private UmbrellaTask _umbrellaTask;
 
-    private void Awake()
-    {
-        
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-        _drinkWaterServeAmount = _maxDrinkWaterServeAmount;
-
-        //initial task will be drink water task   
+        _drinkWaterServeAmount = _maxDrinkWaterServeAmount;           
         UpdateOnServeAmountUI(_drinkWaterServeAmount);
     }
 
@@ -80,28 +72,37 @@ public class NamwanInventory : MonoBehaviour
         _serveAmountText.text = ((int)serveAmount).ToString();
     }
 
-    public void RefillDrinkWater()
+    //public void RefillDrinkWater()
+    //{
+    //    if (_drinkWaterServeAmount < _maxDrinkWaterServeAmount)
+    //    {  
+    //        _drinkWaterServeAmount += 1 * Time.time;
+    //        UpdateOnServeAmountUI(_drinkWaterServeAmount);
+    //        print("ASD");
+    //    }
+    //}
+
+    public IEnumerator RefillDrinkWater()
     {
         if (_drinkWaterServeAmount < _maxDrinkWaterServeAmount)
-        {  
-            _drinkWaterServeAmount += 1 * Time.time;
+        {
+            _drinkWaterServeAmount += 1 * Time.deltaTime;
             UpdateOnServeAmountUI(_drinkWaterServeAmount);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
     public void OnDrinkWaterTask()
     {
         _taskIcon.sprite = _taskIcons[0];
-        UpdateOnServeAmountUI(_umbrellaServeAmount);
-
-        RefillDrinkWater();
+        UpdateOnServeAmountUI(_drinkWaterServeAmount);
+        StartCoroutine(RefillDrinkWater());
     }
 
     public void OnUmbrellaTask()
     {
         _taskIcon.sprite = _taskIcons[1];
-        UpdateOnServeAmountUI(_drinkWaterServeAmount);
-
+        UpdateOnServeAmountUI(_umbrellaServeAmount);
         TakeUmbrella(_umbrellaTask);
     }
 }

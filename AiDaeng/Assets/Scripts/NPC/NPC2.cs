@@ -541,12 +541,12 @@ public class NPC2 : MonoBehaviour, IObserver
     {        
         if (Input.GetMouseButtonDown(1) && namwan != null && !isMoving && namwan.inventory.canServe)
         {            
-            namwan.MoveToWaypoint(transform);// called Namwan to give some water cups for this npc
+            namwan.MoveToWaypoint(transform);
             namwan.targetNPC = this;
         }
         else
         {
-            print("CAN'T USE NAMWAN");
+            //print("CAN'T USE NAMWAN");
         }
     }
     

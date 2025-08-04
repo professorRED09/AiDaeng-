@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Weather_Normal : Weather_BaseState
 {
-    private float _timer = 10f;
+    private float _timer = 5f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)
@@ -13,11 +13,6 @@ public class Weather_Normal : Weather_BaseState
 
         weather.audioSource.clip = weather.normalWeatherSFX;
         weather.audioSource.Play();
-
-        // return everything to normal
-        //weather.anim.SetTrigger("isNormal");
-        //weather.currentTimer = weather.timer;
-        //Debug.Log("NORMAL STATE ENTRY");
     }
 
     public override void UpdateState(WeatherManager weather)
