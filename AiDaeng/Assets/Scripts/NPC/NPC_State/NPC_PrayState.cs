@@ -15,7 +15,11 @@ public class NPC_PrayState : NPC_BaseState
 
     public override void UpdateState(NPC2 npc)
     {
-        
+        if(npc.isUpset)
+        {
+            npc.SwitchState(npc.rageLeaveState);
+        }
+
         //if(prayingTime > 0)
         //{
         //    prayingTime -= 1 * Time.deltaTime;

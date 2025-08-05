@@ -11,14 +11,12 @@ public class NPC2 : MonoBehaviour, IObserver
     private float maxMV = 10f;   // MV => mood value
     private float currentMV;
 
-    [SerializeField] private float moodDecSp = 0.2f;      // decreasing speed of mood value, assign as public for adjusting in other script
-    private float defaultMoodDecSp;
+    [SerializeField] private float moodDecSp ;      // decreasing speed of mood value, assign as public for adjusting in other script
+    [SerializeField] private float defaultMoodDecSp = 0.2f;
     //public float prayingTime = 2;
     private readonly float speed = 5f;
     public GameObject happyVFX;
-    //public GameObject scorePopup;
- 
-    //[SerializeField] Vector3 transOffset;
+
     float detectLength = 1.2f;
     public LayerMask npcMask;
 
@@ -103,9 +101,7 @@ public class NPC2 : MonoBehaviour, IObserver
         npcManager = FindObjectOfType<NPC_Manager2>();
 
         scoreManager = FindObjectOfType<ScoreManager>();
-        _umbrellaTask = FindObjectOfType<UmbrellaTask>();
-
-        
+        _umbrellaTask = FindObjectOfType<UmbrellaTask>();        
 
         // set initial value       
         currentMV = maxMV;
@@ -140,7 +136,8 @@ public class NPC2 : MonoBehaviour, IObserver
         wayToRageLeave = npcManager.wpToRageLeave;
 
         // store default value in temp value
-        defaultMoodDecSp = moodDecSp;
+        //defaultMoodDecSp = moodDecSp;
+        moodDecSp = defaultMoodDecSp;
 
         // make npc recognize the weather when get spawned
         OnWeatherChange();
@@ -190,6 +187,7 @@ public class NPC2 : MonoBehaviour, IObserver
         else if (isUpset)
         {
             isMoving = true;
+            //SwitchState(rageLeaveState);
         }
         else
         {
@@ -199,9 +197,9 @@ public class NPC2 : MonoBehaviour, IObserver
 
     IEnumerator GetDrinkWaterBuff()
     {
-        moodDecSp = 0.1f;
+        //float m_tempDecSp = moodDecSp;
+        moodDecSp = 0.1f;       
         yield return new WaitForSeconds(2f);
-
         moodDecSp = defaultMoodDecSp;
     }
 
@@ -478,7 +476,9 @@ public class NPC2 : MonoBehaviour, IObserver
     public void PlayGetItemAnimation()
     {
         //hide order bubble
-        orderBubble.SetActive(false);
+        //orderBubble.SetActive(false);
+        orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = false;     // disable panel image
+        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false;  // disable "..." text;
 
         animator.Play("GetItem");
         _audioSource.clip = _thankSFX;
@@ -489,9 +489,9 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         //Debug.Log("OnGettingProduct");   
 
-        isWaiting = false;
-        takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
- 
+        //isWaiting = false;
+        ResetMoodBar();
+        takenOrderSpot.GetComponent<OrderSpot>().isFree = true; 
         SwitchState(prayState);
     }
 
@@ -499,9 +499,9 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         orderPanel.SetActive(true);
         
-        orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = true; // enable panel image
-        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = true; // enable "..." text;
-        StartCoroutine(OrderProduct()); // set text active
+        orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = true;     // enable panel image
+        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = true;  // enable "..." text;
+        StartCoroutine(OrderProduct());                                             // set text active
         //ResetMoodBar();
         //// play animation
     }
@@ -567,8 +567,8 @@ public class NPC2 : MonoBehaviour, IObserver
 
     public void DecreaseMoodBar()
     {
-        if (isWaiting == false)
-            return;
+        //if (isWaiting == false)
+        //    return;
 
         // decreasing emotion value as the time goes by
         currentMV -= moodDecSp * Time.deltaTime;
@@ -583,7 +583,10 @@ public class NPC2 : MonoBehaviour, IObserver
     // hide order bubble ui
     public void HideOrder()
     {
-        orderBubble.SetActive(false);
+        orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = false;     // disable panel image
+        orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false;  // disable "..." text;
+        orderBubble.transform.GetChild(2).gameObject.SetActive(false);
+        //orderBubble.SetActive(false);
     }
 
     public void UpdateMoodBar()
@@ -648,6 +651,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public void NormalEffect()
     {
         sprite.color = Color.white;
+        defaultMoodDecSp = 0.2f;
         moodDecSp = defaultMoodDecSp; 
         //print("TODAY IS A GOOD DAY, EH?");
     }
@@ -658,15 +662,15 @@ public class NPC2 : MonoBehaviour, IObserver
 
         if (isRainLover)
         {
-            //Debug.Log("OOH RAIN");
-            moodDecSp = 0.1f;
+            defaultMoodDecSp = 0.1f;            
         }
         else
         {
             //Debug.Log("EEW RAIN");
-            moodDecSp = 0.45f;
+            defaultMoodDecSp = 0.45f;
         }
 
+        moodDecSp = defaultMoodDecSp;
         sprite.color = Color.blue;
         //moodDecSp = 1;
         //print("OH! RAIN! RUN!");
@@ -677,7 +681,8 @@ public class NPC2 : MonoBehaviour, IObserver
         if (hasUmbrella) return;
 
         sprite.color = Color.red;
-        moodDecSp = 1;
+        defaultMoodDecSp = 1;
+        moodDecSp = defaultMoodDecSp;
         //print("ITS SO DAMN HOT MANN");
     }
 
@@ -686,6 +691,7 @@ public class NPC2 : MonoBehaviour, IObserver
         // make it go above an inch so it won't overlap with the other
         direction = Vector3.left;
         transform.position += speed * Time.deltaTime * direction;
+        //print("RAGE");
 
         if (transform.position.x <= -10)
         {
