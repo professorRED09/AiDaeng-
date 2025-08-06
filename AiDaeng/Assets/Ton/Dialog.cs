@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -19,7 +19,7 @@ public class Dialog : MonoBehaviour
     [Header("Image")]
     public GameObject oldBG;
     public GameObject newBG;
-    public GameObject daraIMG;
+    public GameObject NpcIMG;
 
     [Header("Choice")]
     public GameObject Choice_1;
@@ -119,15 +119,6 @@ public class Dialog : MonoBehaviour
             textComponent.text = string.Empty;
             UpdateName();
             StartCoroutine(TypeLine());
-            if (index == 1)
-            {
-                if (oldBG != null) oldBG.SetActive(false);
-                if (newBG != null) newBG.SetActive(true);
-            }
-            if (index == 4 && daraIMG != null)
-            {
-                daraIMG.SetActive(true);
-            }
 
         }
     }

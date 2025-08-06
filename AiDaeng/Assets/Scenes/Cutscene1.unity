@@ -1567,11 +1567,11 @@ MonoBehaviour:
   textComponent: {fileID: 1659598518}
   textNames: {fileID: 1263141783}
   textContinue: {fileID: 0}
-  imageContinue: {fileID: 0}
+  imageContinue: {fileID: 2113861136}
   _isChoice: 0
   oldBG: {fileID: 0}
   newBG: {fileID: 0}
-  daraIMG: {fileID: 0}
+  NpcIMG: {fileID: 0}
   Choice_1: {fileID: 568403024}
   Choice_2: {fileID: 19752191}
   Choice_3: {fileID: 1041687040}
@@ -1580,7 +1580,11 @@ MonoBehaviour:
   - Hell Yeah!
   - Hell Yeah2
   - 3
+  - 3
+  - 3
   names:
+  - kp,.;p
+  - Hkp,.;p
   - kp,.;p
   - Hkp,.;p
   - kp,.;p
