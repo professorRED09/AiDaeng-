@@ -7,12 +7,12 @@ public class Weather_Normal : Weather_BaseState
 
     public override void EnterState(WeatherManager weather)
     {
-        weather.anim.SetTrigger("isNormal");
+        //weather.anim.SetTrigger("isNormal");
 
         _currentTimer = _timer;
 
-        weather.audioSource.clip = weather.normalWeatherSFX;
-        weather.audioSource.Play();
+        //weather.audioSource.clip = weather.normalWeatherSFX;
+        //weather.audioSource.Play();
     }
 
     public override void UpdateState(WeatherManager weather)
@@ -21,8 +21,7 @@ public class Weather_Normal : Weather_BaseState
         _currentTimer -= Time.deltaTime; 
         if (_currentTimer <= 0)
         {
-            weather.anim.ResetTrigger("isNormal");
-
+            //weather.anim.ResetTrigger("isNormal");
             weather.SwitchState(weather.sunnyState);
         }
 

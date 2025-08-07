@@ -58,7 +58,6 @@ public class DaengLevelSelect : MonoBehaviour
     public void SetWaypoint(Vector2 transform)
     {
         _targetPos = transform;
-        Debug.Log("ASD");
     }
 
     void Animate()

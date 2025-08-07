@@ -24,10 +24,10 @@ public class MainMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        if(logoImage != null)
-        {
-            logoImage.DOScale(logoImage.localScale * 0.95f, 1f).SetEase(Ease.InQuad).SetLoops(-1, LoopType.Yoyo);
-        }
+        //if(logoImage != null)
+        //{
+        //    logoImage.DOScale(logoImage.localScale * 0.95f, 1f).SetEase(Ease.InQuad).SetLoops(-1, LoopType.Yoyo);
+        //}
         
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using TMPro;
 
 public class BuddhaBasin : MonoBehaviour
@@ -21,9 +22,11 @@ public class BuddhaBasin : MonoBehaviour
 
     public static BuddhaBasin instance;
     private SpriteRenderer spriteRender;
+    [SerializeField] private MixturePanel mixturePanel;
 
     [Header("UI")]
-    public Slider waterBar;
+    //public Slider waterBar;
+    public Image waterBarFill;
     //[SerializeField] GameObject fullBasin_Notif;
 
 
@@ -39,6 +42,7 @@ public class BuddhaBasin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UpdateWaterBar(currentWB, maxWB);
         //StartCoroutine(ResetBasin());
     }
 
@@ -52,10 +56,14 @@ public class BuddhaBasin : MonoBehaviour
 
     IEnumerator ResetBasin()
     {
+        player.GetComponent<Animator>().SetBool("isDoingTask", true);
+
         audioSource.clip = taskSFX;
         audioSource.Play(); // play soundFX
 
         yield return new WaitForSeconds(0.7f);
+
+        player.GetComponent<Animator>().SetBool("isDoingTask", false);
 
         currentWB = 0;
         isFull = false;
@@ -77,7 +85,8 @@ public class BuddhaBasin : MonoBehaviour
 
     public void UpdateWaterBar(float currentValue, float maxValue)
     {
-        waterBar.value = currentValue / maxValue;
+        float targetFillAmount = currentValue / maxValue;
+        waterBarFill.DOFillAmount(targetFillAmount, 2f);        
     }
 
     void OnFullBasin()
@@ -95,10 +104,12 @@ public class BuddhaBasin : MonoBehaviour
     {
         audioSource.clip = clickSFX;
         audioSource.Play(); // play soundFX
+
         // when players click on this task, the character will move to this task  
         if (waypoint != null && player != null)
         {
             player.MoveToWaypoint(waypoint);
+            mixturePanel.CancelCurrentProduct();
             player.targetWP = gameObject;            
         }
     }

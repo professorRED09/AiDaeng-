@@ -6,10 +6,14 @@ public class WeatherManager : Subject
 {
     public GameObject weatherFilter;
     public Animator anim;
+
     [Header("Sunny")]
+    public GameObject sunnyFilter;
 
     [Header("Rainy")]
-    public ParticleSystem rainFX;
+    public GameObject rainFilter;
+    public ParticleSystem rainDropParticle;
+    public GameObject rainAnimation;
 
     //private float weatherTimer;
     //private float currentWeatherTimer;    
@@ -32,8 +36,7 @@ public class WeatherManager : Subject
 
     void Start()
     {
-        weatherFilter.SetActive(true);
-
+        //weatherFilter.SetActive(true);
         currentState = normalState;
         currentState.EnterState(this);
     }
@@ -62,5 +65,11 @@ public class WeatherManager : Subject
 
         state.EnterState(this);
     }
+
+    //public void OnRainyWeather()
+    //{
+    //    rainFilter.SetActive(true);
+
+    //}
 
 }

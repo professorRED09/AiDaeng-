@@ -5,9 +5,9 @@ public class NPC_PrayState : NPC_BaseState
     float prayingTime = 2f;
     public override void EnterState(NPC2 npc)
     {
-        npc.isClickable = false;
+        npc.isClickable = false;        
         npc.currentWaypointIndex = 0; // reset index to go to next waypoints
-        npc.HideOrder();        
+        //npc.HideOrder();        
         npc.SetWaypoints(npc.wayToPray);
 
         //Debug.Log("THANKS, I'M MA GO prayING");
@@ -44,10 +44,13 @@ public class NPC_PrayState : NPC_BaseState
 
             if (prayingTime > 0)
             {
+                npc.isWaiting = false;
                 prayingTime -= 1 * Time.deltaTime;
             }
             else
             {
+                npc.isWaiting = false;
+                npc.GetPrayingScore();
                 BuddhaBasin.instance.IncreaseWater();  // increase water in basin
                 npc.SwitchState(npc.leaveState);        // switch to leave state
             }

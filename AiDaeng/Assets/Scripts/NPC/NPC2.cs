@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class NPC2 : MonoBehaviour, IObserver
+public class NPC2 : MonoBehaviour /*IObserver*/
 {
     [Header("Setting")]
     private float maxMV = 10f;   // MV => mood value
@@ -26,7 +26,7 @@ public class NPC2 : MonoBehaviour, IObserver
     [SerializeField] Image _moodBarFill;
     [SerializeField] Animator _emoji;
 
-    [SerializeField] GameObject thinkingText;
+    //[SerializeField] GameObject thinkingText;
     //[SerializeField] GameObject itemImage;
     [SerializeField] List<Items> _itemLists;
     //public List<Items> orderList;
@@ -163,6 +163,8 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         Animate(); // animate the character sprite
 
+        OnWeatherChange();
+
         // if npc isn't move, means that they are waiting 
         if (!isMoving)
         {
@@ -264,123 +266,7 @@ public class NPC2 : MonoBehaviour, IObserver
                 isMoving = false; // Stop when all waypoints are reached                
             }
         }
-    }
-
-    //// To give npc a product
-    //private void OnMouseDown()
-    //{
-    //    if (!isClickable)
-    //        return;
-
-    //    player.MoveToWaypoint(player.counterWP);        
-    //    if (player.isAtCounter)
-    //    {
-    //        //check if player has all of products
-    //        bool playerHasAllProducts = true;
-    //        //bool getBonus = true;
-    //        foreach (var element in orderSlotLists)
-    //        {
-    //            if (!Inventory.instance.items.Contains(element.GetComponent<OrderSlot>().orderItem))
-    //            {
-    //                playerHasAllProducts = false;                    
-    //                break;
-    //            }
-    //        }
-
-    //        //if player has all products for npc who has more than 1 order, give them all
-    //        if (playerHasAllProducts && orderLists.Count > 1)
-    //        {
-    //            Inventory.instance.items.RemoveAll(x => orderLists.Contains(x));
-    //            Inventory.instance.DisplayItems();
-
-    //            //clear slot list
-    //            orderSlotLists.Clear();
-    //        }
-
-    //        //if player has just 1 products OR npc orders only 1 products
-    //        else if (!playerHasAllProducts || orderLists.Count < 2)
-    //        {
-    //            for (int i = 0; i < orderSlotLists.Count; i++)
-    //            {
-    //                Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
-    //                if (Inventory.instance.HasItem(m_OrderItem))
-    //                {
-    //                    // remove the given item from player's inventory
-    //                    Inventory.instance.RemoveItem(m_OrderItem);
-
-    //                    currentMV += maxMV / 3.5f;
-    //                    if (currentMV > maxMV)
-    //                    {
-    //                        currentMV = maxMV;
-    //                    }
-
-    //                    // remove the given item from npc's order panel and destroy its gameobject;
-    //                    orderSlotLists[i].SetActive(false);
-    //                    orderSlotLists.Remove(orderSlotLists[i]);
-
-    //                    _serveAttemp += 1;
-    //                    //print(_serveAttemp);
-    //                    //Debug.Log("Serve ONE");
-    //                }                    
-    //            }
-    //        }
-
-    //        else
-    //        {
-    //            NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
-    //        }
-
-    //        //for (int i = 0; i < orderSlotLists.Count; i++)
-    //        //{
-    //        //    Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
-    //        //    // check if there's the exact order in the list, remove it 
-    //        //    if (Inventory.instance.HasItem(m_OrderItem))
-    //        //    {
-    //        //        // remove the given item from player's inventory
-    //        //        Inventory.instance.RemoveItem(m_OrderItem);
-
-    //        //        currentMV += maxMV/3.5f;
-    //        //        if(currentMV > maxMV)
-    //        //        {
-    //        //            currentMV = maxMV;
-    //        //        }
-
-    //        //        // remove the given item from npc's order panel and destroy its gameobject;
-    //        //        orderSlotLists[i].SetActive(false);
-    //        //        orderSlotLists.Remove(orderSlotLists[i]);
-
-    //        //    }
-    //        //    else
-    //        //    {
-    //        //        NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
-    //        //    }    
-    //        //}
-
-    //        if (orderSlotLists.Count == 0)
-    //        {
-    //            getProduct = true;
-
-    //            if (_serveAttemp < 1)
-    //            {
-    //                print("BONUS");
-    //                //player will get score base on npc's current Mood Value
-    //                scoreManager.AddAllOrdersScore(transform.position, GetScoreBasedOnMood());
-    //            }
-    //            else
-    //            {
-    //                print("NO BONUS");
-    //                //player will get score base on npc's current Mood Value
-    //                scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
-    //            }
-
-
-    //            //scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
-    //            GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
-    //            m_HappyVFX.transform.parent = transform;
-    //        }
-
-    //    }
-    //}
+    }    
 
     // To give npc a product
     private void OnMouseDown()
@@ -395,8 +281,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public void CheckProductFromPlayer()
     {        
         //check if player has all of products
-        bool playerHasAllProducts = true;
-        //bool getBonus = true;
+        bool playerHasAllProducts = true;        
         foreach (var element in orderSlotLists)
         {
             if (!Inventory.instance.items.Contains(element.GetComponent<OrderSlot>().orderItem))
@@ -409,7 +294,12 @@ public class NPC2 : MonoBehaviour, IObserver
         //if player has all products for npc who has more than 1 order, give them all
         if (playerHasAllProducts && orderLists.Count > 1)
         {
-            Inventory.instance.items.RemoveAll(x => orderLists.Contains(x));
+            //Inventory.instance.items.RemoveAll(x => orderLists.Contains(x));
+            for(int i = 0; i < orderLists.Count; i++)
+            {
+                Inventory.instance.items.Remove(orderLists[i]);
+            }
+
             Inventory.instance.DisplayItems();
 
             //clear slot list
@@ -473,9 +363,17 @@ public class NPC2 : MonoBehaviour, IObserver
         }        
     }
 
+    public void GetPrayingScore()
+    {
+        scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
+        GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
+        m_HappyVFX.transform.parent = transform;
+    }
+
     public void PlayGetItemAnimation()
     {
         //hide order bubble
+        HideOrder();
         //orderBubble.SetActive(false);
         orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = false;     // disable panel image
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false;  // disable "..." text;
@@ -531,6 +429,7 @@ public class NPC2 : MonoBehaviour, IObserver
             orderSlotLists.Add(m_OrderSlot);
             _itemLists.Remove(order);
         }
+
         // disable "..." text;
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false; 
         isWaiting = true;        
@@ -567,8 +466,8 @@ public class NPC2 : MonoBehaviour, IObserver
 
     public void DecreaseMoodBar()
     {
-        //if (isWaiting == false)
-        //    return;
+        if (isWaiting == false)
+            return;
 
         // decreasing emotion value as the time goes by
         currentMV -= moodDecSp * Time.deltaTime;
@@ -585,13 +484,13 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = false;     // disable panel image
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false;  // disable "..." text;
-        orderBubble.transform.GetChild(2).gameObject.SetActive(false);
+        orderBubble.transform.GetChild(4).gameObject.SetActive(false);
         //orderBubble.SetActive(false);
     }
 
     public void UpdateMoodBar()
     {
-        if (getProduct) return;
+        //if (getProduct) return;
 
         float targetFillAmount = currentMV / maxMV;
         _moodBarFill.fillAmount = targetFillAmount;
@@ -671,16 +570,25 @@ public class NPC2 : MonoBehaviour, IObserver
         }
 
         moodDecSp = defaultMoodDecSp;
-        sprite.color = Color.blue;
+
+        //set color to a cool tone
+        sprite.color = new Vector4(0.48f, 0.53f, 0.76f, 1f);
+        //Color currentColor = sprite.color;
+        //currentColor = Color.blue;
+        //currentColor.a = 0.5f;
+        //sprite.color = currentColor;
+
         //moodDecSp = 1;
         //print("OH! RAIN! RUN!");
     }
 
     public void SunnyEffect()
     {
-        if (hasUmbrella) return;
+        if (hasUmbrella) return;       
 
-        sprite.color = Color.red;
+        //set color to a hot tone
+        sprite.color = new Vector4(1f, 0.83f, 0.62f, 1f);
+
         defaultMoodDecSp = 1;
         moodDecSp = defaultMoodDecSp;
         //print("ITS SO DAMN HOT MANN");
@@ -732,26 +640,26 @@ public class NPC2 : MonoBehaviour, IObserver
         }
     }
 
-    public void OnNotify(WeatherType weather)
-    {
-        switch (weather)
-        {
-            case (WeatherType.Rainy):
-                RainyEffect();
-                return;
+    //public void OnNotify(WeatherType weather)
+    //{
+    //    switch (weather)
+    //    {
+    //        case (WeatherType.Rainy):
+    //            RainyEffect();
+    //            return;
 
-            case (WeatherType.Normal):
-                NormalEffect();
-                return;
+    //        case (WeatherType.Normal):
+    //            NormalEffect();
+    //            return;
 
-            case (WeatherType.Sunny):
-                SunnyEffect();
-                return;
+    //        case (WeatherType.Sunny):
+    //            SunnyEffect();
+    //            return;
 
-            default:
-                return;
-        }
-    }
+    //        default:
+    //            return;
+    //    }
+    //}
 
     // animate character based on each conditions
     void Animate()
@@ -776,13 +684,13 @@ public class NPC2 : MonoBehaviour, IObserver
         isFacingRight = !isFacingRight;
     }
 
-    void OnEnable()
-    {
-        weatherManager.AddObserver(this);
-    }
+    //void OnEnable()
+    //{
+    //    weatherManager.AddObserver(this);
+    //}
 
-    void OnDisable()
-    {
-        weatherManager.RemoveObserver(this);
-    }
+    //void OnDisable()
+    //{
+    //    weatherManager.RemoveObserver(this);
+    //}
 }

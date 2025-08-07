@@ -8,15 +8,19 @@ public class DrinkWaterTask : MonoBehaviour, IObserver
     public Transform waypoint;     
   
     private Namwan namwan;       
-    private AudioSource audioSource;
+    private AudioSource _audioSource;
     [SerializeField] private bool _isAvailable = true;
     private WeatherManager weatherManager;
+
+    private SpriteRenderer _spriteRender;
 
     void Awake()
     {
         weatherManager = FindObjectOfType<WeatherManager>();
-        namwan = FindObjectOfType<Namwan>(); 
-        audioSource = GetComponent<AudioSource>();
+        namwan = FindObjectOfType<Namwan>();
+
+        _spriteRender = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -30,7 +34,7 @@ public class DrinkWaterTask : MonoBehaviour, IObserver
         if (waypoint != null && namwan != null)
         {
             namwan.MoveToWaypoint(waypoint);
-
+            //print("ASDSAD");
             if (!_isAvailable)
             {
                 Debug.Log("CANT PICK");
@@ -40,6 +44,12 @@ public class DrinkWaterTask : MonoBehaviour, IObserver
             //Change current task for namwan
             namwan.ChangeTask(Namwan.CurrentTask.DrinkWater);
         }
+        else if(namwan == null)
+        {
+            //print("IQAUI");
+        }
+
+        
     }
 
     public void OnNotify(WeatherType weather)
@@ -56,6 +66,16 @@ public class DrinkWaterTask : MonoBehaviour, IObserver
                 //Debug.Log("NAMWAN CAN PICK DRINK");
                 return;
         }
+    }
+
+    private void OnMouseOver()
+    {
+        _spriteRender.color = Color.black;
+    }
+
+    private void OnMouseExit()
+    {
+        _spriteRender.color = Color.white;
     }
 
     void OnEnable()

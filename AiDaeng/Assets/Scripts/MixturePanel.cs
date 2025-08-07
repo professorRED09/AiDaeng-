@@ -10,7 +10,7 @@ public class MixturePanel : MonoBehaviour
     private Image tempItemImage;
     private AudioSource _audioSource;
 
-    private bool isOpened;
+    //private bool isOpened;
     [SerializeField] private bool _isClicked = false;
     private Animator animator;
     private float _defaultTimer = 2f;
@@ -92,6 +92,13 @@ public class MixturePanel : MonoBehaviour
             StartCoroutine(OnCompleteTask());
             
         }
+    }
+
+    public void CancelCurrentProduct()
+    {
+        tempItem = null;
+        tempItemImage.sprite = null;
+        animator.SetTrigger("Close");
     }
 
     IEnumerator OnCompleteTask()

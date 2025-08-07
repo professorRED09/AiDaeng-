@@ -92,9 +92,9 @@ public class GameManager : Subject/*, IObserver*/
 
         if (currentLevel == Level.Level_1) return;
         weatherManager.enabled = true;
-        _namwan.SetActive(true);
-        _drinkWaterTask.SetActive(true);
-        _umbrellaTask.SetActive(true);
+        //_namwan.SetActive(true);
+        //_drinkWaterTask.SetActive(true);
+        //_umbrellaTask.SetActive(true);
     }
 
     public void ShowResult()
