@@ -885,6 +885,7 @@ GameObject:
   - component: {fileID: 533380551}
   - component: {fileID: 533380550}
   - component: {fileID: 533380549}
+  - component: {fileID: 533380552}
   m_Layer: 5
   m_Name: Player
   m_TagString: Untagged
@@ -950,6 +951,21 @@ RectTransform:
   m_AnchoredPosition: {x: -400, y: 18}
   m_SizeDelta: {x: 1548.6592, y: 2934}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!111 &533380552
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533380548}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &568403024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,7 +1493,7 @@ MonoBehaviour:
   - Hkp,.;p
   textSpeed: 1
   _isTyping: 1
-  isChoice1Finished: 0
+  isChoice1Finished: 1
   monkAnimation: {fileID: 0}
   playerAnimation: {fileID: 0}
 --- !u!1 &837782138
