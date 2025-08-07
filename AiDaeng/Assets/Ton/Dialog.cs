@@ -24,14 +24,17 @@ public class Dialog : MonoBehaviour
     [Header("Choice")]
     public GameObject Choice_1;
     public GameObject Choice_2;
-    public GameObject Choice_3;
 
     [TextArea(3, 10)]
     public string[] lines;
     public string[] names;
     public float textSpeed;
+    
     public bool _isTyping = false;
-    private bool _isChoice1Finished = false;
+    public bool isChoice1Finished = false;
+
+    public Animation monkAnimation;
+    public Animation playerAnimation;
    
     #endregion
 
@@ -70,11 +73,11 @@ public class Dialog : MonoBehaviour
             //textContinue.gameObject.SetActive(false);
             imageContinue.gameObject.SetActive(false);
         }
-        if (index == 2 && !_isChoice1Finished)
+        if (index == 2 && !isChoice1Finished)
         {
             _isChoice = true;
             Choice_1.SetActive(true);
-            _isChoice1Finished = true;
+            isChoice1Finished = true;
         }
     }
 
