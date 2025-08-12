@@ -825,7 +825,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0ba2826bd6f80c24bbc386edfbac1012, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.19416162, g: 0.32308295, b: 0.509434, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -971,7 +971,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 00bd03f06a4995146b26a5f4024fb44c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.19607843, g: 0.32156864, b: 0.50980395, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2725,7 +2725,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1dcf204f2f210fb4583f340efe812586, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.19607843, g: 0.32156864, b: 0.50980395, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4681,7 +4681,8 @@ MonoBehaviour:
   maxWB: 8
   currentWB: 0
   waypoint: {fileID: 1292781620}
-  waterBar: {fileID: 1386343312}
+  mixturePanel: {fileID: 0}
+  waterBarFill: {fileID: 0}
 --- !u!60 &1002042181
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11273,7 +11274,8 @@ MonoBehaviour:
   maxWB: 8
   currentWB: 0
   waypoint: {fileID: 1292781620}
-  waterBar: {fileID: 1386343312}
+  mixturePanel: {fileID: 0}
+  waterBarFill: {fileID: 0}
 --- !u!82 &1273976326
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11845,7 +11847,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weatherFilter: {fileID: 168078762}
   anim: {fileID: 1667287569}
-  rainFX: {fileID: 1747304876}
+  sunnyFilter: {fileID: 0}
+  rainFilter: {fileID: 0}
+  rainDropParticle: {fileID: 0}
+  rainAnimation: {fileID: 0}
   audioSource: {fileID: 1339018601}
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
@@ -12564,17 +12569,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1386343312 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8709774963168372025, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
-  m_PrefabInstance: {fileID: 1345793173021261954}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1415108185
 GameObject:
   m_ObjectHideFlags: 0
@@ -19471,7 +19465,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d8b7add14385c324e86490491eb08f30, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.19607843, g: 0.32156864, b: 0.50980395, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -20082,6 +20076,10 @@ PrefabInstance:
     - target: {fileID: 2191529817229558936, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_Name
       value: ProductTutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156429153952712613, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4785956159041672465, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y

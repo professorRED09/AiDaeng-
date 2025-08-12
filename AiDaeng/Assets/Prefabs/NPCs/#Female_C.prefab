@@ -213,9 +213,9 @@ RectTransform:
   m_Father: {fileID: 7327540858993784987}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.5, y: -0.25}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2159668894740612128
@@ -578,14 +578,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moodDecSp: 0.2
+  defaultMoodDecSp: 0.2
   happyVFX: {fileID: 9014111512956324487, guid: f239bbefc1998194fbf6c6500d4328ed, type: 3}
   npcMask:
     serializedVersion: 2
     m_Bits: 8
   orderBubble: {fileID: 1899271858665402489}
   _moodBarFill: {fileID: 5112176852472706994}
-  _emoji: {fileID: 5785666651782746400}
-  thinkingText: {fileID: 3922145827658139504}
+  _emoji: {fileID: 3927946208717548787}
   _itemLists: []
   orderSlotLists: []
   orderLists: []
@@ -926,7 +926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7327540858993784987
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1123,9 +1123,9 @@ RectTransform:
   m_Father: {fileID: 7327540858993784987}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0.95, y: -0.25}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9091061338440790144
@@ -1439,6 +1439,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
+--- !u!1 &3927946208717548787 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 390973797501238790, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
+  m_PrefabInstance: {fileID: 3742450457821860597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4329658762382728694 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1151183626042511107, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
@@ -1455,8 +1460,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &5785666651782746400 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7180158333975643093, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
-  m_PrefabInstance: {fileID: 3742450457821860597}
-  m_PrefabAsset: {fileID: 0}

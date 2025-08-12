@@ -59,6 +59,7 @@ public class ScoreManager : MonoBehaviour
     public void AddAllOrdersScore(Vector3 transform, float score)
     {
         GameObject m_scorePopup = Instantiate(scorePopupPrefab, new Vector2(transform.x + 1.2f, transform.y + 1.9f), Quaternion.identity);
+        score += score*0.5f; // plus bonus score
         m_scorePopup.GetComponent<ScorePopup>().DisplayAllOrdersText(score);
 
         _audioSource.clip = addScoreSFX;
@@ -78,17 +79,17 @@ public class ScoreManager : MonoBehaviour
         if (StarCount() >= 3)
         {
             stars[2].GetComponent<Animator>().SetTrigger("GetStar");
-            Debug.Log("3 STARS");
+            //Debug.Log("3 STARS");
         }
         else if (StarCount() >= 2)
         {
             stars[1].GetComponent<Animator>().SetTrigger("GetStar");
-            Debug.Log("2 STARS");
+            //Debug.Log("2 STARS");
         }
         else if (StarCount() >= 1)
         {
             stars[0].GetComponent<Animator>().SetTrigger("GetStar");
-            Debug.Log("1 STAR");
+            //Debug.Log("1 STAR");
         }
     }   
 

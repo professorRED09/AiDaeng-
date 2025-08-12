@@ -5,14 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class NPC2 : MonoBehaviour /*IObserver*/
+public class NPC2 : MonoBehaviour, IObserver
 {
     [Header("Setting")]
     private float maxMV = 10f;   // MV => mood value
     private float currentMV;
 
-    [SerializeField] private float moodDecSp ;      // decreasing speed of mood value, assign as public for adjusting in other script
-    [SerializeField] private float defaultMoodDecSp = 0.2f;
+    private float moodDecSp ;      // decreasing speed of mood value, assign as public for adjusting in other script
+    private float defaultMoodDecSp = 0.2f;
     //public float prayingTime = 2;
     private readonly float speed = 5f;
     public GameObject happyVFX;
@@ -24,7 +24,7 @@ public class NPC2 : MonoBehaviour /*IObserver*/
     [SerializeField] GameObject orderBubble;
     //[SerializeField] GameObject moodBar;
     [SerializeField] Image _moodBarFill;
-    [SerializeField] Animator _emoji;
+    [SerializeField] GameObject _emoji;
 
     //[SerializeField] GameObject thinkingText;
     //[SerializeField] GameObject itemImage;
@@ -89,6 +89,8 @@ public class NPC2 : MonoBehaviour /*IObserver*/
     [SerializeField] AudioClip _getUmbrellaSFX;
     [SerializeField] AudioClip _thankSFX;
 
+    private MixturePanel _mixturePanel;
+
     private void Awake()
     {        
         sprite = GetComponent<SpriteRenderer>();
@@ -101,7 +103,9 @@ public class NPC2 : MonoBehaviour /*IObserver*/
         npcManager = FindObjectOfType<NPC_Manager2>();
 
         scoreManager = FindObjectOfType<ScoreManager>();
-        _umbrellaTask = FindObjectOfType<UmbrellaTask>();        
+        _umbrellaTask = FindObjectOfType<UmbrellaTask>();
+
+        _mixturePanel = FindObjectOfType<MixturePanel>();        
 
         // set initial value       
         currentMV = maxMV;
@@ -163,7 +167,7 @@ public class NPC2 : MonoBehaviour /*IObserver*/
     {
         Animate(); // animate the character sprite
 
-        OnWeatherChange();
+        //OnWeatherChange();
 
         // if npc isn't move, means that they are waiting 
         if (!isMoving)
@@ -200,8 +204,10 @@ public class NPC2 : MonoBehaviour /*IObserver*/
     IEnumerator GetDrinkWaterBuff()
     {
         //float m_tempDecSp = moodDecSp;
-        moodDecSp = 0.1f;       
-        yield return new WaitForSeconds(2f);
+        moodDecSp = 0.1f;
+        print("AHH");
+        
+        yield return new WaitForSeconds(5f);
         moodDecSp = defaultMoodDecSp;
     }
 
@@ -216,6 +222,10 @@ public class NPC2 : MonoBehaviour /*IObserver*/
 
         StartCoroutine(GetDrinkWaterBuff());
         ResetMoodBar();
+
+        GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
+        m_HappyVFX.transform.parent = transform;
+
         _audioSource.clip = _getWaterSFX;
         _audioSource.Play();
     }
@@ -274,6 +284,7 @@ public class NPC2 : MonoBehaviour /*IObserver*/
         if (!isClickable)
             return;
 
+        _mixturePanel.CancelCurrentProduct();
         player.MoveToWaypoint(player.counterWP);
         player.SetTargetNPC(this);        
     }
@@ -374,6 +385,7 @@ public class NPC2 : MonoBehaviour /*IObserver*/
     {
         //hide order bubble
         HideOrder();
+        ResetMoodBar();
         //orderBubble.SetActive(false);
         orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = false;     // disable panel image
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false;  // disable "..." text;
@@ -388,7 +400,10 @@ public class NPC2 : MonoBehaviour /*IObserver*/
         //Debug.Log("OnGettingProduct");   
 
         //isWaiting = false;
-        ResetMoodBar();
+
+        //ResetMoodBar();
+        GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
+        m_HappyVFX.transform.parent = transform;
         takenOrderSpot.GetComponent<OrderSpot>().isFree = true; 
         SwitchState(prayState);
     }
@@ -460,8 +475,8 @@ public class NPC2 : MonoBehaviour /*IObserver*/
     {
         currentMV = maxMV;
         UpdateMoodBar();
-        GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
-        m_HappyVFX.transform.parent = transform;
+        //GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
+        //m_HappyVFX.transform.parent = transform;
     }
 
     public void DecreaseMoodBar()
@@ -487,7 +502,7 @@ public class NPC2 : MonoBehaviour /*IObserver*/
         orderBubble.transform.GetChild(4).gameObject.SetActive(false);
         //orderBubble.SetActive(false);
     }
-
+    
     public void UpdateMoodBar()
     {
         //if (getProduct) return;
@@ -498,15 +513,15 @@ public class NPC2 : MonoBehaviour /*IObserver*/
 
         if(currentMV >= maxMV * 0.67)
         {
-            _emoji.Play("Happy");
+            _emoji.GetComponent<Animator>().Play("Happy");            
         }
         else if (currentMV >= maxMV * 0.33)
-        {
-            _emoji.Play("Edgy");
+        {            
+            _emoji.GetComponent<Animator>().Play("Edgy");
         }
         else
         {
-            _emoji.Play("Angry");
+            _emoji.GetComponent<Animator>().Play("Angry");
         }
 
         //_moodBarFill.DOColor(_colorGradient.Evaluate(targetFillAmount), 0.5f);        
@@ -589,7 +604,7 @@ public class NPC2 : MonoBehaviour /*IObserver*/
         //set color to a hot tone
         sprite.color = new Vector4(1f, 0.83f, 0.62f, 1f);
 
-        defaultMoodDecSp = 1;
+        defaultMoodDecSp = 0.65f;
         moodDecSp = defaultMoodDecSp;
         //print("ITS SO DAMN HOT MANN");
     }
@@ -640,26 +655,26 @@ public class NPC2 : MonoBehaviour /*IObserver*/
         }
     }
 
-    //public void OnNotify(WeatherType weather)
-    //{
-    //    switch (weather)
-    //    {
-    //        case (WeatherType.Rainy):
-    //            RainyEffect();
-    //            return;
+    public void OnNotify(WeatherType weather)
+    {
+        switch (weather)
+        {
+            case (WeatherType.Rainy):
+                RainyEffect();
+                return;
 
-    //        case (WeatherType.Normal):
-    //            NormalEffect();
-    //            return;
+            case (WeatherType.Normal):
+                NormalEffect();
+                return;
 
-    //        case (WeatherType.Sunny):
-    //            SunnyEffect();
-    //            return;
+            case (WeatherType.Sunny):
+                SunnyEffect();
+                return;
 
-    //        default:
-    //            return;
-    //    }
-    //}
+            default:
+                return;
+        }
+    }
 
     // animate character based on each conditions
     void Animate()
@@ -684,13 +699,13 @@ public class NPC2 : MonoBehaviour /*IObserver*/
         isFacingRight = !isFacingRight;
     }
 
-    //void OnEnable()
-    //{
-    //    weatherManager.AddObserver(this);
-    //}
+    void OnEnable()
+    {
+        weatherManager.AddObserver(this);
+    }
 
-    //void OnDisable()
-    //{
-    //    weatherManager.RemoveObserver(this);
-    //}
+    void OnDisable()
+    {
+        weatherManager.RemoveObserver(this);
+    }
 }

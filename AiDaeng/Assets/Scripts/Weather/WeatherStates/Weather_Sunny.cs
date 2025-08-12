@@ -3,7 +3,7 @@ using DG.Tweening;
 
 public class Weather_Sunny : Weather_BaseState
 {
-    private float _timer = 5f;
+    private float _timer = 40f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)
@@ -25,7 +25,9 @@ public class Weather_Sunny : Weather_BaseState
         {
             //weather.anim.ResetTrigger("isSunny");
             weather.sunnyFilter.GetComponent<SpriteRenderer>().DOFade(0f, 2f);
-            weather.SwitchState(weather.normalState);
+
+            weather.ChangeToNextWeather();
+            //weather.SwitchState(weather.normalState);
         }
     }
 

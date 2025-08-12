@@ -254,14 +254,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moodDecSp: 0.2
+  defaultMoodDecSp: 0.2
   happyVFX: {fileID: 9014111512956324487, guid: f239bbefc1998194fbf6c6500d4328ed, type: 3}
   npcMask:
     serializedVersion: 2
     m_Bits: 8
   orderBubble: {fileID: 7287168114240358586}
   _moodBarFill: {fileID: 4725425884206095829}
-  _emoji: {fileID: 6281638742537272135}
-  thinkingText: {fileID: 3994496829248459128}
+  _emoji: {fileID: 3595229614116816532}
   _itemLists: []
   orderSlotLists: []
   orderLists: []
@@ -1027,6 +1027,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
+--- !u!1 &3595229614116816532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 390973797501238790, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
+  m_PrefabInstance: {fileID: 3785793158406617234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4282929539139286929 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1151183626042511107, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
@@ -1043,8 +1048,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &6281638742537272135 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7180158333975643093, guid: 58179c92213bd6f4ca5a82d523cf31fd, type: 3}
-  m_PrefabInstance: {fileID: 3785793158406617234}
-  m_PrefabAsset: {fileID: 0}

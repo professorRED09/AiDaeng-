@@ -29,6 +29,10 @@ public class WeatherManager : Subject
     public Weather_Rainy rainyState = new Weather_Rainy();
     public Weather_Sunny sunnyState = new Weather_Sunny();
 
+    public int[] weatherTypeNumber;
+    [SerializeField] private int _currentIndex = 1;
+    [SerializeField] private int _currentWeatherOrder;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -66,10 +70,30 @@ public class WeatherManager : Subject
         state.EnterState(this);
     }
 
-    //public void OnRainyWeather()
-    //{
-    //    rainFilter.SetActive(true);
+    public void ChangeToNextWeather()
+    {
+        if(_currentIndex < 2)
+        {
+            _currentIndex++;
+            _currentWeatherOrder = weatherTypeNumber[_currentIndex];
+        }
+        else
+        {
+            return;
+        }
 
-    //}
+        if(_currentWeatherOrder == 1)
+        {
+            SwitchState(normalState);
+        }
+        else if(_currentWeatherOrder == 2)
+        {
+            SwitchState(sunnyState);
+        }
+        else
+        {
+            SwitchState(rainyState);
+        }
+    }
 
 }
