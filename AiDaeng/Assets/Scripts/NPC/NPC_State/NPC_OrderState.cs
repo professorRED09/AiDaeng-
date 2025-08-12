@@ -4,8 +4,7 @@ public class NPC_OrderState : NPC_BaseState
 {
     public override void EnterState(NPC2 npc)
     {
-        npc.isMoving = false;
-        npc.isClickable = true;
+        npc.isMoving = false;        
         npc.isWaiting = false;  
         npc.ThinkOfOrder();     //Show bubble ui
         //Debug.Log("ENTER ORDER STATE");
@@ -15,15 +14,16 @@ public class NPC_OrderState : NPC_BaseState
     {        
         if (npc.isUpset)
         {
-            npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
             npc.SwitchState(npc.rageLeaveState);
-            
+            npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;            
         }
         else if (npc.getProduct)
         {
             //delay time before swtiching to prayState
-            npc.OnGettingProduct();
-            
+            npc.PlayGetItemAnimation();
+            //npc.OnGettingProduct();
+
+
             //npc.takenOrderSpot.GetComponent<OrderSpot>().isFree = true;
             //npc.SwitchState(npc.prayState);
 

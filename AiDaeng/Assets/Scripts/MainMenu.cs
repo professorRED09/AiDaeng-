@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+//using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
@@ -15,11 +17,25 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject settingPanel;
     [SerializeField] GameObject tutorialPanel;
 
+    [SerializeField] Transform logoImage;
+    //[SerializeField] GameObject _productTutorialPanel;
+
     private void Start()
     {
         Time.timeScale = 1f;
-        //startBanner.SetActive(true);
+
+        if (logoImage != null)
+        {
+            logoImage.DOScale(logoImage.localScale * 0.95f, 1f).SetEase(Ease.InQuad).SetLoops(-1, LoopType.Yoyo);
+        }
+
     }
+
+    //public void OnProductTutorialPress()
+    //{
+    //    Time.timeScale = 0f;
+    //    _productTutorialPanel.SetActive(true);
+    //}
 
     public void OnPressStartGame()
     {
@@ -33,6 +49,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnPressTutorial()
     {
+        Time.timeScale = 0f;
         tutorialPanel.SetActive(true);
     }
 

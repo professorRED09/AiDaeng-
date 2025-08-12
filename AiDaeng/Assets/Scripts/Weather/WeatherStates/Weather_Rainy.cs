@@ -1,27 +1,45 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class Weather_Rainy : Weather_BaseState
 {
+    private float _timer = 40f;
+    private float _currentTimer;
+
     public override void EnterState(WeatherManager weather)
     {
-        weather.anim.SetTrigger("isRainy");
-        weather.rainFX.Play();
-        weather.currentTimer = weather.timer;
-        //Debug.Log("RAINY STATE ENTRY");
+        ////play rainy atmosphere
+        ////weather.anim.SetTrigger("isRainy");
+        //weather.rainFilter.GetComponent<SpriteRenderer>().enabled = true;
+        weather.rainFilter.GetComponent<SpriteRenderer>().DOFade(1f, 2f);
+        weather.rainAnimation.GetComponent<SpriteRenderer>().DOFade(0.69f, 2f);
+        weather.rainAnimation.GetComponent<Animator>().enabled = true;
+        weather.rainDropParticle.Play();
+
+        _currentTimer = _timer;
+
+        //weather.audioSource.clip = weather.rainyWeatherSFX;
+        //weather.audioSource.Play();
     }
 
     public override void UpdateState(WeatherManager weather)
     {
-        weather.currentTimer -= Time.deltaTime; // countdown timer
-        if (weather.currentTimer <= 0)
+        // countdown timer
+        _currentTimer -= Time.deltaTime; 
+        
+        if (_currentTimer <= 0)
         {
-            weather.anim.ResetTrigger("isRainy");
-            weather.rainFX.Stop();
-            weather.SwitchState(weather.normalState);
-        }
-            
+            ////weather.anim.ResetTrigger("isRainy");
+            //weather.rainFilter.GetComponent<SpriteRenderer>().enabled = false;
+            weather.rainFilter.GetComponent<SpriteRenderer>().DOFade(0f, 2f);
+            weather.rainAnimation.GetComponent<SpriteRenderer>().DOFade(0f, 2f);
+            weather.rainAnimation.GetComponent<Animator>().enabled = false;
+            weather.rainDropParticle.Stop();
 
-        // if hit jackpot, change weather again
+
+            weather.ChangeToNextWeather();
+            //weather.SwitchState(weather.normalState);
+        }
     }
 
     public override void ExitState(WeatherManager weather)

@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BackButton : MonoBehaviour
+{
+    [SerializeField] GameObject currentUI;
+
+    public void OnBackButtonPress()
+    {
+        Time.timeScale = 1f;
+        currentUI.SetActive(false);
+    }
+}

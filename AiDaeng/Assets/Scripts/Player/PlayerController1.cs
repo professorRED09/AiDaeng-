@@ -24,6 +24,7 @@ public class PlayerController1 : MonoBehaviour
     public bool canControl = false; // player won't be able to control until the game start
 
     public Vector3 direction;  // set as public for debugging
+    public NPC2 targetNPC;
 
 
     private void Start()
@@ -40,13 +41,7 @@ public class PlayerController1 : MonoBehaviour
             Flip();
         }
 
-        //if (pathQueue.Count <= 0)
-        //{
-            
-        //    //isAtPosition = true;
-
-        //}
-
+        // if there are path left for player, keep moving
         if (isMoving && pathQueue.Count > 0)
         {
             MoveToNextWaypoint();
@@ -56,12 +51,7 @@ public class PlayerController1 : MonoBehaviour
             isMoving = false;
         }
 
-        //if (pathQueue.Count == 0 && taskQueue.Count > 0)
-        //{
-        //    MoveToWaypoint(taskQueue.Peek());
-        //    print(taskQueue.Peek());
-        //}
-
+        // check if player's at the counter
         if (transform.position == counterWP.position)
         {
             isAtCounter = true;
@@ -71,15 +61,24 @@ public class PlayerController1 : MonoBehaviour
             isAtCounter = false;
         }
 
+        if (isAtCounter && targetNPC != null)
+        {
+            targetNPC.GetComponent<NPC2>().CheckProductFromPlayer();
+            targetNPC = null;
+        }
+
+    }
+
+    public void SetTargetNPC(NPC2 npc)
+    {
+        targetNPC = npc;
     }
 
     public void AddTask(Transform task)
     {
         //add task to the list and start move to that waypoint        
         taskQueue.Enqueue(task);
-        //check if player is free
-        
-        
+        //check if player is free       
     }
 
     // Start moving toward the nearest waypoint first, then to the target waypoint

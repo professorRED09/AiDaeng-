@@ -1,11 +1,19 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Timer : MonoBehaviour
 {
     [SerializeField] private TMP_Text _timerText;
+    [SerializeField] private Image _timerImageFill;
+
+    [SerializeField] private RectTransform _timerKem;
+    private float _startAngle;
+    private float _endAngle;
+
     [SerializeField] private float timeToDisplay = 60.0f;
+    private float currentTimer;
     private bool _isRunning;
     TimeSpan timeSpan;
 
@@ -14,7 +22,8 @@ public class Timer : MonoBehaviour
         EventManager.TimerStart += EventManagerOnTimerStart;
         EventManager.TimerStop += EventManagerOnTimerStop;
 
-        timeSpan = TimeSpan.FromSeconds(timeToDisplay);
+        currentTimer = timeToDisplay;
+        timeSpan = TimeSpan.FromSeconds(currentTimer);
         _timerText.text = timeSpan.ToString(@"mm\:ss");
     }
 
@@ -34,7 +43,8 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        
+        _startAngle = _timerKem.eulerAngles.z;
+        _endAngle = _startAngle + 360f;
     }
 
     private void Update()
@@ -43,15 +53,23 @@ public class Timer : MonoBehaviour
         if (!_isRunning) return;
 
         //When the time is out, invoke OnTimeStop() function
-        if (timeToDisplay < 0.0f)
+        if (currentTimer < 0.0f)
         {
             EventManager.OnTimerStop();
             return;
         }
 
-        timeToDisplay -= Time.deltaTime;
+        currentTimer -= Time.deltaTime;
+        float targetFillAmount = Math.Abs(timeToDisplay - currentTimer) / timeToDisplay;
+        _timerImageFill.fillAmount = targetFillAmount;
 
-        timeSpan = TimeSpan.FromSeconds(timeToDisplay);    //  represent timeToDisplay in seconds with timeSpan variable
+
+        float t = Mathf.Clamp01(currentTimer / timeToDisplay);
+        float currentAngle = Mathf.Lerp(_startAngle, _endAngle, t);
+        _timerKem.localEulerAngles = new Vector3(0, 0, currentAngle);
+        //_timerKem.transform.Rotate(0, 0, )
+
+        timeSpan = TimeSpan.FromSeconds(currentTimer);    //  represent timeToDisplay in seconds with timeSpan variable
         _timerText.text = timeSpan.ToString(@"mm\:ss");         //  display time in minute:second form        
 
     }

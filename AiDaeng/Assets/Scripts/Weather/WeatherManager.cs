@@ -6,16 +6,22 @@ public class WeatherManager : Subject
 {
     public GameObject weatherFilter;
     public Animator anim;
+
     [Header("Sunny")]
+    public GameObject sunnyFilter;
 
     [Header("Rainy")]
-    public ParticleSystem rainFX;
+    public GameObject rainFilter;
+    public ParticleSystem rainDropParticle;
+    public GameObject rainAnimation;
 
-    public float timer;
-    public float currentTimer;
-
-    //public bool Rainy;
-    //public bool Sunny;
+    //private float weatherTimer;
+    //private float currentWeatherTimer;    
+    [Header("Sound")]
+    public AudioSource audioSource;
+    public AudioClip normalWeatherSFX;
+    public AudioClip sunnyWeatherSFX;
+    public AudioClip rainyWeatherSFX;
 
     //FSM Stuff
     public Weather_BaseState currentState;
@@ -23,10 +29,18 @@ public class WeatherManager : Subject
     public Weather_Rainy rainyState = new Weather_Rainy();
     public Weather_Sunny sunnyState = new Weather_Sunny();
 
+    public int[] weatherTypeNumber;
+    [SerializeField] private int _currentIndex = 1;
+    [SerializeField] private int _currentWeatherOrder;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
-        weatherFilter.SetActive(true);
-
+        //weatherFilter.SetActive(true);
         currentState = normalState;
         currentState.EnterState(this);
     }
@@ -56,49 +70,30 @@ public class WeatherManager : Subject
         state.EnterState(this);
     }
 
-    //public void OnNotify(WeatherType weather)
-    //{
+    public void ChangeToNextWeather()
+    {
+        if(_currentIndex < 2)
+        {
+            _currentIndex++;
+            _currentWeatherOrder = weatherTypeNumber[_currentIndex];
+        }
+        else
+        {
+            return;
+        }
 
-    //}
-    //public void OnNotify(Action action)
-    //{
-    //    switch (action)
-    //    {
-    //        case (Action.StartTimerStop):
-
-    //            return;
-    //        default:
-    //            return;
-    //    }
-    //}
-
-    //public void OnNotify(WeatherType weather)
-    //{
-    //    switch (weather)
-    //    {
-    //        case (WeatherType.Rainy):
-    //            anim.SetTrigger("isRainy");
-    //            //SwitchState(rainyState);
-    //            return;
-
-    //        case (WeatherType.Normal):
-    //            anim.SetTrigger("isNormal");
-    //            //SwitchState(normalState);
-    //            return;
-
-    //        default:
-    //            return;
-    //    }
-    //}
-
-    //void OnEnable()
-    //{
-    //    weatherController.AddObserver(this);
-    //}
-
-    //void OnDisable()
-    //{
-    //    weatherController.RemoveObserver(this);
-    //}
+        if(_currentWeatherOrder == 1)
+        {
+            SwitchState(normalState);
+        }
+        else if(_currentWeatherOrder == 2)
+        {
+            SwitchState(sunnyState);
+        }
+        else
+        {
+            SwitchState(rainyState);
+        }
+    }
 
 }

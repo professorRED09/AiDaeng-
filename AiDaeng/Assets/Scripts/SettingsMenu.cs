@@ -13,6 +13,16 @@ public class SettingsMenu : MonoBehaviour
         audioMixer.SetFloat("Volume", volume);
     }
 
+    public void SetSoundFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFXVolume", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("Volume", volume);
+    }
+
     public void OnPressBackButton()
     {
         settingsPanel.SetActive(false);
