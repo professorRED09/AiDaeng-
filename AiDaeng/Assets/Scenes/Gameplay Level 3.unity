@@ -2165,7 +2165,7 @@ MonoBehaviour:
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
   weatherTypeNumber: 010000000300000001000000
-  _currentIndex: 1
+  _currentIndex: 0
   _currentWeatherOrder: 0
 --- !u!1 &557693610
 GameObject:
@@ -13151,39 +13151,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2657132412545987076, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5648568262564974895, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648568262564974895, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5648568262564974895, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648568262564974895, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.95
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648568262564974895, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6800291242025710480, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6800291242025710480, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6800291242025710480, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6800291242025710480, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8625571471560172437, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_RootOrder

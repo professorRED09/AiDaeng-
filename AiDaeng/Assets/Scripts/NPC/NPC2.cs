@@ -220,7 +220,9 @@ public class NPC2 : MonoBehaviour, IObserver
         //float m_tempDecSp = moodDecSp;
         moodDecSp = 0.1f;
         print("AHH");
-        
+
+            
+
         yield return new WaitForSeconds(5f);
         moodDecSp = defaultMoodDecSp;
     }
@@ -239,6 +241,9 @@ public class NPC2 : MonoBehaviour, IObserver
 
         GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
         m_HappyVFX.transform.parent = transform;
+
+        GameObject m_waterBuff =  Instantiate(npcManager.waterBuff, transform) as GameObject;
+        m_waterBuff.transform.parent = orderBubble.transform.GetChild(6).transform;
 
         _audioSource.clip = _getWaterSFX;
         _audioSource.Play();

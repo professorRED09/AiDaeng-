@@ -13106,6 +13106,8 @@ MonoBehaviour:
   - {fileID: 1840209402}
   - {fileID: 768989279}
   leftNpcCount: 0
+  waterBuff: {fileID: 4171565931567679744, guid: 6893669877cf6844fa701210cb23411a, type: 3}
+  umbrellaBuff: {fileID: 4095924583917428079, guid: 7c599ded384d0e748ac499289f2a16d8, type: 3}
 --- !u!1 &1474498069
 GameObject:
   m_ObjectHideFlags: 0

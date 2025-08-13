@@ -26,6 +26,9 @@ public class NPC_Manager2 : MonoBehaviour
 
     private GameManager gameManager;
 
+    public GameObject waterBuff;
+    public GameObject umbrellaBuff;
+
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();        

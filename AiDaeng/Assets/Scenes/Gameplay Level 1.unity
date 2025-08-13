@@ -2164,6 +2164,9 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
+  weatherTypeNumber: 
+  _currentIndex: 1
+  _currentWeatherOrder: 0
 --- !u!1 &557693610
 GameObject:
   m_ObjectHideFlags: 0
@@ -12220,6 +12223,9 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
+  weatherTypeNumber: 
+  _currentIndex: 1
+  _currentWeatherOrder: 0
 --- !u!4 &1339018600
 Transform:
   m_ObjectHideFlags: 0
@@ -13066,8 +13072,6 @@ MonoBehaviour:
   minTime: 8
   currentSpawnTimer: 0
   itemLists:
-  - {fileID: 11400000, guid: 50b4c1fdeb011d742b16f6fe5418f44a, type: 2}
-  - {fileID: 11400000, guid: 28a65c88a0950dd43824c90d5c13d96c, type: 2}
   - {fileID: 11400000, guid: b7bbfd8c47e016e449c890b743d0e2e3, type: 2}
   - {fileID: 11400000, guid: 3344601e3a2b9e648949bb22a957d51e, type: 2}
   - {fileID: 11400000, guid: 89f49ec4b74a4c141b0060586f201e81, type: 2}
@@ -13100,6 +13104,8 @@ MonoBehaviour:
   - {fileID: 1840209402}
   - {fileID: 768989279}
   leftNpcCount: 0
+  waterBuff: {fileID: 0}
+  umbrellaBuff: {fileID: 0}
 --- !u!1 &1474498069
 GameObject:
   m_ObjectHideFlags: 0
