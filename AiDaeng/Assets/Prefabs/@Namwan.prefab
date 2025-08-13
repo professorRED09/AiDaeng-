@@ -62,8 +62,10 @@ MonoBehaviour:
   _serveAmountText: {fileID: 5223176386756574383}
   serveAmount: 0
   _maxDrinkWaterServeAmount: 4
-  _maxUmbrellaServeAmount: 3
+  _drinkWaterServeAmount: 0
+  _umbrellaServeAmount: 0
   canServe: 1
+  _umbrellaTask: {fileID: 0}
 --- !u!223 &6949628872840457355
 Canvas:
   m_ObjectHideFlags: 0
@@ -298,11 +300,11 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.8901657}
-  m_Size: {x: 0.36, y: 1.4196703}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.07, y: 2.5}
   m_Direction: 0
 --- !u!50 &1825992341276206525
 Rigidbody2D:

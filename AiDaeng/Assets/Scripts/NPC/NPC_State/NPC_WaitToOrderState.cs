@@ -10,6 +10,9 @@ public class NPC_WaitToOrderState : NPC_BaseState
 
     public override void UpdateState(NPC2 npc)
     {
+        //Fade if Namwan is behind
+        npc.DoFade();
+
         // check if there's a free spot to take and order 
         npc.StartCoroutine(npc.CheckOrderSpot());
 

@@ -8,6 +8,7 @@ public class Weather_Rainy : Weather_BaseState
 
     public override void EnterState(WeatherManager weather)
     {
+        Debug.Log("ENTER RAINY WEATHER");
         ////play rainy atmosphere
         ////weather.anim.SetTrigger("isRainy");
         //weather.rainFilter.GetComponent<SpriteRenderer>().enabled = true;

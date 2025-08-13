@@ -8,6 +8,7 @@ public class Weather_Sunny : Weather_BaseState
 
     public override void EnterState(WeatherManager weather)
     {
+        Debug.Log("ENTER SUNNY WEATHER");
         ////play sunny atmosphere
         ////weather.anim.SetTrigger("isSunny");
 

@@ -11,7 +11,10 @@ public class NPC_OrderState : NPC_BaseState
     }
 
     public override void UpdateState(NPC2 npc)
-    {        
+    {
+        //Fade if Namwan is behind
+        npc.DoFade();
+
         if (npc.isUpset)
         {
             npc.SwitchState(npc.rageLeaveState);

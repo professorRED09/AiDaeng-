@@ -17,7 +17,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private readonly float speed = 5f;
     public GameObject happyVFX;
 
-    float detectLength = 1.2f;
+    public float detectLength = 1.2f;
     public LayerMask npcMask;
 
     [Header("UI")]
@@ -198,6 +198,20 @@ public class NPC2 : MonoBehaviour, IObserver
         else
         {
             isMoving = false;
+        }        
+    }
+
+    public void DoFade()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 2.5f);
+
+        if (hit.collider == null)
+        {            
+            sprite.color = new Vector4(1f, 1f, 1f, 1f);
+        }
+        else
+        {            
+            sprite.color = new Vector4(1f, 1f, 1f, 0.5f);
         }
     }
 
@@ -240,7 +254,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
         _audioSource.clip = _getUmbrellaSFX;
         _audioSource.Play();
-    }
+    }    
 
     // Check if there's npc ahead, if yes then stop moving
     void WaitForQueue()
@@ -634,8 +648,10 @@ public class NPC2 : MonoBehaviour, IObserver
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;        
-        Gizmos.DrawLine(transform.position, direction * detectLength);
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + direction * detectLength);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * 2.5f);
         //Gizmos.DrawLine(transform.position, transform.up);
     }
 

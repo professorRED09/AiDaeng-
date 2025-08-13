@@ -2164,6 +2164,9 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
+  weatherTypeNumber: 010000000300000001000000
+  _currentIndex: 1
+  _currentWeatherOrder: 0
 --- !u!1 &557693610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4500,7 +4503,7 @@ MonoBehaviour:
   _namwan: {fileID: 91148722}
   _drinkWaterTask: {fileID: 665842541}
   _umbrellaTask: {fileID: 2027653564}
-  currentLevel: 1
+  currentLevel: 2
 --- !u!1 &927350689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3156429153952712613, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
@@ -12220,6 +12223,9 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
+  weatherTypeNumber: 
+  _currentIndex: 1
+  _currentWeatherOrder: 0
 --- !u!4 &1339018600
 Transform:
   m_ObjectHideFlags: 0
