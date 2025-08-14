@@ -48,8 +48,9 @@ public class Inventory : MonoBehaviour, IObserver
                 slots[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].itemSprite;
 
-                slots[i].GetComponent<InventorySlot>().OnChanged(items[i].itemSprite);
+                //slots[i].GetComponent<InventorySlot>().OnChanged(items[i].itemSprite);
                 slots[i].GetComponent<InventorySlot>().SetItem(items[i]);
+
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().color = new Color(1, 1, 1, 1);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = itemNumbers[i].ToString();
                 //slots[i].transform.GetChild(1).gameObject.SetActive(true);
@@ -59,8 +60,9 @@ public class Inventory : MonoBehaviour, IObserver
                 slots[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 0);
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
 
-                slots[i].GetComponent<InventorySlot>().OnChanged(null);
+                //slots[i].GetComponent<InventorySlot>().OnChanged(null);
                 slots[i].GetComponent<InventorySlot>().SetItem(null);
+
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().color = new Color(1, 1, 1, 0);
                 //slots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = null;
                 //slots[i].transform.GetChild(1).gameObject.SetActive(false);
@@ -185,14 +187,19 @@ public class Inventory : MonoBehaviour, IObserver
             case (WeatherType.Rainy):
                 for (int i = 0; i < slots.Length; i++)
                 {
-                    if (i < items.Count)
-                    {                        
-                        slots[i].GetComponent<InventorySlot>().CountdownLifeBar();                        
-                    }                    
+                    slots[i].GetComponent<InventorySlot>().StartCountdownLifeBar();
+                    //if (i < items.Count)
+                    //{
+                    //    slots[i].GetComponent<InventorySlot>().StartCountdownLifeBar();
+                    //}                    
                 }
                 return;
 
-            default:                
+            default:
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    slots[i].GetComponent<InventorySlot>().HideLifeBarUI();                    
+                }
                 return;
         }
     }

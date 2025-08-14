@@ -204,15 +204,17 @@ public class NPC2 : MonoBehaviour, IObserver
     public void DoFade()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 2.5f);
-
+        Color currentColor = sprite.color;        
         if (hit.collider == null)
-        {            
-            sprite.color = new Vector4(1f, 1f, 1f, 1f);
+        {
+            currentColor.a = 1f;
         }
         else
-        {            
-            sprite.color = new Vector4(1f, 1f, 1f, 0.5f);
+        {
+            currentColor.a = 0.5f;
         }
+
+        sprite.color = currentColor;
     }
 
     IEnumerator GetDrinkWaterBuff()
@@ -243,7 +245,8 @@ public class NPC2 : MonoBehaviour, IObserver
         m_HappyVFX.transform.parent = transform;
 
         GameObject m_waterBuff =  Instantiate(npcManager.waterBuff, transform) as GameObject;
-        m_waterBuff.transform.parent = orderBubble.transform.GetChild(6).transform;
+        m_waterBuff.transform.SetParent(orderBubble.transform.GetChild(6));
+        //orderBubble.transform.GetChild(6).gameObject.transform.SetParent(m_waterBuff.transform, false);
 
         _audioSource.clip = _getWaterSFX;
         _audioSource.Play();
@@ -254,8 +257,12 @@ public class NPC2 : MonoBehaviour, IObserver
         NormalEffect();
         ResetMoodBar();
 
-        _umbrellaIcon.SetActive(true);
+        //_umbrellaIcon.SetActive(true);
         hasUmbrella = true;
+
+        GameObject m_umbrellaBuff = Instantiate(npcManager.umbrellaBuff, transform) as GameObject;
+        m_umbrellaBuff.transform.SetParent(orderBubble.transform.GetChild(6));
+        //m_umbrellaBuff.transform.parent = orderBubble.transform.GetChild(6).transform;
 
         _audioSource.clip = _getUmbrellaSFX;
         _audioSource.Play();
@@ -309,7 +316,8 @@ public class NPC2 : MonoBehaviour, IObserver
     }
 
     public void CheckProductFromPlayer()
-    {        
+    {
+        Vector3 _originalScale = orderBubble.transform.localScale;
         //check if player has all of products
         bool playerHasAllProducts = true;        
         foreach (var element in orderSlotLists)
@@ -359,12 +367,25 @@ public class NPC2 : MonoBehaviour, IObserver
 
                     _serveAttemp += 1;
                 }
+                else
+                {
+                    Debug.Log("KUAYT");
+                    NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+                    //Vector3 _originalScale = orderBubble.transform.localScale;
+                    orderBubble.transform.DOScale(orderBubble.transform.localScale * 1.3f, 0.3f)
+                                .SetEase(Ease.Flash)
+                                .OnComplete(() =>
+                                {
+                                    orderBubble.transform.DOScale(_originalScale, 0.3f);
+                                });
+                    break;
+                }
             }
         }
 
         else
         {
-            NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+            
         }
 
         

@@ -30,7 +30,7 @@ public class WeatherManager : Subject
     public Weather_Sunny sunnyState = new Weather_Sunny();
 
     public int[] weatherTypeNumber;
-    [SerializeField] private int _currentIndex = 1;
+    [SerializeField] private int _currentIndex;
     [SerializeField] private int _currentWeatherOrder;
 
     private void Awake()
@@ -41,8 +41,11 @@ public class WeatherManager : Subject
     void Start()
     {
         //weatherFilter.SetActive(true);
-        currentState = normalState;
-        currentState.EnterState(this);
+
+        //currentState = normalState;
+        //currentState.EnterState(this);
+
+        ChangeToNextWeather();
     }
 
     void Update()

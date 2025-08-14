@@ -43,6 +43,7 @@ public class UmbrellaTask : MonoBehaviour
     {
         ++umbrellaAmount;
         UpdateOnUIText();
+        Debug.Log("Umbrella: " + umbrellaAmount);
 
         //inform player that the umbrella amount has increase
     }

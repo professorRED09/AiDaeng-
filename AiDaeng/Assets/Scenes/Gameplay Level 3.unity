@@ -2149,7 +2149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540917822}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4a57d4e59f934949bf17e693f2ad22c, type: 3}
   m_Name: 
@@ -2164,8 +2164,8 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
-  weatherTypeNumber: 010000000300000001000000
-  _currentIndex: 0
+  weatherTypeNumber: 030000000300000003000000
+  _currentIndex: -1
   _currentWeatherOrder: 0
 --- !u!1 &557693610
 GameObject:
@@ -13106,6 +13106,8 @@ MonoBehaviour:
   - {fileID: 1840209402}
   - {fileID: 768989279}
   leftNpcCount: 0
+  waterBuff: {fileID: 4171565931567679744, guid: 6893669877cf6844fa701210cb23411a, type: 3}
+  umbrellaBuff: {fileID: 4095924583917428079, guid: 7c599ded384d0e748ac499289f2a16d8, type: 3}
 --- !u!1 &1474498069
 GameObject:
   m_ObjectHideFlags: 0
@@ -13151,7 +13153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2657132412545987076, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5648568262564974895, guid: c9cd0ac48a1487649871f1e7360a9eee, type: 3}
       propertyPath: m_AnchorMax.y
@@ -21114,6 +21116,10 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[12]
       value: 
       objectReference: {fileID: 1048379080}
+    - target: {fileID: 4271691049932189288, guid: 6470abd900d176e4595603e8b3a51640, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ff49275a2af8c3e458b10f0540a00ba6, type: 3}
     - target: {fileID: 5850169562241019825, guid: 6470abd900d176e4595603e8b3a51640, type: 3}
       propertyPath: m_Name
       value: '@Namwan'

@@ -3088,7 +3088,7 @@ MonoBehaviour:
   - {fileID: 251083167318123389}
   - {fileID: 6877807027925102101}
   _inventorySprite: {fileID: 1051218077976354547}
-  _shakeStrength: 0
+  _shakeStrength: 10
 --- !u!114 &1051218077976354547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5682,6 +5682,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8219636054079350611}
     m_Modifications:
+    - target: {fileID: 311880467136677126, guid: 393633d4858c9344cb69a112bcbb0a50, type: 3}
+      propertyPath: _slotIndex
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5242363130102223469, guid: 393633d4858c9344cb69a112bcbb0a50, type: 3}
       propertyPath: m_Name
       value: Slot (4)
@@ -6163,6 +6167,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8219636054079350611}
     m_Modifications:
+    - target: {fileID: 311880467136677126, guid: 393633d4858c9344cb69a112bcbb0a50, type: 3}
+      propertyPath: _slotIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5242363130102223469, guid: 393633d4858c9344cb69a112bcbb0a50, type: 3}
       propertyPath: m_Name
       value: Slot (1)
@@ -6666,6 +6674,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8219636054079350611}
     m_Modifications:
+    - target: {fileID: 311880467136677126, guid: 393633d4858c9344cb69a112bcbb0a50, type: 3}
+      propertyPath: _slotIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5242363130102223469, guid: 393633d4858c9344cb69a112bcbb0a50, type: 3}
       propertyPath: m_Name
       value: Slot (3)
@@ -7240,6 +7252,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8219636054079350611}
     m_Modifications:
+    - target: {fileID: 311880467136677126, guid: 393633d4858c9344cb69a112bcbb0a50, type: 3}
+      propertyPath: _slotIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5242363130102223469, guid: 393633d4858c9344cb69a112bcbb0a50, type: 3}
       propertyPath: m_Name
       value: Slot (2)

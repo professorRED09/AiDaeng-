@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2985033506887552406
 RectTransform:
   m_ObjectHideFlags: 0
@@ -244,10 +244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2946347e9bea34693d5e8a60ecb7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemImage: {fileID: 7039756770408128988}
-  _addItemPrefab: {fileID: 4757101205997547004, guid: 3a43304e2172d4443b394b82aec95881, type: 3}
-  _removeItemPrefab: {fileID: 4757101205997547004, guid: e786f47885b16da4bbccde1ddc0b8e3e, type: 3}
+  _slotIndex: 0
   _lifeBarFillImage: {fileID: 8473068136967905592}
+  _lifeBarBG: {fileID: 3630898055542613548}
   currentItem: {fileID: 0}
   _isRaining: 0
 --- !u!1 &9169830897657443899

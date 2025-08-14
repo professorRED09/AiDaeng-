@@ -125,7 +125,6 @@ public class Namwan : MonoBehaviour, IObserver
             if (!targetNPC.GetComponent<NPC2>().hasUmbrella) {
 
                 targetNPC.GetComponent<NPC2>().OnGettingUmbrella();
-
                 inventory.DecreaseUmbrella();
 
                 targetNPC = null;                                               
