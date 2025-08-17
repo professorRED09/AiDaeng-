@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour, IObserver
     [SerializeField] private float _shakeStrength;
     private WeatherManager _weatherManager;
     Vector3 defaultPos;
+    
 
     private void Awake()
     {
@@ -198,6 +199,7 @@ public class Inventory : MonoBehaviour, IObserver
             default:
                 for (int i = 0; i < slots.Length; i++)
                 {
+                    //print("ASDASD");
                     slots[i].GetComponent<InventorySlot>().HideLifeBarUI();                    
                 }
                 return;

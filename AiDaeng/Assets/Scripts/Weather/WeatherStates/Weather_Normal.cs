@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Weather_Normal : Weather_BaseState
 {
-    private float _timer = 20f;
+    private float _timer = 40f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)

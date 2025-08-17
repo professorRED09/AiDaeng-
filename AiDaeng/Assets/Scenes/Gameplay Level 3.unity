@@ -1325,6 +1325,7 @@ GameObject:
   - component: {fileID: 345831206}
   - component: {fileID: 345831205}
   - component: {fileID: 345831204}
+  - component: {fileID: 345831207}
   m_Layer: 0
   m_Name: WindEffect
   m_TagString: Untagged
@@ -1420,6 +1421,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345831207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345831203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056c9980e514445468cd3f7d692d825f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentEffectTimer: 0
 --- !u!1 &366367674
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,7 +2178,7 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
-  weatherTypeNumber: 030000000300000003000000
+  weatherTypeNumber: 01000000030000000100000003000000
   _currentIndex: -1
   _currentWeatherOrder: 0
 --- !u!1 &557693610
@@ -13068,8 +13082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e87c70273336c48ae8ee723a6d83e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 10
-  minTime: 8
+  maxTime: 8
+  minTime: 6
   currentSpawnTimer: 0
   itemLists:
   - {fileID: 11400000, guid: 50b4c1fdeb011d742b16f6fe5418f44a, type: 2}

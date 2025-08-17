@@ -20,10 +20,14 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] private Items currentItem;
     [SerializeField] private bool _isRaining;
     private WeatherManager _weatherManager;
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip _throwItemSFX;
+
 
     private void Awake()
     {
         _weatherManager = FindObjectOfType<WeatherManager>();
+        _audioSource = GetComponent<AudioSource>();
 
         _lifeBarFillImage.enabled = false;
         _lifeBarBG.enabled = false;
@@ -64,8 +68,24 @@ public class InventorySlot : MonoBehaviour
 
         }
         UpdateLifeBar();
+    }
 
+    public void OnMouseDown()
+    {
+        if(currentItem != null && Inventory.instance.items[_slotIndex] != null)
+        {
+            Inventory.instance.items.RemoveAt(_slotIndex);
+            Inventory.instance.DisplayItems();
 
+            //play something to give player feedback
+            _audioSource.clip = _throwItemSFX;
+            _audioSource.Play();
+        }
+        else
+        {
+            print("This slot doesn't have any any items");
+        }
+        
     }
 
     void UpdateLifeBar()
@@ -85,14 +105,15 @@ public class InventorySlot : MonoBehaviour
         if (_weatherManager.currentState == _weatherManager.rainyState && _isRaining == false && currentItem != null)
         {
             _isRaining = true;
-        }        
+        }       
     }
 
     public void StartCountdownLifeBar()
     {
+        //if (currentItem == null) return;
         _lifeBarFillImage.enabled = true;
         _lifeBarBG.enabled = true;
-
+        _isRaining = true;
         //_currentLife = _maxLife;
         //UpdateLifeBar();
         ////if (currentItem == null)
@@ -107,6 +128,7 @@ public class InventorySlot : MonoBehaviour
 
     public void HideLifeBarUI()
     {
+        //print("HIDE");
         _lifeBarFillImage.enabled = false;
         _lifeBarBG.enabled = false;
         _isRaining = false;

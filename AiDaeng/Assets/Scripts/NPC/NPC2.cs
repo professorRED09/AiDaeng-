@@ -368,8 +368,7 @@ public class NPC2 : MonoBehaviour, IObserver
                     _serveAttemp += 1;
                 }
                 else
-                {
-                    Debug.Log("KUAYT");
+                {                    
                     NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
                     //Vector3 _originalScale = orderBubble.transform.localScale;
                     orderBubble.transform.DOScale(orderBubble.transform.localScale * 1.3f, 0.3f)

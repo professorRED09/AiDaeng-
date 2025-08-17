@@ -75,7 +75,7 @@ public class WeatherManager : Subject
 
     public void ChangeToNextWeather()
     {
-        if(_currentIndex < 2)
+        if(_currentIndex < weatherTypeNumber.Length-1)
         {
             _currentIndex++;
             _currentWeatherOrder = weatherTypeNumber[_currentIndex];
