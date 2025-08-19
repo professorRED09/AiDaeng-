@@ -2164,7 +2164,7 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
-  weatherTypeNumber: 
+  weatherTypeNumber: 010000000100000001000000
   _currentIndex: 1
   _currentWeatherOrder: 0
 --- !u!1 &557693610
@@ -4964,7 +4964,7 @@ MonoBehaviour:
   isFull: 0
   maxWB: 8
   currentWB: 0
-  waypoint: {fileID: 1292781620}
+  waypoint: {fileID: 1667793276}
   mixturePanel: {fileID: 591802889}
   waterBarFill: {fileID: 428467807}
 --- !u!60 &1002042181
@@ -11829,7 +11829,7 @@ GameObject:
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1292781620
 Transform:
   m_ObjectHideFlags: 0

@@ -50,7 +50,10 @@ public class BuddhaBasin : MonoBehaviour
     {
         if (col.CompareTag("Player") && player.targetWP == gameObject)
         {
-            StartCoroutine(ResetBasin());
+            if (currentWB != 0)
+            {
+                StartCoroutine(ResetBasin());                
+            }            
         }
     }
 

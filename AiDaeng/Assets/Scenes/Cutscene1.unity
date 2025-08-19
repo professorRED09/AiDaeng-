@@ -1451,10 +1451,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene1Name: Cutscene1
-  level1Name: Gameplay [Beta]
+  level1Name: Gameplay Level 1
   pausePanel: {fileID: 0}
   settingPanel: {fileID: 0}
   tutorialPanel: {fileID: 0}
+  logoImage: {fileID: 0}
 --- !u!114 &802281374
 MonoBehaviour:
   m_ObjectHideFlags: 0
