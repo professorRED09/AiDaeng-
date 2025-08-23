@@ -347,6 +347,7 @@ public class NPC2 : MonoBehaviour, IObserver
         //if player has just 1 products OR npc orders only 1 products
         else if (!playerHasAllProducts || orderLists.Count < 2)
         {
+            bool m_hasSomeOfProduct = false;
             for (int i = 0; i < orderSlotLists.Count; i++)
             {
                 Items m_OrderItem = orderSlotLists[i].GetComponent<OrderSlot>().orderItem;
@@ -354,6 +355,8 @@ public class NPC2 : MonoBehaviour, IObserver
                 {
                     // remove the given item from player's inventory
                     Inventory.instance.RemoveItem(m_OrderItem);
+
+                    m_hasSomeOfProduct = true;
 
                     currentMV += maxMV / 3.5f;
                     if (currentMV > maxMV)
@@ -367,18 +370,31 @@ public class NPC2 : MonoBehaviour, IObserver
 
                     _serveAttemp += 1;
                 }
-                else
-                {                    
-                    NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
-                    //Vector3 _originalScale = orderBubble.transform.localScale;
-                    orderBubble.transform.DOScale(orderBubble.transform.localScale * 1.3f, 0.3f)
-                                .SetEase(Ease.Flash)
-                                .OnComplete(() =>
-                                {
-                                    orderBubble.transform.DOScale(_originalScale, 0.3f);
-                                });
-                    break;
-                }
+                //else
+                //{                    
+                //    NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+                //    //Vector3 _originalScale = orderBubble.transform.localScale;
+                //    orderBubble.transform.DOScale(orderBubble.transform.localScale * 1.3f, 0.3f)
+                //                .SetEase(Ease.Flash)
+                //                .OnComplete(() =>
+                //                {
+                //                    orderBubble.transform.DOScale(_originalScale, 0.3f);
+                //                });
+                //    break;
+                //}
+            }
+
+            // after checking loop, if player doesn't have any product that match npc's need, feedback to player
+            if (!m_hasSomeOfProduct)
+            {
+                NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
+                //Vector3 _originalScale = orderBubble.transform.localScale;
+                orderBubble.transform.DOScale(orderBubble.transform.localScale * 1.3f, 0.3f)
+                            .SetEase(Ease.Flash)
+                            .OnComplete(() =>
+                            {
+                                orderBubble.transform.DOScale(_originalScale, 0.3f);
+                            });                
             }
         }
 

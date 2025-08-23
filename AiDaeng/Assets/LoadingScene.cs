@@ -14,7 +14,9 @@ public class LoadingScene : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         //_transitionScreen.DOFade(1f, 1f).OnComplete(() => StartCoroutine(LoadSceneAsync(sceneName)));
+        _loadingScreen.SetActive(true);
         StartCoroutine(LoadSceneAsync(sceneName));
+        
 
         //_transitionScreen.DOFade(1f, 1f).OnComplete(() => 
         //_transitionScreen.DOFade(0f, 1f).OnComplete(() => StartCoroutine(LoadSceneAsync(sceneName))));
@@ -23,8 +25,7 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadSceneAsync(string sceneName)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-        //operation.allowSceneActivation = false;
-        _loadingScreen.SetActive(true);
+        //operation.allowSceneActivation = false;        
 
         while (!operation.isDone)
         {
@@ -33,11 +34,13 @@ public class LoadingScene : MonoBehaviour
 
             //if (operation.progress >= 0.9f)
             //{
-            //    if (Input.GetKey(KeyCode.Space))
-            //    {
-            //        print("ASD");
-            //        operation.allowSceneActivation = true;
-            //    }
+            //    operation.allowSceneActivation = true;
+
+            //    //if (Input.GetKey(KeyCode.Space))
+            //    //{
+            //    //    print("ASD");
+            //    //    operation.allowSceneActivation = true;
+            //    //}
             //}
 
             yield return null;

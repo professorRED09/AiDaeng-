@@ -4509,6 +4509,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3156429153952712613, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
   m_PrefabInstance: {fileID: 1345793173021261954}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &948723195 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8974288891959626467, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+  m_PrefabInstance: {fileID: 1345793173021261954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &950658675
 GameObject:
   m_ObjectHideFlags: 0
@@ -4967,6 +4978,7 @@ MonoBehaviour:
   waypoint: {fileID: 1667793276}
   mixturePanel: {fileID: 591802889}
   waterBarFill: {fileID: 428467807}
+  fullWaterText: {fileID: 948723195}
 --- !u!60 &1002042181
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11644,6 +11656,7 @@ MonoBehaviour:
   waypoint: {fileID: 1292781620}
   mixturePanel: {fileID: 0}
   waterBarFill: {fileID: 0}
+  fullWaterText: {fileID: 0}
 --- !u!82 &1273976326
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20644,6 +20657,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4785956159041672465, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4879787400591055345, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4895763889336387642, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}

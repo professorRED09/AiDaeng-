@@ -27,7 +27,7 @@ public class BuddhaBasin : MonoBehaviour
     [Header("UI")]
     //public Slider waterBar;
     public Image waterBarFill;
-    //[SerializeField] GameObject fullBasin_Notif;
+    [SerializeField] TMP_Text fullWaterText;
 
 
     private void Awake()
@@ -42,6 +42,7 @@ public class BuddhaBasin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         UpdateWaterBar(currentWB, maxWB);
         //StartCoroutine(ResetBasin());
     }
@@ -71,6 +72,8 @@ public class BuddhaBasin : MonoBehaviour
         currentWB = 0;
         isFull = false;
         UpdateWaterBar(currentWB, maxWB);
+
+        fullWaterText.enabled = false;
     }
 
     public void IncreaseWater()
@@ -99,6 +102,9 @@ public class BuddhaBasin : MonoBehaviour
         // play soundFX
         audioSource.clip = fullSFX;
         audioSource.Play();
+
+        fullWaterText.enabled = true;
+        fullWaterText.gameObject.transform.DOMove(fullWaterText.gameObject.transform.position + Vector3.up, 1f);
 
         NotificationManager.instance.AddNoti("น้ำเต็มแล้วน้อง!");        
     }

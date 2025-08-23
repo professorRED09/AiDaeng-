@@ -29,6 +29,8 @@ public class GameManager : Subject/*, IObserver*/
     [SerializeField] private GameObject _umbrellaTask;
     private MusicManager musicManager;
 
+    private InteractiveTutorial tutorial;
+
     public enum Level
     {
         Level_1, Level_2, Level_3
@@ -43,6 +45,12 @@ public class GameManager : Subject/*, IObserver*/
         scoreManager = FindObjectOfType<ScoreManager>();
         weatherManager = FindObjectOfType<WeatherManager>();
         musicManager = FindObjectOfType<MusicManager>();
+
+        tutorial = FindObjectOfType<InteractiveTutorial>();
+        //if (tutorial != null)
+        //{
+        //    tutorial.enabled = false;
+        //}
     }
 
     private void Start()
@@ -84,6 +92,12 @@ public class GameManager : Subject/*, IObserver*/
 
         EnableManagers();
         player.canControl = true;
+
+        //if(tutorial != null)
+        //{
+        //    tutorial.enabled = true;
+        //    //tutorial.StartTutorial();
+        //}
     }    
 
     private void EnableManagers()
