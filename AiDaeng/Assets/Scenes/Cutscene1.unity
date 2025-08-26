@@ -1121,6 +1121,7 @@ GameObject:
   - component: {fileID: 802281372}
   - component: {fileID: 802281373}
   - component: {fileID: 802281374}
+  - component: {fileID: 802281375}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1469,7 +1470,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802281367}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740afd275ec08a343a434f6354210499, type: 3}
   m_Name: 
@@ -1503,6 +1504,29 @@ MonoBehaviour:
   isChoice1Finished: 0
   monkAnimation: {fileID: 0}
   playerAnimation: {fileID: 0}
+--- !u!114 &802281375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802281367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5cb225d5a1a3c49b13064ac1ab3e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: {fileID: 1659598518}
+  nameText: {fileID: 1263141783}
+  choicePanel: {fileID: 1644412640}
+  choiceButtonPrefab: {fileID: 568403025}
+  lines: []
+  names: []
+  textSpeed: 0.05
+  characterNames:
+  - "\u0E41\u0E14\u0E07"
+  characterAnimators:
+  - {fileID: 0}
 --- !u!1 &837782138
 GameObject:
   m_ObjectHideFlags: 0
