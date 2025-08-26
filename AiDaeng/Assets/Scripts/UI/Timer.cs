@@ -12,10 +12,12 @@ public class Timer : MonoBehaviour
     private float _startAngle;
     private float _endAngle;
 
-    [SerializeField] private float timeToDisplay = 60.0f;
+    [SerializeField] private float timeToDisplay;
     private float currentTimer;
     private bool _isRunning;
     TimeSpan timeSpan;
+
+    public bool unlimitedTimeCheck;
 
     private void OnEnable()
     {
@@ -50,7 +52,7 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         //countdown game timer        
-        if (!_isRunning) return;
+        if (!_isRunning || unlimitedTimeCheck) return;
 
         //When the time is out, invoke OnTimeStop() function
         if (currentTimer < 0.0f)

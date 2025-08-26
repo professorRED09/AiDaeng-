@@ -22,7 +22,7 @@ public class ScoreManager : MonoBehaviour
     private AudioSource _audioSource;    
     [SerializeField] float _maxScore;
     [SerializeField] float _fillSpeed;
-    [SerializeField] private float _currentScore;
+    public float currentScore;
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
         _maxScore = npcManager.maxTime * baseScore;
         _audioSource = GetComponent<AudioSource>();
         //initially set score to 0 when the game start
-        _currentScore = 0;           
+        currentScore = 0;           
     }
 
     //private void Update()
@@ -51,8 +51,8 @@ public class ScoreManager : MonoBehaviour
         _audioSource.clip = addScoreSFX;
         _audioSource.Play();
 
-        _currentScore += score;
-        UpdateScoreBar(_currentScore, _maxScore);       
+        currentScore += score;
+        UpdateScoreBar(currentScore, _maxScore);       
         
     } 
 
@@ -65,16 +65,16 @@ public class ScoreManager : MonoBehaviour
         _audioSource.clip = addScoreSFX;
         _audioSource.Play();
 
-        _currentScore += score;
-        UpdateScoreBar(_currentScore, _maxScore);
+        currentScore += score;
+        UpdateScoreBar(currentScore, _maxScore);
     }
 
     public void UpdateScoreBar(float currentValue, float maxValue)
     {
-        float targetFillAmount = _currentScore / _maxScore;
+        float targetFillAmount = currentScore / _maxScore;
         _scoreBarFill.DOFillAmount(targetFillAmount, _fillSpeed);
         //scoreBar.value = currentValue / maxValue;
-        scoreText.text = ((int)_currentScore).ToString();
+        scoreText.text = ((int)currentScore).ToString();
 
         if (StarCount() >= 3)
         {
@@ -96,15 +96,15 @@ public class ScoreManager : MonoBehaviour
     // convert current score to number of star
     public float StarCount()
     {
-        if(_currentScore >= _maxScore)
+        if(currentScore >= _maxScore)
         {            
             return 3;
         }
-        else if (_currentScore >= (2*_maxScore/3))
+        else if (currentScore >= (2*_maxScore/3))
         {            
             return 2;            
         }
-        else if (_currentScore >= (_maxScore/3))
+        else if (currentScore >= (_maxScore/3))
         {            
             return 1;
         }

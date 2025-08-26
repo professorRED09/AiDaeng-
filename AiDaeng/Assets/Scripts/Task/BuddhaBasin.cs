@@ -12,10 +12,10 @@ public class BuddhaBasin : MonoBehaviour
     public AudioClip clickSFX;
     public AudioClip fullSFX;
 
-    public bool isFull;    // check if the basin is full
-    public float maxWB; // max quantity of water in the basin
-    [SerializeField] float currentWB; // current quantity of water in the basin
-    public Transform waypoint;  // The waypoint for this task
+    public bool isFull;                 // check if the basin is full
+    public float maxWB;                 // max quantity of water in the basin
+    [SerializeField] float currentWB;   // current quantity of water in the basin
+    public Transform waypoint;          // The waypoint for this task
 
     private PlayerController1 player;    // Reference for player script 
     private AudioSource audioSource;

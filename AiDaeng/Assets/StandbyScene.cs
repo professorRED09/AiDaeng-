@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class StandbyScene : MonoBehaviour
 {
-    
-    public void OnPressYesButtton()
+    public void OnPressYesButtton(string sceneName)
     {
-        SceneManager.LoadScene("Gameplay Tutorial");
+        SceneManager.LoadScene(sceneName);
     }
 
-    public void OnPressNoButton()
+    public void OnPressNoButton(string sceneName)
     {
-        SceneManager.LoadScene("Gameplay Level 1");
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -19,6 +19,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
     public float detectLength = 1.2f;
     public LayerMask npcMask;
+    public int orderTotalForTutorial = 0;
 
     [Header("UI")]
     [SerializeField] GameObject orderBubble;
@@ -394,7 +395,14 @@ public class NPC2 : MonoBehaviour, IObserver
                             .OnComplete(() =>
                             {
                                 orderBubble.transform.DOScale(_originalScale, 0.3f);
-                            });                
+                            });
+
+                //if tutorial isn't null, call tutorial
+                if(InteractiveTutorial.instance != null && Inventory.instance.items.Count != 0)
+                {
+                    InteractiveTutorial.instance.SwitchState(InteractiveTutorial.instance.onWrongNarmObState);
+                }
+                
             }
         }
 
@@ -438,6 +446,7 @@ public class NPC2 : MonoBehaviour, IObserver
 
     public void PlayGetItemAnimation()
     {
+        isClickable = false;
         //hide order bubble
         HideOrder();
         ResetMoodBar();
@@ -478,12 +487,21 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         yield return new WaitForSeconds(3);
 
+        int _orderNumbers = 0;
         // random total of things to order (for now let's just random between 1 and 2)
-        int orderNumbers = Random.Range(1, 3);  // npc will order 1 or 2 things (3 is the exclusive)
+        if(orderTotalForTutorial == 0)
+        {
+            _orderNumbers = Random.Range(1, 3);  // npc will order 1 or 2 things (3 is the exclusive)
+        }
+        else
+        {
+            _orderNumbers = orderTotalForTutorial;
+        }
+        //int _orderNumbers = Random.Range(1, 3);  // npc will order 1 or 2 things (3 is the exclusive)
 
         isClickable = true;
 
-        for (int i = 0; i < orderNumbers; i++)
+        for (int i = 0; i < _orderNumbers; i++)
         {
             //random order
             Items order = _itemLists[Random.Range(0, _itemLists.Count)];
