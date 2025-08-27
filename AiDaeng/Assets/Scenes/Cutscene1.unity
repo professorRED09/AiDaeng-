@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802281367}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b69ab6a866e44d4885c27be870077a4, type: 3}
   m_Name: 
@@ -1499,11 +1499,12 @@ MonoBehaviour:
   - Hkp,.;p
   - kp,.;p
   - Hkp,.;p
-  textSpeed: 1
+  textSpeed: 0.1
   _isTyping: 1
   isChoice1Finished: 0
   monkAnimation: {fileID: 0}
   playerAnimation: {fileID: 0}
+  numwanAnimation: {fileID: 0}
 --- !u!114 &802281375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1516,17 +1517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5cb225d5a1a3c49b13064ac1ab3e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueText: {fileID: 1659598518}
-  nameText: {fileID: 1263141783}
-  choicePanel: {fileID: 1644412640}
-  choiceButtonPrefab: {fileID: 568403025}
-  lines: []
-  names: []
-  textSpeed: 0.05
-  characterNames:
-  - "\u0E41\u0E14\u0E07"
-  characterAnimators:
-  - {fileID: 0}
 --- !u!1 &837782138
 GameObject:
   m_ObjectHideFlags: 0

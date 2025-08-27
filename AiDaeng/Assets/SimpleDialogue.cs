@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SimpleDialogue : MonoBehaviour
 {
+    [Header("UI References")]
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI nameText;
     public Image characterLeft;
@@ -13,25 +14,20 @@ public class SimpleDialogue : MonoBehaviour
     public Button continueButton;
     public Button skipButton;
 
+    [Header("Dialogue Data")]
     public string[] lines;
     public string[] names;
     public bool[] isLeftSpeaker;
 
-    [Header("Sprites")]
-    public Sprite leftIdleSprite;
-    public Sprite rightIdleSprite;
-    public Sprite[] leftTalkingSprites;
-    public Sprite[] rightTalkingSprites;
+    [Header("Animators")]
+    public Animator leftAnimator;
+    public Animator rightAnimator;
 
     [Header("Settings")]
     public float textSpeed = 0.05f;
-    public float talkFrameDelay = 0.1f;
 
     private int index = 0;
     private bool isTyping = false;
-
-    private Coroutine leftTalkRoutine;
-    private Coroutine rightTalkRoutine;
 
     void Start()
     {
@@ -39,6 +35,7 @@ public class SimpleDialogue : MonoBehaviour
         nameText.text = "";
         continueButton.gameObject.SetActive(false);
         skipButton.onClick.AddListener(OnSkipClicked);
+
         StartDialogue();
     }
 
@@ -49,9 +46,11 @@ public class SimpleDialogue : MonoBehaviour
             if (isTyping)
             {
                 StopAllCoroutines();
-                StopTalkingAnimations();
+                StopTalking();
+
                 dialogueText.text = lines[index];
                 nameText.text = names[index];
+
                 isTyping = false;
                 continueButton.gameObject.SetActive(true);
             }
@@ -78,20 +77,17 @@ public class SimpleDialogue : MonoBehaviour
     {
         isTyping = true;
         dialogueText.text = "";
-        nameText.text = "";
+        nameText.text = names[index]; // โชว์ชื่อทันที
 
-        StartTalkingAnimation();
+        StartTalking();
 
-        int maxLength = Mathf.Max(names[index].Length, lines[index].Length);
-
-        for (int i = 0; i < maxLength; i++)
+        foreach (char c in lines[index])
         {
-            if (i < names[index].Length) nameText.text += names[index][i];
-            if (i < lines[index].Length) dialogueText.text += lines[index][i];
+            dialogueText.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
 
-        StopTalkingAnimations();
+        StopTalking();
         isTyping = false;
         continueButton.gameObject.SetActive(true);
     }
@@ -115,63 +111,59 @@ public class SimpleDialogue : MonoBehaviour
     {
         if (isLeftSpeaker[index])
         {
-            characterLeft.sprite = leftIdleSprite;
-            characterRight.sprite = rightIdleSprite;
             characterLeft.color = new Color(1, 1, 1, 1);
             characterRight.color = new Color(1, 1, 1, 0.5f);
         }
         else
         {
-            characterLeft.sprite = leftIdleSprite;
-            characterRight.sprite = rightIdleSprite;
             characterLeft.color = new Color(1, 1, 1, 0.5f);
             characterRight.color = new Color(1, 1, 1, 1);
         }
     }
 
-    void StartTalkingAnimation()
+    void StartTalking()
     {
-        StopTalkingAnimations(); // เผื่ออันเก่ายังเล่นอยู่
-
-        if (isLeftSpeaker[index] && leftTalkingSprites.Length > 0)
+        if (isLeftSpeaker[index])
         {
-            leftTalkRoutine = StartCoroutine(AnimateSprite(characterLeft, leftTalkingSprites));
+            leftAnimator.SetBool("isTalking", true);
         }
-        else if (!isLeftSpeaker[index] && rightTalkingSprites.Length > 0)
+        else
         {
-            rightTalkRoutine = StartCoroutine(AnimateSprite(characterRight, rightTalkingSprites));
+            rightAnimator.SetBool("isTalking", true);
         }
     }
 
-    void StopTalkingAnimations()
+    void StopTalking()
     {
-        if (leftTalkRoutine != null) StopCoroutine(leftTalkRoutine);
-        if (rightTalkRoutine != null) StopCoroutine(rightTalkRoutine);
-
-        characterLeft.sprite = leftIdleSprite;
-        characterRight.sprite = rightIdleSprite;
-    }
-
-    IEnumerator AnimateSprite(Image target, Sprite[] sprites)
-    {
-        int i = 0;
-        while (true)
+        if (isLeftSpeaker[index])
         {
-            target.sprite = sprites[i];
-            i = (i + 1) % sprites.Length;
-            yield return new WaitForSeconds(talkFrameDelay);
+            leftAnimator.SetBool("isTalking", false);
+        }
+        else
+        {
+            rightAnimator.SetBool("isTalking", false);
         }
     }
 
     void OnSkipClicked()
     {
+        StartCoroutine(SkipToEnd());
+    }
+
+    IEnumerator SkipToEnd()
+    {
         StopAllCoroutines();
         index = lines.Length - 1;
         UpdateUI();
+
         dialogueText.text = lines[index];
         nameText.text = names[index];
         isTyping = false;
         continueButton.gameObject.SetActive(true);
+
+        StopTalking();
+
+        yield return new WaitForSeconds(1f); // โชว์บรรทัดสุดท้ายก่อนเปลี่ยน Scene
         SceneManager.LoadScene("Gameplay [Beta]");
     }
 }
