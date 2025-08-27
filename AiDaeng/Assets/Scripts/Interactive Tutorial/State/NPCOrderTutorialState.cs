@@ -27,6 +27,7 @@ public class NPCOrderTutorialState : TutorialState
             }
             else
             {
+                Time.timeScale = 1f;
                 tutorial.SwitchState(tutorial.makeNarmObState);
             }          
         }

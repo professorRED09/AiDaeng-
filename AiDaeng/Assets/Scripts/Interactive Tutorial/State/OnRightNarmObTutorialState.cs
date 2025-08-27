@@ -10,6 +10,7 @@ public class OnRightNarmObTutorialState : TutorialState
 
     public override void EnterState(InteractiveTutorial tutorial)
     {
+        tutorial.HideAllPointer();
         tutorial.player.GetComponent<PlayerController1>().enabled = true;
 
         tutorial.SetNarrativeText(_textArray[_currentIndex++]);
@@ -37,8 +38,7 @@ public class OnRightNarmObTutorialState : TutorialState
             }            
         }
         else if (tutorial.tutorialNPC == null)
-        {
-            tutorial.ShowPointer(-1);
+        {            
             tutorial.SwitchState(tutorial.gameRuleState);
         }
     }

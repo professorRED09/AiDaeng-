@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
@@ -91,7 +92,7 @@ public class NPC2 : MonoBehaviour, IObserver
     [SerializeField] AudioClip _thankSFX;
 
     private MixturePanel _mixturePanel;
-
+    private Vector3 _originalScale; 
     private void Awake()
     {        
         sprite = GetComponent<SpriteRenderer>();
@@ -149,6 +150,8 @@ public class NPC2 : MonoBehaviour, IObserver
 
         // store item lists from npc manager
         _itemLists.AddRange(npcManager.itemLists);
+
+        _originalScale = orderBubble.transform.localScale;
     }   
 
     public void SetWaypoints(Transform[] assignedWaypoints)
@@ -222,9 +225,7 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         //float m_tempDecSp = moodDecSp;
         moodDecSp = 0.1f;
-        print("AHH");
-
-            
+        print("AHH");           
 
         yield return new WaitForSeconds(5f);
         moodDecSp = defaultMoodDecSp;
@@ -307,9 +308,12 @@ public class NPC2 : MonoBehaviour, IObserver
 
     // To give npc a product
     private void OnMouseDown()
-    {
+    {        
+
         if (!isClickable)
+        {            
             return;
+        }
 
         _mixturePanel.CancelCurrentProduct();
         player.MoveToWaypoint(player.counterWP);
@@ -317,8 +321,7 @@ public class NPC2 : MonoBehaviour, IObserver
     }
 
     public void CheckProductFromPlayer()
-    {
-        Vector3 _originalScale = orderBubble.transform.localScale;
+    {       
         //check if player has all of products
         bool playerHasAllProducts = true;        
         foreach (var element in orderSlotLists)
