@@ -35,6 +35,7 @@ public class Dialog : MonoBehaviour
 
     public Animation monkAnimation;
     public Animation playerAnimation;
+    public Animation numwanAnimation;
    
     #endregion
 
