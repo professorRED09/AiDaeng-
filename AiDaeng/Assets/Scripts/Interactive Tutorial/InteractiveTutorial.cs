@@ -10,6 +10,7 @@ public class InteractiveTutorial : MonoBehaviour
     [Header("UI Ref")]
     [SerializeField] TMP_Text _narrativeText;
     [SerializeField] TMP_Text _smallNarrativeText;
+    [SerializeField] TMP_Text _clickToGoText;
     [SerializeField] Image _panel;
     //public string tutorial1Text;
 
@@ -39,6 +40,8 @@ public class InteractiveTutorial : MonoBehaviour
     public GameObject PlayAgainUIBox;
     public GameObject TryAgainUIBox;
 
+    private Tween blinkTween;
+
     private void Awake()
     {
         instance = this;        
@@ -52,7 +55,7 @@ public class InteractiveTutorial : MonoBehaviour
         Invoke(nameof(StartTutorial), 3.5f);
 
         ShowNarrativeText(false);
-        ShowSmallNarrativeText(false);
+        ShowSmallNarrativeText(false);        
     }
 
     void StartTutorial()
@@ -66,6 +69,20 @@ public class InteractiveTutorial : MonoBehaviour
         currentState.EnterState(this);        
 
         _smallNarrativeText.gameObject.SetActive(false);
+        //_clickToGoText.DOFade(0f, 0.5f).OnComplete(() => _narrativeText.DOFade(1f, 0.5f));
+
+        
+    }
+
+    public void BlinkingClickToGoText()
+    {
+        _clickToGoText.gameObject.SetActive(true);
+        //// Create a sequence for the blinking effect
+        blinkTween = DOTween.Sequence()
+            .Append(_clickToGoText.DOFade(0f, 0.5f).SetEase(Ease.Linear)) // Fade out
+            .Append(_clickToGoText.DOFade(1f, 0.5f).SetEase(Ease.Linear)) // Fade in
+            .SetLoops(-1, LoopType.Restart).SetUpdate(true); ; // Loop indefinitely
+        //blinkTween.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -121,16 +138,16 @@ public class InteractiveTutorial : MonoBehaviour
         }
     }    
 
+    public void HideAllPointer()
+    {
+        for (int i = 0; i < _pointerArray.Length; i++)
+        {
+            _pointerArray[i].SetActive(false);
+        }        
+    }
+
     public void ShowPointer(int m_pointerIndex)
     {
-        if(m_pointerIndex == -1)
-        {
-            for (int i = 0; i < _pointerArray.Length; i++)
-            {
-                _pointerArray[i].SetActive(false);
-            }
-        }
-
         for(int i = 0; i < _pointerArray.Length; i++)
         {
             if(i == m_pointerIndex)
@@ -164,19 +181,20 @@ public class InteractiveTutorial : MonoBehaviour
     {
         if (isOpen == true)
         {
-            //_interactTutorialPanel.gameObject.SetActive(true);
-            //_interactTutorialPage.transform.GetChild(1).gameObject.SetActive(true); 
+            Time.timeScale = 0f;
             _panel.gameObject.SetActive(true);
-            _panel.DOFade(0.7f, 0.5f).OnComplete(() => Time.timeScale = 0f); 
-            _narrativeText.gameObject.SetActive(true);            
+            _panel.DOFade(0.7f, 0.5f).SetUpdate(true); 
+            _narrativeText.gameObject.SetActive(true);
+
+            BlinkingClickToGoText();
         }
         else
         {
-            //_interactTutorialPage.transform.GetChild(0).gameObject.SetActive(false);
-            //_interactTutorialPage.transform.GetChild(1).gameObject.SetActive(false);
-            _panel.DOFade(0f, 0.5f).OnComplete(() => Time.timeScale = 1f).OnComplete(() => _panel.gameObject.SetActive(false));
+            _panel.DOFade(0f, 0.5f).OnComplete(() => Time.timeScale = 1f).OnComplete(() => 
+                    _panel.gameObject.SetActive(false));
 
             _narrativeText.gameObject.SetActive(false);
+            _clickToGoText.gameObject.SetActive(false);
         }
     }
 

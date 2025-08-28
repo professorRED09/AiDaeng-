@@ -8,6 +8,7 @@ public class OnNPCRageLeaveTutorialState : TutorialState
     //private int _currentIndex = 0;
     public override void EnterState(InteractiveTutorial tutorial)
     {
+        tutorial.HideAllPointer();
         tutorial.SetNarrativeText("เมื่อผู้คนอารมณ์เสียและเดินออกจากฉาก คุณจะพลาดคะแนนที่จะได้จากคนคนนั้น \n หากพลาดมากๆ อาจทำให้ไม่ผ่านด่านได้");
         Time.timeScale = 1f;
         Debug.Log("ENTER NPC RAGE LEAVE STATE");        
