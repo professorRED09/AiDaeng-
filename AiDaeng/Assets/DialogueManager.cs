@@ -7,12 +7,17 @@ using DG.Tweening;
 
 public class DialogueManager : MonoBehaviour
 {
-    public Animator[] charactersArray;    
+    public Animator[] charactersArray;
 
-    [TextArea(3, 10)]
+    public Animation[] daengAnimation;
+    public Animation[] jaoawadAnimation;
+
+    //[TextArea(3, 10)]
     public string[] sentences;
     public string[] names;
     public bool[] isQuestion;
+    public bool[] isSkipToOtherIndex;
+    public int[] indexToSkipTo;
     public float textDelayTime;
 
     [Header("Variable")]
@@ -51,7 +56,8 @@ public class DialogueManager : MonoBehaviour
     private void BlinkingText(string m_text)
     {
         continueText.gameObject.SetActive(true);
-        _blinkTween = DOTween.Sequence()
+        continueText.text = m_text;
+       /* _blinkTween = */DOTween.Sequence()
             .Append(continueText.DOFade(0f, 1f).SetEase(Ease.Linear))
             .Append(continueText.DOFade(1f, 1f).SetEase(Ease.Linear))
             .SetLoops(-1, LoopType.Restart);
@@ -80,6 +86,8 @@ public class DialogueManager : MonoBehaviour
         nameText.text = string.Empty;
         nameText.text = names[_currentIndex];
 
+        BlinkingText("คลิกเพื่อไปต่อ");
+
         MakeSpeakerStandOut();
 
         _isTyping = true;
@@ -96,10 +104,14 @@ public class DialogueManager : MonoBehaviour
         }
 
         if(isQuestion[_currentIndex] == true)
-        {
-            Debug.Log("This is a question");
+        {            
             q1Choices.SetActive(true);
+            BlinkingText("คลิกเลือกคำตอบเพื่อไปต่อ");
+            Debug.Log("This is a question 1");
         }
+        
+
+
 
         _isTyping = false;
         //BlinkingText("คลิกเพื่อไปต่อ");
@@ -121,6 +133,10 @@ public class DialogueManager : MonoBehaviour
             _isTyping = false;
             
             return;
+        }
+        else if (isSkipToOtherIndex[_currentIndex] == true)
+        {
+            _currentIndex = indexToSkipTo[_currentIndex] - 1;
         }
 
         _currentIndex++;
