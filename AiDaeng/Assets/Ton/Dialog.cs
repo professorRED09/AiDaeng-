@@ -19,7 +19,7 @@ public class Dialog : MonoBehaviour
     [Header("Image")]
     public GameObject oldBG;
     public GameObject newBG;
-    public GameObject NpcIMG;
+    //public GameObject NpcIMG;
 
     [Header("Choice")]
     public GameObject Choice_1;
@@ -33,12 +33,14 @@ public class Dialog : MonoBehaviour
     public bool _isTyping = false;
     public bool isChoice1Finished = false;
 
-    public Animation monkAnimation;
-    public Animation playerAnimation;
+    public Animator monkAnimation;
+    public Animator playerAnimation;
    
     #endregion
 
     private int index;
+    public bool[] isQuestion;
+
     private void Start()
     {
         textComponent.text = string.Empty;
@@ -47,6 +49,7 @@ public class Dialog : MonoBehaviour
 
         StartDialog();
     }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -63,6 +66,7 @@ public class Dialog : MonoBehaviour
                 _isTyping = false;
             }
         }
+
         if (textComponent.text == lines[index])
         {
             //textContinue.gameObject.SetActive(true);
@@ -73,6 +77,7 @@ public class Dialog : MonoBehaviour
             //textContinue.gameObject.SetActive(false);
             imageContinue.gameObject.SetActive(false);
         }
+
         if (index == 2 && !isChoice1Finished)
         {
             _isChoice = true;
@@ -87,6 +92,7 @@ public class Dialog : MonoBehaviour
         UpdateName();
         StartCoroutine(TypeLine());
     }
+
     IEnumerator TypeLine()
     {
         textComponent.text = string.Empty;
@@ -95,16 +101,9 @@ public class Dialog : MonoBehaviour
 
         _isTyping = true;
 
-        //soundmanager.dialogueSource.Stop();
-        //soundmanager.PlayDialogue(soundmanager.dialogue);
-
         int maxLength = Mathf.Max(names[index].Length, lines[index].Length);
         for (int i = 0; i < maxLength; i++)
         {
-            //if(i < names[index].Length)
-            //{
-            //    textNames.text += names[index][i];
-            //}
             if (i < lines[index].Length)
             {
                 textComponent.text += lines[index][i];
@@ -112,8 +111,8 @@ public class Dialog : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
         _isTyping = false;
-        //soundmanager.dialogueSource.Stop();
     }
+
     void NextLine()
     {   
         if (index < lines.Length - 1)
@@ -122,9 +121,9 @@ public class Dialog : MonoBehaviour
             textComponent.text = string.Empty;
             UpdateName();
             StartCoroutine(TypeLine());
-
         }
     }
+
     void UpdateName()
     {
         if (index < names.Length)
