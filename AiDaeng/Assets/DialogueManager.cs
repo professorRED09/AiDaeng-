@@ -9,8 +9,9 @@ public class DialogueManager : MonoBehaviour
 {
     public Animator[] charactersArray;
 
-    public Animation[] daengAnimation;
-    public Animation[] jaoawadAnimation;
+    public AnimationClip[] daengAnimation;
+    public AnimationClip[] jaoawadAnimation;
+    public AnimationClip[] namwanAnimation;
 
     //[TextArea(3, 10)]
     public string[] sentences;
@@ -31,17 +32,15 @@ public class DialogueManager : MonoBehaviour
     private int _currentIndex;
     private Tween _blinkTween;
 
+    [Header("UI Box")]
+    public GameObject doYouWantToPlayTutorialUIBox;
+    //public LoadingScene loadingScene;
+
     // Start is called before the first frame update
     void Start()
     {
         StartDialogue();
         BlinkingText("คลิกเพื่อไปต่อ");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void StartDialogue()
@@ -88,6 +87,7 @@ public class DialogueManager : MonoBehaviour
 
         BlinkingText("คลิกเพื่อไปต่อ");
 
+        UpdateAnimation();
         MakeSpeakerStandOut();
 
         _isTyping = true;
@@ -109,9 +109,6 @@ public class DialogueManager : MonoBehaviour
             BlinkingText("คลิกเลือกคำตอบเพื่อไปต่อ");
             Debug.Log("This is a question 1");
         }
-        
-
-
 
         _isTyping = false;
         //BlinkingText("คลิกเพื่อไปต่อ");
@@ -143,7 +140,8 @@ public class DialogueManager : MonoBehaviour
         Debug.Log(_currentIndex);
 
         if (_currentIndex >= sentences.Length)
-        {            
+        {
+            ShowUIBox(doYouWantToPlayTutorialUIBox);
             return;
         }
         else
@@ -162,13 +160,32 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(TypeSentence());
         q1Choices.SetActive(false);
     }
-    
-    //public void OnPressNoOnQ1()
-    //{
-    //    _currentIndex++;
-    //    dialogueText.text = sentences[_currentIndex];
-    //    StopAllCoroutines();
-    //    StartCoroutine(TypeSentence());
-    //}
+
+    public void UpdateAnimation()
+    {
+        for(int i = 0; i < charactersArray.Length; i++)
+        {
+            if(charactersArray[i].gameObject.name == "แดง" && daengAnimation[_currentIndex] != null)
+            {
+                charactersArray[i].Play(daengAnimation[_currentIndex].name);
+            }
+            else if (charactersArray[i].gameObject.name == "เจ้าอาวาส" && jaoawadAnimation[_currentIndex] != null)
+            {
+                charactersArray[i].Play(jaoawadAnimation[_currentIndex].name);
+            }
+            else if (charactersArray[i].gameObject.name == "น้ำหวาน" && namwanAnimation[_currentIndex] != null)
+            {
+                charactersArray[i].Play(namwanAnimation[_currentIndex].name);
+            }
+        }
+    }
+
+    public void ShowUIBox(GameObject m_UIBox)
+    {
+        m_UIBox.SetActive(true);
+        m_UIBox.transform.GetChild(0).GetComponent<Image>().DOFade(0.7f, 0.5f).OnComplete(() =>
+          m_UIBox.transform.GetChild(1).gameObject.transform.DOLocalMoveX(0, 1f));
+    }
+
 
 }
