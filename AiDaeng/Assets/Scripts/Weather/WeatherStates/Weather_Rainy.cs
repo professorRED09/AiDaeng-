@@ -3,7 +3,7 @@ using DG.Tweening;
 
 public class Weather_Rainy : Weather_BaseState
 {
-    private float _timer = 40f;
+    //private float _timer = 40f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)
@@ -17,7 +17,8 @@ public class Weather_Rainy : Weather_BaseState
         weather.rainAnimation.GetComponent<Animator>().enabled = true;
         weather.rainDropParticle.Play();
 
-        _currentTimer = _timer;
+        //_currentTimer = _timer;
+        _currentTimer = weather.weatherTimerArray[weather.currentIndex];
 
         //weather.audioSource.clip = weather.rainyWeatherSFX;
         //weather.audioSource.Play();

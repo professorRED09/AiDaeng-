@@ -2023,7 +2023,7 @@ GameObject:
   - component: {fileID: 540917825}
   - component: {fileID: 540917824}
   m_Layer: 0
-  m_Name: '#Weather Filter'
+  m_Name: '#Weather Manager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2164,8 +2164,10 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
-  weatherTypeNumber: 010000000100000001000000
-  _currentIndex: 1
+  weatherOrderArray: 01000000
+  weatherTimerArray:
+  - 120
+  currentIndex: -1
   _currentWeatherOrder: 0
 --- !u!1 &557693610
 GameObject:
@@ -2732,7 +2734,7 @@ MonoBehaviour:
   addScoreSFX: {fileID: 8300000, guid: 3c85cd8227e807e47ae9a0dc94fd978a, type: 3}
   _maxScore: 10
   _fillSpeed: 1
-  _currentScore: 0
+  currentScore: 0
 --- !u!82 &650653517
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12236,8 +12238,9 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
-  weatherTypeNumber: 
-  _currentIndex: 1
+  weatherOrderArray: 
+  weatherTimerArray: []
+  currentIndex: -1
   _currentWeatherOrder: 0
 --- !u!4 &1339018600
 Transform:

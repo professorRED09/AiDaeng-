@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class Weather_Normal : Weather_BaseState
 {
-    private float _timer = 40f;
+    //private float _timer = 40f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)
     {
         //weather.anim.SetTrigger("isNormal");
 
-        _currentTimer = _timer;
+        //_currentTimer = _timer;
+        _currentTimer = weather.weatherTimerArray[weather.currentIndex];
 
         //weather.audioSource.clip = weather.normalWeatherSFX;
         //weather.audioSource.Play();

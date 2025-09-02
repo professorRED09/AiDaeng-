@@ -38,8 +38,13 @@ public class OnRightNarmObTutorialState : TutorialState
             }            
         }
         else if (tutorial.tutorialNPC == null)
-        {            
-            tutorial.SwitchState(tutorial.gameRuleState);
+        {
+            //set water to overflow to continue to the next tutorial
+            tutorial.buddhaBasin.currentWB = tutorial.buddhaBasin.maxWB;
+            tutorial.buddhaBasin.UpdateWaterBar(tutorial.buddhaBasin.currentWB, tutorial.buddhaBasin.maxWB);
+
+
+            tutorial.SwitchState(tutorial.onWaterOverflowState);
         }
     }
 

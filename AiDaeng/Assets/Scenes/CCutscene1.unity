@@ -402,6 +402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 6073078440853039767, guid: 65ed141ad71e0644f84224fe4b444143, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2212,7 +2216,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1675870588}
   - {fileID: 2104709997}
   - {fileID: 154236310}
   - {fileID: 1944258061}
@@ -2222,6 +2225,7 @@ RectTransform:
   - {fileID: 1856161735}
   - {fileID: 1523583278}
   - {fileID: 1827459017}
+  - {fileID: 1675870588}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3069,7 +3073,7 @@ MonoBehaviour:
   continueText: {fileID: 487621590}
   q1Choices: {fileID: 1007962483}
   _isTyping: 0
-  doYouWantToPlayTutorialUIBox: {fileID: 1827459016}
+  afterDialogueEndUIBox: {fileID: 1827459016}
 --- !u!4 &1335698653
 Transform:
   m_ObjectHideFlags: 0

@@ -29,8 +29,10 @@ public class WeatherManager : Subject
     public Weather_Rainy rainyState = new Weather_Rainy();
     public Weather_Sunny sunnyState = new Weather_Sunny();
 
-    public int[] weatherTypeNumber;
-    [SerializeField] private int _currentIndex = -1;
+    public int[] weatherOrderArray;
+    public float[] weatherTimerArray;
+    //[SerializeField] private int _currentIndex = -1;
+    public int currentIndex = -1;
     [SerializeField] private int _currentWeatherOrder;
 
     private void Awake()
@@ -75,10 +77,10 @@ public class WeatherManager : Subject
 
     public void ChangeToNextWeather()
     {
-        if(_currentIndex < weatherTypeNumber.Length-1)
+        if(currentIndex < weatherOrderArray.Length-1)
         {
-            _currentIndex++;
-            _currentWeatherOrder = weatherTypeNumber[_currentIndex];
+            currentIndex++;
+            _currentWeatherOrder = weatherOrderArray[currentIndex];
         }
         else
         {

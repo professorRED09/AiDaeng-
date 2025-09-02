@@ -18,9 +18,11 @@ public class InteractiveTutorial : MonoBehaviour
     public MixturePanel mixturePanel;
     public PlayerController1 player;
     public ScoreManager scoreManager;
+    public BuddhaBasin buddhaBasin;
 
     public Items[] processItem;
-        
+
+    #region Finite State Machine
     public TutorialState currentState;
     public IntroTutorialState introState = new IntroTutorialState();
     public NPCOrderTutorialState npcOrderState = new NPCOrderTutorialState();
@@ -29,7 +31,9 @@ public class InteractiveTutorial : MonoBehaviour
     public OnNPCRageLeaveTutorialState onNPCRageLeaveState = new OnNPCRageLeaveTutorialState();
     public OnWrongNarmObTutorialState onWrongNarmObState = new OnWrongNarmObTutorialState();
     public OnRightNarmObTutorialState onRightNarmObState = new OnRightNarmObTutorialState();
+    public OnWaterOverflowTutorialState onWaterOverflowState = new OnWaterOverflowTutorialState();
     public GameRuleTutorialState gameRuleState = new GameRuleTutorialState();
+    #endregion
 
     private int _introTextIndex = 0;
 

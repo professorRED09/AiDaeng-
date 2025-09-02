@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DaengLevelSelect : MonoBehaviour
-{
+{    
     private Animator _animator;
     private Rigidbody2D _rb;
     private Vector3 _direction;
 
     private bool _isMoving = false;
     private bool isFacingRight = true;
-    private Vector3 _targetPos;
+    [SerializeField] private Transform _targetTransf;
+    //[SerializeField] private Transform _defaultTransf;
     [SerializeField] private float _moveSpeed;
 
     private void Awake()
@@ -21,24 +22,24 @@ public class DaengLevelSelect : MonoBehaviour
 
     private void Start()
     {
-        //transform.position = 
+        transform.position = _targetTransf.position;
     }
 
     private void Update()
     {
         // check if daeng is at the target position
-        if(transform.position != _targetPos)
+        if(transform.position != _targetTransf.position/* && _targetPos != Vector3.zero*/)
         {
             _isMoving = true;
 
-            _direction = (_targetPos - transform.position).normalized;
+            _direction = (_targetTransf.position - transform.position).normalized;
 
             transform.position += _moveSpeed * Time.deltaTime * _direction;
 
             // Check if player reached the waypoint
-            if (Vector3.Distance(transform.position, _targetPos) < 0.1f)
+            if (Vector3.Distance(transform.position, _targetTransf.position) < 0.1f)
             {
-                transform.position = _targetPos;                         
+                transform.position = _targetTransf.position;                         
             }
         }
         else
@@ -55,16 +56,15 @@ public class DaengLevelSelect : MonoBehaviour
 
     }
 
-    public void SetWaypoint(Vector2 transform)
+    public void SetWaypoint(Transform transform)
     {
-        _targetPos = transform;
+        _targetTransf = transform;
     }
 
     void Animate()
     {
         _animator.SetBool("isMoving", _isMoving);
-        _animator.SetFloat("moveX", _direction.x);
-        _animator.SetFloat("moveY", _direction.y);
+        _animator.SetFloat("moveX", _direction.x);  
     }
 
     void Flip()

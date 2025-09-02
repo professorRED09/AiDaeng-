@@ -92,12 +92,6 @@ public class GameManager : Subject/*, IObserver*/
 
         EnableManagers();
         player.canControl = true;
-
-        //if(tutorial != null)
-        //{
-        //    tutorial.enabled = true;
-        //    //tutorial.StartTutorial();
-        //}
     }    
 
     private void EnableManagers()
@@ -107,9 +101,6 @@ public class GameManager : Subject/*, IObserver*/
 
         if (currentLevel == Level.Level_1) return;
         weatherManager.enabled = true;
-        //_namwan.SetActive(true);
-        //_drinkWaterTask.SetActive(true);
-        //_umbrellaTask.SetActive(true);
     }
 
     public void ShowResult()
@@ -150,13 +141,7 @@ public class GameManager : Subject/*, IObserver*/
         {
             m_Animator.Play("Lose");
         }
-    }
-
-    //public void OnNotify(WeatherType weather)
-    //{
-
-    //}
-    
+    }  
 
 
 }

@@ -2037,7 +2037,7 @@ GameObject:
   - component: {fileID: 540917825}
   - component: {fileID: 540917824}
   m_Layer: 0
-  m_Name: '#Weather Filter'
+  m_Name: '#Weather Manager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2178,8 +2178,14 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
-  weatherTypeNumber: 01000000030000000100000003000000
-  _currentIndex: -1
+  weatherOrderArray: 0100000002000000010000000300000001000000
+  weatherTimerArray:
+  - 20
+  - 40
+  - 20
+  - 40
+  - 20
+  currentIndex: -1
   _currentWeatherOrder: 0
 --- !u!1 &557693610
 GameObject:
@@ -2746,7 +2752,7 @@ MonoBehaviour:
   addScoreSFX: {fileID: 8300000, guid: 3c85cd8227e807e47ae9a0dc94fd978a, type: 3}
   _maxScore: 10
   _fillSpeed: 1
-  _currentScore: 0
+  currentScore: 0
 --- !u!82 &650653517
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11990,8 +11996,9 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
-  weatherTypeNumber: 
-  _currentIndex: 1
+  weatherOrderArray: 
+  weatherTimerArray: []
+  currentIndex: -1
   _currentWeatherOrder: 0
 --- !u!4 &1339018600
 Transform:
@@ -20247,6 +20254,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 161464791177747066, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_text
+      value: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48 3"
+      objectReference: {fileID: 0}
     - target: {fileID: 307917346614890776, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -20477,7 +20488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6239143374079321834, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: timeToDisplay
-      value: 80
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 6296042020480868644, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y

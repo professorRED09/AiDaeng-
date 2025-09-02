@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6444569628605407787}
   - component: {fileID: 4269556016128537090}
-  - component: {fileID: 1782940122584840499}
   m_Layer: 5
-  m_Name: TutorialPage
+  m_Name: InstructorPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,21 +61,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1782940122584840499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097057047150402986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afdcf843ac4be6a48902e044477efbc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  topicText: {fileID: 950297967187438840}
-  narrativeText: {fileID: 4222699929957512673}
-  videoClip: {fileID: 0}
 --- !u!1 &4125431344440642632
 GameObject:
   m_ObjectHideFlags: 0

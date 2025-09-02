@@ -7,13 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelect : MonoBehaviour
 {
-    [SerializeField] string selectedSceneName;
+    public LoadingScene asyncManager;
     [SerializeField] DaengLevelSelect daeng;
-
-    [Header("Cutscene Name")]
-    [SerializeField] string cutscene1Name;
-    [SerializeField] string cutscene2Name;
-    [SerializeField] string cutscene3Name;
 
     [Header("Level position")]
     [SerializeField] Transform level1Pos; 
@@ -27,17 +22,7 @@ public class LevelSelect : MonoBehaviour
     private void Start()
     {
         OnSelectLevel1();
-    }
-
-    public void OnPressPlay()
-    {
-        if(selectedSceneName == null)
-        {
-            levelNameText.text = "-บอกให้เลือกด่านก่อนไง-";
-            return;
-        }
-        SceneManager.LoadScene(selectedSceneName);
-    }
+    }   
 
     public void OnPressBack()
     {
@@ -45,47 +30,29 @@ public class LevelSelect : MonoBehaviour
     }
 
     public void OnSelectLevel1()
-    {
-        //change selectedSceneName to cutScene name
-        if(cutscene1Name == null)
-        {
-            Debug.Log("Haven't added the scene yet");
-            return;
-        }
-        selectedSceneName = cutscene1Name;
+    {  
         levelNameText.text = "-ด่านที่ 1-";
 
         //Daeng walk to the selected cutscene
-        daeng.SetWaypoint(level1Pos.TransformPoint(level2Pos.position)); ;
+        daeng.SetWaypoint(level1Pos); ;
+        asyncManager.SelectSceneToPlay("CCutscene1");
     }
 
     public void OnSelectLevel2()
     {
-        if (cutscene2Name == null)
-        {
-            Debug.Log("Haven't added the scene yet");
-            return;
-        }
-        //change selectedSceneName to cutscene name
-        selectedSceneName = cutscene2Name;
         levelNameText.text = "-ด่านที่ 2-";
 
         //Daeng walk to the selected cutscene
-        daeng.SetWaypoint(level2Pos.TransformPoint(level2Pos.position));
+        daeng.SetWaypoint(level2Pos);
+        asyncManager.SelectSceneToPlay("Gameplay Level 2");
     }
 
     public void OnSelectLevel3()
     {
-        if (cutscene3Name == null)
-        {
-            Debug.Log("Haven't added the scene yet");
-            return;
-        }
-        //change selectedSceneName to cutscene name
-        selectedSceneName = cutscene3Name;
         levelNameText.text = "-ด่านที่ 3-";
 
         //Daeng walk to the selected cutscene
-        daeng.SetWaypoint(level3Pos.TransformPoint(level2Pos.position));
+        daeng.SetWaypoint(level3Pos);
+        asyncManager.SelectSceneToPlay("Gameplay Level 3");
     }
 }

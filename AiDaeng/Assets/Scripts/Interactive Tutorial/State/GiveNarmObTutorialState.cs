@@ -15,7 +15,7 @@ public class GiveNarmObTutorialState : TutorialState
     {
         tutorial.HideAllPointer();
         //  must know the state of npc
-        if (tutorial.tutorialNPC.getProduct)
+        if (tutorial.tutorialNPC.currentState == tutorial.tutorialNPC.prayState)
         {              
             tutorial.SwitchState(tutorial.onRightNarmObState);
         }

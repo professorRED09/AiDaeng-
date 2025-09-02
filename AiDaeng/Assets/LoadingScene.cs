@@ -9,6 +9,7 @@ public class LoadingScene : MonoBehaviour
 {
     [SerializeField] GameObject _loadingScreen;
     [SerializeField] Image _loadingBarFill;
+    [SerializeField] string _selectedSceneName;
     //[SerializeField] Image _transitionScreen;
 
     public void LoadScene(string sceneName)
@@ -20,7 +21,18 @@ public class LoadingScene : MonoBehaviour
 
         //_transitionScreen.DOFade(1f, 1f).OnComplete(() => 
         //_transitionScreen.DOFade(0f, 1f).OnComplete(() => StartCoroutine(LoadSceneAsync(sceneName))));
-    }    
+    }   
+    
+    public void SelectSceneToPlay(string m_sceneName)
+    {
+        _selectedSceneName = m_sceneName;
+    }
+
+    public void LoadSceneSelected()
+    {
+        _loadingScreen.SetActive(true);
+        StartCoroutine(LoadSceneAsync(_selectedSceneName));
+    }
 
     IEnumerator LoadSceneAsync(string sceneName)
     {

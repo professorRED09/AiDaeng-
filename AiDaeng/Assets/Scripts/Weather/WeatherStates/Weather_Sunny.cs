@@ -3,7 +3,7 @@ using DG.Tweening;
 
 public class Weather_Sunny : Weather_BaseState
 {
-    private float _timer = 40f;
+    //private float _timer = 40f;
     private float _currentTimer;
 
     public override void EnterState(WeatherManager weather)
@@ -13,7 +13,9 @@ public class Weather_Sunny : Weather_BaseState
         ////weather.anim.SetTrigger("isSunny");
 
         weather.sunnyFilter.GetComponent<SpriteRenderer>().DOFade(0.24f, 2f);
-        _currentTimer = _timer;
+
+        //_currentTimer = _timer;
+        _currentTimer = weather.weatherTimerArray[weather.currentIndex];
 
         //weather.audioSource.clip = weather.sunnyWeatherSFX;
         //weather.audioSource.Play();

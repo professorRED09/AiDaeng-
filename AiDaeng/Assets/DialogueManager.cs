@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour
     private Tween _blinkTween;
 
     [Header("UI Box")]
-    public GameObject doYouWantToPlayTutorialUIBox;
+    public GameObject afterDialogueEndUIBox;
     //public LoadingScene loadingScene;
 
     // Start is called before the first frame update
@@ -141,7 +141,7 @@ public class DialogueManager : MonoBehaviour
 
         if (_currentIndex >= sentences.Length)
         {
-            ShowUIBox(doYouWantToPlayTutorialUIBox);
+            ShowUIBox(afterDialogueEndUIBox);
             return;
         }
         else

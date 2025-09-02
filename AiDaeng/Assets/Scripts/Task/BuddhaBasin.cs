@@ -14,7 +14,7 @@ public class BuddhaBasin : MonoBehaviour
 
     public bool isFull;                 // check if the basin is full
     public float maxWB;                 // max quantity of water in the basin
-    [SerializeField] float currentWB;   // current quantity of water in the basin
+    public float currentWB;   // current quantity of water in the basin
     public Transform waypoint;          // The waypoint for this task
 
     private PlayerController1 player;    // Reference for player script 
@@ -79,12 +79,12 @@ public class BuddhaBasin : MonoBehaviour
     public void IncreaseWater()
     {
         currentWB += 2.5f;
-        if(currentWB >= maxWB)
-        {
-            currentWB = maxWB;
-            isFull = true;
-            OnFullBasin();// pop up notif window
-        }
+        //if(currentWB >= maxWB)
+        //{
+        //    currentWB = maxWB;
+        //    isFull = true;
+        //    OnFullBasin();// pop up notif window
+        //}
         UpdateWaterBar(currentWB, maxWB);
         //print("WATER INCREASES");
     }
@@ -92,7 +92,14 @@ public class BuddhaBasin : MonoBehaviour
     public void UpdateWaterBar(float currentValue, float maxValue)
     {
         float targetFillAmount = currentValue / maxValue;
-        waterBarFill.DOFillAmount(targetFillAmount, 2f);        
+        waterBarFill.DOFillAmount(targetFillAmount, 2f);
+
+        if (currentWB >= maxWB)
+        {
+            currentWB = maxWB;
+            isFull = true;
+            OnFullBasin();// pop up notif window
+        }
     }
 
     void OnFullBasin()

@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
-using TMPro;
 
-public class TutorialPage : MonoBehaviour
+[CreateAssetMenu(menuName = "InstructorPage", fileName = "New instructor page")]
+
+public class InstructorPage : ScriptableObject
 {
-    public TMP_Text topicText;
-    public TMP_Text narrativeText;
+    public string topicText;
+    public string narrativeText;
     public VideoClip videoClip;
 
     //[TextArea(3, 10)]
