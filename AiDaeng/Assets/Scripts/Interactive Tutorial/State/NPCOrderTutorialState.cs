@@ -11,6 +11,7 @@ public class NPCOrderTutorialState : TutorialState
     {
         tutorial.ShowSmallNarrativeText(false);
         tutorial.ShowNarrativeText(true);
+        tutorial.ChangeIllust(0);
 
         
         tutorial.SetNarrativeText("ดูของที่ผู้คนสั่งให้ดี");
@@ -23,11 +24,13 @@ public class NPCOrderTutorialState : TutorialState
         {
             if(_currentIndex <= _textArray.Length - 1)
             {
+                tutorial.ChangeIllust(1);
                 tutorial.SetNarrativeText(_textArray[_currentIndex++]);                              
             }
             else
             {
                 Time.timeScale = 1f;
+                tutorial.ChangeIllust(-1);
                 tutorial.SwitchState(tutorial.makeNarmObState);
             }          
         }

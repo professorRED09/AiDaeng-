@@ -12,7 +12,7 @@ public class IntroTutorialState : TutorialState
     {
         //tutorial.InstructPlayer();
         tutorial.ShowNarrativeText(true);
-        tutorial.SetNarrativeText(_textArray[_currentIndex++]);
+        tutorial.SetNarrativeText(_textArray[_currentIndex++]);        
 
         tutorial.player.GetComponent<PlayerController1>().enabled = false;
         Debug.Log("ENTER INTRO STATE");

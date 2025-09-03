@@ -24,7 +24,7 @@ public class PauseManu : MonoBehaviour
     }
 
     public void OnPressSetting()
-    {
+    {        
         settingPanel.SetActive(true);
     }
 

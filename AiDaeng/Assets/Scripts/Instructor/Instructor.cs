@@ -80,11 +80,17 @@ public class Instructor : MonoBehaviour
     }
 
     public void OnBackButton()
-    {       
+    {
+        Invoke(nameof(HideInstructorUI), 0.5f);
         DOTween.Sequence()
             .Append(instructorUI.transform.GetChild(1).gameObject.transform.DOLocalMoveX(1713, 1f))
             .Append(instructorUI.transform.GetChild(0).GetComponent<Image>().DOFade(0f, 0.5f))
             .SetUpdate(true)
-            .OnComplete(() => Time.timeScale = 1);
+            .OnComplete(() => Time.timeScale = 1);            
+    }
+
+    void HideInstructorUI()
+    {
+        instructorUI.SetActive(false);
     }
 }

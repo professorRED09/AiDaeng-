@@ -182,6 +182,7 @@ MonoBehaviour:
   npcMask:
     serializedVersion: 2
     m_Bits: 8
+  orderTotalForTutorial: 0
   orderBubble: {fileID: 7287168114240358586}
   _moodBarFill: {fileID: 1210217171010393419}
   _emoji: {fileID: 6970245790850125322}
@@ -830,7 +831,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1627308575
   m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &7247104011693904477

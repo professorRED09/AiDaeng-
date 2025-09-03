@@ -21,7 +21,7 @@ public class ComicCutscene : MonoBehaviour
     public GameObject holdingUI;
     public Image holdingFillImage;
 
-    public float holdDuration = 1.5f; 
+    public float holdDuration = 0.6f; 
     private bool _isHolding = false;
     private float _holdTimer = 0f;
 
@@ -74,6 +74,12 @@ public class ComicCutscene : MonoBehaviour
     public void PlayCutscene(int m_indexOffset)
     {
         _currentIndex += m_indexOffset;
+
+        if (_currentIndex >= cutsceneVideo.Length)
+        {
+            asyncManager.LoadScene("CCutscene1");
+        }
+
         _videoPlayer.clip = cutsceneVideo[_currentIndex];
 
         nextButton.SetActive(false);
@@ -84,17 +90,6 @@ public class ComicCutscene : MonoBehaviour
         //{
         //    nextButton.SetActive(false);
         //    goButton.SetActive(true);
-        //}
-        //else if (_currentIndex <= 0)
-        //{
-        //    previousButton.SetActive(false);
-        //    goButton.SetActive(false);
-        //}
-        //else
-        //{
-        //    nextButton.SetActive(true);
-        //    previousButton.SetActive(true);
-        //    goButton.SetActive(false);
         //}
     }
 

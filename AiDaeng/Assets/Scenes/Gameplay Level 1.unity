@@ -20777,6 +20777,10 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 6644994224321085460, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: CCutscene2
+      objectReference: {fileID: 0}
     - target: {fileID: 7384969740207777771, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

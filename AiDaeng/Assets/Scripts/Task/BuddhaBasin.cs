@@ -28,6 +28,9 @@ public class BuddhaBasin : MonoBehaviour
     //public Slider waterBar;
     public Image waterBarFill;
     [SerializeField] TMP_Text fullWaterText;
+    private Vector3 _fullWaterTextScale;
+    [SerializeField] private float _warnTimer;
+    private float _defaultWarnTimer = 4.5f;
 
 
     private void Awake()
@@ -42,9 +45,24 @@ public class BuddhaBasin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _fullWaterTextScale = fullWaterText.transform.localScale;
         UpdateWaterBar(currentWB, maxWB);
         //StartCoroutine(ResetBasin());
+    }
+
+    private void Update()
+    {
+        if (isFull)
+        {
+            _warnTimer -= Time.deltaTime;
+
+            if(_warnTimer <= 0)
+            {
+                fullWaterText.transform.DOShakeScale(0.5f, 1f)
+                    .OnComplete(() => fullWaterText.transform.DOScale(_fullWaterTextScale, 0.2f));
+                _warnTimer = _defaultWarnTimer;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -105,13 +123,14 @@ public class BuddhaBasin : MonoBehaviour
     void OnFullBasin()
     {
         isFull = true;
-
+        _warnTimer = _defaultWarnTimer;
         // play soundFX
         audioSource.clip = fullSFX;
         audioSource.Play();
 
         fullWaterText.enabled = true;
-        fullWaterText.gameObject.transform.DOMove(fullWaterText.gameObject.transform.position + Vector3.up, 1f);
+        fullWaterText.transform.DOShakeScale(0.5f, 1f)
+            .OnComplete(() => fullWaterText.transform.DOScale(_fullWaterTextScale, 0.2f));        
 
         NotificationManager.instance.AddNoti("น้ำเต็มแล้วน้อง!");        
     }

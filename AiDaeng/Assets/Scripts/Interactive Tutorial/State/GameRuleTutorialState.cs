@@ -9,6 +9,7 @@ public class GameRuleTutorialState : TutorialState
         Time.timeScale = 1f;
         Debug.Log("ENTER GAME RULE STATE");
         tutorial.SetNarrativeText("ทีงี้ พี่ก็ต้องเก็บแต้มให้ครบอย่างน้อยดาวนึง เข้าใจ๊?");
+        tutorial.ChangeIllust(2);
         //if (tutorial.scoreManager.currentScore <= 0)
         //{
         //    tutorial.SetNarrativeText("มื่อผู้คนอารมณ์เสียและเดินออกจากฉาก \n คุณจะพลาดคะแนนที่จะได้จากคนคนนั้น หากพลาดมากๆ อาจทำให้ไม่ผ่านด่านได้");
@@ -25,6 +26,7 @@ public class GameRuleTutorialState : TutorialState
         if (Input.GetMouseButtonDown(0))
         {
             Time.timeScale = 1f;
+            tutorial.ChangeIllust(-1);
             tutorial.ShowUIBox(tutorial.PlayAgainUIBox);
             Debug.Log("Show BOX");            
         }

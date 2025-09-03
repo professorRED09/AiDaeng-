@@ -12,8 +12,14 @@ public class InteractiveTutorial : MonoBehaviour
     [SerializeField] TMP_Text _smallNarrativeText;
     [SerializeField] TMP_Text _clickToGoText;
     [SerializeField] Image _panel;
+    
+    //public GameObject[] illustrationArray;
+    public Sprite[] spriteForIllustArray;
+    public Image illustration;
+    private int _currentIllustIndex;
     //public string tutorial1Text;
 
+    [Header("Tutorial Comp Ref")]
     public NPC2 tutorialNPC;
     public MixturePanel mixturePanel;
     public PlayerController1 player;
@@ -73,9 +79,7 @@ public class InteractiveTutorial : MonoBehaviour
         currentState.EnterState(this);        
 
         _smallNarrativeText.gameObject.SetActive(false);
-        //_clickToGoText.DOFade(0f, 0.5f).OnComplete(() => _narrativeText.DOFade(1f, 0.5f));
-
-        
+        //_clickToGoText.DOFade(0f, 0.5f).OnComplete(() => _narrativeText.DOFade(1f, 0.5f));        
     }
 
     public void BlinkingClickToGoText()
@@ -187,7 +191,7 @@ public class InteractiveTutorial : MonoBehaviour
         {
             Time.timeScale = 0f;
             _panel.gameObject.SetActive(true);
-            _panel.DOFade(0.7f, 0.5f).SetUpdate(true); 
+            _panel.DOFade(0.85f, 0.5f).SetUpdate(true); 
             _narrativeText.gameObject.SetActive(true);
 
             BlinkingClickToGoText();
@@ -200,6 +204,45 @@ public class InteractiveTutorial : MonoBehaviour
             _narrativeText.gameObject.SetActive(false);
             _clickToGoText.gameObject.SetActive(false);
         }
+    }
+
+    public void ChangeIllust(int m_index)
+    {
+        if(m_index < 0)
+        {
+            illustration.enabled = false;
+        }
+        else
+        {
+            illustration.sprite = spriteForIllustArray[m_index];
+            illustration.preserveAspect = true;
+            illustration.enabled = true;
+        }
+    }
+    
+    public void ShowIllustration(int m_index)
+    {
+
+        //if(m_index < 0)
+        //{
+        //    for (int i = 0; i <= illustrationArray.Length; i++)
+        //    {
+        //        illustrationArray[i].SetActive(false);
+        //    }
+        //    return;
+        //}
+
+        //for(int i = 0; i <= illustrationArray.Length; i++)
+        //{
+        //    if(i == m_index)
+        //    {
+        //        illustrationArray[i].SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        illustrationArray[i].SetActive(false);
+        //    }            
+        //}
     }
 
     public void ShowSmallNarrativeText(bool isOpen)

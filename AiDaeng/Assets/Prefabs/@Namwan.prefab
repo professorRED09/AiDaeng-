@@ -61,7 +61,7 @@ MonoBehaviour:
   _taskIcon: {fileID: 8234397464283136715}
   _serveAmountText: {fileID: 5223176386756574383}
   serveAmount: 0
-  _maxDrinkWaterServeAmount: 4
+  _maxDrinkWaterServeAmount: 3
   _drinkWaterServeAmount: 0
   _umbrellaServeAmount: 0
   canServe: 1
@@ -86,7 +86,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1627308575
   m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &8521260628474553249
@@ -165,7 +165,7 @@ Transform:
   m_Children:
   - {fileID: 658650458893502951}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &866019958271558627
 MonoBehaviour:
@@ -196,7 +196,7 @@ MonoBehaviour:
   currentWaypoint: {fileID: 0}
   targetNPC: {fileID: 0}
   inventory: {fileID: 8022126920014468084}
-  moveSpeed: 50
+  moveSpeed: 10
   currentTask: 0
 --- !u!212 &5517554680531496031
 SpriteRenderer:

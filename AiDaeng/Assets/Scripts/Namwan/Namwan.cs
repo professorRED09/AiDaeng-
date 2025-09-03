@@ -20,6 +20,9 @@ public class Namwan : MonoBehaviour, IObserver
     private bool _isMoving = false;
     private Animator _animator;
     //public bool canServe = true;
+    private float _defaultTimer = 6f;
+    private float _timer;
+    private bool _isCommandedByPlayer;
 
     //[SerializeField] float _maxServeAmount = 4f; // Max amount of water cups that Namwan can carries
     //private float serveAmount;
@@ -71,6 +74,20 @@ public class Namwan : MonoBehaviour, IObserver
         {
             inventory.OnUmbrellaTask();
         }
+
+        if (_isCommandedByPlayer)
+        {
+            _timer = _defaultTimer;
+            _isCommandedByPlayer = false;
+        }
+        else
+        {
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
+            {
+                BackToTheTask();
+            }
+        }
     }
 
     void Animate()
@@ -107,7 +124,7 @@ public class Namwan : MonoBehaviour, IObserver
             inventory.DeductDrinkWater();
             targetNPC = null;                                  
             _audioSource.Play();
-            Invoke(nameof(BackToTheTask), 4f);
+            //Invoke(nameof(BackToTheTask), 4f);
         }
         else
         {
@@ -129,7 +146,7 @@ public class Namwan : MonoBehaviour, IObserver
 
                 targetNPC = null;                                               
                 _audioSource.Play();
-                Invoke(nameof(BackToTheTask), 4f);
+                //Invoke(nameof(BackToTheTask), 4f);
             }
             else
             {
@@ -146,9 +163,14 @@ public class Namwan : MonoBehaviour, IObserver
 
     void BackToTheTask()
     {
-        if (_isMoving) return;
+        if (_isCommandedByPlayer)
+        {
+            return;
+        }
 
-        if(currentTask == CurrentTask.DrinkWater)
+        
+
+        if (currentTask == CurrentTask.DrinkWater)
         {
             MoveToWaypoint(waypoints[0]);
         }
@@ -192,6 +214,9 @@ public class Namwan : MonoBehaviour, IObserver
     {
         if (_isMoving || targetWaypoint == null)
             return;
+
+        _isCommandedByPlayer = true;
+
         // Find the nearest waypoint
         Transform nearestWaypoint = GetNearestWaypoint(targetWaypoint); 
 
@@ -219,7 +244,7 @@ public class Namwan : MonoBehaviour, IObserver
             currentWaypoint = nextWaypoint;
             pathQueue.Dequeue(); // Remove the visited waypoint
 
-            if (pathQueue.Count <= 0 && targetNPC != null)
+            if (pathQueue.Count <= 0 && targetNPC != null && transform.position != waypoints[0].position && transform.position != waypoints[1].position) 
             {
                 if(currentTask == CurrentTask.DrinkWater)
                 {
