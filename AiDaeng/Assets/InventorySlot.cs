@@ -22,7 +22,7 @@ public class InventorySlot : MonoBehaviour
     private WeatherManager _weatherManager;
     private AudioSource _audioSource;
     [SerializeField] private AudioClip _throwItemSFX;
-
+    [SerializeField] private GameObject _throwItemVFX;
 
     private void Awake()
     {
@@ -53,8 +53,7 @@ public class InventorySlot : MonoBehaviour
 
         if(_currentLife > 0)
         {
-            _currentLife -= 1f * Time.deltaTime;
-            
+            _currentLife -= 1f * Time.deltaTime;            
         }
         else
         {
@@ -80,6 +79,9 @@ public class InventorySlot : MonoBehaviour
             //play something to give player feedback
             _audioSource.clip = _throwItemSFX;
             _audioSource.Play();
+
+            Vector3 thePosition = transform.TransformPoint(transform.position);
+            Instantiate(_throwItemVFX, thePosition, Quaternion.identity);
         }
         else
         {

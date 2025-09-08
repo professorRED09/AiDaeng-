@@ -10,6 +10,7 @@ public class OnRightNarmObTutorialState : TutorialState
 
     public override void EnterState(InteractiveTutorial tutorial)
     {
+        tutorial.npcManager.enabled = false;
         tutorial.HideAllPointer();
         tutorial.player.GetComponent<PlayerController1>().enabled = true;
 

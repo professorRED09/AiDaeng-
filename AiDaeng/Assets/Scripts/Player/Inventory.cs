@@ -9,7 +9,6 @@ public class Inventory : MonoBehaviour, IObserver
 {
     public static Inventory instance;
     public List<Items> items = new List<Items>();
-    //public List<int> itemNumbers = new List<int>();
     public GameObject[] slots;
 
     [SerializeField] private Image _inventorySprite;
@@ -204,6 +203,16 @@ public class Inventory : MonoBehaviour, IObserver
                 }
                 return;
         }
+    }
+
+    public void GenerateItemsForTutorial(Items[] m_itemArray)
+    {
+        items.Clear();
+        for(int i = 0; i < slots.Length; i++)
+        {
+            items.Add(m_itemArray[Random.Range(0, m_itemArray.Length)]);
+        }
+        DisplayItems();
     }
 
     void OnEnable()

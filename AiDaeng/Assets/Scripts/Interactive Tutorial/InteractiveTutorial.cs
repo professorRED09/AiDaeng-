@@ -21,12 +21,14 @@ public class InteractiveTutorial : MonoBehaviour
 
     [Header("Tutorial Comp Ref")]
     public NPC2 tutorialNPC;
+    public NPC_Manager2 npcManager;
     public MixturePanel mixturePanel;
     public PlayerController1 player;
     public ScoreManager scoreManager;
     public BuddhaBasin buddhaBasin;
 
     public Items[] processItem;
+    public Items[] completedItem;
 
     #region Finite State Machine
     public TutorialState currentState;
@@ -38,6 +40,7 @@ public class InteractiveTutorial : MonoBehaviour
     public OnWrongNarmObTutorialState onWrongNarmObState = new OnWrongNarmObTutorialState();
     public OnRightNarmObTutorialState onRightNarmObState = new OnRightNarmObTutorialState();
     public OnWaterOverflowTutorialState onWaterOverflowState = new OnWaterOverflowTutorialState();
+    public OnFullInventoryTutorialState onFullInventoryState = new OnFullInventoryTutorialState();
     public GameRuleTutorialState gameRuleState = new GameRuleTutorialState();
     #endregion
 

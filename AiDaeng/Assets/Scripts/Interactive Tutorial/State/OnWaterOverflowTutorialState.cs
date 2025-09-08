@@ -10,9 +10,8 @@ public class OnWaterOverflowTutorialState : TutorialState
     public override void EnterState(InteractiveTutorial tutorial)
     {
         Time.timeScale = 1f;
-        Debug.Log("ENTER GAME RULE STATE");
+        Debug.Log("ENTER WATER OVERFLOW");
         tutorial.SetNarrativeText(_textArray[_currentIndex++]);
-
         tutorial.ShowNarrativeText(true);
     }
 
@@ -35,7 +34,10 @@ public class OnWaterOverflowTutorialState : TutorialState
         } 
         else if (tutorial.buddhaBasin.currentWB <= 0)
         {
-            tutorial.SwitchState(tutorial.gameRuleState);
+            tutorial.SetSmallNarrativeText("คลิกที่ซุ้มพระพุทธรูปเพื่อเปลี่ยนภาชนะรองน้ำ");
+            tutorial.ShowSmallNarrativeText(false);
+            //tutorial.SwitchState(tutorial.gameRuleState);
+            tutorial.SwitchState(tutorial.onFullInventoryState);
         }       
     }
 

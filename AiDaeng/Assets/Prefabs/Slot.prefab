@@ -252,6 +252,7 @@ MonoBehaviour:
   currentItem: {fileID: 0}
   _isRaining: 0
   _throwItemSFX: {fileID: 8300000, guid: 32665b0530240734d8bc756a6d83f86d, type: 3}
+  _throwItemVFX: {fileID: 1759238317202213861, guid: 7f3b0b5cd98f43542bc8116da443fece, type: 3}
 --- !u!114 &7389817475256371808
 MonoBehaviour:
   m_ObjectHideFlags: 0

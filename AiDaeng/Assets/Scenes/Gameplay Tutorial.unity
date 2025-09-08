@@ -747,7 +747,7 @@ RectTransform:
   m_GameObject: {fileID: 187711409}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 288602563}
@@ -755,7 +755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -517, y: 0}
   m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &187711411
@@ -4740,11 +4740,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ccb019628bd288469a498c79af9d2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultPanel: {fileID: 927350689}
+  resultUI: {fileID: 0}
   resultText: {fileID: 479597940}
+  resultPanel: {fileID: 927350689}
   resultStar: {fileID: 1308932090}
   StartNotif: {fileID: 2025171410}
   ClosedNotif: {fileID: 572904167}
+  fireworksPrefab: {fileID: 0}
+  resultPanelSprites: []
   timer: {fileID: 770082254}
   isGameover: 0
   _namwan: {fileID: 91148722}
@@ -13864,8 +13867,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 86b559c9c95e4b244b7e38843fbbaba6, type: 3}
   - {fileID: 21300000, guid: 5cf292489883c83478a2e61a9b5c5fa7, type: 3}
   - {fileID: 21300000, guid: ecd77dfc2e646164a955964f1d6984ca, type: 3}
+  - {fileID: 21300000, guid: 60352b4b0ef8375429b21fda46f24ca2, type: 3}
   illustration: {fileID: 187711411}
   tutorialNPC: {fileID: 0}
+  npcManager: {fileID: 1422673780}
   mixturePanel: {fileID: 591802889}
   player: {fileID: 2145833752}
   scoreManager: {fileID: 650653516}
@@ -13874,6 +13879,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a037d85c315fce24fa7c48a96e4081b9, type: 2}
   - {fileID: 11400000, guid: 1baa172a33f74e4448f9acbd544f0ef9, type: 2}
   - {fileID: 11400000, guid: 2a340d89eafa9674fa4e9a5eb10e787d, type: 2}
+  completedItem:
+  - {fileID: 11400000, guid: 28a65c88a0950dd43824c90d5c13d96c, type: 2}
+  - {fileID: 11400000, guid: b7bbfd8c47e016e449c890b743d0e2e3, type: 2}
+  - {fileID: 11400000, guid: 3344601e3a2b9e648949bb22a957d51e, type: 2}
+  - {fileID: 11400000, guid: 89f49ec4b74a4c141b0060586f201e81, type: 2}
+  - {fileID: 11400000, guid: 333977778b5d6944b8dc7d9dbec56691, type: 2}
+  - {fileID: 11400000, guid: 50b4c1fdeb011d742b16f6fe5418f44a, type: 2}
   _pointerArray:
   - {fileID: 762449929}
   - {fileID: 707455060}
@@ -21507,6 +21519,10 @@ PrefabInstance:
     - target: {fileID: 3885512756512590120, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086778008001617681, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4267334962647227823, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_text
