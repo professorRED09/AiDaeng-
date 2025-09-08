@@ -2178,7 +2178,7 @@ MonoBehaviour:
   normalWeatherSFX: {fileID: 8300000, guid: 21d4a62ad36054a49a50a6db7b98b5fe, type: 3}
   sunnyWeatherSFX: {fileID: 8300000, guid: 8926eebb44f92644291378d44ffe0465, type: 3}
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
-  weatherOrderArray: 0100000002000000010000000300000001000000
+  weatherOrderArray: 0100000003000000010000000300000001000000
   weatherTimerArray:
   - 20
   - 40
@@ -4250,7 +4250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829018861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalPosition: {x: 0, y: -6, z: 90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4269,11 +4269,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ccb019628bd288469a498c79af9d2f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultPanel: {fileID: 927350689}
+  resultUI: {fileID: 927350689}
   resultText: {fileID: 479597940}
+  resultPanel: {fileID: 1345793173021261956}
   resultStar: {fileID: 1308932090}
   StartNotif: {fileID: 2025171410}
   ClosedNotif: {fileID: 572904167}
+  fireworksPrefab: {fileID: 7750853977139984564, guid: 6a7b26737f4a19a40b5f385c66dc96a9, type: 3}
+  resultPanelSprites:
+  - {fileID: 21300000, guid: 85f238123df34cf499b01b4a79394528, type: 3}
+  - {fileID: 21300000, guid: efbfb34c8b64b634a884a2c60247cf01, type: 3}
   timer: {fileID: 770082254}
   isGameover: 0
   _namwan: {fileID: 91148722}
@@ -4744,6 +4749,7 @@ MonoBehaviour:
   mixturePanel: {fileID: 591802889}
   waterBarFill: {fileID: 428467807}
   fullWaterText: {fileID: 1345793173021261955}
+  _warnTimer: 0
 --- !u!60 &1002042181
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11427,6 +11433,7 @@ MonoBehaviour:
   mixturePanel: {fileID: 0}
   waterBarFill: {fileID: 0}
   fullWaterText: {fileID: 0}
+  _warnTimer: 0
 --- !u!82 &1273976326
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12764,9 +12771,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instructorPages:
-  - {fileID: 11400000, guid: 40ad0617ca240cc4287475d22fcfde27, type: 2}
-  - {fileID: 11400000, guid: bd2515bd9cf936e4585a40e7311d5022, type: 2}
   - {fileID: 11400000, guid: cf9a9bc5e6938794499e5b190c63658a, type: 2}
+  - {fileID: 11400000, guid: 498b1c094fd21f046b1d04397c50e75e, type: 2}
+  - {fileID: 11400000, guid: 96eebc0dd873f1146aab469c0201b005, type: 2}
   _videoPlayer: {fileID: 1593624651}
   _currentIndex: 0
   nextButton: {fileID: 1358050141}
@@ -20708,6 +20715,22 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 6644994224321085460, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644994224321085460, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1345793173021261957}
+    - target: {fileID: 6644994224321085460, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644994224321085460, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Intro
+      objectReference: {fileID: 0}
     - target: {fileID: 7384969740207777771, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -20862,6 +20885,28 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1345793173021261956 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2848048980376810870, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+  m_PrefabInstance: {fileID: 1345793173021261954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1345793173021261957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6143827817119271827, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+  m_PrefabInstance: {fileID: 1345793173021261954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7662520a45279b6419e23f4c9509c918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3389711720541657655

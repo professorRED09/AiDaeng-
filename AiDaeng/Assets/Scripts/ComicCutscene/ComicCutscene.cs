@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using UnityEngine.EventSystems;
+using TMPro;
+using DG.Tweening;
 using System;
 
 public class ComicCutscene : MonoBehaviour
@@ -17,6 +18,9 @@ public class ComicCutscene : MonoBehaviour
     public GameObject previousButton;
     public GameObject goButton;
 
+    public GameObject hoverPanel;
+    public TMP_Text mouseToBottomBorderText; 
+
     [Header("Holding To Skip")]
     public GameObject holdingUI;
     public Image holdingFillImage;
@@ -27,6 +31,8 @@ public class ComicCutscene : MonoBehaviour
 
     [Header("Load Scene")]
     public LoadingScene asyncManager;
+    public string dialogueSceneName;
+
     private void Awake()
     {
         _videoPlayer = GetComponent<VideoPlayer>();
@@ -60,14 +66,48 @@ public class ComicCutscene : MonoBehaviour
         _isHolding = true;
         _holdTimer = 0;
         holdingUI.SetActive(true);
-        Debug.Log("Button Pressed Down!");
+        //Debug.Log("Button Pressed Down!");
     }
 
     public void OnReleasingSkipButton()
     {
         _isHolding = false;
         holdingUI.SetActive(false);
-        Debug.Log("Button Released!");
+        //Debug.Log("Button Released!");
+    }
+
+    public void OnMouseEnterBottomBorder()
+    {
+        //Debug.Log("Mouse enter");
+        if (_currentIndex <= 0)
+        {
+            //print("VideoEND");
+            nextButton.SetActive(true);
+            previousButton.SetActive(false);
+            goButton.SetActive(false);
+        }
+        else if (_currentIndex >= cutsceneVideo.Length - 1)
+        {
+            //print("VideoEND2");
+            nextButton.SetActive(false);
+            previousButton.SetActive(true);
+            goButton.SetActive(true);
+        }
+        else
+        {
+            //print("VideoEND3");
+            nextButton.SetActive(true);
+            previousButton.SetActive(true);
+            goButton.SetActive(false);
+        }
+    }
+
+    public void OnMouseLeftBottomBorder()
+    {
+        //Debug.Log("Mouse left");
+        nextButton.SetActive(false);
+        previousButton.SetActive(false);
+        goButton.SetActive(false);
     }
 
 
@@ -77,20 +117,18 @@ public class ComicCutscene : MonoBehaviour
 
         if (_currentIndex >= cutsceneVideo.Length)
         {
-            asyncManager.LoadScene("CCutscene1");
+            asyncManager.LoadNextScene();
         }
 
         _videoPlayer.clip = cutsceneVideo[_currentIndex];
+
+        mouseToBottomBorderText.DOFade(0f, 0f);
 
         nextButton.SetActive(false);
         previousButton.SetActive(false);
         goButton.SetActive(false);
 
-        //if(_currentIndex >= cutsceneVideo.Length - 1)
-        //{
-        //    nextButton.SetActive(false);
-        //    goButton.SetActive(true);
-        //}
+        hoverPanel.SetActive(false);
     }
 
     private void OnEnable()
@@ -111,27 +149,31 @@ public class ComicCutscene : MonoBehaviour
 
     private void OnVideoEnd(UnityEngine.Video.VideoPlayer vp)
     {
+        hoverPanel.SetActive(true);
+        mouseToBottomBorderText.DOFade(1f, 0.45f)
+            .OnComplete(() => mouseToBottomBorderText.DOFade(0f, 5f));
         
-        if (_currentIndex <= 0)
-        {
-            print("VideoEND");
-            nextButton.SetActive(true);
-            previousButton.SetActive(false);
-            goButton.SetActive(false);
-        }
-        else if (_currentIndex >= cutsceneVideo.Length - 1) 
-        {
-            print("VideoEND2");
-            nextButton.SetActive(false);
-            previousButton.SetActive(true);
-            goButton.SetActive(true);
-        }
-        else
-        {
-            print("VideoEND3");
-            nextButton.SetActive(true);
-            previousButton.SetActive(true);
-            goButton.SetActive(false);
-        }
+        //if (_currentIndex <= 0)
+        //{
+        //    print("VideoEND");
+        //    nextButton.SetActive(true);
+        //    previousButton.SetActive(false);
+        //    goButton.SetActive(false);
+        //}
+        //else if (_currentIndex >= cutsceneVideo.Length - 1) 
+        //{
+        //    print("VideoEND2");
+        //    nextButton.SetActive(false);
+        //    previousButton.SetActive(true);
+        //    goButton.SetActive(true);
+        //}
+        //else
+        //{
+        //    print("VideoEND3");
+        //    nextButton.SetActive(true);
+        //    previousButton.SetActive(true);
+        //    goButton.SetActive(false);
+        //}
     }
+
 }

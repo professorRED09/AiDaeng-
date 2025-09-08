@@ -8,6 +8,8 @@ using UnityEngine.Video;
 public class InstructorPage : ScriptableObject
 {
     public string topicText;
+
+    [TextArea(3,10)]
     public string narrativeText;
     public VideoClip videoClip;
 

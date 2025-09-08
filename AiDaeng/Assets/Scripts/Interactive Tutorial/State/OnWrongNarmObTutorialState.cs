@@ -7,7 +7,7 @@ public class OnWrongNarmObTutorialState : TutorialState
     public override void EnterState(InteractiveTutorial tutorial)
     {
         tutorial.HideAllPointer();
-        tutorial.SetNarrativeText("มึงทำผิด ไอ้ควาย กลับไปดูออเดอร์ดีๆ ไป!");
+        tutorial.SetNarrativeText("เหมือนจะใส่ดอกไม้ผิดดอกนะ ลองดูสิ่งที่เค้าสั่งแล้วทำใหม่อีกครั้งดู");
         tutorial.ShowNarrativeText(true);
         Debug.Log("ENTER ON WRONG");
         

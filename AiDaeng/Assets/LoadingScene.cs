@@ -17,10 +17,6 @@ public class LoadingScene : MonoBehaviour
         //_transitionScreen.DOFade(1f, 1f).OnComplete(() => StartCoroutine(LoadSceneAsync(sceneName)));
         _loadingScreen.SetActive(true);
         StartCoroutine(LoadSceneAsync(sceneName));
-        
-
-        //_transitionScreen.DOFade(1f, 1f).OnComplete(() => 
-        //_transitionScreen.DOFade(0f, 1f).OnComplete(() => StartCoroutine(LoadSceneAsync(sceneName))));
     }   
     
     public void SelectSceneToPlay(string m_sceneName)
@@ -44,18 +40,33 @@ public class LoadingScene : MonoBehaviour
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
             _loadingBarFill.fillAmount = progressValue;
 
-            //if (operation.progress >= 0.9f)
-            //{
-            //    operation.allowSceneActivation = true;
-
-            //    //if (Input.GetKey(KeyCode.Space))
-            //    //{
-            //    //    print("ASD");
-            //    //    operation.allowSceneActivation = true;
-            //    //}
-            //}
-
             yield return null;
         }        
+    }
+
+    public void LoadNextScene()
+    {
+        //_transitionScreen.DOFade(1f, 1f).OnComplete(() => StartCoroutine(LoadSceneAsync(sceneName)));
+        _loadingScreen.SetActive(true);
+        StartCoroutine(LoadSceneAsync());
+    }
+
+    IEnumerator LoadSceneAsync()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        //operation.allowSceneActivation = false;        
+
+        while (!operation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
+            _loadingBarFill.fillAmount = progressValue;
+
+            yield return null;
+        }
+    }
+
+    public void OnPressQuitGame()
+    {
+        Application.Quit();
     }
 }

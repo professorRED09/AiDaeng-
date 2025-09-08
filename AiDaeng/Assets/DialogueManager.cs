@@ -13,11 +13,13 @@ public class DialogueManager : MonoBehaviour
     public AnimationClip[] jaoawadAnimation;
     public AnimationClip[] namwanAnimation;
 
-    //[TextArea(3, 10)]
+    [TextArea(3, 10)]
     public string[] sentences;
+
     public string[] names;
     public bool[] isQuestion;
     public bool[] isSkipToOtherIndex;
+    public bool[] isSystemQuestion;
     public int[] indexToSkipTo;
     public float textDelayTime;
 
@@ -32,15 +34,26 @@ public class DialogueManager : MonoBehaviour
     private int _currentIndex;
     private Tween _blinkTween;
 
-    [Header("UI Box")]
+    [Header("System Question")]
     public GameObject afterDialogueEndUIBox;
-    //public LoadingScene loadingScene;
+
+    public GameObject[] systemQuestions;
+    public Queue<GameObject> systemQuestionsQueue = new Queue<GameObject>();
+
+    [Header("LoadScene")]
+    public LoadingScene loadingScene;
 
     // Start is called before the first frame update
     void Start()
     {
         StartDialogue();
         BlinkingText("คลิกเพื่อไปต่อ");
+
+        for(int i = 0; i < systemQuestions.Length; i++)
+        {
+            systemQuestionsQueue.Enqueue(systemQuestions[i]);
+        }
+            
     }
 
     private void StartDialogue()
@@ -122,6 +135,14 @@ public class DialogueManager : MonoBehaviour
             print("This is a question, please answer it dammit");
             return;
         }
+        else if (isSkipToOtherIndex[_currentIndex] == true)
+        {
+            _currentIndex = indexToSkipTo[_currentIndex] - 1;
+        }
+        else if (isSystemQuestion[_currentIndex] == true)
+        {
+            ShowUIBox(systemQuestionsQueue.Dequeue());
+        }
         else if (_isTyping)
         {
             StopAllCoroutines();
@@ -131,22 +152,17 @@ public class DialogueManager : MonoBehaviour
             
             return;
         }
-        else if (isSkipToOtherIndex[_currentIndex] == true)
-        {
-            _currentIndex = indexToSkipTo[_currentIndex] - 1;
-        }
+        
 
         _currentIndex++;
         Debug.Log(_currentIndex);
 
         if (_currentIndex >= sentences.Length)
         {
-            ShowUIBox(afterDialogueEndUIBox);
-            return;
+            loadingScene.LoadNextScene();
         }
         else
-        {
-            dialogueText.text = sentences[_currentIndex];
+        {            
             StopAllCoroutines();
             StartCoroutine(TypeSentence());
         }
@@ -159,6 +175,19 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence());
         q1Choices.SetActive(false);
+    }
+    
+    public void OnPressNoToSystemQuestion()
+    {
+        for(int i = 0; i < systemQuestions.Length; i++)
+        {
+            systemQuestions[i].SetActive(false);
+        }
+        
+        dialogueText.text = sentences[_currentIndex];
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence());
+        
     }
 
     public void UpdateAnimation()

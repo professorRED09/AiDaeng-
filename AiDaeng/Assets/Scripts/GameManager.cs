@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : Subject/*, IObserver*/
 {
     [Header("UI")]
-    [SerializeField] GameObject resultPanel;
+    [SerializeField] GameObject resultUI;
     [SerializeField] TMP_Text resultText;
+    [SerializeField] Image resultPanel;
     [SerializeField] GameObject resultStar;
     [SerializeField] GameObject StartNotif;
     [SerializeField] GameObject ClosedNotif;
+
+    public GameObject fireworksPrefab;
+    [SerializeField] Sprite[] resultPanelSprites;
 
     // Managers
     private NPC_Manager2 npcManager;
@@ -30,6 +35,7 @@ public class GameManager : Subject/*, IObserver*/
     private MusicManager musicManager;
 
     private InteractiveTutorial tutorial;
+    
 
     public enum Level
     {
@@ -107,16 +113,21 @@ public class GameManager : Subject/*, IObserver*/
     {        
         if (isGameover == true)
             return;
-        resultPanel.SetActive(true);
+        resultUI.SetActive(true);
         musicManager.PlayResultMusic(scoreManager.StarCount());
         // if player's score is at least pass 1-star goal, inform them that they pass the level
         if (scoreManager.StarCount() >= 1)
         {
-            resultText.text = "ผ่านด่านจ้า!";            
+            resultText.text = "ผ่านด่านจ้า!";
+            Instantiate(fireworksPrefab, transform);
+            resultUI.transform.GetChild(0).GetComponent<Image>().color = new Vector4(1f,1f,1f,0.5f);
+            resultPanel.sprite = resultPanelSprites[0];
         }
         else
         {
-            resultText.text = "ลองใหม่นะ";            
+            resultText.text = "ลองใหม่นะ";
+            resultUI.transform.GetChild(0).GetComponent<Image>().color = new Vector4(0.2f, 0.2f, 0.2f, 0.8f);
+            resultPanel.sprite = resultPanelSprites[1];
         }
         ResultStar();
         isGameover = true;
@@ -141,6 +152,7 @@ public class GameManager : Subject/*, IObserver*/
         {
             m_Animator.Play("Lose");
         }
+       
     }  
 
 

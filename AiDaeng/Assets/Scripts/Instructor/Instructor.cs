@@ -51,10 +51,12 @@ public class Instructor : MonoBehaviour
         if (_currentIndex >= instructorPages.Count - 1)
         {
             nextButton.SetActive(false);
+            previousButton.SetActive(true);
             goButton.SetActive(true);
         }
         else if (_currentIndex <= 0)
         {
+            nextButton.SetActive(true);
             previousButton.SetActive(false);
             goButton.SetActive(false);
         }

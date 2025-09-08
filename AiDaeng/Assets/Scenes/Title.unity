@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 205499298}
   - component: {fileID: 205499297}
   m_Layer: 5
-  m_Name: Tutorial.btn
+  m_Name: Quit.btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,8 +495,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1060475234}
         m_TargetAssemblyTypeName: LoadingScene, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+        m_MethodName: OnPressQuitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2049,7 +2049,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0E2A\u0E2D\u0E19\u0E40\u0E25\u0E48\u0E19"
+  m_text: "\u0E1B\u0E34\u0E14\u0E40\u0E01\u0E21"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 62e798779d7065d428cf45273e79e4b4, type: 2}
   m_sharedMaterial: {fileID: -5156781641394949453, guid: 62e798779d7065d428cf45273e79e4b4, type: 2}
