@@ -702,9 +702,8 @@ MonoBehaviour:
   continueText: {fileID: 609019508}
   q1Choices: {fileID: 254560298}
   _isTyping: 0
-  afterDialogueEndUIBox: {fileID: 0}
   systemQuestions: []
-  loadingScene: {fileID: 195454736}
+  asyncManager: {fileID: 195454736}
 --- !u!4 &1335698653
 Transform:
   m_ObjectHideFlags: 0

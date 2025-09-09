@@ -32,16 +32,13 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private bool _isTyping = false;
     private int _currentIndex;
-    private Tween _blinkTween;
 
     [Header("System Question")]
-    public GameObject afterDialogueEndUIBox;
-
     public GameObject[] systemQuestions;
     public Queue<GameObject> systemQuestionsQueue = new Queue<GameObject>();
 
     [Header("LoadScene")]
-    public LoadingScene loadingScene;
+    public LoadingScene asyncManager;
 
     // Start is called before the first frame update
     void Start()
@@ -159,7 +156,7 @@ public class DialogueManager : MonoBehaviour
 
         if (_currentIndex >= sentences.Length)
         {
-            loadingScene.LoadNextScene();
+            asyncManager.LoadNextScene();
         }
         else
         {            
@@ -183,11 +180,23 @@ public class DialogueManager : MonoBehaviour
         {
             systemQuestions[i].SetActive(false);
         }
-        
+        _currentIndex = 7;
         dialogueText.text = sentences[_currentIndex];
         StopAllCoroutines();
         StartCoroutine(TypeSentence());
         
+    }
+
+    public void OnPressSkip()
+    {
+        if(_currentIndex >= 7 || systemQuestionsQueue.Count <= 0)
+        {
+            asyncManager.LoadNextScene();
+        }
+        else if(_currentIndex < 7 && systemQuestionsQueue.Count > 0)
+        {
+            ShowUIBox(systemQuestionsQueue.Dequeue());
+        }
     }
 
     public void UpdateAnimation()

@@ -28,7 +28,14 @@ public class MainMenu : MonoBehaviour
         {
             logoImage.DOScale(logoImage.localScale * 0.95f, 1f).SetEase(Ease.InQuad).SetLoops(-1, LoopType.Yoyo);
         }
+    }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnPressPauseGame();
+        }
     }
 
     //public void OnProductTutorialPress()
@@ -102,20 +109,7 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Title");
     }
 
-    //IEnumerator DelayTime(float timeScale)
-    //{
-    //    yield return new WaitForSeconds(1f);
-    //    Time.timeScale = timeScale;
-    //}
 
-    //public IEnumerator OnResume()
-    //{
-    //    Time.timeScale = 1f;
-    //    Debug.Log("Resume");
-    //    pausePanel.GetComponent<Animator>().SetBool("isOpened", false);
-    //    yield return new WaitForSeconds(1f);
-    //    pausePanel.SetActive(false);
-    //}
 
 
 

@@ -206,6 +206,7 @@ MonoBehaviour:
   holdDuration: 1.5
   asyncManager: {fileID: 495789667}
   dialogueSceneName: CCutscene1
+  pauseOnCutsceneUI: {fileID: 1498486333}
 --- !u!328 &729474597
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -419,6 +420,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1498486333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2661238098024720493, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+  m_PrefabInstance: {fileID: 4174098823342755269}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1641367790 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8809342038307534194, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
@@ -687,6 +693,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 495789667}
+    - target: {fileID: 5500669134657295964, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: CCutscene0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 495789667}
+    - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoadingScene, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6255974043323829444, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

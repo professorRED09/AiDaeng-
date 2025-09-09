@@ -69,15 +69,17 @@ public class BuddhaBasin : MonoBehaviour
     {
         if (col.CompareTag("Player") && player.targetWP == gameObject)
         {
-            if (currentWB != 0)
-            {
-                StartCoroutine(ResetBasin());                
-            }            
+            StartCoroutine(ResetBasin());
+            //if (currentWB != 0)
+            //{
+                                
+            //}            
         }
     }
 
     IEnumerator ResetBasin()
     {
+        if (currentWB <= 0) yield return null;
         player.GetComponent<Animator>().SetBool("isDoingTask", true);
 
         audioSource.clip = taskSFX;
@@ -97,12 +99,6 @@ public class BuddhaBasin : MonoBehaviour
     public void IncreaseWater()
     {
         currentWB += 2.5f;
-        //if(currentWB >= maxWB)
-        //{
-        //    currentWB = maxWB;
-        //    isFull = true;
-        //    OnFullBasin();// pop up notif window
-        //}
         UpdateWaterBar(currentWB, maxWB);
         //print("WATER INCREASES");
     }
@@ -137,6 +133,7 @@ public class BuddhaBasin : MonoBehaviour
 
     private void OnMouseDown()
     {
+        
         audioSource.clip = clickSFX;
         audioSource.Play(); // play soundFX
 
@@ -147,6 +144,13 @@ public class BuddhaBasin : MonoBehaviour
             mixturePanel.CancelCurrentProduct();
             player.targetWP = gameObject;            
         }
+
+        if (player.transform.position == waypoint.position)
+        {
+            //print("ASDASDSAD");
+            StartCoroutine(ResetBasin());
+        }
+        
     }
 
     private void OnMouseOver()

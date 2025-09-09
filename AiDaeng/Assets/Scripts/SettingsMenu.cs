@@ -8,19 +8,19 @@ public class SettingsMenu : MonoBehaviour
     public AudioMixer audioMixer;
     public GameObject settingsPanel;
     
-    public void SetVolume(float volume)
+    public void SetMasterVolume(float volume)
     {
-        audioMixer.SetFloat("Volume", volume);
+        audioMixer.SetFloat("masterVolume", Mathf.Log10(volume) * 20f);
     }
 
     public void SetSoundFXVolume(float volume)
     {
-        audioMixer.SetFloat("SFXVolume", volume);
+        audioMixer.SetFloat("soundFXVolume", Mathf.Log10(volume) * 20f);
     }
 
     public void SetMusicVolume(float volume)
     {
-        audioMixer.SetFloat("Volume", volume);
+        audioMixer.SetFloat("musicVolume", Mathf.Log10(volume) * 20f);
     }
 
     public void OnPressBackButton()

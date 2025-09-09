@@ -33,6 +33,9 @@ public class ComicCutscene : MonoBehaviour
     public LoadingScene asyncManager;
     public string dialogueSceneName;
 
+    [Header("Pause UI")]
+    public GameObject pauseOnCutsceneUI;
+
     private void Awake()
     {
         _videoPlayer = GetComponent<VideoPlayer>();
@@ -46,6 +49,7 @@ public class ComicCutscene : MonoBehaviour
 
     void Update()
     {
+        //holding to skip function
         if (_isHolding)
         {
             _holdTimer += Time.deltaTime;
@@ -58,6 +62,11 @@ public class ComicCutscene : MonoBehaviour
                 PlayCutscene(1);
                 //asyncManager.LoadScene("CCutscene1");
             }            
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseOnCutsceneUI.SetActive(true);
         }
     }
 
@@ -118,6 +127,7 @@ public class ComicCutscene : MonoBehaviour
         if (_currentIndex >= cutsceneVideo.Length)
         {
             asyncManager.LoadNextScene();
+            return;
         }
 
         _videoPlayer.clip = cutsceneVideo[_currentIndex];

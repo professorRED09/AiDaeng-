@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseManu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     [Header("UI")]
     //[SerializeField] GameObject startBanner;

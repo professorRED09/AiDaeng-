@@ -712,11 +712,9 @@ MonoBehaviour:
   continueText: {fileID: 487621590}
   q1Choices: {fileID: 1007962483}
   _isTyping: 0
-  afterDialogueEndUIBox: {fileID: 1827459016}
   systemQuestions:
   - {fileID: 1827459016}
-  - {fileID: 1827459016}
-  loadingScene: {fileID: 195454736}
+  asyncManager: {fileID: 195454736}
 --- !u!4 &1335698653
 Transform:
   m_ObjectHideFlags: 0
@@ -783,9 +781,25 @@ PrefabInstance:
       value: "\u0E01\u0E48\u0E2D\u0E19\u0E27\u0E31\u0E19\u0E2A\u0E07\u0E01\u0E23\u0E32\u0E19\u0E15\u0E4C\u0E44\u0E21\u0E48\u0E01\u0E35\u0E48\u0E27\u0E31\u0E19"
       objectReference: {fileID: 0}
     - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1335698652}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPressSkip
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5723038402414765119, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -798,6 +812,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 6530035353848695886, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_text
+      value: "\u0E2D\u0E22\u0E32\u0E01\u0E25\u0E2D\u0E07\u0E42\u0E2B\u0E21\u0E14\u0E2A\u0E2D\u0E19\u0E40\u0E25\u0E48\u0E19\n\u0E01\u0E48\u0E2D\u0E19\u0E21\u0E31\u0E49\u0E22?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7290261824810786538, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7671026889527406999, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
       propertyPath: m_IsActive
       value: 0

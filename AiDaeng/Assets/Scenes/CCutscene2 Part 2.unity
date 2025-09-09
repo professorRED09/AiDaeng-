@@ -183,6 +183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7662520a45279b6419e23f4c9509c918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &196987791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5501516239661910551, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 1713486006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &422864868
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,11 +403,11 @@ PrefabInstance:
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 196987791}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingBarFill
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1139084496}
     - target: {fileID: 5341528795661758665, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: m_Name
       value: AsyncManager
@@ -412,6 +417,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+--- !u!114 &1139084496 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2382161645952835523, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 1713486006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1161143349
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,23 +602,23 @@ MonoBehaviour:
   - {fileID: 1713486012}
   - {fileID: 1713486011}
   daengAnimation:
+  - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
+  - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
   - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
-  - {fileID: 0}
   - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
-  - {fileID: 0}
   - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
   jaoawadAnimation: []
   namwanAnimation:
   - {fileID: 7400000, guid: 2afe80a821705854796dca474ace0292, type: 2}
   - {fileID: 7400000, guid: 151164e669755a84ea692f437c8e06a3, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7400000, guid: 151164e669755a84ea692f437c8e06a3, type: 2}
+  - {fileID: 7400000, guid: 2afe80a821705854796dca474ace0292, type: 2}
+  - {fileID: 7400000, guid: 151164e669755a84ea692f437c8e06a3, type: 2}
+  - {fileID: 7400000, guid: 2afe80a821705854796dca474ace0292, type: 2}
+  - {fileID: 7400000, guid: 151164e669755a84ea692f437c8e06a3, type: 2}
   - {fileID: 7400000, guid: 2afe80a821705854796dca474ace0292, type: 2}
   sentences:
   - "\u0E19\u0E49\u0E33\u0E2B\u0E27\u0E32\u0E19\u0E21\u0E32\u0E17\u0E33\u0E2D\u0E30\u0E44\u0E23\u0E17\u0E35\u0E48\u0E19\u0E35\u0E49\u0E2B\u0E23\u0E2D?"
@@ -634,9 +650,8 @@ MonoBehaviour:
   continueText: {fileID: 1713486008}
   q1Choices: {fileID: 1713486007}
   _isTyping: 0
-  afterDialogueEndUIBox: {fileID: 0}
   systemQuestions: []
-  loadingScene: {fileID: 195454736}
+  asyncManager: {fileID: 195454736}
 --- !u!4 &1335698653
 Transform:
   m_ObjectHideFlags: 0
@@ -663,6 +678,34 @@ PrefabInstance:
     - target: {fileID: 2738185049077583508, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
       propertyPath: m_text
       value: "\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48 14 \u0E40\u0E21\u0E29\u0E32\u0E22\u0E19 "
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 195454736}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoadingScene, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607450664561465113, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732344585242486661, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8118228810539595724, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
       propertyPath: m_Name
@@ -751,6 +794,14 @@ PrefabInstance:
     - target: {fileID: 8325872576301137907, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431904165028870922, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1335698652}
+    - target: {fileID: 8431904165028870922, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPressNextSentenceButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

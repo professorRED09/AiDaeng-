@@ -46,11 +46,10 @@ public class Task : MonoBehaviour
             player.GetComponent<Animator>().SetBool("isDoingTask", true);
             audioSource.clip = taskSFX;
             audioSource.Play(); // play soundFX
+            mixturePanel.UpdateTempItem(goalItem);
             yield return new WaitForSeconds(0.7f);
             player.GetComponent<Animator>().SetBool("isDoingTask", false);
-
-            // update on UI to show which process player is currently at
-            mixturePanel.UpdateTempItem(goalItem);
+            // update on UI to show which process player is currently at            
 
             // player can move again
             player.canControl = true;

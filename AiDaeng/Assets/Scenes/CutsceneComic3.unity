@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &127815309 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2661238098024720493, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+  m_PrefabInstance: {fileID: 383628277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &383628277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,6 +179,22 @@ PrefabInstance:
     - target: {fileID: 5500669134657295964, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: CCutscene3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 495789667}
+    - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadNextScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoadingScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6255974043323829444, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -478,6 +499,7 @@ MonoBehaviour:
   holdDuration: 1.5
   asyncManager: {fileID: 495789667}
   dialogueSceneName: CCutscene3
+  pauseOnCutsceneUI: {fileID: 127815309}
 --- !u!328 &729474597
 VideoPlayer:
   m_ObjectHideFlags: 0
