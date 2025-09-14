@@ -32,7 +32,7 @@ public class OnFullInventoryTutorialState : TutorialState
             {
                 Time.timeScale = 1f;
                 tutorial.ShowNarrativeText(false);
-                tutorial.SetSmallNarrativeText("คลิกที่สล็อตช่องเก็บของเพื่อทิ้งของชิ้นนั้นๆ");
+                tutorial.SetSmallNarrativeText("คลิกที่สล็อตช่องเก็บของเพื่อทิ้งของ 2 ชิ้น");
                 tutorial.ShowSmallNarrativeText(true);
                 tutorial.ChangeIllust(-1);                
             }

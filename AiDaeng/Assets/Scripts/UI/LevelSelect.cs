@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using TMPro;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class LevelSelect : MonoBehaviour
 {
@@ -19,15 +20,29 @@ public class LevelSelect : MonoBehaviour
     [Header("UI")]
     [SerializeField] TMP_Text levelNameText;
 
+    public Transform playButtonTransform;
+    private Vector3 _defaultPlayButtonScale;
+
+    [SerializeField] float _scaleValue;
+    [SerializeField] float _scaleDuration;
+
+    //void Awake()
+    //{
+    //    _defaultPlayButtonScale = playButtonTransform.localScale;
+    //}
+
     private void Start()
     {
         OnSelectLevel1();
-    }   
-
-    public void OnPressBack()
-    {
-        SceneManager.LoadScene("Title");
+        playButtonTransform.DOScale(transform.localScale *= _scaleValue, _scaleDuration)
+            .SetLoops(-1,LoopType.Yoyo);
     }
+
+
+    //public void OnPressBack()
+    //{
+    //    SceneManager.LoadScene("Title");
+    //}
 
     public void OnSelectLevel1()
     {  
@@ -44,7 +59,7 @@ public class LevelSelect : MonoBehaviour
 
         //Daeng walk to the selected cutscene
         daeng.SetWaypoint(level2Pos);
-        asyncManager.SelectSceneToPlay("Gameplay Level 2");
+        asyncManager.SelectSceneToPlay("CutsceneComic2");
     }
 
     public void OnSelectLevel3()
@@ -53,6 +68,6 @@ public class LevelSelect : MonoBehaviour
 
         //Daeng walk to the selected cutscene
         daeng.SetWaypoint(level3Pos);
-        asyncManager.SelectSceneToPlay("Gameplay Level 3");
+        asyncManager.SelectSceneToPlay("CutsceneComic3");
     }
 }

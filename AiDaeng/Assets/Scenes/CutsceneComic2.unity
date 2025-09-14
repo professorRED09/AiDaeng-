@@ -371,16 +371,20 @@ PrefabInstance:
       value: OnMouseLeftBottomBorder
       objectReference: {fileID: 0}
     - target: {fileID: 5500669134657295964, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5500669134657295964, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 495789667}
     - target: {fileID: 5500669134657295964, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
+      value: LoadNextScene
       objectReference: {fileID: 0}
     - target: {fileID: 5500669134657295964, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: CCutscene2
+      value: CCutscene2 Part2
       objectReference: {fileID: 0}
     - target: {fileID: 5560743864307020170, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

@@ -48,6 +48,7 @@ public class Task : MonoBehaviour
             audioSource.Play(); // play soundFX
             mixturePanel.UpdateTempItem(goalItem);
             yield return new WaitForSeconds(0.7f);
+            //mixturePanel.UpdateTempItem(goalItem);
             player.GetComponent<Animator>().SetBool("isDoingTask", false);
             // update on UI to show which process player is currently at            
 

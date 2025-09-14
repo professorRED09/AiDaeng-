@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPCOrderTutorialState : TutorialState
 {
-    private string[] _textArray = new string[] {"จำเป็นต้องเสิร์ฟให้ทันก่อนเค้าจะอารมณ์เสีย", "นะจ๊ะ เอ้า ลุย" };
+    private string[] _textArray = new string[] { "ดูของที่ผู้คนสั่งให้ดี", "จำเป็นต้องเสิร์ฟให้ทันก่อนเค้าจะอารมณ์เสีย", "ลองค่อยๆหยิบของตามที่จะบอกนะ" };
     private int _currentIndex = 0;
 
     public override void EnterState(InteractiveTutorial tutorial)
@@ -14,7 +14,7 @@ public class NPCOrderTutorialState : TutorialState
         tutorial.ChangeIllust(0);
 
         
-        tutorial.SetNarrativeText("ดูของที่ผู้คนสั่งให้ดี");
+        tutorial.SetNarrativeText(_textArray[_currentIndex++]);
         Debug.Log("ENTER NPC ORDER STATE");
     }
 

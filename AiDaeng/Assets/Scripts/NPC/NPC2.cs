@@ -59,7 +59,7 @@ public class NPC2 : MonoBehaviour, IObserver
     private PlayerController1 player;
     private Namwan namwan;
 
-    //FSM Stuff
+    #region Finite State Machine
     public NPC_BaseState currentState;
     public NPC_ArriveState arriveState = new NPC_ArriveState();
     public NPC_WaitToOrderState waitToOrderState = new NPC_WaitToOrderState();
@@ -67,6 +67,7 @@ public class NPC2 : MonoBehaviour, IObserver
     public NPC_PrayState prayState = new NPC_PrayState();
     public NPC_LeaveState leaveState = new NPC_LeaveState();
     public NPC_RageLeaveState rageLeaveState = new NPC_RageLeaveState();
+    #endregion
 
     private Animator animator;
     private NPC_Manager2 npcManager;

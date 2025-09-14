@@ -2987,7 +2987,7 @@ PrefabInstance:
     - target: {fileID: 4092271400149319683, guid: 773c670374af5d844bc39c4447e7139a, type: 3}
       propertyPath: sceneMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 574ee63b3e9f0394183230a405e535bc, type: 3}
+      objectReference: {fileID: 8300000, guid: 69729481cbc69e74a820d7bcf60de6c1, type: 3}
     - target: {fileID: 7096693893193050471, guid: 773c670374af5d844bc39c4447e7139a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3038,7 +3038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9120397846655703977, guid: 773c670374af5d844bc39c4447e7139a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
