@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tempItem: {fileID: 0}
+  blankImage: {fileID: 21300000, guid: 8960793a62bb9b54e98491230575bad3, type: 3}
   _isClicked: 0
 --- !u!82 &3754548683591234438
 AudioSource:

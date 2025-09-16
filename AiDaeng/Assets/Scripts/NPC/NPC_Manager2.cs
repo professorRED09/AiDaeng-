@@ -12,6 +12,7 @@ public class NPC_Manager2 : MonoBehaviour
     private bool isTimeout = false;
 
     public List<GameObject> npcPrefabs;
+    public List<GameObject> npcSpawnList;
     public GameObject spawnPoint; // a position to spawn npc
 
     [Header("Waypoints")]
@@ -37,6 +38,7 @@ public class NPC_Manager2 : MonoBehaviour
 
     void Start()
     {
+        npcSpawnList.AddRange(npcPrefabs);
         SpawnNPCs();
         RandomSpawnTime();
     }
@@ -70,12 +72,45 @@ public class NPC_Manager2 : MonoBehaviour
         currentSpawnTimer = Random.Range(minTime, maxTime);        
     }
 
+    //public GameObject RandomTypeOfNPCs()
+    //{
+    //    if(npcSpawnList.Count > 0)
+    //    {
+    //        GameObject npc = npcSpawnList[Random.Range(0, npcSpawnList.Count)], 
+
+    //        npcSpawnList.Remove(npc);
+    //        return npc;
+    //    }
+    //    else
+    //    {
+    //        npcSpawnList = npcPrefabs;
+    //        RandomTypeOfNPCs();
+    //        return null;
+    //    }
+    //}
+
+    public GameObject RandomTypeOfNPCs()
+    {        
+        if (npcSpawnList.Count > 0)
+        {
+            GameObject npc = npcSpawnList[Random.Range(0, npcSpawnList.Count)];
+            npcSpawnList.Remove(npc);
+            return npc;
+        }
+        else
+        {
+            npcSpawnList.AddRange(npcPrefabs);
+            RandomTypeOfNPCs();
+            return null;
+        }
+    }
+
     private void SpawnNPCs()
     {
         _currentNPCCount = spawnedNpcCount - leftNpcCount;
         if (_currentNPCCount > 8) return;
 
-        GameObject npc = Instantiate(npcPrefabs[Random.Range(0,npcPrefabs.Count)], spawnPoint.transform.position, Quaternion.identity);
+        GameObject npc = Instantiate(RandomTypeOfNPCs(), spawnPoint.transform.position, Quaternion.identity);
         NPC2 npcMovement = npc.GetComponent<NPC2>();
         
         if (npcMovement != null)

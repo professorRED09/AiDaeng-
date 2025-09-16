@@ -144,6 +144,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PlayCutscene
       objectReference: {fileID: 0}
+    - target: {fileID: 578494677609501986, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2050869947}
     - target: {fileID: 2067057448457882949, guid: 76fd2df245fa3cc4cba2423c49324801, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -378,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 4092271400149319683, guid: 773c670374af5d844bc39c4447e7139a, type: 3}
       propertyPath: sceneMusic
       value: 
-      objectReference: {fileID: 8300000, guid: 72cf06374a1b8364aab35a10b6ca86a3, type: 3}
+      objectReference: {fileID: 8300000, guid: d59c7669d8b01e141908c0c40d61fff2, type: 3}
     - target: {fileID: 7096693893193050471, guid: 773c670374af5d844bc39c4447e7139a, type: 3}
       propertyPath: m_RootOrder
       value: 6

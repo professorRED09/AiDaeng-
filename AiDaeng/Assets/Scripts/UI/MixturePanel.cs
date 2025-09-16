@@ -8,6 +8,7 @@ public class MixturePanel : MonoBehaviour
     [Header("Setting")]
     public Items tempItem;
     private Image tempItemImage;
+    public Sprite blankImage;
     private AudioSource _audioSource;
 
     //private bool isOpened;
@@ -106,12 +107,12 @@ public class MixturePanel : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if(tempItem == null)
         {
-            tempItemImage.sprite = null;
+            //tempItemImage.sprite = blankImage;
 
             //disable "เสร็จแล้วจ้า!" text   
             transform.GetChild(1).gameObject.SetActive(false);
-            //_isClicked = false;
-            //HidePanel();
+            tempItemImage.sprite = blankImage;
+
         }
     }
 

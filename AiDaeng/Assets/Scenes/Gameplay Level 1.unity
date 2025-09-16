@@ -13110,6 +13110,7 @@ MonoBehaviour:
   - {fileID: 2014829141127630396, guid: 6c5d0828f5a80d848a03e5feb7e29b59, type: 3}
   - {fileID: 8034953409974517664, guid: 4a194782afc9a744aa4cde4a130e9e94, type: 3}
   - {fileID: 2014829141127630396, guid: 208bf92ab79e9d1449cddfa6988871ed, type: 3}
+  npcSpawnList: []
   spawnPoint: {fileID: 557693610}
   wpToQueue:
   - {fileID: 557693611}
@@ -20822,7 +20823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6239143374079321834, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: timeToDisplay
-      value: 80
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6296042020480868644, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y
