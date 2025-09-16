@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -43,6 +44,8 @@ public class GameManager : Subject/*, IObserver*/
     }
 
     [SerializeField] Level currentLevel;
+    [Header("Highlight")]
+    [SerializeField] GameObject[] _highlightedObjects;
 
     void Awake()
     {
@@ -87,6 +90,20 @@ public class GameManager : Subject/*, IObserver*/
         ClosedNotif.GetComponent<Animator>().SetTrigger("isTimeout");
     }
 
+    void HighlightNewObject()
+    {
+        if(_highlightedObjects.Length > 0)
+        {
+            for(int i = 0; i < _highlightedObjects.Length; i++)
+            {
+                SpriteRenderer m_highlightObj = _highlightedObjects[i].GetComponent<SpriteRenderer>();
+                m_highlightObj.DOColor(Color.gray, 0.5f).SetLoops(3,LoopType.Yoyo)
+                    .OnComplete(()=> m_highlightObj.DOColor(Color.white, 0.5f));
+                
+            }
+        }
+    }
+
     IEnumerator CountdownToStart()
     {
         StartNotif.SetActive(true);
@@ -97,6 +114,7 @@ public class GameManager : Subject/*, IObserver*/
         timer.StartLevelTimer();
 
         EnableManagers();
+        Invoke(nameof(HighlightNewObject), 0.5f);
         player.canControl = true;
     }    
 

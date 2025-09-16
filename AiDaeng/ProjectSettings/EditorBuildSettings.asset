@@ -45,6 +45,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CutsceneComic3.unity
     guid: 98efb8c2be8855d44b508a30422ebfcf
   - enabled: 1
+    path: Assets/Scenes/CCutscene3.unity
+    guid: 2ca3cbeb4eac097469fbdbb3668cf15d
+  - enabled: 1
     path: Assets/Scenes/Gameplay Level 3.unity
     guid: 5b1bb2274c6371d4dadbb569664ad5aa
   m_configObjects: {}

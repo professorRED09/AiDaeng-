@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -20,7 +21,9 @@ public class DialogueManager : MonoBehaviour
     public bool[] isQuestion;
     public bool[] isSkipToOtherIndex;
     public bool[] isSystemQuestion;
-    public int[] indexToSkipTo;
+    public bool[] leaveAfterIndex;
+    public bool[] endIndex;
+    public int[] indexToSkipTo;    
     public float textDelayTime;
 
     [Header("Variable")]
@@ -81,6 +84,8 @@ public class DialogueManager : MonoBehaviour
             if (names[_currentIndex] == charactersArray[i].gameObject.name)
             {
                 charactersArray[i].gameObject.GetComponent<Image>().color = new Vector4(1f, 1f, 1f, 1f);
+                charactersArray[i].transform.SetSiblingIndex(2);
+                //print(charactersArray[i].name + "=" + names[_currentIndex]);
             }
             else
             {
@@ -140,6 +145,14 @@ public class DialogueManager : MonoBehaviour
         {
             ShowUIBox(systemQuestionsQueue.Dequeue());
         }
+        else if (leaveAfterIndex[_currentIndex] == true)
+        {
+            RelocateCharacters();
+        }
+        else if (endIndex[_currentIndex] == true)
+        {
+            asyncManager.LoadNextScene();
+        }
         else if (_isTyping)
         {
             StopAllCoroutines();
@@ -152,7 +165,7 @@ public class DialogueManager : MonoBehaviour
         
 
         _currentIndex++;
-        Debug.Log(_currentIndex);
+        //Debug.Log(_currentIndex);
 
         if (_currentIndex >= sentences.Length)
         {
@@ -163,6 +176,14 @@ public class DialogueManager : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(TypeSentence());
         }
+    }
+
+    private void RelocateCharacters()
+    {
+        charactersArray[2].gameObject.transform.DOLocalMoveX(1200, 0.5f);
+        charactersArray[1].gameObject.transform.DOLocalMoveX(400, 0.5f);
+
+        print("ASDASD");
     }
 
     public void OnPressAnswerOnQ1(int m_goToIndex)

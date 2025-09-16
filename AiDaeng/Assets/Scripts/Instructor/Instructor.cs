@@ -42,7 +42,7 @@ public class Instructor : MonoBehaviour
     public void Instruct(int m_indexOffset)
     {
         _currentIndex += m_indexOffset;
-        print(_currentIndex);
+        //print(_currentIndex);
 
         _videoPlayer.clip = instructorPages[_currentIndex].videoClip;
         UIBox.transform.GetChild(1).GetComponent<TMP_Text>().text = instructorPages[_currentIndex].topicText;

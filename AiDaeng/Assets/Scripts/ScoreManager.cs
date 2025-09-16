@@ -8,7 +8,7 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     [Header("Ref")]
-    //public Slider scoreBar;
+    public Timer timer;
     [SerializeField] private Image _scoreBarFill;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject scorePopupPrefab;
@@ -32,16 +32,11 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _maxScore = npcManager.maxTime * baseScore;
+        _maxScore = (timer.timeToDisplay / npcManager.maxTime) * baseScore * 2; // multiply by 2 due to npc give score 2 times; receive things & done praying
         _audioSource = GetComponent<AudioSource>();
-        //initially set score to 0 when the game start
+        
         currentScore = 0;           
     }
-
-    //private void Update()
-    //{
-    //    UpdateScoreBar(_currentScore, _maxScore);
-    //}
 
     public void AddScore(Vector3 transform, float score)
     {

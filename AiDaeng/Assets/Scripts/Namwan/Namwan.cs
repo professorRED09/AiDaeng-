@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using TMPro;
 
 public class Namwan : MonoBehaviour, IObserver
@@ -10,6 +11,8 @@ public class Namwan : MonoBehaviour, IObserver
     public Transform currentWaypoint;
     public Queue<Transform> pathQueue = new Queue<Transform>();   // Waypoints to visit
     private Vector3 direction;
+    public GameObject inventoryUI;
+    private Vector3 _originalInventoryUIScale;
 
     //public TMP_Text serveAmountText;
     public NPC2 targetNPC;
@@ -48,7 +51,8 @@ public class Namwan : MonoBehaviour, IObserver
     void Start()
     {
         //set initial task
-        ChangeTask(CurrentTask.DrinkWater);     
+        ChangeTask(CurrentTask.DrinkWater);
+        _originalInventoryUIScale = inventoryUI.transform.localScale;
     }
 
     // Update is called once per frame
@@ -163,12 +167,7 @@ public class Namwan : MonoBehaviour, IObserver
 
     void BackToTheTask()
     {
-        if (_isCommandedByPlayer)
-        {
-            return;
-        }
-
-        
+        if (_isCommandedByPlayer) return;        
 
         if (currentTask == CurrentTask.DrinkWater)
         {
@@ -180,11 +179,16 @@ public class Namwan : MonoBehaviour, IObserver
         }
     }
 
-    //void BackToRefill()
-    //{
-    //    if (_isMoving) return;
-    //    MoveToWaypoint(waypoints[0]);        
-    //}
+    public void OnEmptyServe()
+    {
+        inventoryUI.transform.DOScale(inventoryUI.transform.localScale * 1.3f, 0.3f)
+            .SetEase(Ease.Flash)
+                            .OnComplete(() =>
+                            {
+                                inventoryUI.transform.DOScale(_originalInventoryUIScale, 0.3f);
+                            });
+
+    }
 
     public void OnNotify(WeatherType weather)
     {

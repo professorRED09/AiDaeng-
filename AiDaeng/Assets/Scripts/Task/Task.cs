@@ -34,9 +34,9 @@ public class Task : MonoBehaviour
     }   
 
     IEnumerator DoTask()
-    {               
-
-        if (isFirstTaskOfTheProduct || mixturePanel.tempItem == requiredItem)
+    {        
+        if ((isFirstTaskOfTheProduct && (mixturePanel.tempItem == null || goalItem.isCompleted)) 
+            || mixturePanel.tempItem == requiredItem)
         {
             mixturePanel.ShowPanel();
 
@@ -54,7 +54,26 @@ public class Task : MonoBehaviour
 
             // player can move again
             player.canControl = true;
-        }       
+        }
+        //if (isFirstTaskOfTheProduct || mixturePanel.tempItem == requiredItem)
+        //{
+        //    mixturePanel.ShowPanel();
+
+        //    // player can't move during task
+        //    player.canControl = false;
+
+        //    player.GetComponent<Animator>().SetBool("isDoingTask", true);
+        //    audioSource.clip = taskSFX;
+        //    audioSource.Play(); // play soundFX
+        //    mixturePanel.UpdateTempItem(goalItem);
+        //    yield return new WaitForSeconds(0.7f);
+        //    //mixturePanel.UpdateTempItem(goalItem);
+        //    player.GetComponent<Animator>().SetBool("isDoingTask", false);
+        //    // update on UI to show which process player is currently at            
+
+        //    // player can move again
+        //    player.canControl = true;
+        //}       
     }
 
 

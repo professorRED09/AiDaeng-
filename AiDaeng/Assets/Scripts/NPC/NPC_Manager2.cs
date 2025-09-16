@@ -21,6 +21,7 @@ public class NPC_Manager2 : MonoBehaviour
     public Transform[] wpToLeave;       // Waypoints to leave
     public Transform[] wpToRageLeave;   // Waypoints to rage leave
 
+    [SerializeField] private int _currentNPCCount = 0; // npc will start spawning right when game start so start counting this variable with 1
     private int spawnedNpcCount; // store total of npc that have spawned
     public int leftNpcCount; // store total of npc that have left 
 
@@ -61,7 +62,7 @@ public class NPC_Manager2 : MonoBehaviour
             }
         }
         
-        
+
     }
 
     public void RandomSpawnTime()
@@ -71,16 +72,19 @@ public class NPC_Manager2 : MonoBehaviour
 
     private void SpawnNPCs()
     {
-        // FIX:if npc is standing on the spawn waypoint, don't spawn 
+        _currentNPCCount = spawnedNpcCount - leftNpcCount;
+        if (_currentNPCCount > 8) return;
+
         GameObject npc = Instantiate(npcPrefabs[Random.Range(0,npcPrefabs.Count)], spawnPoint.transform.position, Quaternion.identity);
-        //GameObject npc = Instantiate(npcPrefab, spawnPoint.transform.position, Quaternion.identity);
         NPC2 npcMovement = npc.GetComponent<NPC2>();
+        
         if (npcMovement != null)
         {
             npcMovement.SetWaypoints(wpToQueue); // Assign waypoints to NPC            
         }
         spawnedNpcCount++;
-        
+        print(spawnedNpcCount);
+        _currentNPCCount = spawnedNpcCount - leftNpcCount;
     }
 
     private void OnEnable()

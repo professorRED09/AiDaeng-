@@ -222,6 +222,13 @@ public class NPC2 : MonoBehaviour, IObserver
         sprite.color = currentColor;
     }
 
+    public void CancelFade()
+    {
+        Color currentColor = sprite.color;
+        currentColor.a = 1f;
+        sprite.color = currentColor;
+    }
+
     IEnumerator GetDrinkWaterBuff()
     {
         //float m_tempDecSp = moodDecSp;
@@ -375,18 +382,6 @@ public class NPC2 : MonoBehaviour, IObserver
 
                     _serveAttemp += 1;
                 }
-                //else
-                //{                    
-                //    NotificationManager.instance.AddNoti("คุณยังไม่ได้ทำออเดอร์เหล่านั้น");
-                //    //Vector3 _originalScale = orderBubble.transform.localScale;
-                //    orderBubble.transform.DOScale(orderBubble.transform.localScale * 1.3f, 0.3f)
-                //                .SetEase(Ease.Flash)
-                //                .OnComplete(() =>
-                //                {
-                //                    orderBubble.transform.DOScale(_originalScale, 0.3f);
-                //                });
-                //    break;
-                //}
             }
 
             // after checking loop, if player doesn't have any product that match npc's need, feedback to player
@@ -435,7 +430,7 @@ public class NPC2 : MonoBehaviour, IObserver
             }
 
 
-            //scoreManager.AddScore(transform.position, GetScoreBasedOnMood());
+            //scoreManager.AddScore(transform.position, GetScoreBasedOnMood());z
             GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
             m_HappyVFX.transform.parent = transform;
         }        
@@ -535,9 +530,10 @@ public class NPC2 : MonoBehaviour, IObserver
             namwan.MoveToWaypoint(transform);
             namwan.targetNPC = this;
         }
-        else
+        else if (Input.GetMouseButtonDown(1) && !namwan.inventory.canServe)
         {
-            //print("CAN'T USE NAMWAN");
+            //inform player 
+            namwan.OnEmptyServe();
         }
     }
     
@@ -600,8 +596,7 @@ public class NPC2 : MonoBehaviour, IObserver
         {
             _emoji.GetComponent<Animator>().Play("Angry");
         }
-
-        //_moodBarFill.DOColor(_colorGradient.Evaluate(targetFillAmount), 0.5f);        
+ 
     }
 
     public float GetScoreBasedOnMood()
@@ -681,7 +676,7 @@ public class NPC2 : MonoBehaviour, IObserver
         //set color to a hot tone
         sprite.color = new Vector4(1f, 0.83f, 0.62f, 1f);
 
-        defaultMoodDecSp = 0.65f;
+        defaultMoodDecSp = 0.55f;
         moodDecSp = defaultMoodDecSp;
         //print("ITS SO DAMN HOT MANN");
     }

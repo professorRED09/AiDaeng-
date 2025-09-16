@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     private float _startAngle;
     private float _endAngle;
 
-    [SerializeField] private float timeToDisplay;
+    public float timeToDisplay;
     private float currentTimer;
     private bool _isRunning;
     TimeSpan timeSpan;

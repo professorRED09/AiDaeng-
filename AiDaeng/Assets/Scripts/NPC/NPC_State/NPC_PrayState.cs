@@ -5,6 +5,7 @@ public class NPC_PrayState : NPC_BaseState
     float prayingTime = 2f;
     public override void EnterState(NPC2 npc)
     {
+        npc.CancelFade(); // make npc back to full alpha color
         npc.isClickable = false;        
         npc.currentWaypointIndex = 0; // reset index to go to next waypoints
         //npc.HideOrder();        

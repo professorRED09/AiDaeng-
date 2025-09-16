@@ -202,8 +202,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4735681498723107405}
-  - {fileID: 2217250444671827059}
   - {fileID: 1954282995921294899}
+  - {fileID: 2217250444671827059}
   m_Father: {fileID: 8325872576301137907}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1810,7 +1810,7 @@ GameObject:
   - component: {fileID: 570634244085425951}
   - component: {fileID: 5314780383854142991}
   m_Layer: 5
-  m_Name: "\u0E40\u0E08\u0E49\u0E32\u0E2D\u0E32\u0E27\u0E32\u0E2A"
+  m_Name: "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
