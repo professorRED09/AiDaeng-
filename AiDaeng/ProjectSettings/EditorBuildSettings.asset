@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay Level 3.unity
     guid: 5b1bb2274c6371d4dadbb569664ad5aa
+  - enabled: 1
+    path: Assets/Scenes/CCutscene4.unity
+    guid: 5cfb28e3e37905b4bb6fa75f98296e5a
   m_configObjects: {}

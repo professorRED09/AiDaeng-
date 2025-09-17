@@ -14,7 +14,11 @@ public class IntroVideo : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        _videoPlayer = GetComponent<VideoPlayer>();        
+        _videoPlayer = GetComponent<VideoPlayer>();
+
+        RenderTexture.active = _videoPlayer.targetTexture;
+        GL.Clear(true, true, Color.black);
+        RenderTexture.active = null;
     }
 
     // Update is called once per frame

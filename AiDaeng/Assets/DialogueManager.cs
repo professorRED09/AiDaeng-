@@ -18,12 +18,15 @@ public class DialogueManager : MonoBehaviour
     public string[] sentences;
 
     public string[] names;
+
+    #region For each sentence
     public bool[] isQuestion;
     public bool[] isSkipToOtherIndex;
     public bool[] isSystemQuestion;
     public bool[] leaveAfterIndex;
     public bool[] endIndex;
-    public int[] indexToSkipTo;    
+    public int[] indexToSkipTo;
+    #endregion
     public float textDelayTime;
 
     [Header("Variable")]
@@ -69,11 +72,10 @@ public class DialogueManager : MonoBehaviour
     {
         continueText.gameObject.SetActive(true);
         continueText.text = m_text;
-       /* _blinkTween = */DOTween.Sequence()
+        DOTween.Sequence()
             .Append(continueText.DOFade(0f, 1f).SetEase(Ease.Linear))
             .Append(continueText.DOFade(1f, 1f).SetEase(Ease.Linear))
             .SetLoops(-1, LoopType.Restart);
-
     }
         
 
