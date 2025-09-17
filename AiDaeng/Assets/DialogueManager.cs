@@ -216,7 +216,7 @@ public class DialogueManager : MonoBehaviour
     {
         if(_currentIndex >= 7 || systemQuestionsQueue.Count <= 0)
         {
-            asyncManager.LoadNextScene();
+            asyncManager.LoadScene("CCutscene1");
         }
         else if(_currentIndex < 7 && systemQuestionsQueue.Count > 0)
         {

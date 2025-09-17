@@ -9,8 +9,8 @@ using DG.Tweening;
 public class NPC2 : MonoBehaviour, IObserver
 {
     [Header("Setting")]
-    private float maxMV = 10f;   // MV => mood value
-    private float currentMV;
+    [SerializeField] private float maxMV = 10f;   // MV => mood value
+    [SerializeField] private float currentMV;
 
     private float moodDecSp ;      // decreasing speed of mood value, assign as public for adjusting in other script
     private float defaultMoodDecSp = 0.2f;
@@ -293,6 +293,28 @@ public class NPC2 : MonoBehaviour, IObserver
             isMoving = false;
         }
     }
+    private void OnDrawGizmos()
+    {
+        // Start position of the ray
+        Vector3 startPos = transform.position;
+
+        // Cast the ray
+        RaycastHit2D hit = Physics2D.Raycast(startPos, direction, detectLength, npcMask);
+
+        // If it hits something, draw a red line up to the hit point
+        if (hit.collider != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(startPos, hit.point);
+            Gizmos.DrawSphere(hit.point, 0.1f); // Draw a small sphere where it hit
+        }
+        else
+        {
+            // If it doesn’t hit, draw the full ray length in green
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(startPos, startPos + direction.normalized * detectLength);
+        }
+    }
 
     public void MoveToWaypoint()
     {
@@ -446,9 +468,13 @@ public class NPC2 : MonoBehaviour, IObserver
     public void PlayGetItemAnimation()
     {
         isClickable = false;
-        //hide order bubble
-        HideOrder();
+        
+        //Decrease maxMV
+        maxMV = 7f;
         ResetMoodBar();
+
+        HideOrder();
+        
         //orderBubble.SetActive(false);
         orderBubble.transform.GetChild(0).GetComponent<Image>().enabled = false;     // disable panel image
         orderBubble.transform.GetChild(2).GetComponent<TMP_Text>().enabled = false;  // disable "..." text;
@@ -548,8 +574,6 @@ public class NPC2 : MonoBehaviour, IObserver
     {
         currentMV = maxMV;
         UpdateMoodBar();
-        //GameObject m_HappyVFX = Instantiate(happyVFX, transform) as GameObject;
-        //m_HappyVFX.transform.parent = transform;
     }
 
     public void DecreaseMoodBar()
@@ -704,14 +728,14 @@ public class NPC2 : MonoBehaviour, IObserver
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + direction * detectLength);
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.up * 2.5f);
-        //Gizmos.DrawLine(transform.position, transform.up);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(transform.position, transform.position + direction * detectLength);
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawLine(transform.position, transform.position + Vector3.up * 2.5f);
+    //    //Gizmos.DrawLine(transform.position, transform.up);
+    //}
 
     void OnWeatherChange()
     {

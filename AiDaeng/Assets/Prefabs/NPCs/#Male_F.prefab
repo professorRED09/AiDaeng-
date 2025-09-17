@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   happyVFX: {fileID: 9014111512956324487, guid: f239bbefc1998194fbf6c6500d4328ed, type: 3}
-  detectLength: 1.2
+  detectLength: 1.3
   npcMask:
     serializedVersion: 2
     m_Bits: 8

@@ -43,6 +43,10 @@ public class ComicCutscene : MonoBehaviour
 
     private void Start()
     {
+        RenderTexture.active = _videoPlayer.targetTexture;
+        GL.Clear(true, true, Color.black);
+        RenderTexture.active = null;
+
         _currentIndex = 0;
         PlayCutscene(0);
     }   

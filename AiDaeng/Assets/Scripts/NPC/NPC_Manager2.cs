@@ -90,19 +90,19 @@ public class NPC_Manager2 : MonoBehaviour
     //}
 
     public GameObject RandomTypeOfNPCs()
-    {        
-        if (npcSpawnList.Count > 0)
-        {
-            GameObject npc = npcSpawnList[Random.Range(0, npcSpawnList.Count)];
-            npcSpawnList.Remove(npc);
-            return npc;
-        }
-        else
+    {
+        int m_randomIndex = Random.Range(0, npcSpawnList.Count);
+        
+        if (npcSpawnList[m_randomIndex] == null) return null;
+
+        GameObject npc = npcSpawnList[Random.Range(0, npcSpawnList.Count)];
+        npcSpawnList.Remove(npc);
+
+        if (npcSpawnList.Count <= 0)
         {
             npcSpawnList.AddRange(npcPrefabs);
-            RandomTypeOfNPCs();
-            return null;
         }
+        return npc;
     }
 
     private void SpawnNPCs()
@@ -118,7 +118,7 @@ public class NPC_Manager2 : MonoBehaviour
             npcMovement.SetWaypoints(wpToQueue); // Assign waypoints to NPC            
         }
         spawnedNpcCount++;
-        print(spawnedNpcCount);
+        //print(spawnedNpcCount);
         _currentNPCCount = spawnedNpcCount - leftNpcCount;
     }
 
