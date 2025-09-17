@@ -632,20 +632,20 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
   - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
-  - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
   - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
   - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
+  - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
   jaoawadAnimation:
   - {fileID: 7400000, guid: 2d3cc0e4bab27c940be99ce2b6be7d37, type: 2}
   - {fileID: 7400000, guid: 9f34a4b6f0b896b46985ee0b3fb1f99c, type: 2}
   - {fileID: 7400000, guid: 2d3cc0e4bab27c940be99ce2b6be7d37, type: 2}
-  - {fileID: 7400000, guid: 9f34a4b6f0b896b46985ee0b3fb1f99c, type: 2}
   - {fileID: 7400000, guid: 2d3cc0e4bab27c940be99ce2b6be7d37, type: 2}
   - {fileID: 7400000, guid: 9f34a4b6f0b896b46985ee0b3fb1f99c, type: 2}
   - {fileID: 7400000, guid: 2d3cc0e4bab27c940be99ce2b6be7d37, type: 2}
   - {fileID: 7400000, guid: 9f34a4b6f0b896b46985ee0b3fb1f99c, type: 2}
+  - {fileID: 7400000, guid: d1ce920b07286f34eb9e705086981fb1, type: 2}
   namwanAnimation: []
   sentences:
   - "\u0E40\u0E1B\u0E47\u0E19\u0E22\u0E31\u0E07\u0E44\u0E07\u0E1A\u0E49\u0E32\u0E07\u0E25\u0E30
@@ -666,21 +666,20 @@ MonoBehaviour:
     \u0E40\u0E23\u0E37\u0E48\u0E2D\u0E07\u0E41\u0E04\u0E48\u0E19\u0E35\u0E49\u0E1C\u0E21\u0E40\u0E15\u0E47\u0E21\u0E43\u0E08\u0E0A\u0E48\u0E27\u0E22\u0E04\u0E23\u0E31\u0E1A"
   - "\u0E07\u0E31\u0E49\u0E19\u0E01\u0E47\u0E1D\u0E32\u0E01\u0E14\u0E49\u0E27\u0E22\u0E25\u0E30\u0E01\u0E31\u0E19\u0E19\u0E30"
   names:
-  - "\u0E40\u0E08\u0E49\u0E32\u0E2D\u0E32\u0E27\u0E32\u0E2A"
+  - "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32"
   - "\u0E41\u0E14\u0E07"
-  - "\u0E40\u0E08\u0E49\u0E32\u0E2D\u0E32\u0E27\u0E32\u0E2A"
-  - "\u0E40\u0E08\u0E49\u0E32\u0E2D\u0E32\u0E27\u0E32\u0E2A"
+  - "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32"
+  - "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32"
   - "\u0E41\u0E14\u0E07"
-  - "\u0E40\u0E08\u0E49\u0E32\u0E2D\u0E32\u0E27\u0E32\u0E2A"
+  - "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32"
   - "\u0E41\u0E14\u0E07"
-  - "\u0E40\u0E08\u0E49\u0E32\u0E2D\u0E32\u0E27\u0E32\u0E2A"
+  - "\u0E2B\u0E25\u0E27\u0E07\u0E15\u0E32"
   isQuestion: 0000000000000000
   isSkipToOtherIndex: 0000000000000000
   isSystemQuestion: 0000000000000000
   leaveAfterIndex: 0000000000000000
   endIndex: 0000000000000000
   indexToSkipTo: 0000000000000000000000000000000000000000000000000000000000000000
-  textDelayTime: 0.1
   dialogueText: {fileID: 1659598518}
   nameText: {fileID: 662791804}
   continueText: {fileID: 487621590}

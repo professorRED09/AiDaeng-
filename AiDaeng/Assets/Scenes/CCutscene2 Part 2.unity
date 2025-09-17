@@ -602,22 +602,22 @@ MonoBehaviour:
   - {fileID: 1713486012}
   - {fileID: 1713486011}
   daengAnimation:
-  - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
-  - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
-  - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
+  - {fileID: 7400000, guid: 9cf389046e1831d4f95294e2c5164901, type: 2}
+  - {fileID: 7400000, guid: a3b4d21add223a04fb5ba67318b7f949, type: 2}
+  - {fileID: 7400000, guid: a3b4d21add223a04fb5ba67318b7f949, type: 2}
   - {fileID: 7400000, guid: 452313c866e25844bb9df37f31011619, type: 2}
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
   - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
   - {fileID: 7400000, guid: 7cf58993ff79b7c4f832b0ba02a99ad6, type: 2}
-  - {fileID: 7400000, guid: 491ffbd64e683d944a2af9c72e809c38, type: 2}
+  - {fileID: 7400000, guid: d9ee616ed9307114ebc61a8845b5ddd2, type: 2}
   jaoawadAnimation: []
   namwanAnimation:
   - {fileID: 7400000, guid: 2afe80a821705854796dca474ace0292, type: 2}
   - {fileID: 7400000, guid: 151164e669755a84ea692f437c8e06a3, type: 2}
+  - {fileID: 7400000, guid: a1166fa9bfcb1c74194adfe25e8f29ce, type: 2}
+  - {fileID: 7400000, guid: b380d2fd07c1c1a43b042729b31f3123, type: 2}
   - {fileID: 7400000, guid: 151164e669755a84ea692f437c8e06a3, type: 2}
-  - {fileID: 7400000, guid: 2afe80a821705854796dca474ace0292, type: 2}
-  - {fileID: 7400000, guid: 151164e669755a84ea692f437c8e06a3, type: 2}
-  - {fileID: 7400000, guid: 2afe80a821705854796dca474ace0292, type: 2}
+  - {fileID: 7400000, guid: a3b4d21add223a04fb5ba67318b7f949, type: 2}
   - {fileID: 7400000, guid: 151164e669755a84ea692f437c8e06a3, type: 2}
   - {fileID: 7400000, guid: 2afe80a821705854796dca474ace0292, type: 2}
   sentences:

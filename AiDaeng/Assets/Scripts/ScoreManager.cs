@@ -74,11 +74,14 @@ public class ScoreManager : MonoBehaviour
         if (StarCount() >= 3)
         {
             stars[2].GetComponent<Animator>().SetTrigger("GetStar");
+            stars[1].GetComponent<Animator>().SetTrigger("GetStar");
+            stars[0].GetComponent<Animator>().SetTrigger("GetStar");
             //Debug.Log("3 STARS");
         }
         else if (StarCount() >= 2)
         {
             stars[1].GetComponent<Animator>().SetTrigger("GetStar");
+            stars[0].GetComponent<Animator>().SetTrigger("GetStar");
             //Debug.Log("2 STARS");
         }
         else if (StarCount() >= 1)

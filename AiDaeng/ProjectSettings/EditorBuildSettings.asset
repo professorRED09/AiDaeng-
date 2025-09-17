@@ -15,14 +15,14 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: a43efefb1e24f0e4597c1443c497b751
   - enabled: 1
-    path: Assets/Scenes/Gameplay Tutorial.unity
-    guid: bd170774de1624e47b30c6e6b74851d4
-  - enabled: 1
     path: Assets/Scenes/CutsceneComic1.unity
     guid: e7944755172463f458fd11ef4c329e13
   - enabled: 1
     path: Assets/Scenes/CCutscene0.unity
     guid: d482998b85f268541baaf1dd15574118
+  - enabled: 1
+    path: Assets/Scenes/Gameplay Tutorial.unity
+    guid: bd170774de1624e47b30c6e6b74851d4
   - enabled: 1
     path: Assets/Scenes/CCutscene1.unity
     guid: abfd26fc64a9e0240b9839d23e912ca7

@@ -2166,7 +2166,7 @@ MonoBehaviour:
   rainyWeatherSFX: {fileID: 8300000, guid: 4daa85d292c98b54a91cf3f937e8926e, type: 3}
   weatherOrderArray: 01000000
   weatherTimerArray:
-  - 80
+  - 120
   currentIndex: -1
   _currentWeatherOrder: 0
 --- !u!1 &557693610
@@ -20823,7 +20823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6239143374079321834, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: timeToDisplay
-      value: 1
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 6296042020480868644, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_AnchorMax.y

@@ -10,10 +10,12 @@ public class DialogueManager : MonoBehaviour
 {
     public Animator[] charactersArray;
 
+    [Header("Animation Clip")]
     public AnimationClip[] daengAnimation;
     public AnimationClip[] jaoawadAnimation;
     public AnimationClip[] namwanAnimation;
 
+    [Header("Dialogue")]
     [TextArea(3, 10)]
     public string[] sentences;
 
@@ -27,7 +29,7 @@ public class DialogueManager : MonoBehaviour
     public bool[] endIndex;
     public int[] indexToSkipTo;
     #endregion
-    public float textDelayTime;
+    private float textDelayTime = 0.05f;
 
     [Header("Variable")]
     public TMP_Text dialogueText;

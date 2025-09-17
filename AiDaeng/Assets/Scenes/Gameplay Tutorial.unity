@@ -2953,6 +2953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb590999ef2ca7c4a8af538e4c108ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 770082254}
   _scoreBarFill: {fileID: 1742580937}
   scoreText: {fileID: 1722778752}
   scorePopupPrefab: {fileID: 1017039640014431114, guid: 1170d6712164010449f96499b8839c8e, type: 3}
@@ -4754,6 +4755,7 @@ MonoBehaviour:
   _drinkWaterTask: {fileID: 665842541}
   _umbrellaTask: {fileID: 2027653564}
   currentLevel: 1
+  _highlightedObjects: []
 --- !u!1 &927350689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3156429153952712613, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
@@ -13483,6 +13485,7 @@ MonoBehaviour:
   - {fileID: 2014829141127630396, guid: 6c5d0828f5a80d848a03e5feb7e29b59, type: 3}
   - {fileID: 8034953409974517664, guid: 4a194782afc9a744aa4cde4a130e9e94, type: 3}
   - {fileID: 2014829141127630396, guid: 208bf92ab79e9d1449cddfa6988871ed, type: 3}
+  npcSpawnList: []
   spawnPoint: {fileID: 557693610}
   wpToQueue:
   - {fileID: 557693611}
@@ -13501,6 +13504,7 @@ MonoBehaviour:
   - {fileID: 672688377}
   - {fileID: 1840209402}
   - {fileID: 768989279}
+  _currentNPCCount: 0
   leftNpcCount: 0
   waterBuff: {fileID: 0}
   umbrellaBuff: {fileID: 0}
@@ -14327,19 +14331,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2974187630154631733, guid: b5bcdaf3a37cf314a9f1822c4689ac2e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2974187630154631733, guid: b5bcdaf3a37cf314a9f1822c4689ac2e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1191372216}
+      objectReference: {fileID: 1837341485}
     - target: {fileID: 2974187630154631733, guid: b5bcdaf3a37cf314a9f1822c4689ac2e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnPressYesButtton
+      value: LoadNextScene
       objectReference: {fileID: 0}
     - target: {fileID: 2974187630154631733, guid: b5bcdaf3a37cf314a9f1822c4689ac2e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: StandbyScene, Assembly-CSharp
+      value: LoadingScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2974187630154631733, guid: b5bcdaf3a37cf314a9f1822c4689ac2e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -19853,6 +19857,17 @@ Transform:
   m_Father: {fileID: 2106187209}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1837341485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6143827817119271827, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+  m_PrefabInstance: {fileID: 1345793173021261954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7662520a45279b6419e23f4c9509c918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1840209401
 GameObject:
   m_ObjectHideFlags: 0
@@ -21896,10 +21911,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8838228751012940340, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
-      insertIndex: -1
+      insertIndex: 20
       addedObject: {fileID: 1191372215}
     - targetCorrespondingSourceObject: {fileID: 8838228751012940340, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
-      insertIndex: -1
+      insertIndex: 21
       addedObject: {fileID: 313935037}
     - targetCorrespondingSourceObject: {fileID: 743506689073810120, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       insertIndex: 2
