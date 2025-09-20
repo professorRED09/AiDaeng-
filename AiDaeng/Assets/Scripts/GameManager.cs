@@ -128,14 +128,23 @@ public class GameManager : Subject/*, IObserver*/
     }
 
     public void ShowResult()
-    {        
-        if (isGameover == true)
-            return;
+    {
+        if (isGameover == true) return;        
         resultUI.SetActive(true);
         musicManager.PlayResultMusic(scoreManager.StarCount());
+
         // if player's score is at least pass 1-star goal, inform them that they pass the level
         if (scoreManager.StarCount() >= 1)
         {
+            //if (currentLevel == Level.Level_1)
+            //{
+            //    PlayerPrefs.SetInt("Level1Passed",  1);
+            //}
+            //else if (currentLevel == Level.Level_2)
+            //{
+            //    PlayerPrefs.SetInt("Level2Passed", 1);
+            //}
+
             resultText.text = "ผ่านด่านจ้า!";
             Instantiate(fireworksPrefab, transform);
             resultUI.transform.GetChild(0).GetComponent<Image>().color = new Vector4(1f,1f,1f,0.5f);

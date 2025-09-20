@@ -462,13 +462,45 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _topicText
+      value: 
+      objectReference: {fileID: 2010755648}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _triviaImage
+      value: 
+      objectReference: {fileID: 2010755646}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingScreen
       value: 
       objectReference: {fileID: 1879164890}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _narrativeText
+      value: 
+      objectReference: {fileID: 2010755647}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingBarFill
       value: 
       objectReference: {fileID: 1967847376}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7dca8c56cecac4741b08fb1d6bfb4ca0, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f4d70a10fb55f214abc435b1b50fed44, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ca72cb91205bde4498c2d712928743f1, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0099029acb63e7547bd811af829d3f3d, type: 2}
     - target: {fileID: 5341528795661758665, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: m_Name
       value: AsyncManager
@@ -1736,6 +1768,39 @@ PrefabInstance:
       addedObject: {fileID: 1633280603}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+--- !u!114 &2010755646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 37836415638268997, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 2010755645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2010755647 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 365818110771135511, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 2010755645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2010755648 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6188675797937066590, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 2010755645}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2010755650 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8325872576301137907, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}

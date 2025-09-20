@@ -401,13 +401,45 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _topicText
+      value: 
+      objectReference: {fileID: 1169831098}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _triviaImage
+      value: 
+      objectReference: {fileID: 1169831096}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingScreen
       value: 
       objectReference: {fileID: 196987791}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _narrativeText
+      value: 
+      objectReference: {fileID: 1169831097}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingBarFill
       value: 
       objectReference: {fileID: 1139084496}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7dca8c56cecac4741b08fb1d6bfb4ca0, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f4d70a10fb55f214abc435b1b50fed44, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ca72cb91205bde4498c2d712928743f1, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0099029acb63e7547bd811af829d3f3d, type: 2}
     - target: {fileID: 5341528795661758665, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: m_Name
       value: AsyncManager
@@ -569,6 +601,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1169831096 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 37836415638268997, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 1713486006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1169831097 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 365818110771135511, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 1713486006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1169831098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6188675797937066590, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 1713486006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1335698651
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +711,6 @@ MonoBehaviour:
   leaveAfterIndex: 0000000000000000
   endIndex: 0000000000000000
   indexToSkipTo: 0000000000000000000000000000000000000000000000000000000000000000
-  textDelayTime: 0.1
   dialogueText: {fileID: 1713486009}
   nameText: {fileID: 1713486010}
   continueText: {fileID: 1713486008}

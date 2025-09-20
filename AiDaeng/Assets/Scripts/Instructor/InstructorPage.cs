@@ -12,12 +12,4 @@ public class InstructorPage : ScriptableObject
     [TextArea(3,10)]
     public string narrativeText;
     public VideoClip videoClip;
-
-    //[TextArea(3, 10)]
-    //public string 
-
-    //private void Awake()
-    //{
-    //    topicText.text = 
-    //}
 }

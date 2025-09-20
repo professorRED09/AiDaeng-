@@ -423,13 +423,45 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _topicText
+      value: 
+      objectReference: {fileID: 5421185081470324864}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _triviaImage
+      value: 
+      objectReference: {fileID: 5421185081470324862}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingScreen
       value: 
       objectReference: {fileID: 1675870587}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _narrativeText
+      value: 
+      objectReference: {fileID: 5421185081470324863}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingBarFill
       value: 
       objectReference: {fileID: 372904890}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7dca8c56cecac4741b08fb1d6bfb4ca0, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f4d70a10fb55f214abc435b1b50fed44, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ca72cb91205bde4498c2d712928743f1, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0099029acb63e7547bd811af829d3f3d, type: 2}
     - target: {fileID: 5341528795661758665, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: m_Name
       value: AsyncManager
@@ -708,7 +740,6 @@ MonoBehaviour:
   leaveAfterIndex: 00000000000000000000000000
   endIndex: 00000000000000000000000000
   indexToSkipTo: 00000000000000000000000006000000000000000000000000000000000000000000000000000000000000000000000000000000
-  textDelayTime: 0.1
   dialogueText: {fileID: 1659598518}
   nameText: {fileID: 662791804}
   continueText: {fileID: 487621590}
@@ -826,6 +857,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8090302539367056788, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -22.184998
+      objectReference: {fileID: 0}
     - target: {fileID: 8118228810539595724, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
       propertyPath: m_Name
       value: DialogueUI
@@ -934,8 +969,45 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: DialogueManager, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 8795238796031960022, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+--- !u!114 &5421185081470324862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 37836415638268997, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 5421185081470324861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5421185081470324863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 365818110771135511, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 5421185081470324861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5421185081470324864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6188675797937066590, guid: bcbffadae7e8f0e43a170cac3a14abde, type: 3}
+  m_PrefabInstance: {fileID: 5421185081470324861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

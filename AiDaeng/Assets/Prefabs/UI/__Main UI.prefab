@@ -2935,6 +2935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutscene1Name: 
   level1Name: 
+  levelSelectUI: {fileID: 0}
   pausePanel: {fileID: 7991621222810393299}
   settingPanel: {fileID: 8085770009641382754}
   tutorialPanel: {fileID: 2191529817229558936}
@@ -5234,6 +5235,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7083262842566239704, guid: 142b30931124ebf4ebcf0cefb6942c84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083262842566239704, guid: 142b30931124ebf4ebcf0cefb6942c84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6143827817119271827}
+    - target: {fileID: 7083262842566239704, guid: 142b30931124ebf4ebcf0cefb6942c84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083262842566239704, guid: 142b30931124ebf4ebcf0cefb6942c84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoadingScene, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083262842566239704, guid: 142b30931124ebf4ebcf0cefb6942c84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Title
+      objectReference: {fileID: 0}
     - target: {fileID: 7561589271921736009, guid: 142b30931124ebf4ebcf0cefb6942c84, type: 3}
       propertyPath: m_Name
       value: Pause
@@ -6160,7 +6181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 996170208209735017, guid: 0fd6982dbff62074897f194360869821, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 996170208209735017, guid: 0fd6982dbff62074897f194360869821, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6172,7 +6193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 996170208209735017, guid: 0fd6982dbff62074897f194360869821, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
+      value: LoadNextScene
       objectReference: {fileID: 0}
     - target: {fileID: 996170208209735017, guid: 0fd6982dbff62074897f194360869821, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -6187,9 +6208,25 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1892023019395740000, guid: 0fd6982dbff62074897f194360869821, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892023019395740000, guid: 0fd6982dbff62074897f194360869821, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7989246329781369854}
+      objectReference: {fileID: 6143827817119271827}
+    - target: {fileID: 1892023019395740000, guid: 0fd6982dbff62074897f194360869821, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892023019395740000, guid: 0fd6982dbff62074897f194360869821, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoadingScene, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892023019395740000, guid: 0fd6982dbff62074897f194360869821, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Title
+      objectReference: {fileID: 0}
     - target: {fileID: 8802631933940763352, guid: 0fd6982dbff62074897f194360869821, type: 3}
       propertyPath: m_Name
       value: Result
@@ -6862,11 +6899,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 6073078440853039767, guid: 65ed141ad71e0644f84224fe4b444143, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65ed141ad71e0644f84224fe4b444143, type: 3}
+--- !u!114 &3079479951811446330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5619419950766568158, guid: 65ed141ad71e0644f84224fe4b444143, type: 3}
+  m_PrefabInstance: {fileID: 7440142432064746724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3677007354435952243 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6073078440853039767, guid: 65ed141ad71e0644f84224fe4b444143, type: 3}
@@ -6888,6 +6940,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 847403596804695744, guid: 65ed141ad71e0644f84224fe4b444143, type: 3}
   m_PrefabInstance: {fileID: 7440142432064746724}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8812894419316052083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2093332525578232983, guid: 65ed141ad71e0644f84224fe4b444143, type: 3}
+  m_PrefabInstance: {fileID: 7440142432064746724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9212246556156196897 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1772390137389829317, guid: 65ed141ad71e0644f84224fe4b444143, type: 3}
+  m_PrefabInstance: {fileID: 7440142432064746724}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7930836486409984104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7047,13 +7121,45 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _topicText
+      value: 
+      objectReference: {fileID: 3079479951811446330}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _triviaImage
+      value: 
+      objectReference: {fileID: 9212246556156196897}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingScreen
       value: 
       objectReference: {fileID: 3677007354435952243}
     - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _narrativeText
+      value: 
+      objectReference: {fileID: 8812894419316052083}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: _loadingBarFill
       value: 
       objectReference: {fileID: 6796272752780381095}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7dca8c56cecac4741b08fb1d6bfb4ca0, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: f4d70a10fb55f214abc435b1b50fed44, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ca72cb91205bde4498c2d712928743f1, type: 2}
+    - target: {fileID: 4262897094244163216, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
+      propertyPath: _trivias.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0099029acb63e7547bd811af829d3f3d, type: 2}
     - target: {fileID: 5341528795661758665, guid: d48af3c2ad582194aa0eb42cfff51edd, type: 3}
       propertyPath: m_Name
       value: AsyncManager

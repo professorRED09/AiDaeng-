@@ -26,44 +26,56 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] float _scaleValue;
     [SerializeField] float _scaleDuration;
 
-    //void Awake()
-    //{
-    //    _defaultPlayButtonScale = playButtonTransform.localScale;
-    //}
+    [Header("Do Pass")]
+    [SerializeField] bool doPassLv1;
+    [SerializeField] bool doPassLv2;
+
 
     private void Start()
     {
         OnSelectLevel1();
         playButtonTransform.DOScale(transform.localScale *= _scaleValue, _scaleDuration)
             .SetLoops(-1,LoopType.Yoyo);
+
+        
+        //if(PlayerPrefs.GetInt("Level1Passed") == 1)
+        //{
+        //    doPassLv1 = true;
+        //}
+        //else if (PlayerPrefs.GetInt("Level2Passed") == 1) 
+        //{
+        //    doPassLv2 = true;
+        //}
     }
 
-
-    //public void OnPressBack()
-    //{
-    //    SceneManager.LoadScene("Title");
-    //}
+    public void OnPressBack()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void OnSelectLevel1()
     {  
+        
         levelNameText.text = "-ด่านที่ 1-";
 
         //Daeng walk to the selected cutscene
         daeng.SetWaypoint(level1Pos); ;
-        asyncManager.SelectSceneToPlay("CCutscene1");
+        asyncManager.SelectSceneToPlay("CCutscene0");
     }
 
     public void OnSelectLevel2()
     {
+        //if (!doPassLv1) return;
         levelNameText.text = "-ด่านที่ 2-";
 
         //Daeng walk to the selected cutscene
         daeng.SetWaypoint(level2Pos);
-        asyncManager.SelectSceneToPlay("CutsceneComic2");
+        asyncManager.SelectSceneToPlay("CCutscene2 Part 1");
     }
 
     public void OnSelectLevel3()
     {
+        //if (!doPassLv2) return;
         levelNameText.text = "-ด่านที่ 3-";
 
         //Daeng walk to the selected cutscene

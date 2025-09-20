@@ -4511,7 +4511,7 @@ MonoBehaviour:
   _namwan: {fileID: 91148722}
   _drinkWaterTask: {fileID: 665842541}
   _umbrellaTask: {fileID: 2027653564}
-  currentLevel: 1
+  currentLevel: 0
   _highlightedObjects: []
 --- !u!1 &927350689 stripped
 GameObject:
@@ -20674,6 +20674,10 @@ PrefabInstance:
       value: 93704681
       objectReference: {fileID: 0}
     - target: {fileID: 3156429153952712613, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3677007354435952243, guid: 756c3f1e0633d064a92c3c817ca85758, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

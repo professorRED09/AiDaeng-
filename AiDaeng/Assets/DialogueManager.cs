@@ -212,11 +212,19 @@ public class DialogueManager : MonoBehaviour
         
     }
 
+    //public void OnPressSkipTutorial()
+    //{
+    //    if (_currentIndex >= 7 || systemQuestionsQueue.Count <= 0)
+    //    {
+    //        asyncManager.LoadNextScene();
+    //    }
+    //}
+
     public void OnPressSkip()
     {
         if(_currentIndex >= 7 || systemQuestionsQueue.Count <= 0)
         {
-            asyncManager.LoadScene("CCutscene1");
+            asyncManager.LoadNextScene();
         }
         else if(_currentIndex < 7 && systemQuestionsQueue.Count > 0)
         {

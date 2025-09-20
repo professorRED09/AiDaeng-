@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] string level1Name;
 
     [Header("UI")]
-    //[SerializeField] GameObject startBanner;
+    [SerializeField] GameObject levelSelectUI;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject settingPanel;
     [SerializeField] GameObject tutorialPanel;
@@ -85,7 +85,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnPressLevelSelect()
     {
-        SceneManager.LoadScene("LevelSelect");
+        levelSelectUI.SetActive(true);
     }
 
     public void OnPressSkipScene1()

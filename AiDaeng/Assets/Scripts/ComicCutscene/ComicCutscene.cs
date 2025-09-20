@@ -62,9 +62,8 @@ public class ComicCutscene : MonoBehaviour
             if (_holdTimer >= holdDuration)
             {
                 holdingUI.SetActive(false);
-                _isHolding = false;
-                PlayCutscene(1);
-                //asyncManager.LoadScene("CCutscene1");
+                _isHolding = false;                
+                asyncManager.LoadNextScene();
             }            
         }
 
