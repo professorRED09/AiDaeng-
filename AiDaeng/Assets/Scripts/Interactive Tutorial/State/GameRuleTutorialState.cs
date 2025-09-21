@@ -13,7 +13,7 @@ public class GameRuleTutorialState : TutorialState
         Debug.Log("ENTER GAME RULE STATE");
         tutorial.SetNarrativeText(_textArray[_currentIndex++]);
         tutorial.ShowNarrativeText(true);
-        tutorial.ChangeIllust(2);        
+        tutorial.ChangeIllust(0);        
     }
 
     public override void UpdateState(InteractiveTutorial tutorial)
@@ -22,7 +22,7 @@ public class GameRuleTutorialState : TutorialState
         {
             if (_currentIndex <= _textArray.Length - 1)
             {
-                tutorial.ChangeIllust(4);
+                tutorial.ChangeIllust(0);
                 tutorial.SetNarrativeText(_textArray[_currentIndex++]);
             }
             else

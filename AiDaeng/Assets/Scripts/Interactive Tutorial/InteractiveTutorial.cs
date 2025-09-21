@@ -16,7 +16,7 @@ public class InteractiveTutorial : MonoBehaviour
     //public GameObject[] illustrationArray;
     public Sprite[] spriteForIllustArray;
     public Image illustration;
-    private int _currentIllustIndex;
+    public int currentIllustIndex;
     //public string tutorial1Text;
 
     [Header("Tutorial Comp Ref")]
@@ -209,20 +209,34 @@ public class InteractiveTutorial : MonoBehaviour
         }
     }
 
+    //public void ChangeIllust(int m_index)
+    //{
+    //    if(m_index < 0)
+    //    {
+    //        illustration.enabled = false;
+    //    }
+    //    else
+    //    {
+    //        illustration.sprite = spriteForIllustArray[m_index];
+    //        illustration.preserveAspect = true;
+    //        illustration.enabled = true;
+    //    }
+    //}
+
     public void ChangeIllust(int m_index)
     {
-        if(m_index < 0)
+        if (m_index < 0)
         {
             illustration.enabled = false;
         }
         else
         {
-            illustration.sprite = spriteForIllustArray[m_index];
+            illustration.sprite = spriteForIllustArray[currentIllustIndex++];
             illustration.preserveAspect = true;
             illustration.enabled = true;
         }
     }
-    
+
     public void ShowIllustration(int m_index)
     {
 

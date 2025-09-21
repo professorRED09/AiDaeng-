@@ -5,7 +5,7 @@ using UnityEngine;
 public class OnRightNarmObTutorialState : TutorialState
 {
     private string[] _textArray = new string[] { "ยอดเยี่ยม! นายเจ๋งที่สุดเลย!",
-                                                "สังเกตว่าหลังจากมอบน้ำอบได้สำเร็จ ผู้เล่นจะได้แต้มคะแนนเพิ่มขึ้นมา"};
+                                                "สังเกตว่าหลังจากมอบน้ำอบได้สำเร็จ ผู้เล่นจะได้แต้มคะแนนเพิ่มขึ้นมา ลองดูหลอดคะแนนมุมขวาบนสิ"};
     private int _currentIndex = 0;
 
     public override void EnterState(InteractiveTutorial tutorial)

@@ -30,13 +30,13 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            OnPressPauseGame();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        OnPressPauseGame();
+    //    }
+    //}
 
     //public void OnProductTutorialPress()
     //{

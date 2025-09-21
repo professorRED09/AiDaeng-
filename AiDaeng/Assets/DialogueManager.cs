@@ -8,6 +8,7 @@ using System;
 
 public class DialogueManager : MonoBehaviour
 {
+    public GameObject dayStartUI;
     public Animator[] charactersArray;
 
     [Header("Animation Clip")]
@@ -51,7 +52,10 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartDialogue();
+        dayStartUI.transform.GetChild(1).DOLocalMoveX(0f, 1f)
+            .OnComplete(() => Invoke(nameof(StartDialogue), 2f));
+
+        //StartDialogue();
         BlinkingText("คลิกเพื่อไปต่อ");
 
         for(int i = 0; i < systemQuestions.Length; i++)
@@ -63,6 +67,7 @@ public class DialogueManager : MonoBehaviour
 
     private void StartDialogue()
     {
+        dayStartUI.SetActive(false);
         _currentIndex = 0;
         dialogueText.text = string.Empty;
         nameText.text = string.Empty;
@@ -240,7 +245,7 @@ public class DialogueManager : MonoBehaviour
             {
                 charactersArray[i].Play(daengAnimation[_currentIndex].name);
             }
-            else if (charactersArray[i].gameObject.name == "เจ้าอาวาส" && jaoawadAnimation[_currentIndex] != null)
+            else if (charactersArray[i].gameObject.name == "หลวงตา" && jaoawadAnimation[_currentIndex] != null)
             {
                 charactersArray[i].Play(jaoawadAnimation[_currentIndex].name);
             }
