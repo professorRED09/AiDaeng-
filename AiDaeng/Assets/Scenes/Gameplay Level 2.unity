@@ -11332,8 +11332,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instructorPages:
   - {fileID: 11400000, guid: 2160961c97b06eb49ac02b6e75451c09, type: 2}
-  - {fileID: 11400000, guid: 40ad0617ca240cc4287475d22fcfde27, type: 2}
-  - {fileID: 11400000, guid: bd2515bd9cf936e4585a40e7311d5022, type: 2}
+  - {fileID: 11400000, guid: f111dc6eefc4f034b90aaf2ccb96541f, type: 2}
+  - {fileID: 11400000, guid: 886cf20e27b73c44d949032b4e5763bb, type: 2}
   _videoPlayer: {fileID: 1898494433}
   _currentIndex: 0
   nextButton: {fileID: 524397069}
